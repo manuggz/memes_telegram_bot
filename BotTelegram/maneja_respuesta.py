@@ -14,12 +14,6 @@ CODE_BOT = "119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg";
 URL_TG_API = "https://api.telegram.org/bot" + CODE_BOT + "/";
 PAGINA_MEMES = 'http://imgflip.com/memesearch'
 
-COLORES = {
-	"rojo":(255,0,0),
-	"verde":(0,255,0),
-	"azul":()
-}
-
 def dibujar_texto_sobre_imagen(texto,draw,image,fposiciony,color):
 	if texto == "": return
 
@@ -159,6 +153,38 @@ def buscarPrimeraImagen(texto,chat_id,nombre):
 
 	return primera_imagen
 
+def escribirEnviarMeme(comandos,imagen,chat_id,usuario_m):
+
+	guardarImagen(imagen)
+
+	imagen_pil = Image.open(imagen.ruta_imagen)
+	draw_pil   = ImageDraw.Draw(imagen_pil)
+
+	mensajes = comandos[1].split("-")
+	tup  = ""
+	tdown = ""
+	if len(mensajes) == 1:
+		tdown = mensajes[0]
+	else:
+		tup   = mensajes[0]
+		tdown = mensajes[1]
+
+	try:
+		color = comandos[2]
+	except IndexError:
+		color = "red"
+
+	dibujar_texto_sobre_imagen(tup,draw_pil,imagen_pil,(lambda td , sz : sz[0]  // 12 ),color)
+	dibujar_texto_sobre_imagen(tdown,draw_pil,imagen_pil,(lambda td , sz : sz[1]  -td[1] - td[1]//2 ),color)
+	ruta_tu = splitext(imagen.ruta_imagen)
+	ruta_guardar = ruta_tu[0] + str(usuario_m.nombre) + str(usuario_m.apellido) + \
+				str(usuario_m.nombreusuario) + str(comandos[0]) + str(random()) + \
+				ruta_tu[1]
+
+	imagen_pil.save(ruta_guardar)
+	enviarMensajeImagen(chat_id,ruta_guardar)
+
+
 def responder_usuario(consulta):
 
 	texto_mensaje = consulta['message']['text']
@@ -190,17 +216,47 @@ def responder_usuario(consulta):
 		enviarMensajeStart(primer_nombre,username,chat_id)
 	elif texto_mensaje == "/help":
 		enviarMensajeHelp(primer_nombre,chat_id)
+	elif texto_mensaje == "/help":
+		enviarMensajeHelp(primer_nombre,chat_id)
+	elif "/create" in texto_mensaje:
+		comandos = texto_mensaje[7:].strip()
+
+		if not comandos:
+			enviarMensajeTexto(chat_id,"Please use this command to write over the current meme , " + \
+										"use it this way , example: \n\n/create " + \
+										"Texto to write- Texto optional , red\n\nType /help " + \
+										"for more examples.")
+		else:
+			comandos = [ i for i in comandos.split(',') if i ]
+
+			ulti_m_con_ima = Mensaje.objects.filter(usuario = usuario_m ,
+												 enviado__isnull = False).order_by('update_id')
+
+			if ulti_m_con_ima:
+				ulti_m_con_ima = ulti_m_con_ima[len(ulti_m_con_ima)-1]
+				try:
+					comandos = ("",comandos[0],comandos[1])
+				except IndexError:
+					comandos = ("",comandos[0])
+				escribirEnviarMeme(comandos,ulti_m_con_ima.enviado.mdimagen,chat_id,usuario_m)
+			else:
+				enviarMensajeTexto(chat_id,"First tell me which meme typing its name!\n" + \
+											"")
+
+
+
 	elif "/sendme" in texto_mensaje:
 		comandos = texto_mensaje[7:].strip()
 
-		if comandos == "":
+		if not  comandos:
 			enviarMensajeTexto(chat_id,"Please use this command to write memes , " + \
 										"use it this way , example: \n\n/sendme yao ming , " + \
 										"Texto to write- Texto optional , red\n\nType /help " + \
 										"for more examples.")
 		else:
 
-			comandos = comandos.split(',')	
+			comandos = [ i for i in comandos.split(',') if i ]
+
 			imagen = buscarPrimeraImagen(comandos[0].strip(),chat_id,primer_nombre)
 
 			if imagen:
@@ -208,35 +264,7 @@ def responder_usuario(consulta):
 				imagen = imagen.mdimagen
 
 				if len(comandos) > 1 :
-
-					guardarImagen(imagen)
-
-					imagen_pil = Image.open(imagen.ruta_imagen)
-					draw_pil   = ImageDraw.Draw(imagen_pil)
-
-					mensajes = comandos[1].split("-")
-					tup  = ""
-					tdown = ""
-					if len(mensajes) == 1:
-						tdown = mensajes[0]
-					else:
-						tup   = mensajes[0]
-						tdown = mensajes[1]
-
-					try:
-						color = comandos[2]
-					except IndexError:
-						color = "red"
-
-					dibujar_texto_sobre_imagen(tup,draw_pil,imagen_pil,(lambda td , sz : sz[0]  // 12 ),color)
-					dibujar_texto_sobre_imagen(tdown,draw_pil,imagen_pil,(lambda td , sz : sz[1]  -td[1] - td[1]//2 ),color)
-					ruta_tu = splitext(imagen.ruta_imagen)
-					ruta_guardar = ruta_tu[0] + str(usuario_m.nombre) + str(usuario_m.apellido) + \
-								str(usuario_m.nombreusuario) + str(comandos[0]) + str(random()) + \
-								ruta_tu[1]
-
-					imagen_pil.save(ruta_guardar)
-					enviarMensajeImagen(chat_id,ruta_guardar)
+					escribirEnviarMeme(comandos,imagen,chat_id,usuario_m)
 				else:
 					enviarImagen(imagen,chat_id)
 
