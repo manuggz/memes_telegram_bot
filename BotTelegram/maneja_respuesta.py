@@ -107,6 +107,14 @@ def enviarMensajeHelp(primer_nombre,chat_id):
 	mensaje += "/sendme forever alone ,Texto 1 - Texto 2 , blue\n" 
 	mensaje += "/sendme forever alone ,Texto 1 , white\n" 
 	mensaje += "/sendme forever alone \n" 
+
+	mensaje += "\n\nExamples of this bot, type each line:\n" 
+	mensaje += "forever alone\n" 
+	mensaje += "/another\n" 
+	mensaje += "/create Im alone\n" 
+	mensaje += "/create Im alone - But with my dog\n"
+	mensaje += "/create Im alone - But with my dog , black\n"
+	mensaje += "\nIf you have any suggestions for my creator let him now at @manuggz."
 	enviarMensajeTexto(chat_id,mensaje)
 
 def construir_imagenes(rutas_imagenes,txt_bu):
