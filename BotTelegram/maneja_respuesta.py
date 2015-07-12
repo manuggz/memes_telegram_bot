@@ -96,7 +96,7 @@ def enviarMensajeStart(primer_nombre,username,chat_id):
 		 	  (" (@" +username +")! "  if username else "") + \
 	          ". I can send you memes. Just tell me which one typing  <meme name> and if I can remember it " + \
 			  " I'll send you a picture." + \
-			  "\n\nExample: Type yao ming . If you do, i'll send you yao ming's meme."
+			  "\n\nExample: Type yao ming . If you do, i'll send you yao ming's meme.\n wanna know more? type /help"
 	enviarMensajeTexto(chat_id,mensaje)
 
 def enviarMensajeHelp(primer_nombre,chat_id):
