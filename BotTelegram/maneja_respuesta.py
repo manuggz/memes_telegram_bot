@@ -109,10 +109,10 @@ def enviarMensajeHelp(primer_nombre,chat_id):
 	mensaje = "Hey " + primer_nombre + ", I can send you pictures of memes.\n" + \
 				  "Just tell me which one. Type its name."
 
-    mensaje += "\n\nExamples of /sendme:\n" 
-    mensaje += "/sendme forever alone ,Texto 1 - Texto 2 , blue\n" 
-    mensaje += "/sendme forever alone ,Texto 1 , white\n" 
-    mensaje += "/sendme forever alone \n" 
+	mensaje += "\n\nExamples of /sendme:\n" 
+	mensaje += "/sendme forever alone ,Texto 1 - Texto 2 , blue\n" 
+	mensaje += "/sendme forever alone ,Texto 1 , white\n" 
+	mensaje += "/sendme forever alone \n" 
 	enviarMensajeTexto(chat_id,mensaje)
 
 def construir_imagenes(rutas_imagenes,txt_bu):
