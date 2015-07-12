@@ -1,0 +1,1 @@
+web: gunicorn MemesTelegramDjango.wsgi --log-file -
