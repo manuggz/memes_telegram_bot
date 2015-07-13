@@ -41,6 +41,5 @@ def responder_mensaje(request):
 		print consulta
 		responder_usuario(consulta)
 	else:
-		responder_usuario({u'update_id': 25205664, u'message': {u'date': 1436813937, u'chat': {u'username': u'manuggz', u'first_name': u'Manuel', u'last_name': u'Gonzalez', u'id': 109518141}, u'from': {u'username': u'manuggz', u'first_name': u'Manuel', u'last_name': u'Gonzalez', u'id': 109518141}, u'message_id': 7541, u'text': u'/sendme forever alone ,Texto 1 - Texto 2 , blue'}})
 		raise Http404()
 	return HttpResponse('OK')

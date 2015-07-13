@@ -205,13 +205,13 @@ def responder_usuario(consulta):
 		return
 
 	try:
-		usuario_m = Usuario.objects.get(nombreusuario = username , 
-									nombre = primer_nombre ,
-									apellido = apellido)
+		usuario_m = Usuario.objects.get(nombreusuario = username[:200], 
+									nombre = primer_nombre[:200] ,
+									apellido = apellido[:200])
 	except ObjectDoesNotExist:
-		usuario_m = Usuario(nombreusuario = username , 
-							nombre = primer_nombre ,
-							apellido = apellido)
+		usuario_m = Usuario(nombreusuario = username[:200], 
+							nombre = primer_nombre[:200] ,
+							apellido = apellido[:200])
 		usuario_m.save()
 
 	try:
@@ -219,7 +219,7 @@ def responder_usuario(consulta):
 	except ObjectDoesNotExist:
 		mensaje_m = Mensaje(id_mensaje = consulta['message']['message_id'] , 
 							update_id = consulta['update_id'],
-							texto_enviado = texto_mensaje,
+							texto_enviado = texto_mensaje[:2000],
 							usuario = usuario_m)
 
 
