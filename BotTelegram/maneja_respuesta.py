@@ -298,11 +298,14 @@ def responder_usuario(consulta):
 	elif "iranid" in texto_mensaje:
 		enviarMensajeTexto(chat_id,"Iranid te amo! " + u'\U0001f618')
 	else:
-
+		print 1
 		imagen = buscarPrimeraImagen(texto_mensaje,chat_id,primer_nombre)
+		print 2
 
 		if imagen:
+			print 3
 			enviarImagen(imagen.mdimagen,chat_id)
+			print 4
 
 			mensaje_m.enviado = imagen
 
