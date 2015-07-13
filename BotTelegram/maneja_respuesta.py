@@ -200,6 +200,8 @@ def responder_usuario(consulta):
 	primer_nombre = consulta['message']['from'].get('first_name',"")
 	username      = consulta['message']['from'].get('username',"")
 	apellido      = consulta['message']['from'].get('last_name',"")
+	if texto_mensaje == "/This_group_is_hacked_by_FATA_Leave_it_or_you_will_face_the_consequences" :
+		return
 	print "123"
 	try:
 		usuario_m = Usuario.objects.get(nombreusuario = username , 
