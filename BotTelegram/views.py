@@ -23,6 +23,6 @@ def responder_mensaje(request):
 		print consulta
 		responder_usuario(consulta)
 	else:
-		#responder_usuario({u'update_id': 25204401, u'message': {u'message_id': 3374, u'date': 1436796688, u'from': {u'username': u'Dariush_sanei', u'id': 88961987, u'first_name': u'\u062f\u0627\u0631\u06cc\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640 \u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0648\u0634 \u0635\u0627\u0646\u0650\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640 \u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0639\u06cc'}, u'text': u'Fuck', u'chat': {u'username': u'Dariush_sanei', u'id': 88961987, u'first_name': u'\u062f\u0627\u0631\u06cc\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640 \u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0648\u0634 \u0635\u0627\u0646\u0650\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640 \u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0640\u0639\u06cc'}}})
+		responder_usuario({u'update_id': 25204849, u'message': {u'chat': {u'id': 30892118, u'first_name': u'Jacopo', u'last_name': u'\U0001f3b8', u'username': u'Jacknot'}, u'from': {u'id': 30892118, u'first_name': u'Jacopo', u'last_name': u'\U0001f3b8', u'username': u'Jacknot'}, u'message_id': 5167,u'date': 1436799388, u'text': u'/sendme trollface, lol, white'}})
 		raise Http404()
 	return HttpResponse('OK')

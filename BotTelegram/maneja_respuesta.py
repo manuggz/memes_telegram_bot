@@ -185,8 +185,7 @@ def escribirEnviarMeme(comandos,imagen,chat_id,usuario_m):
 	dibujar_texto_sobre_imagen(tup,draw_pil,imagen_pil,(lambda td , sz : sz[0]  // 12 ),color)
 	dibujar_texto_sobre_imagen(tdown,draw_pil,imagen_pil,(lambda td , sz : sz[1]  -td[1] - td[1]//2 ),color)
 	ruta_tu = splitext(imagen.ruta_imagen)
-	ruta_guardar = ruta_tu[0] + str(usuario_m.nombre) + str(usuario_m.apellido) + \
-				str(usuario_m.nombreusuario) + str(comandos[0]) + str(random()) + \
+	ruta_guardar = ruta_tu[0] + str(usuario_m.pk)  + str(random()) + \
 				ruta_tu[1]
 
 	imagen_pil.save(ruta_guardar)
