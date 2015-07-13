@@ -4,15 +4,15 @@ from django.db import models
 # start - a starting message 
 
 class Usuario(models.Model):
-	nombreusuario  = models.CharField(max_length=50 , null = True)
-	nombre   = models.CharField(max_length=50)
-	apellido = models.CharField(max_length=50)
+	nombreusuario  = models.CharField(max_length=200 , null = True)
+	nombre   = models.CharField(max_length=200)
+	apellido = models.CharField(max_length=200)
 
 
 class Imagen(models.Model):
-	url_imagen  = models.CharField(max_length=100 , primary_key =  True)
-	ruta_imagen = models.CharField(max_length=50)
-	alt_mensaje =  models.CharField(max_length=100)
+	url_imagen  = models.CharField(max_length=200 , primary_key =  True)
+	ruta_imagen = models.CharField(max_length=200)
+	alt_mensaje =  models.CharField(max_length=200)
 
 class NodoImagen(models.Model):
 	id_lista    = models.IntegerField()
@@ -20,7 +20,7 @@ class NodoImagen(models.Model):
 	siguiente   = models.ForeignKey("NodoImagen",null = True)
 
 class ListaImagen(models.Model):
-	txt_buscado =  models.CharField(max_length=100 , primary_key = True)
+	txt_buscado =  models.CharField(max_length=200 , primary_key = True)
 	primero     =  models.ForeignKey("NodoImagen")
 
 
