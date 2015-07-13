@@ -15,7 +15,6 @@ def index(request):
 def responder_mensaje(request):
 
 	if request.method == 'POST':
-		print consulta
 		consulta = json.loads(request.body)
 		print consulta
 		responder_usuario(consulta)
