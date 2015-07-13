@@ -200,7 +200,7 @@ def responder_usuario(consulta):
 	primer_nombre = consulta['message']['from'].get('first_name',"")
 	username      = consulta['message']['from'].get('username',"")
 	apellido      = consulta['message']['from'].get('last_name',"")
-
+	print "123"
 	try:
 		usuario_m = Usuario.objects.get(nombreusuario = username , 
 									nombre = primer_nombre ,
@@ -211,6 +211,7 @@ def responder_usuario(consulta):
 							apellido = apellido)
 		usuario_m.save()
 
+	print "124"
 	try:
 		mensaje_m = Mensaje.objects.get(id_mensaje = consulta['message']['message_id'])
 	except ObjectDoesNotExist:
@@ -219,6 +220,7 @@ def responder_usuario(consulta):
 							texto_enviado = texto_mensaje,
 							usuario = usuario_m)
 
+	print "125"
 	if not texto_mensaje:
 		enviarMensajeTexto(chat_id,"I dunno what you mean \ud83d\ude05 . Type /help ")
 	elif texto_mensaje == "/start":
