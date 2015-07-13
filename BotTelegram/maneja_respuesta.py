@@ -9,6 +9,7 @@ from os.path import join,exists,basename,splitext
 from models import Usuario ,Mensaje,Imagen,ListaImagen,NodoImagen
 from random import random
 from PIL import Image,ImageDraw,ImageFont
+import datetime
 
 CODE_BOT = "119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg";
 URL_TG_API = "https://api.telegram.org/bot" + CODE_BOT + "/";
@@ -197,30 +198,34 @@ def escribirEnviarMeme(comandos,imagen,chat_id,usuario_m):
 def responder_usuario(consulta):
 
 	texto_mensaje = consulta['message'].get('text',"")
-	chat_id       = consulta['message']['from']['id']
+	chat_id       = consulta['message']['chat']['id']
+	user_id       = consulta['message']['from']['id']
 	primer_nombre = consulta['message']['from'].get('first_name',"")
 	username      = consulta['message']['from'].get('username',"")
 	apellido      = consulta['message']['from'].get('last_name',"")
+	fecha_m       = consulta['message']['date']
+
 	if texto_mensaje == "/This_group_is_hacked_by_FATA_Leave_it_or_you_will_face_the_consequences" :
 		return
 
 	try:
-		usuario_m = Usuario.objects.get(nombreusuario = username[:200], 
-									nombre = primer_nombre[:200] ,
-									apellido = apellido[:200])
+		usuario_m = Usuario.objects.get(id_u = user_id)
 	except ObjectDoesNotExist:
-		usuario_m = Usuario(nombreusuario = username[:200], 
-							nombre = primer_nombre[:200] ,
+		usuario_m = Usuario(id_u       = user_id,
+							nombreusuario = username[:200], 
+							nombre   = primer_nombre[:200] ,
 							apellido = apellido[:200])
 		usuario_m.save()
 
 	try:
 		mensaje_m = Mensaje.objects.get(id_mensaje = consulta['message']['message_id'])
+		return
 	except ObjectDoesNotExist:
 		mensaje_m = Mensaje(id_mensaje = consulta['message']['message_id'] , 
 							update_id = consulta['update_id'],
 							texto_enviado = texto_mensaje[:2000],
-							usuario = usuario_m)
+							usuario = usuario_m,
+							fecha=datetime.datetime.fromtimestamp(int(fecha_m)))
 
 
 	if not texto_mensaje:
@@ -269,7 +274,6 @@ def responder_usuario(consulta):
 		else:
 
 			comandos = [ i.strip() for i in comandos.split(',') if i ]
-			print comandos
 
 			imagen = buscarPrimeraImagen(comandos[0].strip(),chat_id,primer_nombre)
 

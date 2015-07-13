@@ -24,7 +24,7 @@ def mostrarUsuarios(request):
 
 def mostrarUsuario(request,id_usuario):
 	id_usuario = int(id_usuario)
-	usuario_r = Usuario.objects.get(pk=id_usuario)
+	usuario_r = get_object_or_404(Usuario, pk=id_usuario) 
 	mensajes = Mensaje.objects.filter(usuario=usuario_r)
 
 	return render(request,'usuario.html',{'usuario':usuario_r,

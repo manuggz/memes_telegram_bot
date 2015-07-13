@@ -7,7 +7,8 @@
     			<th> ID Mensaje </th>
     			<th> Update ID </th>
     			<th> Texto enviado </th>
-    			<th> ID Usuario </th>
+                <th> Fecha </th>
+                <th> ID Usuario </th>
     		</tr>
     	</thead>
     {% for mensaje in mensajes %}
@@ -15,7 +16,8 @@
     		<tr>
     			<td>{{mensaje.id_mensaje}} </td>
     			<td>{{mensaje.update_id}} </td>
-    			<td>{{mensaje.texto_enviado}} </td>
+                <td>{{mensaje.texto_enviado}} </td>
+                <td>{{mensaje.fecha}} </td>
     			<td>
     				<a href ="{% url 'BotTelegram:usuarios' mensaje.usuario.pk %}">{{mensaje.usuario.pk}} </a>
     			</td>

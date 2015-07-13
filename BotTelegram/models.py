@@ -4,6 +4,7 @@ from django.db import models
 # start - a starting message 
 
 class Usuario(models.Model):
+	id_u = models.IntegerField(primary_key = True)
 	nombreusuario  = models.CharField(max_length=200 , null = True)
 	nombre   = models.CharField(max_length=200)
 	apellido = models.CharField(max_length=200)
@@ -25,7 +26,7 @@ class ListaImagen(models.Model):
 
 
 class Mensaje(models.Model):
-	#fecha         = models.CharField(max_length=200)
+	fecha         = models.DateTimeField()
 	id_mensaje       = models.IntegerField(primary_key = True)
 	update_id        = models.IntegerField()
 	texto_enviado    = models.CharField(max_length=2000 , null = True)
