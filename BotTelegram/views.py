@@ -4,25 +4,46 @@ from django.views.decorators.csrf import csrf_exempt
 from models import Usuario ,Mensaje,Imagen,ListaImagen,NodoImagen
 import json
 from maneja_respuesta import responder_usuario
+from forms import LogPrincipalForm
+import time
 
 
+NOMBRE_USUARIO_MANUEL   = "manuggz"
+PASSWORD_USUARIO_MANUEL = "Itadakimasu3093@!"
+Logeado_manuel = False
 
 # Create your views here.
 def index(request):
-	return render(request,'index.html',{'mensajes':Mensaje.objects.all()})
+	global Logeado_manuel
+	if request.method == "POST":
+		formUsuario = LogPrincipalForm(request.POST)
+		if formUsuario.is_valid():
+			if formUsuario.cleaned_data['username'] == NOMBRE_USUARIO_MANUEL and\
+			   formUsuario.cleaned_data['username'] == NOMBRE_USUARIO_MANUEL:
+
+				Logeado_manuel = True
+				return render(request,'mensajes.html',{'mensajes':Mensaje.objects.all()})
+		else:
+			return HttpResponse("Bad ")
+	else:
+		return render(request,'principal.html',{'form':LogPrincipalForm()})
+
 
 def mostrarUsuario(request,id_usuario):
-	id_usuario = int(id_usuario)
-	return render(request,'usuario.html',{'usuario':Usuario.objects.get(pk=id_usuario)})	
+	if Logeado_manuel:
+		id_usuario = int(id_usuario)
+		return render(request,'usuario.html',{'usuario':Usuario.objects.get(pk=id_usuario)})	
+	else:
+		raise Http404()
 
 @csrf_exempt
 def responder_mensaje(request):
 
 	if request.method == 'POST':
+		time.sleep(1)
 		consulta = json.loads(request.body)
 		print consulta
 		responder_usuario(consulta)
 	else:
-		#responder_usuario({u'update_id': 25204849, u'message': {u'chat': {u'id': 30892118, u'first_name': u'Jacopo', u'last_name': u'\U0001f3b8', u'username': u'Jacknot'}, u'from': {u'id': 30892118, u'first_name': u'Jacopo', u'last_name': u'\U0001f3b8', u'username': u'Jacknot'}, u'message_id': 5167,u'date': 1436799388, u'text': u'/sendme trollface, lol, white'}})
 		raise Http404()
 	return HttpResponse('OK')
