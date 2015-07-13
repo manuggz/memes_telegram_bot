@@ -15,6 +15,7 @@ def responder_mensaje(request):
 
 	if request.method == 'POST':
 		consulta = json.loads(request.body)
+		print consulta
 		responder_usuario(consulta)
 	else:
 		raise Http404()
