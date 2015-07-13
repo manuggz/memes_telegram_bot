@@ -240,7 +240,7 @@ def responder_usuario(consulta):
 										"Texto to write- Texto optional , red\n\nType /help " + \
 										"for more examples.")
 		else:
-			comandos = [ i for i in comandos.split(',') if i ]
+			comandos = [ i.strip() for i in comandos.split(',') if i ]
 
 			ulti_m_con_ima = Mensaje.objects.filter(usuario = usuario_m ,
 												 enviado__isnull = False).order_by('update_id')
@@ -268,7 +268,8 @@ def responder_usuario(consulta):
 										"for more examples.")
 		else:
 
-			comandos = [ i for i in comandos.split(',') if i ]
+			comandos = [ i.strip() for i in comandos.split(',') if i ]
+			print comandos
 
 			imagen = buscarPrimeraImagen(comandos[0].strip(),chat_id,primer_nombre)
 
