@@ -24,17 +24,26 @@ def index(request):
 				Logeado_manuel = True
 				return render(request,'mensajes.html',{'mensajes':Mensaje.objects.all()})
 		else:
-			return HttpResponse("Bad ")
+			return render(request,'principal.html',{'form':LogPrincipalForm()})
 	else:
+		if Logeado_manuel:
+			return render(request,'mensajes.html',{'mensajes':Mensaje.objects.all()})
+
 		return render(request,'principal.html',{'form':LogPrincipalForm()})
 
 
 def mostrarUsuario(request,id_usuario):
 	if Logeado_manuel:
 		id_usuario = int(id_usuario)
-		return render(request,'usuario.html',{'usuario':Usuario.objects.get(pk=id_usuario)})	
+		usuario_r = Usuario.objects.get(pk=id_usuario)
+		mensajes = Mensaje.objects.filter(usuario=usuario_r)
+
+		return render(request,'usuario.html',{'usuario':usuario_r,
+											  'total_ms_en':len(mensajes),
+											  'mensajes':mensajes})	
 	else:
 		raise Http404()
+
 
 @csrf_exempt
 def responder_mensaje(request):
