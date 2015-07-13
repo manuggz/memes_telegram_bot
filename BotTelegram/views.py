@@ -23,6 +23,6 @@ def responder_mensaje(request):
 		print consulta
 		responder_usuario(consulta)
 	else:
-		responder_usuario({u'update_id': 25204849, u'message': {u'chat': {u'id': 30892118, u'first_name': u'Jacopo', u'last_name': u'\U0001f3b8', u'username': u'Jacknot'}, u'from': {u'id': 30892118, u'first_name': u'Jacopo', u'last_name': u'\U0001f3b8', u'username': u'Jacknot'}, u'message_id': 5167,u'date': 1436799388, u'text': u'/sendme trollface, lol, white'}})
+		#responder_usuario({u'update_id': 25204849, u'message': {u'chat': {u'id': 30892118, u'first_name': u'Jacopo', u'last_name': u'\U0001f3b8', u'username': u'Jacknot'}, u'from': {u'id': 30892118, u'first_name': u'Jacopo', u'last_name': u'\U0001f3b8', u'username': u'Jacknot'}, u'message_id': 5167,u'date': 1436799388, u'text': u'/sendme trollface, lol, white'}})
 		raise Http404()
 	return HttpResponse('OK')

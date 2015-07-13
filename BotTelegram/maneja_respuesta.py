@@ -201,20 +201,17 @@ def responder_usuario(consulta):
 	apellido      = consulta['message']['from'].get('last_name',"")
 	if texto_mensaje == "/This_group_is_hacked_by_FATA_Leave_it_or_you_will_face_the_consequences" :
 		return
-	print "123"
+
 	try:
 		usuario_m = Usuario.objects.get(nombreusuario = username , 
 									nombre = primer_nombre ,
 									apellido = apellido)
-		print "123.1"
 	except ObjectDoesNotExist:
 		usuario_m = Usuario(nombreusuario = username , 
 							nombre = primer_nombre ,
 							apellido = apellido)
 		usuario_m.save()
-		print "123.2"
 
-	print "124"
 	try:
 		mensaje_m = Mensaje.objects.get(id_mensaje = consulta['message']['message_id'])
 	except ObjectDoesNotExist:
@@ -223,7 +220,7 @@ def responder_usuario(consulta):
 							texto_enviado = texto_mensaje,
 							usuario = usuario_m)
 
-	print "125"
+
 	if not texto_mensaje:
 		enviarMensajeTexto(chat_id,"I dunno what you mean \ud83d\ude05 . Type /help ")
 	elif texto_mensaje == "/start":
