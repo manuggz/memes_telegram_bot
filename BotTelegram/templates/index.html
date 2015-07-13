@@ -7,5 +7,20 @@
 </head>
 <body>
 	<h1>Hello world!</h1>
+	<table class="table table-hover">
+		<tr>
+			<th> ID Mensaje </th>
+			<th> Update ID </th>
+			<th> Texto enviado </th>
+			<th> Usuario </th>
+	{% for mensaje in mensajes %}
+		<tr>
+			<td>{{mensaje.id_mensaje}} </td>
+			<td>{{mensaje.update_id}} </td>
+			<td>{{mensaje.texto_enviado}} </td>
+			<td>{{mensaje.usuario}} </td>
+		</tr>
+	{% endfor%}
+	</table>	
 </body>
 </html>
