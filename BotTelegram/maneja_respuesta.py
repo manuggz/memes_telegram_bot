@@ -195,19 +195,20 @@ def escribirEnviarMeme(comandos,imagen,chat_id,usuario_m):
 
 def responder_usuario(consulta):
 
-	texto_mensaje = consulta['message']['text']
+	texto_mensaje = consulta['message'].get('text',"")
 	chat_id       = consulta['message']['from']['id']
-	primer_nombre = consulta['message']['from']['first_name']
-	username      = consulta['message']['from']['username']
+	primer_nombre = consulta['message']['from'].get('first_name',"")
+	username      = consulta['message']['from'].get('username',"")
+	apellido      = consulta['message']['from'].get('last_name',"")
 
 	try:
 		usuario_m = Usuario.objects.get(nombreusuario = username , 
 									nombre = primer_nombre ,
-									apellido = consulta['message']['from']['last_name'])
+									apellido = apellido)
 	except ObjectDoesNotExist:
 		usuario_m = Usuario(nombreusuario = username , 
 							nombre = primer_nombre ,
-							apellido = consulta['message']['from']['last_name'])
+							apellido = apellido)
 		usuario_m.save()
 
 	try:
@@ -298,14 +299,10 @@ def responder_usuario(consulta):
 	elif "iranid" in texto_mensaje:
 		enviarMensajeTexto(chat_id,"Iranid te amo! " + u'\U0001f618')
 	else:
-		print 1
 		imagen = buscarPrimeraImagen(texto_mensaje,chat_id,primer_nombre)
-		print 2
 
 		if imagen:
-			print 3
 			enviarImagen(imagen.mdimagen,chat_id)
-			print 4
 
 			mensaje_m.enviado = imagen
 
