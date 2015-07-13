@@ -1,115 +1,26 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html"%}
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Pago for Memes Bot">
-    <meta name="author" content="Manuel Gonzalez manuelggonzalezm@gmail.com">
-
-    <title>Memes Telegram - Admin</title>
-
-    <!-- Bootstrap Core CSS -->
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/simple-sidebar.css' %}" />
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        Panel de administración
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'BotTelegram:mensajes_todos' %}">Mensajes</a>
-                </li>
-                <li>
-                    <a href="{% url 'BotTelegram:usuarios_todos' %}">Usuarios</a>
-                </li>
-                <li>
-                    <a href="#">Overview</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th> ID Mensaje </th>
-							<th> Update ID </th>
-							<th> Texto enviado </th>
-							<th> ID Usuario </th>
-						</tr>
-					</thead>
-				{% for mensaje in mensajes %}
-					<tbody>
-						<tr>
-							<td>{{mensaje.id_mensaje}} </td>
-							<td>{{mensaje.update_id}} </td>
-							<td>{{mensaje.texto_enviado}} </td>
-							<td>
-								<a href ="{% url 'BotTelegram:usuarios' mensaje.usuario.pk %}">{{mensaje.usuario.pk}} </a>
-							</td>
-						</tr>
-					</tbody>
-				{% endfor%}
-				</table>	
-            </div>
-        </div>
-        <!-- /#page-content-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
-
-</body>
-
-</html>
+{% block contenido%}
+    <table class="table table-hover">
+    	<thead>
+    		<tr>
+    			<th> ID Mensaje </th>
+    			<th> Update ID </th>
+    			<th> Texto enviado </th>
+    			<th> ID Usuario </th>
+    		</tr>
+    	</thead>
+    {% for mensaje in mensajes %}
+    	<tbody>
+    		<tr>
+    			<td>{{mensaje.id_mensaje}} </td>
+    			<td>{{mensaje.update_id}} </td>
+    			<td>{{mensaje.texto_enviado}} </td>
+    			<td>
+    				<a href ="{% url 'BotTelegram:usuarios' mensaje.usuario.pk %}">{{mensaje.usuario.pk}} </a>
+    			</td>
+    		</tr>
+    	</tbody>
+    {% endfor%}
+    </table>	
+{% endblock %}

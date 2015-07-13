@@ -35,7 +35,7 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">
+                    <a href="/BotTelegram/">
                         Panel de administración
                     </a>
                 </li>
@@ -43,9 +43,9 @@
                     <a href="{% url 'BotTelegram:mensajes_todos' %}">Mensajes</a>
                 </li>
                 <li>
-                    <a href="#">Usuarios</a>
+                    <a href="{% url 'BotTelegram:usuarios_todos' %}">Usuarios</a>
                 </li>
-                <li>
+<!--                 <li>
                     <a href="#">Overview</a>
                 </li>
                 <li>
@@ -60,21 +60,22 @@
                 <li>
                     <a href="#">Contact</a>
                 </li>
-            </ul>
+ -->            </ul>
         </div>
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
+        		{% block contenido%}
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>Simple Sidebar</h1>
-                        <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
+                        <h1>Memes Bot</h1>
+                        <p>Usa esta web para administrar y ver información sobre el bot.</p>
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                     </div>
                 </div>
+                {% endblock%}
             </div>
         </div>
         <!-- /#page-content-wrapper -->

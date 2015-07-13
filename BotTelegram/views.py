@@ -14,7 +14,7 @@ Logeado_manuel = False
 
 # Create your views here.
 def index(request):
-	return render(request,'index.html',{'form':LogPrincipalForm()})
+	return render(request,'base.html',{'form':LogPrincipalForm()})
 
 def mostrarMensajes(request):
 	return render(request,'mensajes.html',{'mensajes':Mensaje.objects.all()})

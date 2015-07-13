@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Bot de Telegram</title>
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-</head>
-<body>
+{% extends "base.html"%}
+
+{% block contenido%}
+
 	<table class="table table-hover">
 		<tr>
 			<th> Nickname </th>
@@ -20,25 +16,23 @@
 		</tr>
 	</table>	
 
-	<div id = "mensajes">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th> ID Mensaje </th>
-					<th> Update ID </th>
-					<th> Texto enviado </th>
-				</tr>
-			</thead>
-		{% for mensaje in mensajes %}
-			<tbody>
-				<tr>
-					<td>{{mensaje.id_mensaje}} </td>
-					<td>{{mensaje.update_id}} </td>
-					<td>{{mensaje.texto_enviado}} </td>
-				</tr>
-			</tbody>
-		{% endfor%}
-		</table>	
-	</div>
-</body>
-</html>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th> ID Mensaje </th>
+				<th> Update ID </th>
+				<th> Texto enviado </th>
+			</tr>
+		</thead>
+	{% for mensaje in mensajes %}
+		<tbody>
+			<tr>
+				<td>{{mensaje.id_mensaje}} </td>
+				<td>{{mensaje.update_id}} </td>
+				<td>{{mensaje.texto_enviado}} </td>
+			</tr>
+		</tbody>
+	{% endfor%}
+	</table>	
+{% endblock %}
+
