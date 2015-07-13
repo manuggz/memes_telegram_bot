@@ -28,6 +28,6 @@ class Mensaje(models.Model):
 	#fecha         = models.CharField(max_length=200)
 	id_mensaje       = models.IntegerField(primary_key = True)
 	update_id        = models.IntegerField()
-	texto_enviado    = models.CharField(max_length=300 , null = True)
+	texto_enviado    = models.CharField(max_length=2000 , null = True)
 	usuario          = models.ForeignKey(Usuario) #Quien envia el mensaje
 	enviado = models.ForeignKey("NodoImagen",null = True)
