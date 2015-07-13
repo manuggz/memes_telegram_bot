@@ -115,7 +115,9 @@ def enviarMensajeHelp(primer_nombre,chat_id):
 	mensaje += "/create Im alone - But with my dog\n"
 	mensaje += "/create Im alone - But with my dog , black\n"
 	mensaje += "\nIf you have any suggestions for my creator let him now at @manuggz."
+	mensaje += "\n\nPlease if you like this bot , rate it at :https://telegram.me/storebot?start=memesbot"
 	enviarMensajeTexto(chat_id,mensaje)
+
 
 def construir_imagenes(rutas_imagenes,txt_bu):
 	anterior = None
@@ -301,7 +303,7 @@ def responder_usuario(consulta):
 	elif "iranid" in texto_mensaje:
 		enviarMensajeTexto(chat_id,"Iranid te amo! " + u'\U0001f618')
 	else:
-		imagen = buscarPrimeraImagen(texto_mensaje,chat_id,primer_nombre)
+		imagen = buscarPrimeraImagen(texto_mensaje.strip(),chat_id,primer_nombre)
 
 		if imagen:
 			enviarImagen(imagen.mdimagen,chat_id)
