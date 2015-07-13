@@ -205,11 +205,13 @@ def responder_usuario(consulta):
 		usuario_m = Usuario.objects.get(nombreusuario = username , 
 									nombre = primer_nombre ,
 									apellido = apellido)
+		print "123.1"
 	except ObjectDoesNotExist:
 		usuario_m = Usuario(nombreusuario = username , 
 							nombre = primer_nombre ,
 							apellido = apellido)
 		usuario_m.save()
+		print "123.2"
 
 	print "124"
 	try:
