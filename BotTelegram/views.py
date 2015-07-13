@@ -11,6 +11,8 @@ from maneja_respuesta import responder_usuario
 def index(request):
 	return render(request,'index.html',{'mensajes':Mensaje.objects.all()})
 
+def mostrarUsuario(request)
+
 @csrf_exempt
 def responder_mensaje(request):
 
