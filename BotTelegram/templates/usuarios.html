@@ -16,7 +16,7 @@
             </tr>
         {%endfor%}
     </table>    
-    <form class="form-inline" action ='{% url 'BotTelegram:usuarios' usuario.pk %}'} method = "POST">
+    <form class="form-inline" action ='{% url 'BotTelegram:usuarios_todos'%}'} method = "POST">
       {% csrf_token %}
 
       <div class="form-group">
