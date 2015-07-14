@@ -253,6 +253,7 @@ def responder_usuario(consulta):
 												 enviado__isnull = False).order_by('update_id')
 
 			if ulti_m_con_ima:
+				requests.get(URL_TG_API + 'sendChatAction',params={'chat_id' : chat_id,'action':'upload_photo '})
 				ulti_m_con_ima = ulti_m_con_ima[len(ulti_m_con_ima)-1]
 				try:
 					comandos = ("",comandos[0],comandos[1])
@@ -280,7 +281,7 @@ def responder_usuario(consulta):
 			imagen = buscarPrimeraImagen(comandos[0].strip(),chat_id,primer_nombre)
 
 			if imagen:
-
+				requests.get(URL_TG_API + 'sendChatAction',params={'chat_id' : chat_id,'action':'upload_photo '})
 				imagen = imagen.mdimagen
 
 				if len(comandos) > 1 :
@@ -295,6 +296,7 @@ def responder_usuario(consulta):
 		if ulti_m_con_ima:
 			ulti_m_con_ima = ulti_m_con_ima[len(ulti_m_con_ima)-1]
 			if ulti_m_con_ima.enviado.siguiente:
+				requests.get(URL_TG_API + 'sendChatAction',params={'chat_id' : chat_id,'action':'upload_photo '})
 				if enviarImagen(ulti_m_con_ima.enviado.siguiente.mdimagen,chat_id) != 0:
 					enviarMensajeTexto(chat_id,"Sorry , there was a problem , try again. ")
 				else:
@@ -313,6 +315,7 @@ def responder_usuario(consulta):
 		imagen = buscarPrimeraImagen(texto_mensaje.strip(),chat_id,primer_nombre)
 
 		if imagen:
+			requests.get(URL_TG_API + 'sendChatAction',params={'chat_id' : chat_id,'action':'upload_photo '})
 			enviarImagen(imagen.mdimagen,chat_id)
 
 			mensaje_m.enviado = imagen
