@@ -315,7 +315,8 @@ def responder_usuario(consulta):
 		imagen = buscarPrimeraImagen(texto_mensaje.strip(),chat_id,primer_nombre)
 
 		if imagen:
-			requests.get(URL_TG_API + 'sendChatAction',params={'chat_id' : chat_id,'action':'upload_photo'})
+			r=requests.get(URL_TG_API + 'sendChatAction',params={'chat_id' : chat_id,'action':'upload_photo'})
+			print r.text
 			enviarImagen(imagen.mdimagen,chat_id)
 
 			mensaje_m.enviado = imagen
