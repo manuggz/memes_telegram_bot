@@ -1,7 +1,4 @@
 from django.db import models
-# help - Shows a text help
-# another - Another image for your meme
-# start - a starting message 
 
 class Usuario(models.Model):
 	id_u = models.IntegerField(primary_key = True)

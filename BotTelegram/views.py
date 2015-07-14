@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse,Http404
 from django.views.decorators.csrf import csrf_exempt
 from models import Usuario ,Mensaje,Imagen,ListaImagen,NodoImagen
 import json
-from maneja_respuesta import responder_usuario
-from forms import LogPrincipalForm
+from maneja_respuesta import responder_usuario,enviarMensajeTexto
+from forms import LogPrincipalForm,FormEnviarMensaje
 import time
 
 
@@ -14,7 +14,7 @@ import time
 
 # Create your views here.
 def index(request):
-	return render(request,'base.html',{'form':LogPrincipalForm()})
+	return render(request,'base.html')
 
 def mostrarMensajes(request):
 	return render(request,'mensajes.html',{'mensajes':Mensaje.objects.all()})
@@ -27,9 +27,16 @@ def mostrarUsuario(request,id_usuario):
 	usuario_r = get_object_or_404(Usuario, pk=id_usuario) 
 	mensajes = Mensaje.objects.filter(usuario=usuario_r)
 
-	return render(request,'usuario.html',{'usuario':usuario_r,
-										  'total_ms_en':len(mensajes),
-										  'mensajes':mensajes})	
+	if request.method == "GET":
+		form = FormEnviarMensaje()
+	else:
+		form = FormEnviarMensaje(request.POST)
+		if form.is_valid():
+			enviarMensajeTexto(id_usuario,form.cleaned_data['mensaje'])
+
+                   
+	return render(request,'usuario.html',{'usuario':usuario_r,'total_ms_en':len(mensajes),
+										  'mensajes':mensajes,'form':form})	
 
 
 @csrf_exempt
@@ -41,5 +48,5 @@ def responder_mensaje(request):
 		print consulta
 		responder_usuario(consulta)
 	else:
-		raise Http404()
+		return render(request,'base.html')
 	return HttpResponse('OK')

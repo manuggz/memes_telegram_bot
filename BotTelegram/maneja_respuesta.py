@@ -8,6 +8,7 @@ from HTMLParser import HTMLParser
 from os.path import join,exists,basename,splitext
 from models import Usuario ,Mensaje,Imagen,ListaImagen,NodoImagen
 from random import random
+import django.utils.timezone as timezone
 from PIL import Image,ImageDraw,ImageFont
 import datetime
 
@@ -225,7 +226,8 @@ def responder_usuario(consulta):
 							update_id = consulta['update_id'],
 							texto_enviado = texto_mensaje[:2000],
 							usuario = usuario_m,
-							fecha=datetime.datetime.fromtimestamp(int(fecha_m)))
+							fecha=timezone.make_aware(datetime.datetime.utcfromtimestamp(int(fecha_m)),
+								timezone.get_default_timezone()))
 
 
 	if not texto_mensaje:

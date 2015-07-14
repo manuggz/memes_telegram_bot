@@ -12,7 +12,7 @@
                 <td>{{usuario.nombreusuario}} </td>
                 <td>{{usuario.nombre}} </td>
                 <td>{{usuario.apellido}} </td>
-                <td><a href ="{% url 'BotTelegram:usuarios' usuario.pk %}">{{usuario.id}} </a></td>
+                <td><a href ="{% url 'BotTelegram:usuarios' usuario.pk %}">{{usuario.pk}} </a></td>
             </tr>
         {%endfor%}
     </table>    

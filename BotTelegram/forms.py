@@ -15,3 +15,10 @@ class LogPrincipalForm(forms.Form):
                     help_text="Your password.",
                     widget=forms.PasswordInput
                 )
+
+class FormEnviarMensaje(forms.Form):
+    mensaje = forms.CharField(
+                    required = True,
+                    label = "mensaje",
+                    help_text="Mensaje a enviar."
+                )
