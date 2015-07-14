@@ -294,12 +294,12 @@ def responder_usuario(consulta):
 			imagen = buscarPrimeraImagen(comandos[0].strip(),chat_id,primer_nombre)
 
 			if imagen:
-				imagen = imagen.mdimagen
 
 				if len(comandos) > 1 :
-					escribirEnviarMeme(comandos,imagen,chat_id,usuario_m)
+					escribirEnviarMeme(comandos,imagen.mdimagen,chat_id,usuario_m)
 				else:
-					enviarImagen(imagen,chat_id)
+					mensaje_m.enviado = imagen
+					enviarImagen(imagen.mdimagen,chat_id)
 
 	elif texto_mensaje == "/another":
 		ulti_m_con_ima = Mensaje.objects.filter(usuario = usuario_m ,
