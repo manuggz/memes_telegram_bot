@@ -3,7 +3,7 @@ from django.http import HttpResponse,Http404
 from django.views.decorators.csrf import csrf_exempt
 from models import Usuario ,Mensaje,Imagen,ListaImagen,NodoImagen
 import json
-from maneja_respuesta import responder_usuario,enviarMensajeTexto,obtenerFotosPerfil
+from maneja_respuesta import responder_usuario,enviarMensajeTexto
 from forms import LogPrincipalForm,FormEnviarMensaje
 import time
 
@@ -20,6 +20,7 @@ def mostrarMensajes(request):
 	return render(request,'mensajes.html',{'mensajes':Mensaje.objects.all()})
 
 def mostrarUsuarios(request):
+
 	return render(request,'usuarios.html',{'usuarios':Usuario.objects.all()})
 
 def mostrarUsuario(request,id_usuario):
