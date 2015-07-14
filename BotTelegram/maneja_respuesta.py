@@ -38,11 +38,13 @@ def dibujar_texto_sobre_imagen(texto,draw,image,fposiciony,color):
 
 
 def enviarMensajeTexto(chat_id,mensaje):
+	requests.get(URL_TG_API + 'sendChatAction',params={'chat_id' : chat_id,'action':'typing'})
 	requests.get(URL_TG_API + 'sendMessage',params={'chat_id' : chat_id,'text':mensaje})
 
 def enviarMensajeImagen(chat_id,ruta_foto):
 	files = {'photo': open(ruta_foto, 'rb')}	
 	try:
+		requests.get(URL_TG_API + 'sendChatAction',params={'chat_id' : chat_id,'action':'upload_photo'})
 		r = requests.post(URL_TG_API + "sendPhoto",data={'chat_id':chat_id},files=files)
 	except:
 		return -1
@@ -253,7 +255,6 @@ def responder_usuario(consulta):
 												 enviado__isnull = False).order_by('update_id')
 
 			if ulti_m_con_ima:
-				requests.get(URL_TG_API + 'sendChatAction',params={'chat_id' : chat_id,'action':'upload_photo'})
 				ulti_m_con_ima = ulti_m_con_ima[len(ulti_m_con_ima)-1]
 				try:
 					comandos = ("",comandos[0],comandos[1])
@@ -281,7 +282,6 @@ def responder_usuario(consulta):
 			imagen = buscarPrimeraImagen(comandos[0].strip(),chat_id,primer_nombre)
 
 			if imagen:
-				requests.get(URL_TG_API + 'sendChatAction',params={'chat_id' : chat_id,'action':'upload_photo'})
 				imagen = imagen.mdimagen
 
 				if len(comandos) > 1 :
@@ -315,8 +315,6 @@ def responder_usuario(consulta):
 		imagen = buscarPrimeraImagen(texto_mensaje.strip(),chat_id,primer_nombre)
 
 		if imagen:
-			r=requests.get(URL_TG_API + 'sendChatAction',params={'chat_id' : chat_id,'action':'upload_photo'})
-			print r.text
 			enviarImagen(imagen.mdimagen,chat_id)
 
 			mensaje_m.enviado = imagen
