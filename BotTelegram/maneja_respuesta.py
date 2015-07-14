@@ -7,7 +7,7 @@ import json
 from HTMLParser import HTMLParser
 from os.path import join,exists,basename,splitext
 from models import Usuario ,Mensaje,Imagen,ListaImagen,NodoImagen
-from random import random
+from random import random,randint,choice
 import django.utils.timezone as timezone
 from PIL import Image,ImageDraw,ImageFont
 import datetime
@@ -87,13 +87,23 @@ def buscarImagenes(memeConsultado):
 	try:
 		peticion = requests.get(PAGINA_MEMES,params={'q':memeConsultado})
 	except :
-		None
+		return None
 
 	if peticion.status_code != 200:
 		return None
 	parser   = parseadorHTML()
 	parser.feed(peticion.text)
 	return parser.rutas_imagenes
+
+def  enviarMensajeATodosUsuarios(mensaje):
+	usuarios = Usuario.objects.all()
+
+	for usuario in usuarios:
+		enviarMensajeTexto(usuario.pk , mensaje)
+
+def obtenerImagenRandom():
+	todos = list(NodoImagen.objects.all())
+	return  choice(NodoImagen.objects.all()).mdimagen
 
 def enviarMensajeStart(primer_nombre,username,chat_id):
 	mensaje = "Hey " + u"\U0001f604 " + primer_nombre + \
@@ -238,8 +248,8 @@ def responder_usuario(consulta):
 		enviarMensajeStart(primer_nombre,username,chat_id)
 	elif texto_mensaje == "/help":
 		enviarMensajeHelp(primer_nombre,chat_id)
-	elif texto_mensaje == "/help":
-		enviarMensajeHelp(primer_nombre,chat_id)
+	elif texto_mensaje == "/random":
+		enviarImagen(obtenerImagenRandom(),chat_id)
 	elif "/create" in texto_mensaje:
 		comandos = texto_mensaje[7:].strip()
 
