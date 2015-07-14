@@ -1,9 +1,9 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse,Http404
 from django.views.decorators.csrf import csrf_exempt
 from models import Usuario ,Mensaje,Imagen,ListaImagen,NodoImagen
 import json
-from maneja_respuesta import responder_usuario,enviarMensajeTexto
+from maneja_respuesta import responder_usuario,enviarMensajeTexto,obtenerFotosPerfil
 from forms import LogPrincipalForm,FormEnviarMensaje
 import time
 
@@ -48,5 +48,5 @@ def responder_mensaje(request):
 		print consulta
 		responder_usuario(consulta)
 	else:
-		return render(request,'base.html')
+		return redirect('/BotTelegram/')
 	return HttpResponse('OK')

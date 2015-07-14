@@ -195,6 +195,11 @@ def escribirEnviarMeme(comandos,imagen,chat_id,usuario_m):
 	imagen_pil.save(ruta_guardar)
 	enviarMensajeImagen(chat_id,ruta_guardar)
 
+def obtenerFotosPerfil(user_id):
+	fotos = []
+	r = requests.get(URL_TG_API + 'getUserProfilePhotos',params={'user_id' : user_id})
+	r = json.loads(r.body)
+	print r
 
 def responder_usuario(consulta):
 
