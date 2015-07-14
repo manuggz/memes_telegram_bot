@@ -16,4 +16,13 @@
             </tr>
         {%endfor%}
     </table>    
+    <form class="form-inline" action ='{% url 'BotTelegram:usuarios' usuario.pk %}'} method = "POST">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="mensaje">Mensaje a enviar</label>
+        <textarea class="form-control" rows="3" id="mensaje" name="mensaje" placeholder="Mensaje a enviar"></textarea>
+      </div>
+      <button type="submit" class="btn btn-default">Enviar mensaje</button>
+    </form>
 {% endblock %}

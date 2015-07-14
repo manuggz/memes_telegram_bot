@@ -3,7 +3,7 @@ from django.http import HttpResponse,Http404
 from django.views.decorators.csrf import csrf_exempt
 from models import Usuario ,Mensaje,Imagen,ListaImagen,NodoImagen
 import json
-from maneja_respuesta import responder_usuario,enviarMensajeTexto
+from maneja_respuesta import responder_usuario,enviarMensajeTexto,enviarMensajeATodosUsuarios
 from forms import LogPrincipalForm,FormEnviarMensaje
 import time
 
@@ -21,6 +21,11 @@ def mostrarMensajes(request):
 
 def mostrarUsuarios(request):
 
+	if request.method == "POST":
+		form = FormEnviarMensaje(request.POST)
+		if form.is_valid():
+			enviarMensajeATodosUsuarios(form.cleaned_data['mensaje'])
+
 	return render(request,'usuarios.html',{'usuarios':Usuario.objects.all()})
 
 def mostrarUsuario(request,id_usuario):
@@ -28,16 +33,14 @@ def mostrarUsuario(request,id_usuario):
 	usuario_r = get_object_or_404(Usuario, pk=id_usuario) 
 	mensajes = Mensaje.objects.filter(usuario=usuario_r)
 
-	if request.method == "GET":
-		form = FormEnviarMensaje()
-	else:
+	if request.method == "POST":
 		form = FormEnviarMensaje(request.POST)
 		if form.is_valid():
 			enviarMensajeTexto(id_usuario,form.cleaned_data['mensaje'])
 
-                   
+                  
 	return render(request,'usuario.html',{'usuario':usuario_r,'total_ms_en':len(mensajes),
-										  'mensajes':mensajes,'form':form})	
+										  'mensajes':mensajes})	
 
 
 @csrf_exempt

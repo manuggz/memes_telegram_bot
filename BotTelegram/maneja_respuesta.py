@@ -103,7 +103,7 @@ def  enviarMensajeATodosUsuarios(mensaje):
 
 def obtenerImagenRandom():
 	todos = list(NodoImagen.objects.all())
-	return  choice(NodoImagen.objects.all()).mdimagen
+	return  choice(NodoImagen.objects.all())
 
 def enviarMensajeStart(primer_nombre,username,chat_id):
 	mensaje = "Hey " + u"\U0001f604 " + primer_nombre + \
@@ -249,7 +249,9 @@ def responder_usuario(consulta):
 	elif texto_mensaje == "/help":
 		enviarMensajeHelp(primer_nombre,chat_id)
 	elif texto_mensaje == "/random":
-		enviarImagen(obtenerImagenRandom(),chat_id)
+		im_ale = obtenerImagenRandom()
+		enviarImagen(im_ale.mdimagen,chat_id)
+		mensaje_m.enviado = im_ale
 	elif "/create" in texto_mensaje:
 		comandos = texto_mensaje[7:].strip()
 
