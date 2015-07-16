@@ -114,6 +114,15 @@ def enviarMensajeStart(primer_nombre,username,chat_id):
 			  "\n\nExample: Type yao ming . If you do, i'll send you yao ming's meme.\n wanna know more? type /help"
 	enviarMensajeTexto(chat_id,mensaje)
 
+def enviarMensajeHelpCommands(primer_nombre,username,chat_id):
+	mensaje = "Hey " + u"\U0001f604 " + primer_nombre + \
+		 	  (" (@" +username +")! "  if username else "") + \
+	          " to do your meme i just need two things : Text to write and a color. \n" + \
+	          "Give me those things like this : Text to write - Optional Text to write , COLOR\n" + \
+	          "I use the comma(,) to separate the text and the color and the hyphen(-) to separate"+\
+	          " the upper and lower text." 
+	enviarMensajeTexto(chat_id,mensaje)
+
 def enviarMensajeHelp(primer_nombre,chat_id):
 	mensaje = "Hey " + primer_nombre + ", I can send you pictures of memes.\n" + \
 				  "Just tell me which one. Type its name."
@@ -122,6 +131,7 @@ def enviarMensajeHelp(primer_nombre,chat_id):
 	mensaje += "/sendme forever alone ,Texto 1 - Texto 2 , blue\n" 
 	mensaje += "/sendme forever alone ,Texto 1 , white\n" 
 	mensaje += "/sendme forever alone \n" 
+	mensaje += "For more information : Type /help sendme\n" 
 
 	mensaje += "\n\nExamples of this bot, type each line:\n" 
 	mensaje += "forever alone\n" 
@@ -129,6 +139,7 @@ def enviarMensajeHelp(primer_nombre,chat_id):
 	mensaje += "/create Im alone\n" 
 	mensaje += "/create Im alone - But with my dog\n"
 	mensaje += "/create Im alone - But with my dog , black\n"
+	mensaje += "For more information : Type /help create\n\n" 
 	mensaje += "\nIf you have any suggestions for my creator let him now at @manuggz."
 	mensaje += "\n\nPlease if you like this bot , rate it at :https://telegram.me/storebot?start=memesbot"
 	enviarMensajeTexto(chat_id,mensaje)
@@ -247,8 +258,43 @@ def responder_usuario(consulta):
 		enviarMensajeTexto(chat_id,"I dunno what you mean \ud83d\ude05 . Type /help ")
 	elif texto_mensaje == "/start":
 		enviarMensajeStart(primer_nombre,username,chat_id)
-	elif texto_mensaje == "/help":
-		enviarMensajeHelp(primer_nombre,chat_id)
+	elif "/help" in texto_mensaje:
+		comando = texto_mensaje[5:]
+		if "sendme" in texto_mensaje:
+			mensaje = """
+To use this command you have to tell me three things , which meme you want me to fetch, a text to write over your meme and a color to use.
+
+The format is: /sendme MEME , TEXT 1 - TEXT 2 , COLOR
+
+Text 1 : upper text
+Text 2 : optional lower text , if you dont tell me a Text 2 , then Text 1 will be written on the lower part.
+
+Color: it is a string , tell me a color name if I dont know it, i'll write using RED.
+
+Notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts and color are separated using a comma(,) that have to be respected.""" 
+			enviarMensajeTexto(chat_id,mensaje)
+		elif "create" in texto_mensaje:
+			mensaje = """
+To use this command you have to tell me two things ,  a text to write over your meme and a color to use.
+
+The format is: /create TEXT 1 - TEXT 2 , COLOR
+
+Text 1 : upper text
+Text 2 : optional lower text , if you dont tell me a Text 2 , then Text 1 will be written on the lower part.
+
+This command use your current meme that you got using /sendme MEME or just typing its name.
+
+Color: it is a string , tell me a color name if I dont know it, i'll write using RED.
+
+Notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts and color are separated using a comma(,) that have to be respected."""			
+			enviarMensajeTexto(chat_id,mensaje)
+		elif "random" in texto_mensaje:
+			mensaje = """
+			Get a random meme"""
+			enviarMensajeTexto(chat_id,mensaje)
+		else:
+
+			enviarMensajeHelp(primer_nombre,chat_id)
 	elif texto_mensaje == "/random":
 		im_ale = obtenerImagenRandom()
 		enviarImagen(im_ale.mdimagen,chat_id)

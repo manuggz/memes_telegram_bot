@@ -52,7 +52,10 @@ def responder_mensaje(request):
 		print consulta
 		responder_usuario(consulta)
 	else:
-		responder_usuario({u'message': {u'chat': {u'first_name': u'Manuel', u'id': 109518141, u'username': u'manuggz', u'last_name': u'Gonzalez'}, u'text': u'/sendme overly attached girlfriend, Hola ADSASD - Hola 2 ASDASDASD,black', u'from': {u'first_name': u'Manuel', u'id': 109518141, u'username': u'manuggz', u'last_name': u'Gonzalez'}, u'date': 1437074942, 
-			u'message_id': 12495}, u'update_id': 25208198})
+		# mensaje = u"/help sendme"
+		# chid = 12500
+		# upid = 25208203
+		# responder_usuario({u'message': {u'chat': {u'first_name': u'Manuel', u'id': 109518141, u'username': u'manuggz', u'last_name': u'Gonzalez'}, u'text': mensaje, u'from': {u'first_name': u'Manuel', u'id': 109518141, u'username': u'manuggz', u'last_name': u'Gonzalez'}, u'date': 1437074942, 
+		# 	u'message_id': chid}, u'update_id': upid})
 		return redirect('/BotTelegram/')
 	return HttpResponse('OK')
