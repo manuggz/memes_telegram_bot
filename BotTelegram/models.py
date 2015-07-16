@@ -5,6 +5,7 @@ class Usuario(models.Model):
 	nombreusuario  = models.CharField(max_length=200 , null = True)
 	nombre   = models.CharField(max_length=200)
 	apellido = models.CharField(max_length=200)
+	suscrito_actu = models.BooleanField(default = True)
 
 
 class Imagen(models.Model):

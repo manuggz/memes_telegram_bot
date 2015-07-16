@@ -100,7 +100,8 @@ def  enviarMensajeATodosUsuarios(mensaje):
 	usuarios = Usuario.objects.all()
 
 	for usuario in usuarios:
-		enviarMensajeTexto(usuario.pk , mensaje)
+		if usuario.suscrito_actu:
+			enviarMensajeTexto(usuario.pk , mensaje)
 
 def obtenerImagenRandom():
 	todos = list(NodoImagen.objects.all())
@@ -299,6 +300,16 @@ Notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts an
 		im_ale = obtenerImagenRandom()
 		enviarImagen(im_ale.mdimagen,chat_id)
 		mensaje_m.enviado = im_ale
+
+	elif texto_mensaje == "/stop":
+		usuario_m.suscrito_actu = False
+		usuario_m.save()
+		enviarMensajeTexto(chat_id,"Now, you won't receive my updates and any other messages.")
+	elif texto_mensaje == "/wannaknowupdates":
+		usuario_m.suscrito_actu = True
+		usuario_m.save()
+		enviarMensajeTexto(chat_id,"Hello again ,now you will receive update notifications.")
+
 	elif "/create" in texto_mensaje:
 		comandos = texto_mensaje[7:].strip()
 
@@ -323,8 +334,6 @@ Notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts an
 			else:
 				enviarMensajeTexto(chat_id,"First tell me which meme typing its name!\n" + \
 											"")
-
-
 
 	elif "/sendme" in texto_mensaje:
 		comandos = texto_mensaje[7:].strip()
