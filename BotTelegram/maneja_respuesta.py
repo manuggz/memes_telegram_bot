@@ -15,19 +15,20 @@ import datetime
 CODE_BOT = "119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg";
 URL_TG_API = "https://api.telegram.org/bot" + CODE_BOT + "/";
 PAGINA_MEMES = 'http://imgflip.com/memesearch'
+FUENTE = "staticfiles/Montserrat-ExtraBold.otf"
 
 def dibujar_texto_sobre_imagen(texto,draw,image,fposiciony,color):
 	if texto == "": return
 
 	tam = image.size[1] // 9
-	fuente = ImageFont.truetype("staticfiles/Impact.ttf", tam)
+	fuente = ImageFont.truetype(FUENTE, tam)
 
 	tam_d = draw.textsize(texto,font = fuente)
 
 	while  tam_d[0] + image.size[0]//2 - tam_d[0]//2 > image.size[0] :
 		del fuente
 		tam -= 2
-		fuente = ImageFont.truetype("staticfiles/Impact.ttf", tam)
+		fuente = ImageFont.truetype(FUENTE, tam)
 		tam_d = draw.textsize(texto,font = fuente)
 
 
@@ -201,10 +202,10 @@ def escribirEnviarMeme(comandos,imagen,chat_id,usuario_m):
 	dibujar_texto_sobre_imagen(tup,draw_pil,imagen_pil,(lambda td , sz : sz[0]  // 12 ),color)
 	dibujar_texto_sobre_imagen(tdown,draw_pil,imagen_pil,(lambda td , sz : sz[1]  -td[1] - td[1]//2 ),color)
 	ruta_tu = splitext(imagen.ruta_imagen)
-	ruta_guardar = ruta_tu[0] + str(usuario_m.pk)  + str(random()) + \
-				ruta_tu[1]
+	ruta_guardar = ruta_tu[0] + str(usuario_m.pk)  + str(random()) +\
+				".PNG"
 
-	imagen_pil.save(ruta_guardar)
+	imagen_pil.save(ruta_guardar, quality=95)
 	enviarMensajeImagen(chat_id,ruta_guardar)
 
 
