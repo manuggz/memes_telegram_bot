@@ -302,13 +302,19 @@ Notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts an
 		mensaje_m.enviado = im_ale
 
 	elif texto_mensaje == "/stop":
-		usuario_m.suscrito_actu = False
-		usuario_m.save()
-		enviarMensajeTexto(chat_id,"Now, you won't receive my updates and any other messages.")
+		if not  usuario_m.suscrito_actu:
+			enviarMensajeTexto(chat_id,"You just dont like me right? You were already out of the queue.")
+		else:
+			usuario_m.suscrito_actu = False
+			usuario_m.save()
+			enviarMensajeTexto(chat_id,"Now, you won't receive my updates and any other messages.")
 	elif texto_mensaje == "/wannaknowupdates":
-		usuario_m.suscrito_actu = True
-		usuario_m.save()
-		enviarMensajeTexto(chat_id,"Hello again ,now you will receive update notifications.")
+		if not  usuario_m.suscrito_actu:
+			usuario_m.suscrito_actu = True
+			usuario_m.save()
+			enviarMensajeTexto(chat_id,"Hello again ,now you will receive update notifications.")
+		else:
+			enviarMensajeTexto(chat_id,"You are already receiving my notifications.")
 
 	elif "/create" in texto_mensaje:
 		comandos = texto_mensaje[7:].strip()
