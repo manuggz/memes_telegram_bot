@@ -416,16 +416,17 @@ def responder_usuario(consulta):
 		else:
 				enviarMensajeTexto(chat_id,"First tell me which meme!")
 	else:
-		print 1
-		imagen = buscarPrimeraImagen(texto_mensaje.strip(),chat_id,primer_nombre)
+		if not es_grupo:
+			print 1
+			imagen = buscarPrimeraImagen(texto_mensaje.strip(),chat_id,primer_nombre)
 
-		print 2
-		if imagen:
-			print 3
-			enviarImagen(imagen.mdimagen,chat_id)
+			print 2
+			if imagen:
+				print 3
+				enviarImagen(imagen.mdimagen,chat_id)
 
-			print 4
-			mensaje_m.enviado = imagen
+				print 4
+				mensaje_m.enviado = imagen
 
 	mensaje_m.save()
 # Fin responder
