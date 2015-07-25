@@ -299,7 +299,7 @@ def responder_usuario(consulta):
 			if consulta['new_chat_participant']['username'] == 'MemesBot':
 				enviarMensajeHelp("",chat_id)
 			else:
-				enviarMensajeTexto(chat_id,"Hi " + username " , new friend!. Send me /help ")
+				enviarMensajeTexto(chat_id,"Hi " + username + " , new friend!. Send me /help ")
 
 	elif texto_mensaje[0:6] == "/start":
 		if not es_grupo or texto_mensaje[7:] == 'MemesBot':
