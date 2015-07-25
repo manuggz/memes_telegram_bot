@@ -3,19 +3,24 @@
 {% block contenido%}
 
 	<table class="table table-hover">
-		<tr>
-			<th> Nickname </th>
-			<th> Nombre </th>
-			<th> Apellido </th>
-			<th> ID </th>
-			<th> Total mensajes enviados</th>
-		<tr>
-			<td>{{usuario.nombreusuario}} </td>
-			<td>{{usuario.nombre}} </td>
-			<td>{{usuario.apellido}} </td>
-			<td>{{usuario.pk}} </td>
-			<td><a href = '{% url 'BotTelegram:usuarios' usuario.pk %}'} >{{total_ms_en}} </a></td>
-		</tr>
+		<thead>
+			<tr>
+				<th> Nickname </th>
+				<th> Nombre </th>
+				<th> Apellido </th>
+				<th> ID </th>
+				<th> Total mensajes enviados</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{{usuario.nombreusuario}} </td>
+				<td>{{usuario.nombre}} </td>
+				<td>{{usuario.apellido}} </td>
+				<td>{{usuario.pk}} </td>
+				<td><a href = '{% url 'BotTelegram:usuarios' usuario.pk %}'} >{{total_ms_en}} </a></td>
+			</tr>
+		</tbody>
 	</table>	
 
 	<table class="table table-hover">

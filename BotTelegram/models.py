@@ -7,6 +7,10 @@ class Usuario(models.Model):
 	apellido = models.CharField(max_length=200)
 	suscrito_actu = models.BooleanField(default = True)
 
+class GrupoChat(models.Model):
+	id_chat = models.IntegerField(primary_key = True)
+	nombrechat  = models.CharField(max_length=200 , null = True)
+	suscrito_actu = models.BooleanField(default = True)
 
 class Imagen(models.Model):
 	url_imagen  = models.CharField(max_length=200 , primary_key =  True)

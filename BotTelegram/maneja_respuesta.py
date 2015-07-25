@@ -112,7 +112,7 @@ def enviarMensajeStart(primer_nombre,username,chat_id):
 		 	  (" (@" +username +")! "  if username else "") + \
 	          ". I can send you memes. Just tell me which one typing  <meme name> and if I can remember it " + \
 			  " I'll send you a picture." + \
-			  "\n\nExample: Type yao ming . If you do, i'll send you yao ming's meme.\n wanna know more? type /help"
+			  "\n\nExample: Send me yao ming . If you do, i'll send you yao ming's meme.\n wanna know more? Send me /help"
 	enviarMensajeTexto(chat_id,mensaje)
 
 def enviarMensajeHelpCommands(primer_nombre,username,chat_id):
@@ -124,26 +124,61 @@ def enviarMensajeHelpCommands(primer_nombre,username,chat_id):
 	          " the upper and lower text." 
 	enviarMensajeTexto(chat_id,mensaje)
 
-def enviarMensajeHelp(primer_nombre,chat_id):
-	mensaje = "Hey " + primer_nombre + ", I can send you pictures of memes.\n" + \
-				  "Just tell me which one. Type its name."
+def enviarMensajeHelp(comando,chat_id):
 
-	mensaje += "\n\nExamples of /sendme:\n" 
-	mensaje += "/sendme forever alone ,Texto 1 - Texto 2 , blue\n" 
-	mensaje += "/sendme forever alone ,Texto 1 , white\n" 
-	mensaje += "/sendme forever alone \n" 
-	mensaje += "For more information : Type /help sendme\n" 
+	if comando == "sendme":
+		mensaje = """
+To use this command you have to tell me three things , which meme you want me to fetch, a text to write over your meme and a color to use.
 
-	mensaje += "\n\nExamples of this bot, type each line:\n" 
-	mensaje += "forever alone\n" 
-	mensaje += "/another\n" 
-	mensaje += "/create Im alone\n" 
-	mensaje += "/create Im alone - But with my dog\n"
-	mensaje += "/create Im alone - But with my dog , black\n"
-	mensaje += "For more information : Type /help create\n\n" 
-	mensaje += "\nIf you have any suggestions for my creator let him now at @manuggz."
-	mensaje += "\n\nPlease if you like this bot , rate it at :https://telegram.me/storebot?start=memesbot"
-	enviarMensajeTexto(chat_id,mensaje)
+The format is: /sendme MEME , TEXT 1 - TEXT 2 , COLOR
+
+Text 1 : upper text
+Text 2 : optional lower text , if you dont tell me a Text 2 , then Text 1 will be written on the lower part.
+
+Color: it is a string , tell me a color name if I dont know it, i'll write using RED.
+
+Notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts and color are separated using a comma(,) that have to be respected.""" 
+		enviarMensajeTexto(chat_id,mensaje)
+	elif comando == "create":
+		mensaje = """
+To use this command you have to tell me two things ,  a text to write over your meme and a color to use.
+
+The format is: /create TEXT 1 - TEXT 2 , COLOR
+
+Text 1 : upper text
+Text 2 : optional lower text , if you dont tell me a Text 2 , then Text 1 will be written on the lower part.
+
+This command use your current meme that you got using /sendme MEME or just typing its name.
+
+Color: it is a string , tell me a color name if I dont know it, i'll write using RED.
+
+Notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts and color are separated using a comma(,) that have to be respected."""			
+		enviarMensajeTexto(chat_id,mensaje)
+	elif comando == "random":
+		mensaje = """
+		Get a random meme"""
+		enviarMensajeTexto(chat_id,mensaje)
+	else:
+
+		mensaje = "Hey " + ", I can send you pictures of memes.\n" + \
+					  "Just tell me which one. Send me its name."
+
+		mensaje += "\n\nExamples of /sendme:\n" 
+		mensaje += "/sendme forever alone ,Texto 1 - Texto 2 , blue\n" 
+		mensaje += "/sendme forever alone ,Texto 1 , white\n" 
+		mensaje += "/sendme forever alone \n" 
+		mensaje += "For more information : Send me /help sendme\n" 
+
+		mensaje += "\n\nExamples of this bot, Send me each line:\n" 
+		mensaje += "forever alone\n" 
+		mensaje += "/another\n" 
+		mensaje += "/create Im alone\n" 
+		mensaje += "/create Im alone - But with my dog\n"
+		mensaje += "/create Im alone - But with my dog , black\n"
+		mensaje += "For more information : Send me /help create\n\n" 
+		mensaje += "\nIf you have any suggestions for my creator let him now at @manuggz."
+		mensaje += "\n\nPlease if you like this bot , rate it at :https://telegram.me/storebot?start=memesbot"
+		enviarMensajeTexto(chat_id,mensaje)
 
 
 def construir_imagenes(rutas_imagenes,txt_bu):
@@ -181,7 +216,7 @@ def buscarPrimeraImagen(texto,chat_id,nombre):
 		imagenes       = buscarImagenes(texto)
 		if imagenes == []:
 			enviarMensajeTexto(chat_id,"I'm sorry " + u'\U0001f605' + " @" + nombre + \
-									   ".\n I can't remember this meme( " + texto + " )!. Type /help.")
+									   ".\n I can't remember this meme( " + texto + " )!. Send me /help.")
 		elif imagenes == None:
 			enviarMensajeTexto(chat_id,"Sorry , there is a problem getting your meme. Try again.")
 
@@ -230,6 +265,9 @@ def responder_usuario(consulta):
 	username      = consulta['message']['from'].get('username',"")
 	apellido      = consulta['message']['from'].get('last_name',"")
 	fecha_m       = consulta['message']['date']
+	es_grupo = consulta['message']['chat']['id'] != consulta['message']['from']['id']
+	if es_grupo:
+		titulo_chat = consulta['message']['chat']['title']
 
 	if texto_mensaje == "/This_group_is_hacked_by_FATA_Leave_it_or_you_will_face_the_consequences" :
 		return
@@ -256,114 +294,110 @@ def responder_usuario(consulta):
 
 
 	if not texto_mensaje:
-		enviarMensajeTexto(chat_id,"I dunno what you mean \ud83d\ude05 . Type /help ")
-	elif texto_mensaje == "/start":
-		enviarMensajeStart(primer_nombre,username,chat_id)
-	elif "/help" in texto_mensaje:
-		comando = texto_mensaje[5:]
-		if "sendme" in texto_mensaje:
-			mensaje = """
-To use this command you have to tell me three things , which meme you want me to fetch, a text to write over your meme and a color to use.
 
-The format is: /sendme MEME , TEXT 1 - TEXT 2 , COLOR
-
-Text 1 : upper text
-Text 2 : optional lower text , if you dont tell me a Text 2 , then Text 1 will be written on the lower part.
-
-Color: it is a string , tell me a color name if I dont know it, i'll write using RED.
-
-Notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts and color are separated using a comma(,) that have to be respected.""" 
-			enviarMensajeTexto(chat_id,mensaje)
-		elif "create" in texto_mensaje:
-			mensaje = """
-To use this command you have to tell me two things ,  a text to write over your meme and a color to use.
-
-The format is: /create TEXT 1 - TEXT 2 , COLOR
-
-Text 1 : upper text
-Text 2 : optional lower text , if you dont tell me a Text 2 , then Text 1 will be written on the lower part.
-
-This command use your current meme that you got using /sendme MEME or just typing its name.
-
-Color: it is a string , tell me a color name if I dont know it, i'll write using RED.
-
-Notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts and color are separated using a comma(,) that have to be respected."""			
-			enviarMensajeTexto(chat_id,mensaje)
-		elif "random" in texto_mensaje:
-			mensaje = """
-			Get a random meme"""
-			enviarMensajeTexto(chat_id,mensaje)
-		else:
-
-			enviarMensajeHelp(primer_nombre,chat_id)
-	elif texto_mensaje == "/random":
-		im_ale = obtenerImagenRandom()
-		enviarImagen(im_ale.mdimagen,chat_id)
-		mensaje_m.enviado = im_ale
-
-	elif texto_mensaje == "/stop":
-		if not  usuario_m.suscrito_actu:
-			enviarMensajeTexto(chat_id,"You just dont like me right? You were already out of the queue.")
-		else:
-			usuario_m.suscrito_actu = False
-			usuario_m.save()
-			enviarMensajeTexto(chat_id,"Now, you won't receive my updates and any other messages.")
-	elif texto_mensaje == "/wannaknowupdates":
-		if not  usuario_m.suscrito_actu:
-			usuario_m.suscrito_actu = True
-			usuario_m.save()
-			enviarMensajeTexto(chat_id,"Hello again ,now you will receive update notifications.")
-		else:
-			enviarMensajeTexto(chat_id,"You are already receiving my notifications.")
-
-	elif "/create" in texto_mensaje:
-		comandos = texto_mensaje[7:].strip()
-
-		if not comandos:
-			enviarMensajeTexto(chat_id,"Please use this command to write over the current meme , " + \
-										"use it this way , example: \n\n/create " + \
-										"Texto to write- Texto optional , red\n\nType /help " + \
-										"for more examples.")
-		else:
-			comandos = [ i.strip() for i in comandos.split(',') if i ]
-
-			ulti_m_con_ima = Mensaje.objects.filter(usuario = usuario_m ,
-												 enviado__isnull = False).order_by('update_id')
-
-			if ulti_m_con_ima:
-				ulti_m_con_ima = ulti_m_con_ima[len(ulti_m_con_ima)-1]
-				try:
-					comandos = ("",comandos[0],comandos[1])
-				except IndexError:
-					comandos = ("",comandos[0])
-				escribirEnviarMeme(comandos,ulti_m_con_ima.enviado.mdimagen,chat_id,usuario_m)
+		if consulta.get('new_chat_participant',None):
+			if consulta['new_chat_participant']['username'] == 'MemesBot':
+				enviarMensajeHelp("",chat_id)
 			else:
-				enviarMensajeTexto(chat_id,"First tell me which meme typing its name!\n" + \
-											"")
+				enviarMensajeTexto(chat_id,"Hi " + username " , new friend!. Send me /help ")
 
-	elif "/sendme" in texto_mensaje:
-		comandos = texto_mensaje[7:].strip()
+	elif texto_mensaje[0:6] == "/start":
+		if not es_grupo or texto_mensaje[7:] == 'MemesBot':
+			enviarMensajeStart(primer_nombre,username,chat_id)
+	elif texto_mensaje[0:5] == "/help":
+		if es_grupo and texto_mensaje[6:] == 'MemesBot':
+			enviarMensajeHelp(texto_mensaje[14:].strip(),chat_id)
+		elif not es_grupo:
+			enviarMensajeHelp(texto_mensaje[5:].strip(),chat_id)
+	elif texto_mensaje[0:7] == "/random":
+		if not es_grupo or texto_mensaje[8:] == 'MemesBot':
+			im_ale = obtenerImagenRandom()
+			enviarImagen(im_ale.mdimagen,chat_id)
+			mensaje_m.enviado = im_ale
 
-		if not  comandos:
-			enviarMensajeTexto(chat_id,"Please use this command to write memes , " + \
-										"use it this way , example: \n\n/sendme yao ming , " + \
-										"Texto to write- Texto optional , red\n\nType /help " + \
-										"for more examples.")
+	elif texto_mensaje[0:5] == "/stop":
+		if not es_grupo or texto_mensaje[6:] == 'MemesBot':
+			if not  usuario_m.suscrito_actu:
+				enviarMensajeTexto(chat_id,"You just dont like me right? You were already out of the queue.")
+			else:
+				usuario_m.suscrito_actu = False
+				usuario_m.save()
+				enviarMensajeTexto(chat_id,"Now, you won't receive my updates and any other messages.")
+	elif texto_mensaje[0:17] == "/wannaknowupdates":
+		if not es_grupo or texto_mensaje[18:] == 'MemesBot':
+			if not  usuario_m.suscrito_actu:
+				usuario_m.suscrito_actu = True
+				usuario_m.save()
+				enviarMensajeTexto(chat_id,"Hello again ,now you will receive update notifications.")
+			else:
+				enviarMensajeTexto(chat_id,"You are already receiving my notifications.")
+
+	elif texto_mensaje[0:7] == "/create":
+		comandos = ""
+		valido = False
+		if not es_grupo:
+			comandos = texto_mensaje[8:].strip()
+			valido = True
 		else:
+			if texto_mensaje[8:16] == 'MemesBot':
+				comandos = texto_mensaje[17:].strip()
+				valido = True
 
-			comandos = [ i.strip() for i in comandos.split(',') if i ]
+		if valido:
+			if not comandos :
+				enviarMensajeTexto(chat_id,"Please use this command to write over the current meme , " + \
+											"use it this way , example: \n\n/create " + \
+											"Texto to write- Texto optional , red\n\nSend me /help " + \
+											"for more examples.")
+			else:
+				comandos = [ i.strip() for i in comandos.split(',') if i ]
 
-			imagen = buscarPrimeraImagen(comandos[0].strip(),chat_id,primer_nombre)
+				ulti_m_con_ima = Mensaje.objects.filter(usuario = usuario_m ,
+													 enviado__isnull = False).order_by('update_id')
 
-			if imagen:
-
-				if len(comandos) > 1 :
-					escribirEnviarMeme(comandos,imagen.mdimagen,chat_id,usuario_m)
+				if ulti_m_con_ima:
+					ulti_m_con_ima = ulti_m_con_ima[len(ulti_m_con_ima)-1]
+					try:
+						comandos = ("",comandos[0],comandos[1])
+					except IndexError:
+						comandos = ("",comandos[0])
+					escribirEnviarMeme(comandos,ulti_m_con_ima.enviado.mdimagen,chat_id,usuario_m)
 				else:
-					mensaje_m.enviado = imagen
-					enviarImagen(imagen.mdimagen,chat_id)
+					enviarMensajeTexto(chat_id,"First tell me which meme typing its name!\n" + \
+												"")
 
-	elif texto_mensaje == "/another":
+	elif texto_mensaje[0:7] == "/sendme":
+		comandos = ""
+		valido = False
+		if not es_grupo:
+			comandos = texto_mensaje[8:].strip()
+			valido = True
+		else:
+			if texto_mensaje[8:16] == 'MemesBot':
+				comandos = texto_mensaje[17:].strip()
+				valido = True
+
+		if valido:
+			if not  comandos:
+				enviarMensajeTexto(chat_id,"Please use this command to write memes , " + \
+											"use it this way , example: \n\n/sendme yao ming , " + \
+											"Texto to write- Texto optional , red\n\nSend me /help " + \
+											"for more examples.")
+			else:
+
+				comandos = [ i.strip() for i in comandos.split(',') if i ]
+
+				imagen = buscarPrimeraImagen(comandos[0].strip(),chat_id,primer_nombre)
+
+				if imagen:
+
+					if len(comandos) > 1 :
+						escribirEnviarMeme(comandos,imagen.mdimagen,chat_id,usuario_m)
+					else:
+						mensaje_m.enviado = imagen
+						enviarImagen(imagen.mdimagen,chat_id)
+
+	elif texto_mensaje[0:8] == "/another":
 		ulti_m_con_ima = Mensaje.objects.filter(usuario = usuario_m ,
 											 enviado__isnull = False).order_by('update_id')
 
@@ -381,16 +415,16 @@ Notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts an
 
 		else:
 				enviarMensajeTexto(chat_id,"First tell me which meme!")
-
-
-	elif "iranid" in texto_mensaje:
-		enviarMensajeTexto(chat_id,"Iranid te amo! " + u'\U0001f618')
 	else:
+		print 1
 		imagen = buscarPrimeraImagen(texto_mensaje.strip(),chat_id,primer_nombre)
 
+		print 2
 		if imagen:
+			print 3
 			enviarImagen(imagen.mdimagen,chat_id)
 
+			print 4
 			mensaje_m.enviado = imagen
 
 	mensaje_m.save()
