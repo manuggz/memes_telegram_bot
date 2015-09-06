@@ -435,6 +435,8 @@ def responder_usuario(consulta):
 				print 4
 				mensaje_m.enviado = imagen
 
+	print(5)
 	mensaje_m.save()
+	print(6)
 # Fin responder
 
