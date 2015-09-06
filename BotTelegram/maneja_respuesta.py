@@ -258,6 +258,7 @@ def escribirEnviarMeme(comandos,imagen,chat_id,usuario_m):
 
 def responder_usuario(consulta):
 
+	print(1)
 	texto_mensaje = consulta['message'].get('text',"")
 	chat_id       = consulta['message']['chat']['id']
 	user_id       = consulta['message']['from']['id']
@@ -293,6 +294,7 @@ def responder_usuario(consulta):
 								timezone.get_default_timezone()))
 
 
+	print(2)
 	if not texto_mensaje:
 
 		if consulta.get('new_chat_participant',None):
