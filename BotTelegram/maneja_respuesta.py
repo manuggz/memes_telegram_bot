@@ -39,11 +39,8 @@ def dibujar_texto_sobre_imagen(texto,draw,image,fposiciony,color):
 
 
 def enviarMensajeTexto(chat_id,mensaje):
-	print("3.1")
 	requests.get(URL_TG_API + 'sendChatAction',params={'chat_id' : chat_id,'action':'typing'})
-	print("3.2")
 	requests.get(URL_TG_API + 'sendMessage',params={'chat_id' : chat_id,'text':mensaje})
-	print("3.3")
 
 def enviarMensajeImagen(chat_id,ruta_foto):
 	files = {'photo': open(ruta_foto, 'rb')}	
@@ -261,7 +258,6 @@ def escribirEnviarMeme(comandos,imagen,chat_id,usuario_m):
 
 def responder_usuario(consulta):
 
-	print(1)
 	texto_mensaje = consulta['message'].get('text',"")
 	chat_id       = consulta['message']['chat']['id']
 	user_id       = consulta['message']['from']['id']
@@ -297,7 +293,6 @@ def responder_usuario(consulta):
 								timezone.get_default_timezone()))
 
 
-	print(2)
 	if not texto_mensaje:
 
 		if consulta.get('new_chat_participant',None):
@@ -316,16 +311,14 @@ def responder_usuario(consulta):
 			enviarMensajeHelp(texto_mensaje[5:].strip(),chat_id)
 	elif texto_mensaje[0:7] == "/random":
 		if not es_grupo or texto_mensaje[8:] == 'MemesBot':
-			#im_ale = obtenerImagenRandom()
-			#enviarImagen(im_ale.mdimagen,chat_id)
-			#mensaje_m.enviado = im_ale
-			enviarMensajeTexto(chat_id,"Working on it again sorry.")
+			im_ale = obtenerImagenRandom()
+			enviarImagen(im_ale.mdimagen,chat_id)
+			mensaje_m.enviado = im_ale
+
 	elif texto_mensaje[0:5] == "/stop":
 		if not es_grupo or texto_mensaje[6:] == 'MemesBot':
 			if not  usuario_m.suscrito_actu:
-				print(3)
 				enviarMensajeTexto(chat_id,"You just dont like me right? You were already out of the queue.")
-				print(4)
 			else:
 				usuario_m.suscrito_actu = False
 				usuario_m.save()
@@ -424,19 +417,14 @@ def responder_usuario(consulta):
 				enviarMensajeTexto(chat_id,"First tell me which meme!")
 	else:
 		if not es_grupo:
-			print 1
 			imagen = buscarPrimeraImagen(texto_mensaje.strip(),chat_id,primer_nombre)
 
-			print 2
 			if imagen:
-				print 3
 				enviarImagen(imagen.mdimagen,chat_id)
-
-				print 4
 				mensaje_m.enviado = imagen
 
-	print(5)
+
 	mensaje_m.save()
-	print(6)
+
 # Fin responder
 
