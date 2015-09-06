@@ -316,10 +316,10 @@ def responder_usuario(consulta):
 			enviarMensajeHelp(texto_mensaje[5:].strip(),chat_id)
 	elif texto_mensaje[0:7] == "/random":
 		if not es_grupo or texto_mensaje[8:] == 'MemesBot':
-			im_ale = obtenerImagenRandom()
-			enviarImagen(im_ale.mdimagen,chat_id)
-			mensaje_m.enviado = im_ale
-
+			#im_ale = obtenerImagenRandom()
+			#enviarImagen(im_ale.mdimagen,chat_id)
+			#mensaje_m.enviado = im_ale
+			enviarMensajeTexto(chat_id,"Working on it again sorry.")
 	elif texto_mensaje[0:5] == "/stop":
 		if not es_grupo or texto_mensaje[6:] == 'MemesBot':
 			if not  usuario_m.suscrito_actu:
