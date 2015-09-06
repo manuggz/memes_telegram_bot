@@ -39,8 +39,11 @@ def dibujar_texto_sobre_imagen(texto,draw,image,fposiciony,color):
 
 
 def enviarMensajeTexto(chat_id,mensaje):
+	print("3.1")
 	requests.get(URL_TG_API + 'sendChatAction',params={'chat_id' : chat_id,'action':'typing'})
+	print("3.2")
 	requests.get(URL_TG_API + 'sendMessage',params={'chat_id' : chat_id,'text':mensaje})
+	print("3.3")
 
 def enviarMensajeImagen(chat_id,ruta_foto):
 	files = {'photo': open(ruta_foto, 'rb')}	
@@ -320,7 +323,9 @@ def responder_usuario(consulta):
 	elif texto_mensaje[0:5] == "/stop":
 		if not es_grupo or texto_mensaje[6:] == 'MemesBot':
 			if not  usuario_m.suscrito_actu:
+				print(3)
 				enviarMensajeTexto(chat_id,"You just dont like me right? You were already out of the queue.")
+				print(4)
 			else:
 				usuario_m.suscrito_actu = False
 				usuario_m.save()
