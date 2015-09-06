@@ -261,7 +261,6 @@ def escribirEnviarMeme(comandos,imagen,chat_id,usuario_m):
 
 def responder_usuario(consulta):
 
-	print(1)
 	texto_mensaje = consulta['message'].get('text',"")
 	chat_id       = consulta['message']['chat']['id']
 	user_id       = consulta['message']['from']['id']
@@ -297,7 +296,6 @@ def responder_usuario(consulta):
 								timezone.get_default_timezone()))
 
 
-	print(2)
 	if not texto_mensaje:
 
 		if consulta.get('new_chat_participant',None):
@@ -323,9 +321,7 @@ def responder_usuario(consulta):
 	elif texto_mensaje[0:5] == "/stop":
 		if not es_grupo or texto_mensaje[6:] == 'MemesBot':
 			if not  usuario_m.suscrito_actu:
-				print(3)
 				enviarMensajeTexto(chat_id,"You just dont like me right? You were already out of the queue.")
-				print(4)
 			else:
 				usuario_m.suscrito_actu = False
 				usuario_m.save()
@@ -424,15 +420,11 @@ def responder_usuario(consulta):
 				enviarMensajeTexto(chat_id,"First tell me which meme!")
 	else:
 		if not es_grupo:
-			print 1
 			imagen = buscarPrimeraImagen(texto_mensaje.strip(),chat_id,primer_nombre)
 
-			print 2
 			if imagen:
-				print 3
 				enviarImagen(imagen.mdimagen,chat_id)
 
-				print 4
 				mensaje_m.enviado = imagen
 
 	print(5)
