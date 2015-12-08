@@ -780,8 +780,7 @@ def mostrarUsuarios(request):
 def mostrarMoteles(request):
 
 	if request.method == "GET":
-		#return HttpResponse(moteles_json_texto)
-		return HttpResponse(json.dumps(moteles), content_type="application/json")
+		return HttpResponse(moteles_json_texto)
 
 	return HttpResponse('Matate!')
 
