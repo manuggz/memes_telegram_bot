@@ -6,11 +6,12 @@ import shutil
 import json
 from HTMLParser import HTMLParser
 from os.path import join,exists,basename,splitext
-from models import Usuario ,Mensaje,Imagen,ListaImagen,NodoImagen
+from models import Usuario ,Imagen,RespuestaServidor
 from random import random,randint,choice
 import django.utils.timezone as timezone
 from PIL import Image,ImageDraw,ImageFont
 import datetime
+from time import sleep
 
 CODE_BOT = "119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg";
 URL_TG_API = "https://api.telegram.org/bot" + CODE_BOT + "/";
@@ -40,6 +41,7 @@ def dibujar_texto_sobre_imagen(texto,draw,image,fposiciony,color):
 
 def enviarMensajeTexto(chat_id,mensaje):
 	requests.get(URL_TG_API + 'sendChatAction',params={'chat_id' : chat_id,'action':'typing'})
+	sleep(2);
 	requests.get(URL_TG_API + 'sendMessage',params={'chat_id' : chat_id,'text':mensaje})
 
 def enviarMensajeImagen(chat_id,ruta_foto):
@@ -104,8 +106,8 @@ def  enviarMensajeATodosUsuarios(mensaje):
 			enviarMensajeTexto(usuario.pk , mensaje)
 
 def obtenerImagenRandom():
-	todos = list(NodoImagen.objects.all())
-	return  choice(NodoImagen.objects.all())
+	todos = list(Imagen.objects.all())
+	return  choice(Imagen.objects.all())
 
 def enviarMensajeStart(primer_nombre,username,chat_id):
 	mensaje = "Hey " + u"\U0001f604 " + primer_nombre + \
@@ -182,35 +184,23 @@ Notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts an
 
 
 def construir_imagenes(rutas_imagenes,txt_bu):
-	anterior = None
+
 	for i in range(len(rutas_imagenes)-1,-1,-1):
 		url_ima      = "http:" + rutas_imagenes[i]['src']
 		path_archivo = join('staticfiles',basename(url_ima))
 
-		try:
-			imagendb = Imagen.objects.get(url_imagen = url_ima)
-		except ObjectDoesNotExist:
-			imagendb = Imagen(url_imagen = url_ima,
-							  ruta_imagen = path_archivo,
-							  alt_mensaje = rutas_imagenes[i]['alt'])
-			imagendb.save()
+		imagendb = Imagen(id_lista = i,
+						  url_imagen = url_ima,
+						  ruta_imagen = path_archivo,
+						  textobuscado = txt_bu)		
+		imagendb.save()
 
-		nodo = NodoImagen(id_lista    = i,
-			  			  mdimagen    = imagendb,
-			              siguiente   =anterior)
-		nodo.save()
-
-		anterior = nodo
-
-	ListaImagen(txt_buscado = txt_bu,
-				primero     =  nodo).save()
-
-	return nodo
+	return imagendb
 
 def buscarPrimeraImagen(texto,chat_id,nombre):
 	primera_imagen = None
 	try:
-		primera_imagen = ListaImagen.objects.get(txt_buscado = texto).primero
+		primera_imagen = Imagen.objects.get(id_lista = 0 , textobuscado = texto)
 	except ObjectDoesNotExist:
 
 		imagenes       = buscarImagenes(texto)
@@ -274,7 +264,7 @@ def responder_usuario(consulta):
 
 	try:
 		usuario_m = Usuario.objects.get(id_u = user_id)
-	except ObjectDoesNotExist:
+	except ObjectDoesNotExist: #Agregamos el nuevo usuario :D
 		usuario_m = Usuario(id_u       = user_id,
 							nombreusuario = username[:200], 
 							nombre   = primer_nombre[:200] ,
@@ -282,19 +272,15 @@ def responder_usuario(consulta):
 		usuario_m.save()
 
 	try:
-		mensaje_m = Mensaje.objects.get(id_mensaje = consulta['message']['message_id'])
-		return
+		RespuestaServidor.objects.get(id_mensaje = consulta['message']['message_id'])
+		return #Mensaje ya respondido
 	except ObjectDoesNotExist:
-		mensaje_m = Mensaje(id_mensaje = consulta['message']['message_id'] , 
-							update_id = consulta['update_id'],
-							texto_enviado = texto_mensaje[:2000],
-							usuario = usuario_m,
-							fecha=timezone.make_aware(datetime.datetime.utcfromtimestamp(int(fecha_m)),
-								timezone.get_default_timezone()))
+		pass
 
 
 	if not texto_mensaje:
 
+		#This is not working!
 		if consulta.get('new_chat_participant',None):
 			if consulta['new_chat_participant']['username'] == 'MemesBot':
 				enviarMensajeHelp("",chat_id)
@@ -312,8 +298,13 @@ def responder_usuario(consulta):
 	elif texto_mensaje[0:7] == "/random":
 		if not es_grupo or texto_mensaje[8:] == 'MemesBot':
 			im_ale = obtenerImagenRandom()
-			enviarImagen(im_ale.mdimagen,chat_id)
-			mensaje_m.enviado = im_ale
+			enviarImagen(im_ale,chat_id)
+			respuesta = RespuestaServidor(id_mensaje = consulta['message']['message_id'],
+								fecha=timezone.make_aware(datetime.datetime.utcfromtimestamp(int(fecha_m)),
+								timezone.get_default_timezone()),
+								usuario = usuario_m,
+								imagen_enviada = im_ale)
+			respuesta.save()
 
 	elif texto_mensaje[0:5] == "/stop":
 		if not es_grupo or texto_mensaje[6:] == 'MemesBot':
@@ -352,8 +343,7 @@ def responder_usuario(consulta):
 			else:
 				comandos = [ i.strip() for i in comandos.split(',') if i ]
 
-				ulti_m_con_ima = Mensaje.objects.filter(usuario = usuario_m ,
-													 enviado__isnull = False).order_by('update_id')
+				ulti_m_con_ima = RespuestaServidor.objects.filter(usuario = usuario_m).order_by('id_mensaje')
 
 				if ulti_m_con_ima:
 					ulti_m_con_ima = ulti_m_con_ima[len(ulti_m_con_ima)-1]
@@ -361,7 +351,7 @@ def responder_usuario(consulta):
 						comandos = ("",comandos[0],comandos[1])
 					except IndexError:
 						comandos = ("",comandos[0])
-					escribirEnviarMeme(comandos,ulti_m_con_ima.enviado.mdimagen,chat_id,usuario_m)
+					escribirEnviarMeme(comandos,ulti_m_con_ima.imagen_enviada,chat_id,usuario_m)
 				else:
 					enviarMensajeTexto(chat_id,"First tell me which meme typing its name!\n" + \
 												"")
@@ -392,25 +382,28 @@ def responder_usuario(consulta):
 				if imagen:
 
 					if len(comandos) > 1 :
-						escribirEnviarMeme(comandos,imagen.mdimagen,chat_id,usuario_m)
+						escribirEnviarMeme(comandos,imagen,chat_id,usuario_m)
 					else:
 						mensaje_m.enviado = imagen
-						enviarImagen(imagen.mdimagen,chat_id)
+						enviarImagen(imagen,chat_id)
 
 	elif texto_mensaje[0:8] == "/another":
-		ulti_m_con_ima = Mensaje.objects.filter(usuario = usuario_m ,
-											 enviado__isnull = False).order_by('update_id')
+		ulti_m_con_ima = RespuestaServidor.objects.filter(usuario = usuario_m).order_by('id_mensaje')
 
 		if ulti_m_con_ima:
 			ulti_m_con_ima = ulti_m_con_ima[len(ulti_m_con_ima)-1]
-			if ulti_m_con_ima.enviado.siguiente:
+
+			try:
+				imagen_siguiente = Imagen.objects.get(id_lista =ulti_m_con_ima.id_lista + 1 , 
+													  textobuscado = ulti_m_con_ima.textobuscado)
+
 				requests.get(URL_TG_API + 'sendChatAction',params={'chat_id' : chat_id,'action':'upload_photo'})
 				if enviarImagen(ulti_m_con_ima.enviado.siguiente.mdimagen,chat_id) != 0:
 					enviarMensajeTexto(chat_id,"Sorry , there was a problem , try again. ")
 				else:
 					mensaje_m.enviado = ulti_m_con_ima.enviado.siguiente
 
-			else:
+			except ObjectDoesNotExist:
 				enviarMensajeTexto(chat_id,"Sorry , there's no more images for your meme. \n")
 
 		else:

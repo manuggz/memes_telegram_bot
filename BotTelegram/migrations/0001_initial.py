@@ -11,30 +11,43 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Mensaje',
+            name='GrupoChat',
             fields=[
-                ('id_mensaje', models.IntegerField(serialize=False, primary_key=True)),
-                ('texto_enviado', models.CharField(max_length=200, null=True)),
+                ('id_chat', models.IntegerField(serialize=False, primary_key=True)),
+                ('nombrechat', models.CharField(max_length=200, null=True)),
+                ('suscrito_actu', models.BooleanField(default=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Update',
+            name='Imagen',
             fields=[
-                ('update_id', models.IntegerField(serialize=False, primary_key=True)),
-                ('mensaje', models.ForeignKey(to='BotTelegram.Mensaje')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('url_imagen', models.CharField(max_length=200)),
+                ('ruta_imagen', models.CharField(max_length=200)),
+                ('textobuscado', models.CharField(max_length=200)),
+                ('id_lista', models.IntegerField()),
+            ],
+        ),
+        migrations.CreateModel(
+            name='RespuestaServidor',
+            fields=[
+                ('id_mensaje', models.IntegerField(serialize=False, primary_key=True)),
+                ('fecha', models.DateTimeField()),
+                ('imagen_enviada', models.ForeignKey(to='BotTelegram.Imagen')),
             ],
         ),
         migrations.CreateModel(
             name='Usuario',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id_u', models.IntegerField(serialize=False, primary_key=True)),
                 ('nombreusuario', models.CharField(max_length=200, null=True)),
-                ('nombre', models.CharField(max_length=200)),
-                ('apellido', models.CharField(max_length=200)),
+                ('nombre', models.CharField(max_length=200, null=True)),
+                ('apellido', models.CharField(max_length=200, null=True)),
+                ('suscrito_actu', models.BooleanField(default=True)),
             ],
         ),
         migrations.AddField(
-            model_name='mensaje',
+            model_name='respuestaservidor',
             name='usuario',
             field=models.ForeignKey(to='BotTelegram.Usuario'),
         ),

@@ -83,7 +83,7 @@ DATABASES['default'] =  dj_database_url.config()
 if not DATABASES['default']:
     DATABASES = {
         'default':{'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'memestg',
+        'NAME': 'memestg8',
         'HOST': 'localhost',
         'USER': 'manuggz',
         'PASSWORD': 'linking750',
