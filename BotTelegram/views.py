@@ -759,6 +759,7 @@ moteles_json_texto ='''[
     }
 ]'''
 
+moteles = json.loads(data)
 
 # Create your views here.
 def index(request):
@@ -779,8 +780,8 @@ def mostrarUsuarios(request):
 def mostrarMoteles(request):
 
 	if request.method == "GET":
-		return HttpResponse(moteles_json_texto)
-		#return JsonResponse({'foo':'bar'})
+		#return HttpResponse(moteles_json_texto)
+		return JsonResponse(moteles)
 
 	return HttpResponse('Matate!')
 
