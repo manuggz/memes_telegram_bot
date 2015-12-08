@@ -21,7 +21,7 @@ moteles_json_texto ='''[
         "cat_num": 1, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel51.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538615/HOTEL_NILSON_abuc9c.jpg", 
         "nombre": "HOTEL NILSON", 
         "id": 51
     }, 
@@ -33,7 +33,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL ATL\u00c1NTIDA", 
         "id": 52
     }, 
@@ -45,7 +45,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel10.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538595/HOTEL_COLISEO_gsmojh.jpg", 
         "nombre": "HOTEL COLISEO", 
         "id": 10
     }, 
@@ -57,7 +57,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL EL CID", 
         "id": 19
     }, 
@@ -69,7 +69,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL CHACAO CUMBERLAND", 
         "id": 49
     }, 
@@ -81,7 +81,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL PLAZA PALACE", 
         "id": 56
     }, 
@@ -93,7 +93,7 @@ moteles_json_texto ='''[
         "cat_num": 1, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel7.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538644/HOTEL_LIDER_wmokdo.jpg", 
         "nombre": "HOTEL LIDER", 
         "id": 7
     }, 
@@ -105,7 +105,7 @@ moteles_json_texto ='''[
         "cat_num": 3, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL PENT HOUSE", 
         "id": 20
     }, 
@@ -117,7 +117,7 @@ moteles_json_texto ='''[
         "cat_num": 3, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "MOTEL CANAIMA", 
         "id": 28
     }, 
@@ -129,7 +129,7 @@ moteles_json_texto ='''[
         "cat_num": 4, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL ALLADIN", 
         "id": 30
     }, 
@@ -141,7 +141,7 @@ moteles_json_texto ='''[
         "cat_num": 4, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel46.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538548/HOTEL_MEDITERRANEO_ghtha5.jpg", 
         "nombre": "HOTEL MEDITERRANEO", 
         "id": 46
     }, 
@@ -153,7 +153,7 @@ moteles_json_texto ='''[
         "cat_num": 3, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel3.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449546854/DAKOTA_SUITES_HOTEL_orswxh.jpg", 
         "nombre": "DAKOTA SUITES HOTEL", 
         "id": 3
     }, 
@@ -165,7 +165,7 @@ moteles_json_texto ='''[
         "cat_num": 3, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL NOSTRUM", 
         "id": 14
     }, 
@@ -177,7 +177,7 @@ moteles_json_texto ='''[
         "cat_num": 1, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel4.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538607/HOTEL_RAMO_BLANCO_hcwvq2.jpg", 
         "nombre": "HOTEL RAMO BLANCO ", 
         "id": 4
     }, 
@@ -189,7 +189,7 @@ moteles_json_texto ='''[
         "cat_num": 1, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL RORA", 
         "id": 13
     }, 
@@ -201,7 +201,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel31.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538641/HOTEL_CARACAS_CUMBERLAND_vgmqcx.jpg", 
         "nombre": "HOTEL CARACAS CUMBERLAND", 
         "id": 31
     }, 
@@ -213,7 +213,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel47.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538565/HOTEL_KING_S_hfbl4s.jpg", 
         "nombre": "HOTEL KING\u00b4S", 
         "id": 47
     }, 
@@ -225,7 +225,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL LA MONCLOA", 
         "id": 58
     }, 
@@ -237,7 +237,7 @@ moteles_json_texto ='''[
         "cat_num": 1, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL GIOLY", 
         "id": 18
     }, 
@@ -249,7 +249,7 @@ moteles_json_texto ='''[
         "cat_num": 1, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL REMA", 
         "id": 17
     }, 
@@ -261,7 +261,7 @@ moteles_json_texto ='''[
         "cat_num": 1, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel50.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538570/HOTEL_LA_SALLE_tjipkf.jpg", 
         "nombre": "HOTEL LA SALLE", 
         "id": 50
     }, 
@@ -273,7 +273,7 @@ moteles_json_texto ='''[
         "cat_num": 1, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel6.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538669/HOTEL_42_ocopma.jpg", 
         "nombre": "HOTEL 42", 
         "id": 6
     }, 
@@ -285,7 +285,7 @@ moteles_json_texto ='''[
         "cat_num": 1, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel1.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538593/HOTEL_IMPERIO_kud46i.jpg", 
         "nombre": "HOTEL IMPERIO ", 
         "id": 1
     }, 
@@ -297,7 +297,7 @@ moteles_json_texto ='''[
         "cat_num": 1, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel38.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538557/HOTEL_LIMA_jf6uzu.jpg", 
         "nombre": "HOTEL LIMA", 
         "id": 38
     }, 
@@ -309,7 +309,7 @@ moteles_json_texto ='''[
         "cat_num": 1, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel42.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538620/HOTEL_EDU_MOTO-HOTEL_i30xcx.jpg", 
         "nombre": "HOTEL EDU (MOTO-HOTEL)", 
         "id": 42
     }, 
@@ -321,7 +321,7 @@ moteles_json_texto ='''[
         "cat_num": 1, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel41.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538554/HOTEL_MADRID_vrkkvh.jpg", 
         "nombre": "HOTEL MADRID", 
         "id": 41
     }, 
@@ -333,7 +333,7 @@ moteles_json_texto ='''[
         "cat_num": 1, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel48.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538674/HOTEL_YARE_g2yy0f.jpg", 
         "nombre": "HOTEL YARE", 
         "id": 48
     }, 
@@ -345,7 +345,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel36.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538658/HOTEL_SAVOY_pyex2n.jpg", 
         "nombre": "HOTEL SAVOY", 
         "id": 36
     }, 
@@ -357,7 +357,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL RIAZOR", 
         "id": 59
     }, 
@@ -369,7 +369,7 @@ moteles_json_texto ='''[
         "cat_num": 1, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL PANORAMA", 
         "id": 53
     }, 
@@ -381,7 +381,7 @@ moteles_json_texto ='''[
         "cat_num": 1, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL EL MARQU\u00c9S", 
         "id": 54
     }, 
@@ -393,7 +393,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "LEXINGTON SUITES HOTEL", 
         "id": 2
     }, 
@@ -405,7 +405,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel9.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538611/HOTEL_BEETHOVEN_tipvvx.jpg", 
         "nombre": "HOTEL BEETHOVEN", 
         "id": 9
     }, 
@@ -417,7 +417,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel45.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538635/HOTEL_LA_FLORESTA_nigsma.jpg", 
         "nombre": "HOTEL LA FLORESTA", 
         "id": 45
     }, 
@@ -429,7 +429,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL LINCOLN SUITES", 
         "id": 55
     }, 
@@ -441,7 +441,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel34.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538590/HOTEL_PRESIDENT_dmsy8s.jpg", 
         "nombre": "HOTEL PRESIDENT", 
         "id": 34
     }, 
@@ -453,7 +453,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel44.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538657/HOTEL_TAMPA_vknrri.jpg", 
         "nombre": "HOTEL TAMPA", 
         "id": 44
     }, 
@@ -465,7 +465,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel43.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538637/HOTEL_BROADWAY_byf4ux.jpg", 
         "nombre": "HOTEL BROADWAY", 
         "id": 43
     }, 
@@ -477,7 +477,7 @@ moteles_json_texto ='''[
         "cat_num": 3, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL GILMAR", 
         "id": 15
     }, 
@@ -489,7 +489,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel57.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538565/HOTEL_PLAZA_VENEZUELA_muoe6p.jpg", 
         "nombre": "HOTEL PLAZA VENEZUELA", 
         "id": 57
     }, 
@@ -501,7 +501,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel37.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538582/HOTEL_SHELTER_SUITES_a1avjy.jpg", 
         "nombre": "HOTEL SHELTER SUITES", 
         "id": 37
     }, 
@@ -513,7 +513,7 @@ moteles_json_texto ='''[
         "cat_num": 2, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL ALEX", 
         "id": 60
     }, 
@@ -525,7 +525,7 @@ moteles_json_texto ='''[
         "cat_num": 3, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel8.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538630/HOTEL_HARMONY_rjpjbk.jpg", 
         "nombre": "HOTEL HARMONY ", 
         "id": 8
     }, 
@@ -537,7 +537,7 @@ moteles_json_texto ='''[
         "cat_num": 3, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel23.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538565/HOTEL_MEREY_v6rukw.jpg", 
         "nombre": "HOTEL MEREY", 
         "id": 23
     }, 
@@ -549,7 +549,7 @@ moteles_json_texto ='''[
         "cat_num": 3, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel29.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538580/HOTEL_NACIONES_UNIDAS_ga9e78.jpg", 
         "nombre": "HOTEL NACIONES UNIDAS", 
         "id": 29
     }, 
@@ -561,7 +561,7 @@ moteles_json_texto ='''[
         "cat_num": 3, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel32.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538659/HOTEL_EMBASSY_SUITES_kxsezr.jpg", 
         "nombre": "HOTEL EMBASSY SUITES", 
         "id": 32
     }, 
@@ -573,7 +573,7 @@ moteles_json_texto ='''[
         "cat_num": 3, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL GABIAL", 
         "id": 61
     }, 
@@ -585,7 +585,7 @@ moteles_json_texto ='''[
         "cat_num": 4, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel27.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449546852/MOTEL_VILLA_SUITES_ts6yfe.jpg", 
         "nombre": "MOTEL VILLA SUITES", 
         "id": 27
     }, 
@@ -597,7 +597,7 @@ moteles_json_texto ='''[
         "cat_num": 3, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL TRINI", 
         "id": 21
     }, 
@@ -609,7 +609,7 @@ moteles_json_texto ='''[
         "cat_num": 3, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel22.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538659/HOTEL_LA_TOJA_ejyldr.jpg", 
         "nombre": "HOTEL LA TOJA", 
         "id": 22
     }, 
@@ -621,7 +621,7 @@ moteles_json_texto ='''[
         "cat_num": 4, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL AMERICAN DALLAS", 
         "id": 12
     }, 
@@ -633,7 +633,7 @@ moteles_json_texto ='''[
         "cat_num": 4, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL DALLAS", 
         "id": 16
     }, 
@@ -645,7 +645,7 @@ moteles_json_texto ='''[
         "cat_num": 4, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel25.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538654/HOTEL_DALLAS_SUITES_mixrz3.jpg", 
         "nombre": "HOTEL DALLAS SUITES", 
         "id": 25
     }, 
@@ -657,7 +657,7 @@ moteles_json_texto ='''[
         "cat_num": 4, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel39.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538613/HOTEL_CALIFORNIA_SUITES_hkzhlc.jpg", 
         "nombre": "HOTEL CALIFORNIA SUITES", 
         "id": 39
     }, 
@@ -669,7 +669,7 @@ moteles_json_texto ='''[
         "cat_num": 4, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel40.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538664/HOTEL_DUBAI_SUITES_rkejww.jpg", 
         "nombre": "HOTEL DUBAI SUITES", 
         "id": 40
     }, 
@@ -681,7 +681,7 @@ moteles_json_texto ='''[
         "cat_num": 4, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel33.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538561/HOTEL_MONTAA_SUITES_yv7ool.jpg", 
         "nombre": "HOTEL MONTA\u00d1A SUITES", 
         "id": 33
     }, 
@@ -693,7 +693,7 @@ moteles_json_texto ='''[
         "cat_num": 4, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel5.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449546853/NOVO_HOTEL_EXPRESS_kqxdfx.jpg", 
         "nombre": "NOVO HOTEL EXPRESS", 
         "id": 5
     }, 
@@ -705,7 +705,7 @@ moteles_json_texto ='''[
         "cat_num": 5, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL LAS AMERICAS", 
         "id": 11
     }, 
@@ -717,7 +717,7 @@ moteles_json_texto ='''[
         "cat_num": 5, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "THE VIP HOTEL", 
         "id": 62
     }, 
@@ -729,7 +729,7 @@ moteles_json_texto ='''[
         "cat_num": 5, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel24.jpg", 
+        "foto": "http://res.cloudinary.com/manuggz/image/upload/v1449538626/HOTEL_MONTPARK_lz37kg.jpg", 
         "nombre": "HOTEL MONTPARK", 
         "id": 24
     }, 
@@ -741,7 +741,7 @@ moteles_json_texto ='''[
         "cat_num": 5, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "THE HOTEL", 
         "id": 35
     }, 
@@ -753,7 +753,7 @@ moteles_json_texto ='''[
         "cat_num": 4, 
         "tipo_de_cobro": "Por horas", 
         "estr": 3, 
-        "foto": "http://www.letomhotel.com/media/images/img_hotel0.jpg", 
+        "foto": "http://www.wannafly.hk/images/mgthumbnails/751x394-images-HRH_4.jpg", 
         "nombre": "HOTEL BOSQUE DORADO", 
         "id": 26
     }
