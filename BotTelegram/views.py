@@ -759,7 +759,7 @@ moteles_json_texto ='''[
     }
 ]'''
 
-moteles = json.loads(data)
+moteles = json.loads(moteles_json_texto)
 
 # Create your views here.
 def index(request):
