@@ -781,7 +781,7 @@ def mostrarMoteles(request):
 
 	if request.method == "GET":
 		#return HttpResponse(moteles_json_texto)
-		return JsonResponse(moteles)
+		return HttpResponse(json.dumps(moteles), content_type="application/json")
 
 	return HttpResponse('Matate!')
 
