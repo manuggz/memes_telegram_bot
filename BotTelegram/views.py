@@ -30,13 +30,28 @@ def mostrarUsuarios(request):
 
 	return render(request,'usuarios.html',{'usuarios':Usuario.objects.all()})
 
+def csrf_exempt(view_func):
+        """
+        Marks a view function as being exempt from the CSRF view protection.
+        """
+        # We could just do view_func.csrf_exempt = True, but decorators
+        # are nicer if they don't have side-effects, so we return a new
+        # function.
+        def wrapped_view(request,*args, **kwargs):
+            return view_func(request, *args, **kwargs)
+            if request.META.has_key('HTTP_KEY_LETOM_AUTH'):
+                wrapped_view.csrf_exempt = True
+        return wraps(view_func, assigned=available_attrs(view_func))(wrapped_view)
 
+@csrf_exempt
 def iniciarSesion(request):
 
     if request.method == "POST":
         data = json.loads(request.body)
         data.update({"cod":"1","id_usu":2,"notif":1,"pref":3})
         return JsonResponse(data)
+
+    return HttpResponse('<h1>dota 2 is the game!!</h1>')
 
 def mostrarMoteles(request):
 
