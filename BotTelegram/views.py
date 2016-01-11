@@ -38,7 +38,6 @@ def iniciarSesion(request):
 
     if request.method == "POST":
         data = json.loads(request.body)
-        data.update({"cod":"1","id_usu":2,"notif":1,"pref":3})
         return JsonResponse(data)
 
     return HttpResponse('<h1>dota 2 is the game!!</h1>')
