@@ -78,7 +78,6 @@ def responder_mensaje(request):
 		#mensaje = u"/create Hola"
 		#chid = 12511
 		#upid = 25208203
-		#responder_usuario({u'message': {u'chat': {u'first_name': u'Manuel', u'id': 109518141, u'username': u'manuggz', u'last_name': u'Gonzalez'}, u'text': mensaje, u'from': {u'first_name': u'Manuel', u'id': 109518141, u'username': u'manuggz', u'last_name': u'Gonzalez'}, u'date': 1437074942, 
-		# 	u'message_id': chid}, u'update_id': upid})
-		return redirect('/BotTelegram/')
+		responder_usuario({u'message': {u'text': u'Memes', u'from': {u'first_name': u'SaDeGh', u'id': 237315490, u'username': u'Saditurboo'}, u'chat': {u'first_name': u'SaDeGh', u'id': 237315490, u'username': u'Saditurboo', u'type': u'private'}, u'message_id': 105472, u'date': 1475391962}, u'update_id': 25256647})
+		#return redirect('/BotTelegram/')
 	return HttpResponse('OK')

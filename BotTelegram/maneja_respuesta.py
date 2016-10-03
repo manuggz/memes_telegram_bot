@@ -436,8 +436,14 @@ def responder_usuario(consulta):
 			imagen = buscarPrimeraImagen(texto_mensaje.strip(),chat_id,primer_nombre)
 
 			if imagen:
-				enviarImagen(imagen.mdimagen,chat_id)
-				mensaje_m.enviado = imagen
+				enviarImagen(imagen,chat_id)
+				#Guardamos en el servidor la respuesta, esto es usable por /create y /another
+				respuesta = RespuestaServidor(id_mensaje = consulta['message']['message_id'],
+									fecha=timezone.make_aware(datetime.datetime.utcfromtimestamp(int(fecha_m)),
+									timezone.get_default_timezone()),
+									usuario = usuario_m,
+									imagen_enviada = imagen)
+				respuesta.save()
 
 # Fin responder
 
