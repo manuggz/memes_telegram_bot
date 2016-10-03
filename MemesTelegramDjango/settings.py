@@ -85,7 +85,7 @@ if not DATABASES['default']:
         'default':{'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'memestg8',
         'HOST': 'localhost',
-        'USER': 'manuggz',
+        'USER': 'postgres',
         'PASSWORD': 'linking750',
         'PORT': '5432'}
 

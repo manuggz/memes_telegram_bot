@@ -27,16 +27,20 @@
 		<thead>
 			<tr>
 				<th> ID Mensaje </th>
-				<th> Update ID </th>
+				<!--<th> Update ID </th>-->
 				<th> Texto enviado </th>
+				<th> Imagen Respuesta</th>
 			</tr>
 		</thead>
 	{% for mensaje in mensajes %}
 		<tbody>
 			<tr>
 				<td>{{mensaje.id_mensaje}} </td>
-				<td>{{mensaje.update_id}} </td>
+				<!--<td>{{mensaje.update_id}} </td>-->
 				<td>{{mensaje.texto_enviado}} </td>
+    			<td>
+    				<a href ="{{mensaje.imagen_enviada.url_imagen}}" target="_blank">Imagen </a>
+    			</td>
 			</tr>
 		</tbody>
 	{% endfor%}

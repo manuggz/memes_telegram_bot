@@ -15,12 +15,12 @@ class GrupoChat(models.Model):
 
 class RespuestaServidor(models.Model):
 	id_mensaje       = models.IntegerField(primary_key = True)
-	fecha            = models.DateTimeField()
+	fecha            = models.DateTimeField() #Fecha de respuesta
 	usuario          = models.ForeignKey(Usuario) #Quien envia el mensaje
-	imagen_enviada   = models.ForeignKey("Imagen")
+	imagen_enviada   = models.ForeignKey("Imagen") #Imagen enviada
 
 class Imagen(models.Model):
 	url_imagen    = models.CharField(max_length=200)
 	ruta_imagen   = models.CharField(max_length=200)  # Ruta de la imagen en el servidor(in case)
-	textobuscado  = models.CharField(max_length=200)
-	id_lista = models.IntegerField()
+	textobuscado  = models.CharField(max_length=200)  # Texto buscado para acceder a la imagen
+	id_lista = models.IntegerField() #ID en la lista de imagenes

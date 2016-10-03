@@ -13,8 +13,8 @@ from PIL import Image,ImageDraw,ImageFont
 import datetime
 from time import sleep
 
-CODE_BOT = "119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg";
-URL_TG_API = "https://api.telegram.org/bot" + CODE_BOT + "/";
+CODE_BOT = "119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg"
+URL_TG_API = "https://api.telegram.org/bot" + CODE_BOT + "/"
 PAGINA_MEMES = 'http://imgflip.com/memesearch'
 FUENTE = "staticfiles/Montserrat-ExtraBold.otf"
 
@@ -26,7 +26,7 @@ def dibujar_texto_sobre_imagen(texto,draw,image,fposiciony,color):
 
 	tam_d = draw.textsize(texto,font = fuente)
 
-	while  tam_d[0] + image.size[0]//2 - tam_d[0]//2 > image.size[0] :
+	while  tam_d[0] + image.size[0] // 2 - tam_d[0] // 2 > image.size[0] :
 		del fuente
 		tam -= 2
 		fuente = ImageFont.truetype(FUENTE, tam)
@@ -34,14 +34,14 @@ def dibujar_texto_sobre_imagen(texto,draw,image,fposiciony,color):
 
 
 	try:
-		draw.text((image.size[0]//2 - tam_d[0]//2,fposiciony(tam_d,image.size)),texto, font=fuente,fill = color)
+		draw.text((image.size[0] // 2 - tam_d[0] // 2,fposiciony(tam_d,image.size)),texto, font=fuente,fill = color)
 	except ValueError:
-		draw.text((image.size[0]//2 - tam_d[0]//2,fposiciony(tam_d,image.size)),texto, font=fuente,fill = "red")
+		draw.text((image.size[0] // 2 - tam_d[0] // 2,fposiciony(tam_d,image.size)),texto, font=fuente,fill = "red")
 
 
 def enviarMensajeTexto(chat_id,mensaje):
 	requests.get(URL_TG_API + 'sendChatAction',params={'chat_id' : chat_id,'action':'typing'})
-	sleep(2);
+	sleep(2)
 	requests.get(URL_TG_API + 'sendMessage',params={'chat_id' : chat_id,'text':mensaje})
 
 def enviarMensajeImagen(chat_id,ruta_foto):
@@ -63,6 +63,8 @@ def enviarMensajeImagen(chat_id,ruta_foto):
 
 	return 0
 
+#Si no existe la imagen en el servidor
+# la guarda en la ruta especificada
 def guardarImagen(imagen):
 	if not exists(imagen.ruta_imagen):
 		resp = requests.get(imagen.url_imagen, stream=True)
@@ -70,6 +72,8 @@ def guardarImagen(imagen):
 		with open(imagen.ruta_imagen, 'wb') as archivo_img:
 		    shutil.copyfileobj(resp.raw, archivo_img)
 
+#envia una imagen a un chat
+#notar que primero se debe guardar la imagen localmente
 def enviarImagen(imagen,chat_id):
 	guardarImagen(imagen)
 	return enviarMensajeImagen(chat_id,imagen.ruta_imagen)
@@ -85,7 +89,8 @@ class parseadorHTML(HTMLParser):
 		if tag == "img":
 			self.rutas_imagenes.append(dict(attrs))
 
-
+#Busca TODAS las imagenes en la pagina web PAGINA_MEMES
+# va guardando TODAS las rutas url en una lista y las regresa
 def buscarImagenes(memeConsultado):
 	try:
 		peticion = requests.get(PAGINA_MEMES,params={'q':memeConsultado})
@@ -94,7 +99,7 @@ def buscarImagenes(memeConsultado):
 
 	if peticion.status_code != 200:
 		return None
-	parser   = parseadorHTML()
+	parser = parseadorHTML()
 	parser.feed(peticion.text)
 	return parser.rutas_imagenes
 
@@ -111,7 +116,7 @@ def obtenerImagenRandom():
 
 def enviarMensajeStart(primer_nombre,username,chat_id):
 	mensaje = "Hey " + u"\U0001f604 " + primer_nombre + \
-		 	  (" (@" +username +")! "  if username else "") + \
+		 	  (" (@" + username + ")! "  if username else "") + \
 	          ". I can send you memes. Just tell me which one typing  <meme name> and if I can remember it " + \
 			  " I'll send you a picture." + \
 			  "\n\nExample: Send me yao ming . If you do, i'll send you yao ming's meme.\n wanna know more? Send me /help"
@@ -119,10 +124,10 @@ def enviarMensajeStart(primer_nombre,username,chat_id):
 
 def enviarMensajeHelpCommands(primer_nombre,username,chat_id):
 	mensaje = "Hey " + u"\U0001f604 " + primer_nombre + \
-		 	  (" (@" +username +")! "  if username else "") + \
+		 	  (" (@" + username + ")! "  if username else "") + \
 	          " to do your meme i just need two things : Text to write and a color. \n" + \
 	          "Give me those things like this : Text to write - Optional Text to write , COLOR\n" + \
-	          "I use the comma(,) to separate the text and the color and the hyphen(-) to separate"+\
+	          "I use the comma(,) to separate the text and the color and the hyphen(-) to separate" + \
 	          " the upper and lower text." 
 	enviarMensajeTexto(chat_id,mensaje)
 
@@ -183,11 +188,12 @@ Notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts an
 		enviarMensajeTexto(chat_id,mensaje)
 
 
+#construye todos los objetos Imagen de la BD dada una lista de URL hacia las imagenes
 def construir_imagenes(rutas_imagenes,txt_bu):
 
-	for i in range(len(rutas_imagenes)-1,-1,-1):
-		url_ima      = "http:" + rutas_imagenes[i]['src']
-		path_archivo = join('staticfiles',basename(url_ima))
+	for i in range(len(rutas_imagenes) - 1,-1,-1):
+		url_ima = "http:" + rutas_imagenes[i]['src']
+		path_archivo = join('staticfiles',basename(url_ima)) #Ruta en el servidor
 
 		imagendb = Imagen(id_lista = i,
 						  url_imagen = url_ima,
@@ -197,13 +203,16 @@ def construir_imagenes(rutas_imagenes,txt_bu):
 
 	return imagendb
 
+#Obtiene la primera imagen asociada a un texto buscado por el usuario
+#si ya alguien lo ha buscado antes se regresa la referencia al primer objeto Imagen de la lista
+#sino, se buscan todas-> se construyen en la BD y se regresa el primer objeto Imagen
 def buscarPrimeraImagen(texto,chat_id,nombre):
 	primera_imagen = None
 	try:
 		primera_imagen = Imagen.objects.get(id_lista = 0 , textobuscado = texto)
 	except ObjectDoesNotExist:
 
-		imagenes       = buscarImagenes(texto)
+		imagenes = buscarImagenes(texto)
 		if imagenes == []:
 			enviarMensajeTexto(chat_id,"I'm sorry " + u'\U0001f605' + " @" + nombre + \
 									   ".\n I can't remember this meme( " + texto + " )!. Send me /help.")
@@ -220,15 +229,15 @@ def escribirEnviarMeme(comandos,imagen,chat_id,usuario_m):
 	guardarImagen(imagen)
 
 	imagen_pil = Image.open(imagen.ruta_imagen)
-	draw_pil   = ImageDraw.Draw(imagen_pil)
+	draw_pil = ImageDraw.Draw(imagen_pil)
 
 	mensajes = comandos[1].split("-")
-	tup  = ""
+	tup = ""
 	tdown = ""
 	if len(mensajes) == 1:
 		tdown = mensajes[0]
 	else:
-		tup   = mensajes[0]
+		tup = mensajes[0]
 		tdown = mensajes[1]
 
 	try:
@@ -236,10 +245,10 @@ def escribirEnviarMeme(comandos,imagen,chat_id,usuario_m):
 	except IndexError:
 		color = "red"
 
-	dibujar_texto_sobre_imagen(tup,draw_pil,imagen_pil,(lambda td , sz : sz[0]  // 12 ),color)
-	dibujar_texto_sobre_imagen(tdown,draw_pil,imagen_pil,(lambda td , sz : sz[1]  -td[1] - td[1]//2 ),color)
+	dibujar_texto_sobre_imagen(tup,draw_pil,imagen_pil,(lambda td , sz : sz[0] // 12),color)
+	dibujar_texto_sobre_imagen(tdown,draw_pil,imagen_pil,(lambda td , sz : sz[1] - td[1] - td[1] // 2),color)
 	ruta_tu = splitext(imagen.ruta_imagen)
-	ruta_guardar = ruta_tu[0] + str(usuario_m.pk)  + str(random()) +\
+	ruta_guardar = ruta_tu[0] + str(usuario_m.pk) + str(random()) + \
 				".PNG"
 
 	imagen_pil.save(ruta_guardar, quality=95)
@@ -249,13 +258,14 @@ def escribirEnviarMeme(comandos,imagen,chat_id,usuario_m):
 def responder_usuario(consulta):
 
 	texto_mensaje = consulta['message'].get('text',"")
-	chat_id       = consulta['message']['chat']['id']
-	user_id       = consulta['message']['from']['id']
+	chat_id = consulta['message']['chat']['id']
+	user_id = consulta['message']['from']['id']
 	primer_nombre = consulta['message']['from'].get('first_name',"")
-	username      = consulta['message']['from'].get('username',"")
-	apellido      = consulta['message']['from'].get('last_name',"")
-	fecha_m       = consulta['message']['date']
+	username = consulta['message']['from'].get('username',"")
+	apellido = consulta['message']['from'].get('last_name',"")
+	fecha_m = consulta['message']['date']
 	es_grupo = consulta['message']['chat']['id'] != consulta['message']['from']['id']
+
 	if es_grupo:
 		titulo_chat = consulta['message']['chat']['title']
 
@@ -346,7 +356,7 @@ def responder_usuario(consulta):
 				ulti_m_con_ima = RespuestaServidor.objects.filter(usuario = usuario_m).order_by('id_mensaje')
 
 				if ulti_m_con_ima:
-					ulti_m_con_ima = ulti_m_con_ima[len(ulti_m_con_ima)-1]
+					ulti_m_con_ima = ulti_m_con_ima[len(ulti_m_con_ima) - 1]
 					try:
 						comandos = ("",comandos[0],comandos[1])
 					except IndexError:
@@ -376,32 +386,45 @@ def responder_usuario(consulta):
 			else:
 
 				comandos = [ i.strip() for i in comandos.split(',') if i ]
-
+				#print comandos
 				imagen = buscarPrimeraImagen(comandos[0].strip(),chat_id,primer_nombre)
 
-				if imagen:
-
-					if len(comandos) > 1 :
+				if imagen: #Si se encontro una imagen con exito
+					if len(comandos) > 1 : #si el usuario quiere un texto sobre la imagen
 						escribirEnviarMeme(comandos,imagen,chat_id,usuario_m)
-					else:
-						mensaje_m.enviado = imagen
-						enviarImagen(imagen,chat_id)
+					else: #si solo quiere la imagen cruda
+
+						enviarImagen(imagen,chat_id) #Le enviamos la imagen
+						
+						#Notar que guardamos en el servidor la respuesta, esto es usable por /create y /another
+						respuesta = RespuestaServidor(id_mensaje = consulta['message']['message_id'],
+											fecha=timezone.make_aware(datetime.datetime.utcfromtimestamp(int(fecha_m)),
+											timezone.get_default_timezone()),
+											usuario = usuario_m,
+											imagen_enviada = imagen)
+						respuesta.save()
 
 	elif texto_mensaje[0:8] == "/another":
 		ulti_m_con_ima = RespuestaServidor.objects.filter(usuario = usuario_m).order_by('id_mensaje')
 
 		if ulti_m_con_ima:
-			ulti_m_con_ima = ulti_m_con_ima[len(ulti_m_con_ima)-1]
+			ulti_m_con_ima = ulti_m_con_ima[len(ulti_m_con_ima) - 1]
 
 			try:
-				imagen_siguiente = Imagen.objects.get(id_lista =ulti_m_con_ima.id_lista + 1 , 
-													  textobuscado = ulti_m_con_ima.textobuscado)
+				imagen_siguiente = Imagen.objects.get(id_lista =ulti_m_con_ima.imagen_enviada.id_lista + 1 , 
+													  textobuscado = ulti_m_con_ima.imagen_enviada.textobuscado)
 
 				requests.get(URL_TG_API + 'sendChatAction',params={'chat_id' : chat_id,'action':'upload_photo'})
-				if enviarImagen(ulti_m_con_ima.enviado.siguiente.mdimagen,chat_id) != 0:
+				if enviarImagen(imagen_siguiente,chat_id) != 0:
 					enviarMensajeTexto(chat_id,"Sorry , there was a problem , try again. ")
 				else:
-					mensaje_m.enviado = ulti_m_con_ima.enviado.siguiente
+					#Guardamos en el servidor la respuesta, esto es usable por /create y /another
+					respuesta = RespuestaServidor(id_mensaje = consulta['message']['message_id'],
+										fecha=timezone.make_aware(datetime.datetime.utcfromtimestamp(int(fecha_m)),
+										timezone.get_default_timezone()),
+										usuario = usuario_m,
+										imagen_enviada = imagen_siguiente)
+					respuesta.save()
 
 			except ObjectDoesNotExist:
 				enviarMensajeTexto(chat_id,"Sorry , there's no more images for your meme. \n")
@@ -415,9 +438,6 @@ def responder_usuario(consulta):
 			if imagen:
 				enviarImagen(imagen.mdimagen,chat_id)
 				mensaje_m.enviado = imagen
-
-
-	mensaje_m.save()
 
 # Fin responder
 
