@@ -135,7 +135,7 @@ def enviarMensajeHelp(comando,chat_id):
 
 	if comando == "sendme":
 		mensaje = """
-To use this command you have to tell me three things , which meme you want me to fetch, a text to write over your meme and a color to use.
+To use this command you have to tell me three things, which meme you want me to fetch, a text to write over your meme and a color to use.
 
 The format is: /sendme MEME , TEXT 1 - TEXT 2 , COLOR
 
@@ -167,7 +167,7 @@ Notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts an
 		enviarMensajeTexto(chat_id,mensaje)
 	else:
 
-		mensaje = "Hey " + ", I can send you pictures of memes.\n" + \
+		mensaje = "Hey" + ", I can send you pictures of memes.\n" + \
 					  "Just tell me which one. Send me its name."
 
 		mensaje += "\n\nExamples of /sendme:\n" 

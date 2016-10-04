@@ -80,16 +80,16 @@ import dj_database_url
 
 DATABASES = {}
 DATABASES['default'] =  dj_database_url.config()
-if not DATABASES['default']:
-    DATABASES = {
-        'default':{'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'memestg8',
-        'HOST': 'localhost',
-        'USER': 'postgres',
-        'PASSWORD': 'linking750',
-        'PORT': '5432'}
-
-    }
+# if not DATABASES['default']:
+#     DATABASES = {
+#         'default':{'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'memestg8',
+#         'HOST': 'localhost',
+#         'USER': 'postgres',
+#         'PASSWORD': 'linking750',
+#         'PORT': '5432'}
+#
+#     }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
