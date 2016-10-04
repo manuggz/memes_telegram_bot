@@ -4,10 +4,8 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    #url(r'^moteles/$', views.mostrarMoteles, name='moteles_todos'),
-    #url(r'^login/$', views.iniciarSesion, name='log_in'),
-    url(r'^mensajes/$', views.mostrarMensajes, name='mensajes_todos'),
-    url(r'^usuarios/$', views.mostrarUsuarios, name='usuarios_todos'),
-    url(r'^usuario/(?P<id_usuario>\d+)$', views.mostrarUsuario, name='usuarios'),
-    url(r'^119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/$', views.responder_mensaje, name='responder_mensaje'),
+    url(r'^mensajes/$', views.mostrar_mensajes, name='mensajes_todos'), #Muestra todos los mensajes registrados
+    url(r'^usuarios/$', views.mostrar_usuarios, name='usuarios_todos'), # Muestra todos los  usuarios registrados
+    url(r'^usuario/(?P<id_usuario>\d+)$', views.mostrar_usuario, name='usuarios'), #Muestra los datos de un usuario
+    url(r'^119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/$', views.atender_mensaje_usuario_tg, name='responder_mensaje'),
 ]
