@@ -2,9 +2,9 @@
 from user_tg import UserTG
 from chat_tg import ChatTG
 
-class MessajeTG:
+class MessageTG:
 
-    def __int__(self, dict_message):
+    def __init__(self, dict_message):
 
         # type:Integer
         # Unique message identifier

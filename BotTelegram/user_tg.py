@@ -13,8 +13,8 @@ class UserTG:
 
         # Type: String
         # User‘s or bot’s last name
-        self.last_name = dict_user.get("last_name", None)
+        self.last_name = dict_user.get("last_name", "")
 
         # Type: String
         # User‘s or bot’s username
-        self.username = dict_user.get("username", None)
+        self.username = dict_user.get("username", "")

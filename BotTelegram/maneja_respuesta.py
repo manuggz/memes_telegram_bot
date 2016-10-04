@@ -6,9 +6,13 @@ import shutil
 import json
 from HTMLParser import HTMLParser
 from os.path import join, exists, basename, splitext
+
+from BotTelegram.update_tg import UpdateTG
+from MemesTelegramDjango.settings import BASE_DIR
 from models import Usuario, Imagen, RespuestaServidor
 from random import random, choice
 import django.utils.timezone as timezone
+import xml.etree.ElementTree as ET
 from PIL import Image, ImageDraw, ImageFont
 import datetime
 from time import sleep
@@ -21,6 +25,24 @@ URL_TG_API = "https://api.telegram.org/bot" + CODE_BOT + "/"
 PAGINA_MEMES = 'http://imgflip.com/memesearch'
 # Fuente usada para escribir sobre los memes
 FUENTE = "staticfiles/Montserrat-ExtraBold.otf"
+
+root_xml_string = None
+
+class Unbuffered(object):
+    def __init__(self, stream):
+        self.stream = stream
+
+    def write(self, data):
+        self.stream.write(data)
+        self.stream.flush()
+
+    def __getattr__(self, attr):
+        return getattr(self.stream, attr)
+
+
+import sys
+
+sys.stdout = Unbuffered(sys.stdout)
 
 
 def dibujar_texto_sobre_imagen(texto, draw, image, fposiciony, color):
@@ -49,7 +71,7 @@ def enviar_mensaje_usuario(chat_id, mensaje):
     requests.get(URL_TG_API + 'sendMessage', params={'chat_id': chat_id, 'text': mensaje})
 
 
-def enviarMensajeImagen(chat_id, ruta_foto):
+def enviar_mensaje_imagen(chat_id, ruta_foto):
     files = {'photo': open(ruta_foto, 'rb')}
     try:
         requests.get(URL_TG_API + 'sendChatAction', params={'chat_id': chat_id, 'action': 'upload_photo'})
@@ -71,7 +93,7 @@ def enviarMensajeImagen(chat_id, ruta_foto):
 
 # Si no existe la imagen en el servidor
 # la guarda en la ruta especificada
-def guardarImagen(imagen):
+def guardar_imagen(imagen):
     if not exists(imagen.ruta_imagen):
         resp = requests.get(imagen.url_imagen, stream=True)
 
@@ -81,9 +103,9 @@ def guardarImagen(imagen):
 
 # envia una imagen a un chat
 # notar que primero se debe guardar la imagen localmente
-def enviarImagen(imagen, chat_id):
-    guardarImagen(imagen)
-    return enviarMensajeImagen(chat_id, imagen.ruta_imagen)
+def enviar_imagen(imagen, chat_id):
+    guardar_imagen(imagen)
+    return enviar_mensaje_imagen(chat_id, imagen.ruta_imagen)
 
 
 class parseadorHTML(HTMLParser):
@@ -98,7 +120,7 @@ class parseadorHTML(HTMLParser):
 
 # Busca TODAS las imagenes en la pagina web PAGINA_MEMES
 # va guardando TODAS las rutas url en una lista y las regresa
-def buscarImagenes(memeConsultado):
+def buscar_imagenes(memeConsultado):
     try:
         peticion = requests.get(PAGINA_MEMES, params={'q': memeConsultado})
     except:
@@ -118,85 +140,16 @@ def enviar_mensaje_usuarios(mensaje):
         if usuario.suscrito_actu:
             enviar_mensaje_usuario(usuario.pk, mensaje)
 
-
-def obtenerImagenRandom():
-    todos = list(Imagen.objects.all())
+#De las imagenes referenciadas en la BD obtiene una aleatoria
+def obtener_imagen_random():
     return choice(Imagen.objects.all())
 
-
-def enviarMensajeStart(primer_nombre, username, chat_id):
-    mensaje = "Hey " + u"\U0001f604 " + primer_nombre + \
-              (" (@" + username + ")! " if username else "") + \
-              ". I can send you memes. Just tell me which one typing  <meme name> and if I can remember it " + \
-              " I'll send you a picture." + \
-              "\n\nExample: Send me yao ming . If you do, i'll send you yao ming's meme.\n wanna know more? Send me /help"
-    enviar_mensaje_usuario(chat_id, mensaje)
-
-
-def enviarMensajeHelpCommands(primer_nombre, username, chat_id):
-    mensaje = "Hey " + u"\U0001f604 " + primer_nombre + \
-              (" (@" + username + ")! " if username else "") + \
-              " to do your meme i just need two things : Text to write and a color. \n" + \
-              "Give me those things like this : Text to write - Optional Text to write , COLOR\n" + \
-              "I use the comma(,) to separate the text and the color and the hyphen(-) to separate" + \
-              " the upper and lower text."
-    enviar_mensaje_usuario(chat_id, mensaje)
-
-
-def enviarMensajeHelp(comando, chat_id):
-    if comando == "sendme":
-        mensaje = """
-To use this command you have to tell me three things, which meme you want me to fetch, a text to write over your meme and a color to use.
-
-The format is: /sendme MEME , TEXT 1 - TEXT 2 , COLOR
-
-Text 1 : upper text
-Text 2 : optional lower text , if you dont tell me a Text 2 , then Text 1 will be written on the lower part.
-
-Color: it is a string , tell me a color name if I dont know it, i'll write using RED.
-
-Notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts and color are separated using a comma(,) that have to be respected."""
-        enviar_mensaje_usuario(chat_id, mensaje)
-    elif comando == "create":
-        mensaje = """
-To use this command you have to tell me two things ,  a text to write over your meme and a color to use.
-
-The format is: /create TEXT 1 - TEXT 2 , COLOR
-
-Text 1 : upper text
-Text 2 : optional lower text , if you dont tell me a Text 2 , then Text 1 will be written on the lower part.
-
-This command use your current meme that you got using /sendme MEME or just typing its name.
-
-Color: it is a string , tell me a color name if I dont know it, i'll write using RED.
-
-Notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts and color are separated using a comma(,) that have to be respected."""
-        enviar_mensaje_usuario(chat_id, mensaje)
-    elif comando == "random":
-        mensaje = """
-		Get a random meme"""
-        enviar_mensaje_usuario(chat_id, mensaje)
-    else:
-
-        mensaje = "Hey" + ", I can send you pictures of memes.\n" + \
-                  "Just tell me which one. Send me its name."
-
-        mensaje += "\n\nExamples of /sendme:\n"
-        mensaje += "/sendme forever alone ,Texto 1 - Texto 2 , blue\n"
-        mensaje += "/sendme forever alone ,Texto 1 , white\n"
-        mensaje += "/sendme forever alone \n"
-        mensaje += "For more information : Send me /help sendme\n"
-
-        mensaje += "\n\nExamples of this bot, Send me each line:\n"
-        mensaje += "forever alone\n"
-        mensaje += "/another\n"
-        mensaje += "/create Im alone\n"
-        mensaje += "/create Im alone - But with my dog\n"
-        mensaje += "/create Im alone - But with my dog , black\n"
-        mensaje += "For more information : Send me /help create\n\n"
-        mensaje += "\nIf you have any suggestions for my creator let him now at @manuggz."
-        mensaje += "\n\nPlease if you like this bot , rate it at :https://telegram.me/storebot?start=memesbot"
-        enviar_mensaje_usuario(chat_id, mensaje)
+# Envia una cadena de texto asociada a un comando
+def enviar_mensaje_ayuda_comando(comando,chat_id):
+    for help_m in root_xml_string.iter("help"):
+        if help_m.attrib.get("comando", "") == comando:
+            enviar_mensaje_usuario(chat_id, help_m.text)
+            return
 
 
 # construye todos los objetos Imagen de la BD dada una lista de URL hacia las imagenes
@@ -217,18 +170,17 @@ def construir_imagenes(rutas_imagenes, txt_bu):
 # Obtiene la primera imagen asociada a un texto buscado por el usuario
 # si ya alguien lo ha buscado antes se regresa la referencia al primer objeto Imagen de la lista
 # sino, se buscan todas-> se construyen en la BD y se regresa el primer objeto Imagen
-def buscarPrimeraImagen(texto, chat_id, nombre):
+def buscar_primera_imagen(texto, chat_id, nombre):
     primera_imagen = None
     try:
         primera_imagen = Imagen.objects.get(id_lista=0, textobuscado=texto)
     except ObjectDoesNotExist:
 
-        imagenes = buscarImagenes(texto)
+        imagenes = buscar_imagenes(texto)
         if imagenes == []:
-            enviar_mensaje_usuario(chat_id, "I'm sorry " + u'\U0001f605' + " @" + nombre + \
-                                   ".\n I can't remember this meme( " + texto + " )!. Send me /help.")
+            enviar_mensaje_usuario(chat_id, root_xml_string.find("no_recuerda_meme").text)
         elif imagenes == None:
-            enviar_mensaje_usuario(chat_id, "Sorry , there is a problem getting your meme. Try again.")
+            enviar_mensaje_usuario(chat_id, root_xml_string.find("problema_buscando_meme").text)
 
         else:
             primera_imagen = construir_imagenes(imagenes, texto)
@@ -236,8 +188,8 @@ def buscarPrimeraImagen(texto, chat_id, nombre):
     return primera_imagen
 
 
-def escribirEnviarMeme(comandos, imagen, chat_id, usuario_m):
-    guardarImagen(imagen)
+def escribir_enviar_meme(comandos, imagen, chat_id, usuario_m):
+    guardar_imagen(imagen)
 
     imagen_pil = Image.open(imagen.ruta_imagen)
     draw_pil = ImageDraw.Draw(imagen_pil)
@@ -263,159 +215,138 @@ def escribirEnviarMeme(comandos, imagen, chat_id, usuario_m):
                    ".PNG"
 
     imagen_pil.save(ruta_guardar, quality=95)
-    enviarMensajeImagen(chat_id, ruta_guardar)
+    enviar_mensaje_imagen(chat_id, ruta_guardar)
 
 
 ## Atiende el mensaje del usuario
-def atender_consulta_mensaje_tg(consulta):
-    texto_mensaje = consulta['message'].get('text', "")
-    chat_id = consulta['message']['chat']['id']
-    user_id = consulta['message']['from']['id']
-    primer_nombre = consulta['message']['from'].get('first_name', "")
-    username = consulta['message']['from'].get('username', "")
-    apellido = consulta['message']['from'].get('last_name', "")
-    fecha_m = consulta['message']['date']
-    es_grupo = consulta['message']['chat']['id'] != consulta['message']['from']['id']
+def atender_consulta_mensaje_tg(dict_update):
+    global root_xml_string
 
-    if es_grupo:
-        titulo_chat = consulta['message']['chat']['title']
+    update_tg = UpdateTG(dict_update)  # Convertimos el dict a una manejable Python Class
 
-    if texto_mensaje == "/This_group_is_hacked_by_FATA_Leave_it_or_you_will_face_the_consequences":
+    tree = ET.parse(join("BotTelegram","languages", "en_US", 'strings.xml'))
+    root_xml_string = tree.getroot()
+
+    # Someone was boring and atacked
+    if update_tg.message.text == "/This_group_is_hacked_by_FATA_Leave_it_or_you_will_face_the_consequences":
         return
 
-    try:
-        usuario_m = Usuario.objects.get(id_u=user_id)
-    except ObjectDoesNotExist:  # Agregamos el nuevo usuario :D
-        usuario_m = Usuario(id_u=user_id,
-                            nombreusuario=username[:200],
-                            nombre=primer_nombre[:200],
-                            apellido=apellido[:200])
-        usuario_m.save()
+    # Por ahora solo grupos "normales" y chats privados
+
+    if update_tg.message.chat.type not in ("group", "private"): return
 
     try:
-        RespuestaServidor.objects.get(id_mensaje=consulta['message']['message_id'])
+        usuario_m = Usuario.objects.get(id_u=update_tg.message.user_from.id)
+    except Usuario.DoesNotExist:
+        usuario_m = Usuario.create(
+            id_u=update_tg.message.user_from.id,
+            nombreusuario=update_tg.message.user_from.username[:200],
+            nombre=update_tg.message.user_from.first_name[:200],
+            apellido=update_tg.message.user_from.last_name[:200]
+        )
+
+    try:
+        RespuestaServidor.objects.get(id_mensaje=update_tg.message.message_id)
         return  # Mensaje ya respondido
     except ObjectDoesNotExist:
         pass
 
-    if not texto_mensaje:
+    if not update_tg.message.text:
+        if update_tg.message.new_chat_member:
+            if update_tg.message.new_chat_member.username == 'MemesBot':
+                enviar_mensaje_ayuda_comando("help", update_tg.message.chat.id)
 
-        # This is not working!
-        if consulta.get('new_chat_participant', None):
-            if consulta['new_chat_participant']['username'] == 'MemesBot':
-                enviarMensajeHelp("", chat_id)
-            else:
-                enviar_mensaje_usuario(chat_id, "Hi " + username + " , new friend!. Send me /help ")
+    elif update_tg.message.text[0:6] == "/start":
+        enviar_mensaje_ayuda_comando("/start",update_tg.message.chat.id)
 
-    elif texto_mensaje[0:6] == "/start":
-        if not es_grupo or texto_mensaje[7:] == 'MemesBot':
-            enviarMensajeStart(primer_nombre, username, chat_id)
-    elif texto_mensaje[0:5] == "/help":
-        if es_grupo and texto_mensaje[6:] == 'MemesBot':
-            enviarMensajeHelp(texto_mensaje[14:].strip(), chat_id)
-        elif not es_grupo:
-            enviarMensajeHelp(texto_mensaje[5:].strip(), chat_id)
-    elif texto_mensaje[0:7] == "/random":
-        if not es_grupo or texto_mensaje[8:] == 'MemesBot':
-            im_ale = obtenerImagenRandom()
-            enviarImagen(im_ale, chat_id)
-            respuesta = RespuestaServidor(id_mensaje=consulta['message']['message_id'],
-                                          fecha=timezone.make_aware(datetime.datetime.utcfromtimestamp(int(fecha_m)),
-                                                                    timezone.get_default_timezone()),
-                                          usuario=usuario_m,
-                                          imagen_enviada=im_ale)
-            respuesta.save()
+    elif update_tg.message.text[0:5] == "/help":
+        if update_tg.message.chat.type == "group":
+            enviar_mensaje_ayuda_comando(update_tg.message.text[14:].strip(), update_tg.message.chat.id)
+        elif update_tg.message.chat.type == "private":
+            enviar_mensaje_ayuda_comando(update_tg.message.text[5:].strip(), update_tg.message.chat.id)
 
-    elif texto_mensaje[0:5] == "/stop":
-        if not es_grupo or texto_mensaje[6:] == 'MemesBot':
-            if not usuario_m.suscrito_actu:
-                enviar_mensaje_usuario(chat_id, "You just dont like me right? You were already out of the queue.")
-            else:
-                usuario_m.suscrito_actu = False
-                usuario_m.save()
-                enviar_mensaje_usuario(chat_id, "Now, you won't receive my updates and any other messages.")
-    elif texto_mensaje[0:17] == "/wannaknowupdates":
-        if not es_grupo or texto_mensaje[18:] == 'MemesBot':
-            if not usuario_m.suscrito_actu:
-                usuario_m.suscrito_actu = True
-                usuario_m.save()
-                enviar_mensaje_usuario(chat_id, "Hello again ,now you will receive update notifications.")
-            else:
-                enviar_mensaje_usuario(chat_id, "You are already receiving my notifications.")
+    elif update_tg.message.text[0:7] == "/random":
 
-    elif texto_mensaje[0:7] == "/create":
-        comandos = ""
-        valido = False
-        if not es_grupo:
-            comandos = texto_mensaje[8:].strip()
-            valido = True
+        im_ale = obtener_imagen_random() #Se obtiene la imagen aleatoria
+        enviar_imagen(im_ale, update_tg.message.chat.id) # Se envia al chat
+
+    elif update_tg.message.text[0:5] == "/stop":
+
+        if usuario_m.suscrito_actu:
+            usuario_m.suscrito_actu = False
+            usuario_m.save() #Actualizamos el usuario en la BD
+            enviar_mensaje_usuario(update_tg.message.chat.id,root_xml_string.find("stop").text)
         else:
-            if texto_mensaje[8:16] == 'MemesBot':
-                comandos = texto_mensaje[17:].strip()
-                valido = True
+            enviar_mensaje_usuario(update_tg.message.chat.id, root_xml_string.find("stop_twice").text)
 
-        if valido:
-            if not comandos:
-                enviar_mensaje_usuario(chat_id, "Please use this command to write over the current meme , " + \
-                                       "use it this way , example: \n\n/create " + \
-                                       "Texto to write- Texto optional , red\n\nSend me /help " + \
-                                       "for more examples.")
-            else:
-                comandos = [i.strip() for i in comandos.split(',') if i]
-
-                ulti_m_con_ima = RespuestaServidor.objects.filter(usuario=usuario_m).order_by('id_mensaje')
-
-                if ulti_m_con_ima:
-                    ulti_m_con_ima = ulti_m_con_ima[len(ulti_m_con_ima) - 1]
-                    try:
-                        comandos = ("", comandos[0], comandos[1])
-                    except IndexError:
-                        comandos = ("", comandos[0])
-                    escribirEnviarMeme(comandos, ulti_m_con_ima.imagen_enviada, chat_id, usuario_m)
-                else:
-                    enviar_mensaje_usuario(chat_id, "First tell me which meme typing its name!\n" + \
-                                           "")
-
-    elif texto_mensaje[0:7] == "/sendme":
-        comandos = ""
-        valido = False
-        if not es_grupo:
-            comandos = texto_mensaje[8:].strip()
-            valido = True
+    elif update_tg.message.text[0:17] == "/wannaknowupdates":
+        if not usuario_m.suscrito_actu:
+            usuario_m.suscrito_actu = True
+            usuario_m.save()
+            enviar_mensaje_usuario(update_tg.message.chat.id,root_xml_string.find("wannaknowupdates").text)
         else:
-            if texto_mensaje[8:16] == 'MemesBot':
-                comandos = texto_mensaje[17:].strip()
-                valido = True
+            enviar_mensaje_usuario(update_tg.message.chat.id,root_xml_string.find("wannaknowupdates_twice").text)
 
-        if valido:
-            if not comandos:
-                enviar_mensaje_usuario(chat_id, "Please use this command to write memes , " + \
-                                       "use it this way , example: \n\n/sendme yao ming , " + \
-                                       "Texto to write- Texto optional , red\n\nSend me /help " + \
-                                       "for more examples.")
+    elif update_tg.message.text[0:7] == "/create":
+
+        comandos = ""
+
+        if update_tg.message.chat.type == "private":
+            comandos = update_tg.message.text[8:].strip()
+        elif update_tg.message.chat.type == "group":
+            comandos = update_tg.message.text[17:].strip() #Saltamos @MemesBot
+
+        if not comandos:
+            enviar_mensaje_usuario(update_tg.message.chat.id,root_xml_string.find("create_sin_comandos").text)
+        else:
+            comandos = [i.strip() for i in comandos.split(',') if i]
+
+            ulti_m_con_ima = RespuestaServidor.objects.filter(usuario=usuario_m).last()
+
+            if ulti_m_con_ima:
+                try:
+                    comandos = ("", comandos[0], comandos[1])
+                except IndexError:
+                    comandos = ("", comandos[0])
+                escribir_enviar_meme(comandos, ulti_m_con_ima.imagen_enviada, update_tg.message.chat.id, usuario_m)
             else:
+                enviar_mensaje_usuario(update_tg.message.chat.id,root_xml_string.find("create_sin_imagen_reciente").text)
 
-                comandos = [i.strip() for i in comandos.split(',') if i]
-                # print comandos
-                imagen = buscarPrimeraImagen(comandos[0].strip(), chat_id, primer_nombre)
+    elif update_tg.message.text[0:7] == "/sendme":
 
-                if imagen:  # Si se encontro una imagen con exito
-                    if len(comandos) > 1:  # si el usuario quiere un texto sobre la imagen
-                        escribirEnviarMeme(comandos, imagen, chat_id, usuario_m)
-                    else:  # si solo quiere la imagen cruda
+        comandos = ""
 
-                        enviarImagen(imagen, chat_id)  # Le enviamos la imagen
+        if update_tg.message.chat.type == "private":
+            comandos = update_tg.message.text[8:].strip()
+        elif update_tg.message.chat.type == "group":
+            comandos = update_tg.message.text[17:].strip()
 
-                        # Notar que guardamos en el servidor la respuesta, esto es usable por /create y /another
-                        respuesta = RespuestaServidor(id_mensaje=consulta['message']['message_id'],
-                                                      fecha=timezone.make_aware(
-                                                          datetime.datetime.utcfromtimestamp(int(fecha_m)),
-                                                          timezone.get_default_timezone()),
-                                                      usuario=usuario_m,
-                                                      imagen_enviada=imagen)
-                        respuesta.save()
+        if not comandos:
+            enviar_mensaje_usuario(update_tg.message.chat.id,root_xml_string.find("sendme_sin_comandos").text)
+        else:
 
-    elif texto_mensaje[0:8] == "/another":
+            comandos = [i.strip() for i in comandos.split(',') if i]
+
+            imagen = buscar_primera_imagen(comandos[0].strip(), update_tg.message.chat.id,
+                                           update_tg.message.user_from.first_name)
+
+            if imagen:  # Si se encontro una imagen con exito
+                if len(comandos) > 1:  # si el usuario quiere un texto sobre la imagen
+                    escribir_enviar_meme(comandos, imagen, update_tg.message.chat.id, usuario_m)
+                else:  # si solo quiere la imagen cruda
+
+                    enviar_imagen(imagen, update_tg.message.chat.id)  # Le enviamos la imagen
+
+                    # Notar que guardamos en el servidor la respuesta, esto es usable por /create y /another
+                    respuesta = RespuestaServidor(id_mensaje=dict_update['message']['message_id'],
+                                                  fecha=timezone.make_aware(
+                                                      datetime.datetime.utcfromtimestamp(int(update_tg.message.date)),
+                                                      timezone.get_default_timezone()),
+                                                  usuario=usuario_m,
+                                                  imagen_enviada=imagen)
+                    respuesta.save()
+
+    elif update_tg.message.text[0:8] == "/another":
         ulti_m_con_ima = RespuestaServidor.objects.filter(usuario=usuario_m).order_by('id_mensaje')
 
         if ulti_m_con_ima:
@@ -425,37 +356,37 @@ def atender_consulta_mensaje_tg(consulta):
                 imagen_siguiente = Imagen.objects.get(id_lista=ulti_m_con_ima.imagen_enviada.id_lista + 1,
                                                       textobuscado=ulti_m_con_ima.imagen_enviada.textobuscado)
 
-                requests.get(URL_TG_API + 'sendChatAction', params={'chat_id': chat_id, 'action': 'upload_photo'})
-                if enviarImagen(imagen_siguiente, chat_id) != 0:
-                    enviar_mensaje_usuario(chat_id, "Sorry , there was a problem , try again. ")
+                requests.get(URL_TG_API + 'sendChatAction',
+                             params={'chat_id': update_tg.message.chat.id, 'action': 'upload_photo'})
+                if enviar_imagen(imagen_siguiente, update_tg.message.chat.id) != 0:
+                    enviar_mensaje_usuario(update_tg.message.chat.id, root_xml_string.find("error_1").text)
                 else:
                     # Guardamos en el servidor la respuesta, esto es usable por /create y /another
-                    respuesta = RespuestaServidor(id_mensaje=consulta['message']['message_id'],
+                    respuesta = RespuestaServidor(id_mensaje=dict_update['message']['message_id'],
                                                   fecha=timezone.make_aware(
-                                                      datetime.datetime.utcfromtimestamp(int(fecha_m)),
+                                                      datetime.datetime.utcfromtimestamp(int(update_tg.message.date)),
                                                       timezone.get_default_timezone()),
                                                   usuario=usuario_m,
                                                   imagen_enviada=imagen_siguiente)
                     respuesta.save()
 
             except ObjectDoesNotExist:
-                enviar_mensaje_usuario(chat_id, "Sorry , there's no more images for your meme. \n")
+                enviar_mensaje_usuario(update_tg.message.chat.id, root_xml_string.find("sin_mas_imagenes_another").text)
 
         else:
-            enviar_mensaje_usuario(chat_id, "First tell me which meme!")
+            enviar_mensaje_usuario(update_tg.message.chat.id, root_xml_string.find("another_sin_imagen").text)
     else:
-        if not es_grupo:
-            imagen = buscarPrimeraImagen(texto_mensaje.strip(), chat_id, primer_nombre)
+        if update_tg.message.chat.type == "private":
+            imagen = buscar_primera_imagen(update_tg.message.text.strip(), update_tg.message.chat.id,
+                                           update_tg.message.user_from.username)
 
             if imagen:
-                enviarImagen(imagen, chat_id)
+                enviar_imagen(imagen, update_tg.message.chat.id)
                 # Guardamos en el servidor la respuesta, esto es usable por /create y /another
-                respuesta = RespuestaServidor(id_mensaje=consulta['message']['message_id'],
+                respuesta = RespuestaServidor(id_mensaje=dict_update['message']['message_id'],
                                               fecha=timezone.make_aware(
-                                                  datetime.datetime.utcfromtimestamp(int(fecha_m)),
+                                                  datetime.datetime.utcfromtimestamp(int(update_tg.message.date)),
                                                   timezone.get_default_timezone()),
                                               usuario=usuario_m,
                                               imagen_enviada=imagen)
                 respuesta.save()
-
-# Fin responder
