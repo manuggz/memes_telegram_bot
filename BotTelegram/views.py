@@ -44,6 +44,19 @@ def mostrar_usuario(request, id_usuario):
 @csrf_exempt
 def atender_mensaje_usuario_tg(request):
     if request.method == 'POST':
+        #time.sleep(1)  # Para no saturar al servidor
         consulta = json.loads(request.body)
+        #print consulta
         atender_consulta_mensaje_tg(consulta)
+    else:
+        mensaje = u"/start"
+        chid = 109518141
+        upid = 25208203
+        atender_consulta_mensaje_tg({u'message': {u'text': mensaje,
+                                                  u'from': {u'first_name': u'SaDeGh', u'id': chid,
+                                                            u'username': u'Saditurboo'},
+                                                  u'chat': {u'first_name': u'SaDeGh', u'id': chid,
+                                                            u'username': u'Saditurboo', u'type': u'private'},
+                                                  u'message_id': 905475, u'date': 1475391962}, u'update_id': 25256647})
+    # return redirect('/BotTelegram/')
     return HttpResponse('OK')

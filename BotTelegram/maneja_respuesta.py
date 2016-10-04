@@ -217,6 +217,7 @@ def escribir_enviar_meme(comandos, imagen, chat_id, usuario_m):
     imagen_pil.save(ruta_guardar, quality=95)
     enviar_mensaje_imagen(chat_id, ruta_guardar)
 
+#start help
 
 ## Atiende el mensaje del usuario
 def atender_consulta_mensaje_tg(dict_update):
@@ -257,13 +258,17 @@ def atender_consulta_mensaje_tg(dict_update):
                 enviar_mensaje_ayuda_comando("help", update_tg.message.chat.id)
 
     elif update_tg.message.text[0:6] == "/start":
-        enviar_mensaje_ayuda_comando("/start",update_tg.message.chat.id)
+        enviar_mensaje_ayuda_comando("start",update_tg.message.chat.id)
 
     elif update_tg.message.text[0:5] == "/help":
         if update_tg.message.chat.type == "group":
-            enviar_mensaje_ayuda_comando(update_tg.message.text[14:].strip(), update_tg.message.chat.id)
+            comando = update_tg.message.text[14:].strip()
         elif update_tg.message.chat.type == "private":
-            enviar_mensaje_ayuda_comando(update_tg.message.text[5:].strip(), update_tg.message.chat.id)
+            comando = update_tg.message.text[5:].strip()
+
+        if not comando:
+            comando = "help"
+        enviar_mensaje_ayuda_comando(comando, update_tg.message.chat.id)
 
     elif update_tg.message.text[0:7] == "/random":
 
