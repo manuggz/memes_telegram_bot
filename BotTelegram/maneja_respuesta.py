@@ -274,12 +274,13 @@ def atender_consulta_mensaje_tg(dict_update):
 
         im_ale = obtener_imagen_random() #Se obtiene la imagen aleatoria
         enviar_imagen(im_ale, update_tg.message.chat.id) # Se envia al chat
-        RespuestaServidor.create(id_mensaje=dict_update['message']['message_id'],
+        respuesta = RespuestaServidor(id_mensaje=dict_update['message']['message_id'],
                                  fecha=timezone.make_aware(
                                      datetime.datetime.utcfromtimestamp(int(update_tg.message.date)),
                                      timezone.get_default_timezone()),
                                  usuario=usuario_m,
                                  imagen_enviada=im_ale)
+        respuesta.save()
 
     elif update_tg.message.text[0:5] == "/stop":
 
@@ -349,12 +350,13 @@ def atender_consulta_mensaje_tg(dict_update):
                     enviar_imagen(imagen, update_tg.message.chat.id)  # Le enviamos la imagen
 
                     # Notar que guardamos en el servidor la respuesta, esto es usable por /create y /another
-                    RespuestaServidor.create(id_mensaje=dict_update['message']['message_id'],
+                    respuesta = RespuestaServidor(id_mensaje=dict_update['message']['message_id'],
                                                   fecha=timezone.make_aware(
                                                       datetime.datetime.utcfromtimestamp(int(update_tg.message.date)),
                                                       timezone.get_default_timezone()),
                                                   usuario=usuario_m,
                                                   imagen_enviada=imagen)
+                    respuesta.save()
 
     elif update_tg.message.text[0:8] == "/another":
         ulti_m_con_ima = RespuestaServidor.objects.filter(usuario=usuario_m).order_by('id_mensaje')
@@ -372,12 +374,13 @@ def atender_consulta_mensaje_tg(dict_update):
                     enviar_mensaje_usuario(update_tg.message.chat.id, root_xml_string.find("error_1").text)
                 else:
                     # Guardamos en el servidor la respuesta, esto es usable por /create y /another
-                    RespuestaServidor.create(id_mensaje=dict_update['message']['message_id'],
+                    respuesta = RespuestaServidor(id_mensaje=dict_update['message']['message_id'],
                                                   fecha=timezone.make_aware(
                                                       datetime.datetime.utcfromtimestamp(int(update_tg.message.date)),
                                                       timezone.get_default_timezone()),
                                                   usuario=usuario_m,
                                                   imagen_enviada=imagen_siguiente)
+                    respuesta.save()
             except ObjectDoesNotExist:
                 enviar_mensaje_usuario(update_tg.message.chat.id, root_xml_string.find("sin_mas_imagenes_another").text)
 
@@ -391,9 +394,10 @@ def atender_consulta_mensaje_tg(dict_update):
             if imagen:
                 enviar_imagen(imagen, update_tg.message.chat.id)
                 # Guardamos en el servidor la respuesta, esto es usable por /create y /another
-                RespuestaServidor.create(id_mensaje=dict_update['message']['message_id'],
+                respuesta = RespuestaServidor(id_mensaje=dict_update['message']['message_id'],
                                               fecha=timezone.make_aware(
                                                   datetime.datetime.utcfromtimestamp(int(update_tg.message.date)),
                                                   timezone.get_default_timezone()),
                                               usuario=usuario_m,
                                               imagen_enviada=imagen)
+                respuesta.save()
