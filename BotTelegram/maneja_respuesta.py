@@ -250,12 +250,13 @@ def atender_consulta_mensaje_tg(dict_update):
     try:
         usuario_m = Usuario.objects.get(id_u=update_tg.message.user_from.id)
     except Usuario.DoesNotExist:
-        usuario_m = Usuario.create(
+        usuario_m = Usuario(
             id_u=update_tg.message.user_from.id,
             nombreusuario=update_tg.message.user_from.username[:200],
             nombre=update_tg.message.user_from.first_name[:200],
             apellido=update_tg.message.user_from.last_name[:200]
         )
+        usuario_m.create()
 
     try:
         RespuestaServidor.objects.get(id_mensaje=update_tg.message.message_id)
@@ -411,3 +412,6 @@ def atender_consulta_mensaje_tg(dict_update):
                                               usuario=usuario_m,
                                               imagen_enviada=imagen)
                 respuesta.save()
+
+
+{u'callback_query': {u'message': {u'from': {u'first_name': u'Memes', u'username': u'MemesBot', u'id': 119646075}, u'photo': [{u'height': 67, u'width': 90, u'file_size': 1453, u'file_id': u'AgADAQAD4AABMht7pyEHvLzPzdHlZ-sijOcvAASaBl6bBpvUBVqkAQABAg'}, {u'height': 238, u'width': 320, u'file_size': 15927, u'file_id': u'AgADAQAD4AABMht7pyEHvLzPzdHlZ-sijOcvAAShXaf2995n21ukAQABAg'}, {u'height': 461, u'width': 620, u'file_size': 32026, u'file_id': u'AgADAQAD4AABMht7pyEHvLzPzdHlZ-sijOcvAAQazB8p7xjcdlmkAQABAg'}], u'caption': u'Prueba', u'chat': {u'last_name': u'Gonzalez', u'first_name': u'Manuel', u'username': u'manuggz', u'id': 109518141, u'type': u'private'}, u'date': 1475628904, u'message_id': 106249}, u'data': u'ASD', u'chat_instance': u'-3266157052870893227', u'id': u'470376834033505255', u'from': {u'last_name': u'Gonzalez', u'first_name': u'Manuel', u'username': u'manuggz', u'id': 109518141}}, u'update_id': 25257083}
