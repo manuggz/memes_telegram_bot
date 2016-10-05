@@ -71,11 +71,21 @@ def enviar_mensaje_usuario(chat_id, mensaje):
     requests.get(URL_TG_API + 'sendMessage', params={'chat_id': chat_id, 'text': mensaje})
 
 
-def enviar_mensaje_imagen(chat_id, ruta_foto):
+def enviar_mensaje_imagen(chat_id, ruta_foto,reply_markup = None):
     files = {'photo': open(ruta_foto, 'rb')}
+
+    data_message = {'chat_id': chat_id}
+
+    if reply_markup:
+        data_message["reply_markup"] = json.dumps(reply_markup)
+
     try:
         requests.get(URL_TG_API + 'sendChatAction', params={'chat_id': chat_id, 'action': 'upload_photo'})
-        r = requests.post(URL_TG_API + "sendPhoto", data={'chat_id': chat_id}, files=files)
+        r = requests.post(
+            URL_TG_API + "sendPhoto",
+            data=data_message,
+            files=files
+        )
     except:
         return -1
 
@@ -100,12 +110,11 @@ def guardar_imagen(imagen):
         with open(imagen.ruta_imagen, 'wb') as archivo_img:
             shutil.copyfileobj(resp.raw, archivo_img)
 
-
 # envia una imagen a un chat
 # notar que primero se debe guardar la imagen localmente
-def enviar_imagen(imagen, chat_id):
+def enviar_imagen(imagen, chat_id,reply_markup = None):
     guardar_imagen(imagen)
-    return enviar_mensaje_imagen(chat_id, imagen.ruta_imagen)
+    return enviar_mensaje_imagen(chat_id, imagen.ruta_imagen,reply_markup)
 
 
 class parseadorHTML(HTMLParser):
@@ -228,6 +237,8 @@ def atender_consulta_mensaje_tg(dict_update):
     tree = ET.parse(join("BotTelegram","languages", "en_US", 'strings.xml'))
     root_xml_string = tree.getroot()
 
+    if not update_tg.message: return
+
     # Someone was boring and atacked
     if update_tg.message.text == "/This_group_is_hacked_by_FATA_Leave_it_or_you_will_face_the_consequences":
         return
@@ -273,8 +284,9 @@ def atender_consulta_mensaje_tg(dict_update):
     elif update_tg.message.text[0:7] == "/random":
 
         im_ale = obtener_imagen_random() #Se obtiene la imagen aleatoria
-        enviar_imagen(im_ale, update_tg.message.chat.id) # Se envia al chat
-        respuesta = RespuestaServidor(id_mensaje=dict_update['message']['message_id'],
+        enviar_imagen(im_ale,update_tg.message.chat.id)#,{"inline_keyboard":[[{"text":"Random","callback_data":"ASD"}]]})
+
+        respuesta = RespuestaServidor(id_mensaje=update_tg.message.message_id,
                                  fecha=timezone.make_aware(
                                      datetime.datetime.utcfromtimestamp(int(update_tg.message.date)),
                                      timezone.get_default_timezone()),
@@ -350,7 +362,7 @@ def atender_consulta_mensaje_tg(dict_update):
                     enviar_imagen(imagen, update_tg.message.chat.id)  # Le enviamos la imagen
 
                     # Notar que guardamos en el servidor la respuesta, esto es usable por /create y /another
-                    respuesta = RespuestaServidor(id_mensaje=dict_update['message']['message_id'],
+                    respuesta = RespuestaServidor(id_mensaje=update_tg.message.message_id,
                                                   fecha=timezone.make_aware(
                                                       datetime.datetime.utcfromtimestamp(int(update_tg.message.date)),
                                                       timezone.get_default_timezone()),
@@ -359,11 +371,9 @@ def atender_consulta_mensaje_tg(dict_update):
                     respuesta.save()
 
     elif update_tg.message.text[0:8] == "/another":
-        ulti_m_con_ima = RespuestaServidor.objects.filter(usuario=usuario_m).order_by('id_mensaje')
+        ulti_m_con_ima = RespuestaServidor.objects.filter(usuario=usuario_m).last()
 
         if ulti_m_con_ima:
-            ulti_m_con_ima = ulti_m_con_ima[len(ulti_m_con_ima) - 1]
-
             try:
                 imagen_siguiente = Imagen.objects.get(id_lista=ulti_m_con_ima.imagen_enviada.id_lista + 1,
                                                       textobuscado=ulti_m_con_ima.imagen_enviada.textobuscado)
@@ -374,7 +384,7 @@ def atender_consulta_mensaje_tg(dict_update):
                     enviar_mensaje_usuario(update_tg.message.chat.id, root_xml_string.find("error_1").text)
                 else:
                     # Guardamos en el servidor la respuesta, esto es usable por /create y /another
-                    respuesta = RespuestaServidor(id_mensaje=dict_update['message']['message_id'],
+                    respuesta = RespuestaServidor(id_mensaje=update_tg.message.message_id,
                                                   fecha=timezone.make_aware(
                                                       datetime.datetime.utcfromtimestamp(int(update_tg.message.date)),
                                                       timezone.get_default_timezone()),
@@ -394,7 +404,7 @@ def atender_consulta_mensaje_tg(dict_update):
             if imagen:
                 enviar_imagen(imagen, update_tg.message.chat.id)
                 # Guardamos en el servidor la respuesta, esto es usable por /create y /another
-                respuesta = RespuestaServidor(id_mensaje=dict_update['message']['message_id'],
+                respuesta = RespuestaServidor(id_mensaje=update_tg.message.message_id,
                                               fecha=timezone.make_aware(
                                                   datetime.datetime.utcfromtimestamp(int(update_tg.message.date)),
                                                   timezone.get_default_timezone()),
