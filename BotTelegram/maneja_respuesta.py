@@ -256,7 +256,7 @@ def atender_consulta_mensaje_tg(dict_update):
             nombre=update_tg.message.user_from.first_name[:200],
             apellido=update_tg.message.user_from.last_name[:200]
         )
-        usuario_m.create()
+        usuario_m.save()
 
     try:
         RespuestaServidor.objects.get(id_mensaje=update_tg.message.message_id)
