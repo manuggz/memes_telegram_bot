@@ -19,4 +19,6 @@ class UpdateTG:
         if self.message:
             self.message = MessageTG(self.message)
 
+        self.is_message_debug = dict_update.get("debug", False)
+
 

@@ -3,10 +3,11 @@ from django.db import models
 
 class Usuario(models.Model):
     id_u = models.IntegerField(primary_key=True)
-    nombreusuario = models.CharField(max_length=200, null=True)
-    nombre = models.CharField(max_length=200, null=True)
+    nombre = models.CharField(max_length=200,default="NoName")
     apellido = models.CharField(max_length=200, null=True)
+    nombreusuario = models.CharField(max_length=200, null=True)
     suscrito_actu = models.BooleanField(default=True)
+    ultima_respuesta = models.ForeignKey("RespuestaServidor",null=True,on_delete=models.SET_NULL)
 
     def __str__(self):
         str_r = self.nombre
@@ -25,13 +26,16 @@ class GrupoChat(models.Model):
         str_r = self.nombrechat
         return str_r
 
-
+#Ultima Respuesta mandada por el servidor al usuario / Notar que
+# respuestas de texto como a /start no cuentan porque hay restricciones a la capacidad de la BD
+# solo se guardan las respuestas a /random /sendme <meme> o <meme> ya que es necesario
+# para cuando el usuario utilize /another o /create , necesitamos guardar esas referencias
+# Por eso SIEMPRE un usuario apunta A UN SOLO OBJETO RespuestaServidor
 class RespuestaServidor(models.Model):
     id_mensaje = models.IntegerField(primary_key=True)
     fecha = models.DateTimeField()  # Fecha de respuesta
-    usuario = models.ForeignKey(Usuario)  # Quien envia el mensaje
+    usuario_t = models.ForeignKey(Usuario)  # A Quien se envia el mensaje
     imagen_enviada = models.ForeignKey("Imagen")  # Imagen enviada
-
 
     def __str__(self):
         str_r = self.id_mensaje

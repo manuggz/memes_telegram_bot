@@ -18,7 +18,7 @@ class MessageTG:
 
         # type:Integer
         # Date the message was sent in Unix time
-        self.date = dict_message["date"]
+        self.datetime = dict_message["date"]
 
         # Type: Chat
         # Conversation the message belongs to

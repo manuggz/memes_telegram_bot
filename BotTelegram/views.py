@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse, Http404
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+
+from enviar_mensajes_usuario import *
 from maneja_respuesta import *
 from forms import FormEnviarMensaje
-import time
 
 
 # Vista principal Home.
@@ -44,11 +45,11 @@ def mostrar_usuario(request, id_usuario):
 @csrf_exempt
 def atender_mensaje_usuario_tg(request):
     if request.method == 'POST':
-        #time.sleep(1)  # Para no saturar al servidor
         consulta = json.loads(request.body)
         print consulta
         atender_consulta_mensaje_tg(consulta)
     else:
+
         mensaje = u"/random"
         chid = 109518141
         upid = 25208203
@@ -57,6 +58,8 @@ def atender_mensaje_usuario_tg(request):
                                                             u'username': u'Saditurboo'},
                                                   u'chat': {u'first_name': u'SaDeGh', u'id': chid,
                                                             u'username': u'Saditurboo', u'type': u'private'},
-                                                  u'message_id': 905476, u'date': 1475391962}, u'update_id': 25256647})
-    # return redirect('/BotTelegram/')
+                                                  u'message_id': 905507, u'date': 1475391962}, u'update_id': 25256647,"debug":True})
+
+
+
     return HttpResponse('OK')

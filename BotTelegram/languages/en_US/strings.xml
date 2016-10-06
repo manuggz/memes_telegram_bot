@@ -146,9 +146,9 @@ You are already receiving my notifications.
     <create_sin_comandos>
 Please use this command to write over the current meme , use it this way , example:
 
-/create Texto to write- Texto optional , red
+/create Texto to write- Texto optional , Color optional
 
-Send me /help for more examples.
+Send me /help create for more examples.
     </create_sin_comandos>
 
     <!-- Este mensaje aparece cuando el usuario utiliza /create sin imagen reciente -->
