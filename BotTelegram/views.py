@@ -50,7 +50,7 @@ def atender_mensaje_usuario_tg(request):
         atender_consulta_mensaje_tg(consulta)
     else:
 
-        mensaje = u"/random"
+        mensaje = u"chuck"
         chid = 109518141
         upid = 25208203
         atender_consulta_mensaje_tg({u'message': {u'text': mensaje,
@@ -58,7 +58,7 @@ def atender_mensaje_usuario_tg(request):
                                                             u'username': u'Saditurboo'},
                                                   u'chat': {u'first_name': u'SaDeGh', u'id': chid,
                                                             u'username': u'Saditurboo', u'type': u'private'},
-                                                  u'message_id': 905507, u'date': 1475391962}, u'update_id': 25256647,"debug":True})
+                                                  u'message_id': 905521, u'date': 1475391962}, u'update_id': 25256647,"debug":True})
 
 
 

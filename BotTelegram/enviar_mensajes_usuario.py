@@ -40,10 +40,10 @@ def enviar_mensaje_usuarios(mensaje):
 # notar que primero se debe guardar la imagen localmente
 def enviar_imagen(chat_id, imagen, reply_markup=None):
     guardar_imagen(imagen)
-    return enviar_mensaje_imagen(chat_id, imagen.ruta_imagen, reply_markup)
+    return enviar_mensaje_imagen(chat_id, imagen.ruta_imagen, imagen.title,reply_markup)
 
 
-def enviar_mensaje_imagen(chat_id, ruta_foto, reply_markup=None):
+def enviar_mensaje_imagen(chat_id, ruta_foto,caption="",reply_markup=None):
     files = {'photo': open(ruta_foto, 'rb')}
 
     data_message = {'chat_id': chat_id}
@@ -51,6 +51,8 @@ def enviar_mensaje_imagen(chat_id, ruta_foto, reply_markup=None):
     if reply_markup:
         data_message["reply_markup"] = json.dumps(reply_markup)
 
+    if caption:
+        data_message["caption"] = caption
     try:
         requests.get(URL_TG_API + 'sendChatAction', params={'chat_id': chat_id, 'action': 'upload_photo'})
         r = requests.post(

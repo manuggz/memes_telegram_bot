@@ -6,7 +6,7 @@ class Usuario(models.Model):
     nombre = models.CharField(max_length=200,default="NoName")
     apellido = models.CharField(max_length=200, null=True)
     nombreusuario = models.CharField(max_length=200, null=True)
-    suscrito_actu = models.BooleanField(default=True) # cambiar a "is_suscrito_actu"
+    is_suscrito_actu = models.BooleanField(default=True) # cambiar a "is_suscrito_actu"
     ultima_respuesta = models.ForeignKey("RespuestaServidor",null=True,on_delete=models.SET_NULL)
 
     def __str__(self):
@@ -20,7 +20,7 @@ class Usuario(models.Model):
 class GrupoChat(models.Model):
     id_chat = models.IntegerField(primary_key=True)
     nombrechat = models.CharField(max_length=200, null=True)
-    suscrito_actu = models.BooleanField(default=True)
+    is_suscrito_actu = models.BooleanField(default=True)
 
     def __str__(self):
         str_r = self.nombrechat
@@ -47,6 +47,7 @@ class Imagen(models.Model):
     ruta_imagen = models.CharField(max_length=200)  # Ruta de la imagen en el servidor(in case)
     textobuscado = models.CharField(max_length=200)  # Texto buscado para acceder a la imagen
     id_lista = models.IntegerField()  # ID en la lista de imagenes
+    title = models.CharField(max_length=200,default="")
 
 
     def __str__(self):

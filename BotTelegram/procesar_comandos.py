@@ -51,8 +51,8 @@ def stop_tg(chat_id,usuario,is_debug,xml_string):
     if is_debug:  # Mensage de DEBUG
         enviar_mensaje_usuario(chat_id, "Respuesta /stop")
 
-    if usuario.suscrito_actu:
-        usuario.suscrito_actu = False
+    if usuario.is_suscrito_actu:
+        usuario.is_suscrito_actu = False
         usuario.save()  # Actualizamos el usuario en la BD
         enviar_mensaje_usuario(chat_id, xml_string.find("stop").text)
     else:
@@ -64,8 +64,8 @@ def wannaknowupdates_tg(chat_id,usuario,is_debug,xml_string):
     if is_debug:  # Mensage de DEBUG
         enviar_mensaje_usuario(chat_id, "Respuesta /wannaknowupdates")
 
-    if not usuario.suscrito_actu:
-        usuario.suscrito_actu = True
+    if not usuario.is_suscrito_actu:
+        usuario.is_suscrito_actu = True
         usuario.save()
         enviar_mensaje_usuario(chat_id, xml_string.find("wannaknowupdates").text)
     else:

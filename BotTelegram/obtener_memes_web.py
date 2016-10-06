@@ -12,6 +12,14 @@ from BotTelegram.models import Imagen
 # URL de la pagina usada para buscar los memes
 PAGINA_MEMES = 'http://imgflip.com/memesearch'
 
+class ImagenWeb:
+
+    def __init__(self):
+        self.title = ""
+        self.url = ""
+
+    def __str__(self):
+        return self.title + "-" + self.url
 
 # De las imagenes referenciadas en la BD obtiene una aleatoria
 def obtener_imagen_random():
@@ -22,17 +30,20 @@ def obtener_imagen_random():
 
 
 # construye todos los objetos Imagen de la BD dada una lista de URL hacia las imagenes
-def construir_imagenes(rutas_imagenes, txt_bu):
+def construir_imagenes(imagenes, txt_bu):
     imagendb = None
 
-    for i in range(len(rutas_imagenes) - 1, -1, -1):
-        url_ima = "http:" + rutas_imagenes[i]['src']
+    for i in range(len(imagenes) - 1, -1, -1):
+        url_ima = "http:" + imagenes[i].url
         path_archivo = join('staticfiles', basename(url_ima))  # Ruta en el servidor
-
-        imagendb = Imagen(id_lista=i,
-                          url_imagen=url_ima,
-                          ruta_imagen=path_archivo,
-                          textobuscado=txt_bu)
+        #print imagenes[i]
+        imagendb = Imagen(
+            id_lista=i,
+            url_imagen=url_ima,
+            ruta_imagen=path_archivo,
+            textobuscado=txt_bu,
+            title = imagenes[i].title
+        )
         imagendb.save()
 
     return imagendb
@@ -53,16 +64,31 @@ def buscar_imagenes(memeConsultado):
         return None
     parser = parseadorHTML()
     parser.feed(peticion.text)
-    return parser.rutas_imagenes
+    return parser.imagenes
 
 
 
 class parseadorHTML(HTMLParser):
     def __init__(self):
         HTMLParser.__init__(self)
-        self.rutas_imagenes = []
+        self.imagenes = []
+        self.imagen_actual = None
 
     def handle_starttag(self, tag, attrs):
+        if tag == "h3":
+            #print tag ,attrs
+            self.imagen_actual = ImagenWeb()
+
         if tag == "img":
-            self.rutas_imagenes.append(dict(attrs))
+            #print tag,attrs
+            self.imagen_actual.url = dict(attrs)['src']
+            self.imagenes.append(self.imagen_actual)
+            #print self.imagen_actual
+            self.imagen_actual = None
+
+    def handle_data(self, data):
+        if self.imagen_actual:
+            #print "ASDASDASD", data
+            if data.strip():
+                self.imagen_actual.title = data
 
