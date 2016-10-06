@@ -121,7 +121,7 @@ def sendme_tg(chat_id,usuario,resto_mensaje,is_debug,xml_string):
     if not imagen: return None # Si no se encontro una imagen con exito
 
     if len(formato) == 1:# si solo quiere la imagen "cruda" ejemplo: solo envia /sendme yao ming
-        enviar_imagen(imagen, chat_id)  # Le enviamos la imagen de yao ming
+        enviar_imagen(chat_id,imagen)  # Le enviamos la imagen de yao ming
         return imagen  # regresamos la imagen enviada para que el usuario la pueda usar despues con comandos tales
         # como /create o /another
 
@@ -152,7 +152,7 @@ def another_tg(chat_id,usuario,is_debug,xml_string):
         requests.get(URL_TG_API + 'sendChatAction',params={'chat_id': chat_id, 'action': 'upload_photo'})
 
         # Enviamos la imagen
-        if enviar_imagen(imagen_siguiente, chat_id) != 0: # si no es exitoso
+        if enviar_imagen(chat_id,imagen_siguiente) != 0: # si no es exitoso
             enviar_mensaje_usuario(chat_id, xml_string.find("error_1").text)
             return None
 
@@ -174,7 +174,7 @@ def buscar_meme_tg(chat_id,meme_name,tipo_chat,is_debug,xml_strings):
     imagen = buscar_primera_imagen(chat_id,meme_name.strip(),xml_strings)
 
     if imagen:
-        enviar_imagen(imagen,chat_id)
+        enviar_imagen(chat_id,imagen)
 
     return imagen
 

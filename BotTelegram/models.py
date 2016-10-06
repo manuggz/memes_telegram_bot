@@ -6,7 +6,7 @@ class Usuario(models.Model):
     nombre = models.CharField(max_length=200,default="NoName")
     apellido = models.CharField(max_length=200, null=True)
     nombreusuario = models.CharField(max_length=200, null=True)
-    suscrito_actu = models.BooleanField(default=True)
+    suscrito_actu = models.BooleanField(default=True) # cambiar a "is_suscrito_actu"
     ultima_respuesta = models.ForeignKey("RespuestaServidor",null=True,on_delete=models.SET_NULL)
 
     def __str__(self):
