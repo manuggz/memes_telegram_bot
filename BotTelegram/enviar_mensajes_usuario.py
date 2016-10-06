@@ -13,7 +13,7 @@ from django.utils import timezone
 from PIL import Image, ImageDraw, ImageFont
 
 # Fuente usada para escribir sobre los memes
-FUENTE = "staticfiles/Montserrat-ExtraBold.otf"
+FUENTE = "staticfiles/ufonts.com_impact.ttf"
 
 # Codigo del BOT dado por el API de Telegram -- Token
 CODE_BOT = "119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg"

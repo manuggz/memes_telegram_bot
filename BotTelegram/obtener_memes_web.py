@@ -13,15 +13,12 @@ from BotTelegram.models import Imagen
 PAGINA_MEMES = 'http://imgflip.com/memesearch'
 
 
-
-
 # De las imagenes referenciadas en la BD obtiene una aleatoria
 def obtener_imagen_random():
     todos = Imagen.objects.all()
     if todos.exists():
         return choice(todos)
     return None
-
 
 
 # construye todos los objetos Imagen de la BD dada una lista de URL hacia las imagenes
