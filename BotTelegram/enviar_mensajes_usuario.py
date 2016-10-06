@@ -34,6 +34,7 @@ def enviar_mensaje_usuarios(mensaje):
     for usuario in usuarios:
         if usuario.is_suscrito_actu:
             enviar_mensaje_usuario(usuario.pk, mensaje)
+        sleep(2)
 
 
 # envia una imagen a un chat
@@ -76,7 +77,7 @@ def enviar_mensaje_imagen(chat_id, ruta_foto,caption="",reply_markup=None):
 
 
 # Envia una cadena de texto asociada a un comando
-def enviar_mensaje_ayuda_comando(comando, chat_id, xml_string):
+def enviar_mensaje_ayuda_comando(chat_id,comando, xml_string):
     for help_m in xml_string.iter("help"):
         if help_m.attrib.get("comando", "") == comando:
             enviar_mensaje_usuario(chat_id, help_m.text)
@@ -144,13 +145,19 @@ def dibujar_texto_sobre_imagen(texto, draw, image, fposiciony, color):
 
 
 def guardar_imagen_enviada(message_id, datetime_unix, usuario_m, image):
+
+    if datetime_unix:
+        datetime_d = datetime.datetime.utcfromtimestamp(int(datetime_unix))
+    else:
+        datetime_d = datetime.datetime.now()
+
     # creamos la respuesta
     respuesta = RespuestaServidor(
         id_mensaje=message_id,
         fecha=timezone.make_aware(
-            datetime.datetime.utcfromtimestamp(int(datetime_unix)),
-            timezone.get_default_timezone()
-        ),
+                datetime_d,
+                timezone.get_default_timezone()
+            ),
         usuario_t=usuario_m,
         imagen_enviada=image
     )

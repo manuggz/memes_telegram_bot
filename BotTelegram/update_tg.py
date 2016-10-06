@@ -1,4 +1,5 @@
 # coding=utf-8
+from BotTelegram.callbackquery_tg import CallbackQueryTG
 from BotTelegram.message_tg import MessageTG
 
 
@@ -19,6 +20,15 @@ class UpdateTG:
         if self.message:
             self.message = MessageTG(self.message)
 
+        # type: CallbackQuery
+        # Optional. New incoming callback query
+        # For example when a user press a bu
+        self.callback_query = dict_update.get("callback_query","")
+        if self.callback_query:
+            self.callback_query = CallbackQueryTG(self.callback_query)
+
         self.is_message_debug = dict_update.get("debug", False)
+
+
 
 

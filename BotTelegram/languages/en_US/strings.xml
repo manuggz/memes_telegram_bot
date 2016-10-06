@@ -80,7 +80,6 @@ I'll send you a picture.
 Example: Send me yao ming . If you do, i'll send you yao ming's meme.
 
 wanna know more? Send me /help
-
     </help>
 
     <!--Este mensaje aparece cuando el usuario envia /sendme solamente lo cual no cumple con su formato -->

@@ -6,4 +6,15 @@ Changes:
 
 ---- Some texts have been changed to make them more easy to understand.
 ---- Changed Font to Impact.
----- Added Caption to Images so you can understand what the meme is about, you can use it to search for that meme.
+---- Added Caption to Images so you can understand what the meme you searched is about, you can use it to search for that meme later.
+
+---- Fixed some bugs
+---- Lots of changes to the code server.
+
+If you want to stop receiving these messages send /stop.
+
+[0.5.1]
+
+---- Removed option to join groups because of lack of implementation
+---- Added button /random to /random images
+---- Fixed bug related to some commands not showing any text
