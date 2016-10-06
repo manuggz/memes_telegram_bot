@@ -32,7 +32,7 @@ def enviar_mensaje_usuarios(mensaje):
     usuarios = Usuario.objects.all()
 
     for usuario in usuarios:
-        if usuario.suscrito_actu:
+        if usuario.is_suscrito_actu:
             enviar_mensaje_usuario(usuario.pk, mensaje)
 
 

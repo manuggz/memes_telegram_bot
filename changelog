@@ -1,5 +1,9 @@
-version actual: 0.5
+[0.5]
 
--- Cambiados Mensajes
--- Cambiada fuente
--- Agregado un caption a las imagenes para poder ver cual texto de busqueda genera la imagen
+I've been update to version 0.5
+
+Changes:
+
+---- Some texts have been changed to make them more easy to understand.
+---- Changed Font to Impact.
+---- Added Caption to Images so you can understand what the meme is about, you can use it to search for that meme.

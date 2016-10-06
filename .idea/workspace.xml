@@ -4,10 +4,7 @@
     <list default="true" id="9a5328c0-0b85-4a51-b0cf-d04724dbb485" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" afterPath="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/models.py" afterPath="$PROJECT_DIR$/BotTelegram/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/obtener_memes_web.py" afterPath="$PROJECT_DIR$/BotTelegram/obtener_memes_web.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/procesar_comandos.py" afterPath="$PROJECT_DIR$/BotTelegram/procesar_comandos.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/views.py" afterPath="$PROJECT_DIR$/BotTelegram/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/changelog" afterPath="$PROJECT_DIR$/changelog" />
     </list>
     <ignored path="memes_telegramd.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -93,7 +90,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="obtener_memes_web.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="obtener_memes_web.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BotTelegram/obtener_memes_web.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="399">
@@ -127,11 +124,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="enviar_mensajes_usuario.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="enviar_mensajes_usuario.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
+            <state relative-caret-position="202">
+              <caret line="34" column="36" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -142,8 +139,8 @@
       <file leaf-file-name="changelog" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/changelog">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="92" selection-start-line="4" selection-start-column="92" selection-end-line="4" selection-end-column="92" />
+            <state relative-caret-position="120">
+              <caret line="8" column="114" selection-start-line="8" selection-start-column="114" selection-end-line="8" selection-end-column="114" />
               <folding />
             </state>
           </provider>
@@ -179,10 +176,10 @@
         <option value="$PROJECT_DIR$/BotTelegram/maneja_respuesta.py" />
         <option value="$PROJECT_DIR$/BotTelegram/procesar_comandos.py" />
         <option value="$PROJECT_DIR$/BotTelegram/models.py" />
-        <option value="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" />
-        <option value="$PROJECT_DIR$/changelog" />
         <option value="$PROJECT_DIR$/BotTelegram/views.py" />
         <option value="$PROJECT_DIR$/BotTelegram/obtener_memes_web.py" />
+        <option value="$PROJECT_DIR$/changelog" />
+        <option value="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" />
       </list>
     </option>
   </component>
@@ -639,7 +636,7 @@
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25518832" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2590315" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32884902" sideWeight="0.50269026" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -881,24 +878,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/changelog">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="92" selection-start-line="4" selection-start-column="92" selection-end-line="4" selection-end-column="92" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BotTelegram/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -915,6 +894,24 @@
           <caret line="41" column="31" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
           <folding>
             <element signature="e#98#131#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/changelog">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="114" selection-start-line="8" selection-start-column="114" selection-end-line="8" selection-end-column="114" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="34" column="36" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
