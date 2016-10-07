@@ -50,7 +50,7 @@ Please, notice that Text 1 and Text 2 are separated using a hyphen(-) , and the 
         <text>
 Get a random meme fron Internet!
         </text>
-        <button text = "random" callback_data = "Random"/>
+{#        <button text = "random" callback_data = "Random"/>#}
     </help>
 
     <!--Este mensaje aparece cuando el usuario envia /help -->
@@ -77,7 +77,7 @@ If you have any suggestions for my creator let him now at @manuggz.
 
 Please if you like this bot , rate it at :https://telegram.me/storebot?start=memesbot
         </text>
-        <button text = "random" callback_data = "Random"/>
+{#        <button text = "random" callback_data = "Random"/>#}
     </help>
 
     <!--Este mensaje aparece cuando el usuario envia /start -->
@@ -91,7 +91,7 @@ Example: Send me yao ming . If you do, i'll send you yao ming's meme.
 
 wanna know more? Send me /help
         </text>
-        <button text = "random" callback_data = "Random"/>
+{#        <button text = "random" callback_data = "Random"/>#}
     </help>
 
     <!--Este mensaje aparece cuando el usuario envia /sendme solamente lo cual no cumple con su formato -->
@@ -112,7 +112,7 @@ Send me /help for more examples.
 Sorry , there's no more images for your meme.
 
         </text>
-        <button text = "random" callback_data = "Random"/>
+{#        <button text = "random" callback_data = "Random"/>#}
     </sin_mas_imagenes_another>
 
     <!--Este mensaje aparece cuando el usuario quiere usar /another pero no ha usado ningun comando que regrese una
@@ -122,7 +122,7 @@ Sorry , there's no more images for your meme.
 
 First tell me which meme!
         </text>
-        <button text = "random" callback_data = "Random"/>
+{#        <button text = "random" callback_data = "Random"/>#}
     </another_sin_imagen>
 
     <!-- Este mensaje aparece cuando el usuario busca un meme el cual no se encuentra ni en BD ni en la pagina -->
@@ -144,6 +144,8 @@ Sorry , there is a problem getting your meme. Try again.
     <stop>
         <text>
 Now, you won't receive my updates and any other messages.
+
+You can enable them again with /wannaknowupdates.
         </text>
     </stop>
 
@@ -152,6 +154,7 @@ Now, you won't receive my updates and any other messages.
     <stop_twice>
         <text>
 You just dont like me right? You were already out of the queue.
+You can enable them again with /wannaknowupdates.
         </text>
     </stop_twice>
 
@@ -161,6 +164,8 @@ You just dont like me right? You were already out of the queue.
     <wannaknowupdates>
         <text>
 Hello again ,now you will receive update notifications.
+
+You can stop them with /stop.
         </text>
     </wannaknowupdates>
 
@@ -169,6 +174,8 @@ Hello again ,now you will receive update notifications.
     <wannaknowupdates_twice>
         <text>
 You are already receiving my notifications.
+
+You can stop them with /stop.
         </text>
     </wannaknowupdates_twice>
 
