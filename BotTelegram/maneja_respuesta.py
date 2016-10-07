@@ -66,6 +66,5 @@ def atender_consulta_mensaje_tg(dict_update):
             update_tg.message.datetime,
             usuario_m,
             root_xml_string,
-            update_tg.message.message_id,
             *extraer_comando(update_tg.message.text)
         )

@@ -22,6 +22,9 @@ CODE_BOT = "119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg"
 URL_TG_API = "https://api.telegram.org/bot" + CODE_BOT + "/"
 
 
+def responder_callback_query(query_id):
+    requests.get(URL_TG_API + 'answerCallbackQuery', params={'callback_query_id': query_id})
+
 def enviar_mensaje_usuario(chat_id, mensaje,reply_markup = None):
 
     params  = {'chat_id': chat_id, 'text': mensaje}
@@ -167,7 +170,7 @@ def dibujar_texto_sobre_imagen(texto, draw, image, fposiciony, color):
         draw.text((image.size[0] // 2 - tam_d[0] // 2, fposiciony(tam_d, image.size)), texto, font=fuente, fill="red")
 
 
-def guardar_imagen_enviada(message_id, datetime_unix, usuario_m, image):
+def guardar_imagen_enviada(datetime_unix, usuario_m, image):
 
     if datetime_unix:
         datetime_d = datetime.datetime.utcfromtimestamp(int(datetime_unix))
@@ -184,11 +187,11 @@ def guardar_imagen_enviada(message_id, datetime_unix, usuario_m, image):
         imagen_enviada=image
     )
 
-    respuesta.save()  # Guardamos en la BD
-
     # Actualizamos el usuario
     if usuario_m.ultima_respuesta:
         usuario_m.ultima_respuesta.delete()
+
+    respuesta.save()  # Guardamos en la BD
 
     usuario_m.ultima_respuesta = respuesta
     usuario_m.save()

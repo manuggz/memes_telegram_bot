@@ -32,12 +32,12 @@ class GrupoChat(models.Model):
 # para cuando el usuario utilize /another o /create , necesitamos guardar esas referencias
 # Por eso SIEMPRE un usuario apunta A UN SOLO OBJETO RespuestaServidor
 class RespuestaServidor(models.Model):
+    usuario_t = models.ForeignKey(Usuario,primary_key=True)  # A Quien se envia el mensaje
     fecha = models.DateTimeField()  # Fecha de respuesta
-    usuario_t = models.ForeignKey(Usuario)  # A Quien se envia el mensaje
     imagen_enviada = models.ForeignKey("Imagen")  # Imagen enviada
 
     def __str__(self):
-        str_r = self.id_mensaje
+        str_r = str(self.usuario_t)
         return str_r
 
 

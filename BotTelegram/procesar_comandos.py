@@ -168,10 +168,12 @@ def sendme_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
 # El usuario puede usar /another despues de los siguientes casos:
 # Despues de /random , /sendme meme name, meme name, anterior /another
 def another_tg(chat_id, usuario, is_debug, xml_string):
+
     if is_debug:  # Mensage de DEBUG
         enviar_mensaje_usuario(chat_id, "Respuesta /another")
 
-    if not usuario.ultima_respuesta:  # En caso de que no exista una imagen anterior
+
+    if not usuario.ultima_respuesta_id:  # En caso de que no exista una imagen anterior
         parsear_enviar_xml(chat_id, xml_string.find("another_sin_imagen"))
         return None
 
@@ -200,7 +202,7 @@ def another_tg(chat_id, usuario, is_debug, xml_string):
 # Ejemplo : Solo envia "yao ming"
 def buscar_meme_tg(chat_id, meme_name, tipo_chat, is_debug, xml_strings):
     if is_debug:  # Mensage de DEBUG
-        enviar_mensaje_usuario(chat_id, "Respuesta mensage sin comando")
+        enviar_mensaje_usuario(chat_id, "Respuesta mensage sin comando: " + meme_name)
 
     if tipo_chat != "private": return None  # Debido a la forma del comando solo funciona "bien" cuando es un chat privado
 
