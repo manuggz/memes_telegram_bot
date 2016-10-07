@@ -40,9 +40,9 @@ def construir_imagenes(imagenes, txt_bu):
         imagendb = Imagen(
             id_lista=i,
             url_imagen=url_ima,
-            ruta_imagen=path_archivo,
-            textobuscado=txt_bu,
-            title = imagenes[i].title
+            ruta_imagen=path_archivo[:200],
+            textobuscado=txt_bu[:200],
+            title = imagenes[i].title[:200]
         )
         imagendb.save()
 
