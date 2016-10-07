@@ -81,4 +81,8 @@ def mostrar_imagen(request,id_imagen):
     id_usuario = int(id_imagen)
     imagen = get_object_or_404(Imagen, pk=id_imagen)
 
-    return render(request, 'usuario.html', {'imagen': imagen})
+    return render(request, 'imagen.html', {'imagen': imagen})
+
+
+def mostrar_imagenes(request):
+    return render(request, 'imagenes.html', {'imagenes': Imagen.objects.all()})

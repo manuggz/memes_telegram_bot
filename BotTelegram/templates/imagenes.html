@@ -1,0 +1,26 @@
+{% extends "base.html"%}
+{% load tz %}
+
+{% block contenido%}
+    <table class="table table-hover">
+    	<thead>
+    		<tr>
+			<tr>
+				<th> Title </th>
+				<th> URL Imagen </th>
+				<th> Ruta destino </th>
+				<th> Texto buscado (ID lista)</th>
+			</tr>
+    	</thead>
+    {% for imagen in imagenes %}
+    	<tbody>
+			<tr>
+                <td><a href ="{% url 'BotTelegram:imagen' imagen.pk %}">{{imagen.title}} </a></td>
+                <td><a href ="{{imagen.url_imagen}}" target="_blank"> Imagen </a></td>
+				<td>{{imagen.ruta_imagen}} </td>
+				<td>{{imagen.textobuscado}} ( {{imagen.id_lista}} )</td>
+			</tr>
+    	</tbody>
+    {% endfor%}
+    </table>	
+{% endblock %}
