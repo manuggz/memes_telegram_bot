@@ -300,9 +300,9 @@ def buscar_primera_imagen(chat_id, meme_name, xml_strings):
 
         imagenes = buscar_imagenes(meme_name)
         if imagenes == []:
-            parsear_enviar_xml(chat_id, xml_string.find("no_recuerda_meme"))
+            parsear_enviar_xml(chat_id, xml_strings.find("no_recuerda_meme"))
         elif imagenes == None:
-            parsear_enviar_xml(chat_id, xml_string.find("problema_buscando_meme"))
+            parsear_enviar_xml(chat_id, xml_strings.find("problema_buscando_meme"))
 
         else:
             primera_imagen = construir_imagenes(imagenes, meme_name)
