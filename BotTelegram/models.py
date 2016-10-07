@@ -32,7 +32,6 @@ class GrupoChat(models.Model):
 # para cuando el usuario utilize /another o /create , necesitamos guardar esas referencias
 # Por eso SIEMPRE un usuario apunta A UN SOLO OBJETO RespuestaServidor
 class RespuestaServidor(models.Model):
-    id_mensaje = models.IntegerField(primary_key=True)
     fecha = models.DateTimeField()  # Fecha de respuesta
     usuario_t = models.ForeignKey(Usuario)  # A Quien se envia el mensaje
     imagen_enviada = models.ForeignKey("Imagen")  # Imagen enviada
@@ -43,11 +42,11 @@ class RespuestaServidor(models.Model):
 
 
 class Imagen(models.Model):
-    url_imagen = models.CharField(max_length=200)
-    ruta_imagen = models.CharField(max_length=200)  # Ruta de la imagen en el servidor(in case)
-    textobuscado = models.CharField(max_length=200)  # Texto buscado para acceder a la imagen
-    id_lista = models.IntegerField()  # ID en la lista de imagenes
     title = models.CharField(max_length=200,default="")
+    url_imagen = models.CharField(max_length=200)
+    textobuscado = models.CharField(max_length=200)  # Texto buscado para acceder a la imagen
+    ruta_imagen = models.CharField(max_length=200)  # Ruta de la imagen en el servidor(in case)
+    id_lista = models.IntegerField()  # ID en la lista de imagenes
 
 
     def __str__(self):

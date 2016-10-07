@@ -176,7 +176,6 @@ def guardar_imagen_enviada(message_id, datetime_unix, usuario_m, image):
 
     # creamos la respuesta
     respuesta = RespuestaServidor(
-        id_mensaje=message_id,
         fecha=timezone.make_aware(
                 datetime_d,
                 timezone.get_default_timezone()

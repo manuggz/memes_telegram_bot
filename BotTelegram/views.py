@@ -50,15 +50,10 @@ def atender_mensaje_usuario_tg(request):
         atender_consulta_mensaje_tg(consulta)
     else:
 
-        mensaje = u"/another"
+        mensaje = u"/start"
         chid = 109518141
         upid = 25208203
-        atender_consulta_mensaje_tg({u'message': {u'text': mensaje,
-                                                   u'from': {u'first_name': u'SaDeGh', u'id': chid,
-                                                             u'username': u'Saditurboo'},
-                                                   u'chat': {u'first_name': u'SaDeGh', u'id': chid,
-                                                             u'username': u'Saditurboo', u'type': u'private'},
-                                                   u'message_id': 905527, u'date': 1475391962}, u'update_id': 25256647,"debug":True})
+        atender_consulta_mensaje_tg({u'callback_query': {u'id': u'470376835803901570', u'from': {u'id': 109518141, u'last_name': u'Gonzalez', u'first_name': u'Manuel', u'username': u'manuggz'}, u'chat_instance': u'-3266157052870893227', u'data': u'Random', u'message': {u'from': {u'id': 119646075, u'username': u'MemesBot', u'first_name': u'Memes'}, u'entities': [{u'type': u'bot_command', u'offset': 213, u'length': 5}], u'date': 1475867414, u'text': u"Hey. I can send you memes. Just tell me which one typing its name and if I can remember it\nI'll send you a picture.\n\nExample: Send me yao ming . If you do, i'll send you yao ming's meme.\n\nwanna know more? Send me /help", u'chat': {u'id': 109518141, u'last_name': u'Gonzalez', u'type': u'private', u'first_name': u'Manuel', u'username': u'manuggz'}, u'message_id': 107694}}, u'update_id': 25257687})
 
         # atender_consulta_mensaje_tg({u'update_id': 25257467, u'callback_query': {u'data': u'random', u'message': {u'photo': [
         # {u'file_id': u'AgADAQADnwEyG3unIQeHf8_1SA8rG42t5y8ABPFY1bJSpotw-akBAAEC', u'height': 90, u'file_size': 2033,
@@ -80,3 +75,10 @@ def atender_mensaje_usuario_tg(request):
 
 
     return HttpResponse('OK')
+
+
+def mostrar_imagen(request,id_imagen):
+    id_usuario = int(id_imagen)
+    imagen = get_object_or_404(Imagen, pk=id_imagen)
+
+    return render(request, 'usuario.html', {'imagen': imagen})
