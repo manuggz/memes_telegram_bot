@@ -19,6 +19,7 @@ def procesar_callback_query(update_tg,xml_strings):
             nombre=update_tg.callback_query.user_from.first_name[:200],
             apellido=update_tg.callback_query.user_from.last_name[:200]
         )
+
     if update_tg.callback_query.data == "Random":
         #Notar que no se esta usando chat_instance arreglar
 

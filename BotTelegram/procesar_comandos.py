@@ -47,7 +47,7 @@ def construir_callback_buttons(imagen):
         "inline_keyboard":
             [
                 [
-                    {"text": "Random", "callback_data": "random"}
+                    {"text": "Random", "callback_data": "Random"}
                 ]#,
                 #[
                 #    {
