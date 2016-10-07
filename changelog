@@ -3,7 +3,6 @@
 I've been update to version 0.5
 
 ---- Removed option to join groups because of lack of implementation
----- Added button /random to /random response
 ---- Fixed bug related to some commands not showing any text
 ---- Added button Random to /start , /random , /help and in other especial cases.
 
