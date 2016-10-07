@@ -1,0 +1,59 @@
+{% extends "base.html"%}
+
+{% block contenido%}
+
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th> Title </th>
+				<th> URL Imagen </th>
+				<th> Ruta destino </th>
+				<th> Texto buscado (ID lista)</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{{imagen.title}} </td>
+                <a href ="{{imagen.url_imagen}}" target="_blank"> Imagen </a>
+				<td>{{imagen.ruta_imagen}} </td>
+				<td>{{imagen.textobuscado}} ( {{imagen.id_lista}} )</td>
+			</tr>
+		</tbody>
+	</table>	
+
+    <img src = "{{imagen.url_imagen}}">
+{#	<table class="table table-hover">#}
+{#		<thead>#}
+{#			<tr>#}
+{#				<th> ID Mensaje </th>#}
+{#				<!--<th> Update ID </th>-->#}
+{#				<th> Texto enviado </th>#}
+{#				<th> Imagen Respuesta</th>#}
+{#			</tr>#}
+{#		</thead>#}
+{#	{% for mensaje in mensajes %}#}
+{#		<tbody>#}
+{#			<tr>#}
+{#				<td>{{mensaje.id_mensaje}} </td>#}
+{#				<!--<td>{{mensaje.update_id}} </td>-->#}
+{#				<td>{{mensaje.texto_enviado}} </td>#}
+{#    			<td>#}
+{#    				<a href ="{{mensaje.imagen_enviada.url_imagen}}" target="_blank">Imagen </a>#}
+{#    			</td>#}
+{#			</tr>#}
+{#		</tbody>#}
+{#	{% endfor%}#}
+{#	</table>	#}
+{##}
+{#	<hr>#}
+{#	<form class="form-inline" action ='{% url 'BotTelegram:usuarios' usuario.pk %}'} method = "POST">#}
+{#      {% csrf_token %}#}
+{##}
+{#	  <div class="form-group">#}
+{#	    <label for="mensaje">Mensaje a enviar</label>#}
+{#	    <textarea class="form-control" rows="3" id="mensaje" name="mensaje" placeholder="Mensaje a enviar"></textarea>#}
+{#	  </div>#}
+{#	  <button type="submit" class="btn btn-default">Enviar mensaje</button>#}
+{#	</form>#}
+{% endblock %}
+
