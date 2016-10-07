@@ -49,9 +49,6 @@ def construir_imagenes(imagenes, txt_bu):
     return imagendb
 
 
-
-
-
 # Busca TODAS las imagenes en la pagina web PAGINA_MEMES
 # va guardando TODAS las rutas url en una lista y las regresa
 def buscar_imagenes(memeConsultado):

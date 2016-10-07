@@ -22,9 +22,15 @@ CODE_BOT = "119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg"
 URL_TG_API = "https://api.telegram.org/bot" + CODE_BOT + "/"
 
 
-def enviar_mensaje_usuario(chat_id, mensaje):
+def enviar_mensaje_usuario(chat_id, mensaje,reply_markup = None):
+
+    params  = {'chat_id': chat_id, 'text': mensaje}
+
+    if reply_markup:
+        params["reply_markup"] = json.dumps(reply_markup)
+
     requests.get(URL_TG_API + 'sendChatAction', params={'chat_id': chat_id, 'action': 'typing'})
-    requests.get(URL_TG_API + 'sendMessage', params={'chat_id': chat_id, 'text': mensaje})
+    requests.get(URL_TG_API + 'sendMessage', params=params)
 
 
 # Envia un mensaje a todos los usuarios del bot
@@ -75,13 +81,30 @@ def enviar_mensaje_imagen(chat_id, ruta_foto,caption="",reply_markup=None):
 
     return 0
 
+# Parsea el string guardado en el archivo xml strings.xml
+# construyendo el mensaje en un formato entendible por la api de TG
+def enviar_mensaje_ayuda_comando(chat_id, comando, root_xml):
 
-# Envia una cadena de texto asociada a un comando
-def enviar_mensaje_ayuda_comando(chat_id,comando, xml_string):
-    for help_m in xml_string.iter("help"):
-        if help_m.attrib.get("comando", "") == comando:
-            enviar_mensaje_usuario(chat_id, help_m.text)
-            return
+    elemento_ayuda = root_xml.findall("help[@comando='{0}']".format(comando))[0]
+
+    parsear_enviar_xml(chat_id,elemento_ayuda)
+
+# Parsea un xml object y lo envia en formato de la API de Telegram
+def parsear_enviar_xml(chat_id,xml_object):
+    texto = ""
+    botones = []
+    mark_keyboard = {}
+
+    for sub_elemento in list(xml_object):
+        if sub_elemento.tag == "text":
+            texto += sub_elemento.text
+        elif sub_elemento.tag == "button":
+            botones.append([sub_elemento.attrib]) # De esta forma quedan uno debajo del otro
+
+    if botones:
+        mark_keyboard = {"inline_keyboard":botones}
+
+    enviar_mensaje_usuario(chat_id, texto,mark_keyboard)
 
 
 # Si no existe la imagen en el servidor

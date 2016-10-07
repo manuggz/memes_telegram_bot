@@ -6,6 +6,7 @@
     <!-- Le dice al usuario lo que hace dicho comando /sendme -->
     <!-- Recordar que /sendme obtiene una imagen de la BD o de la pagina web y escribe sobre ella -->
     <help comando = "sendme">
+        <text>
 To use this command you have to tell me three things, which meme you want me to fetch, a text to write over your meme and a color to use.
 
 The format is: /sendme MEME , TEXT 1 - TEXT 2 , COLOR
@@ -16,13 +17,14 @@ Text 2 : optional lower text , if you dont tell me a Text 2 , then Text 1 will b
 Color: it is a string , tell me a color name if I dont know it, i'll write using RED.
 
 Notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts and color are separated using a comma(,) that have to be respected.
+        </text>
     </help>
 
     <!--Este mensaje aparece cuando el usuario envia /help create-->
     <!-- Le dice al usuario lo que hace dicho comando /create -->
     <!-- Recordar que /create usa la ultima imagen enviada al usuario como base para escribir el meme -->
     <help comando = "create">
-
+        <text>
 This command will allow you to write over your most recent meme.
 To use this command you have to tell me two things ,  a TEXT to write over your meme and a COLOR to use.
 
@@ -36,6 +38,8 @@ This command use your current meme that you got using /sendme MEME or just typin
 Color: it is a string , tell me a color name if I dont know it, i'll write using RED.
 
 Please, notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts and color are separated using a comma(,) that have to be respected.
+
+        </text>
     </help>
 
     <!--Este mensaje aparece cuando el usuario envia /help random-->
@@ -43,12 +47,16 @@ Please, notice that Text 1 and Text 2 are separated using a hyphen(-) , and the 
     <!-- Recordar que /random escoge de las imagenes referenciadas en la BD una imagen aleatoria y se la da al usuario
     guardando el mensaje para que el usuario pueda usar /another -->
     <help comando = "random">
+        <text>
 Get a random meme fron Internet!
+        </text>
+        <button text = "random" callback_data = "Random"/>
     </help>
 
     <!--Este mensaje aparece cuando el usuario envia /help -->
     <!-- Proporciona una vista general de lo que se puede hacer con el bot -->
     <help comando = "help">
+        <text>
 Hi, I can send you memes and let you write over them.
 
 You can send me its name or use /sendme yaoming .
@@ -68,98 +76,127 @@ Use /help sendme or /help create
 If you have any suggestions for my creator let him now at @manuggz.
 
 Please if you like this bot , rate it at :https://telegram.me/storebot?start=memesbot
+        </text>
+        <button text = "random" callback_data = "Random"/>
     </help>
 
     <!--Este mensaje aparece cuando el usuario envia /start -->
     <!-- Recordar que /start es el mensaje de bienvenida del bot -->
     <help comando="start">
-
+        <text>
 Hey. I can send you memes. Just tell me which one typing its name and if I can remember it
 I'll send you a picture.
 
 Example: Send me yao ming . If you do, i'll send you yao ming's meme.
 
 wanna know more? Send me /help
-
+        </text>
+        <button text = "random" callback_data = "Random"/>
     </help>
 
     <!--Este mensaje aparece cuando el usuario envia /sendme solamente lo cual no cumple con su formato -->
     <sendme_sin_comandos>
-
+        <text>
 Please use this command to write memes, use it this way , example:
 
 /sendme yao ming ,texto to write- Texto optional , red
 
 Send me /help for more examples.
+        </text>
     </sendme_sin_comandos>
 
     <!--Este mensaje aparece cuando el usuario alcanza el final de la lista de imagenes y envia /another de nuevo -->
     <sin_mas_imagenes_another>
+        <text>
 
 Sorry , there's no more images for your meme.
 
+        </text>
+        <button text = "random" callback_data = "Random"/>
     </sin_mas_imagenes_another>
 
     <!--Este mensaje aparece cuando el usuario quiere usar /another pero no ha usado ningun comando que regrese una
     lista de imagenes, recordar que /another se usa para ver la siguiente de una lista-->
     <another_sin_imagen>
+        <text>
+
 First tell me which meme!
+        </text>
+        <button text = "random" callback_data = "Random"/>
     </another_sin_imagen>
 
     <!-- Este mensaje aparece cuando el usuario busca un meme el cual no se encuentra ni en BD ni en la pagina -->
     <no_recuerda_meme>
+        <text>
 I'm sorry  I can't remember this meme!. Send me /help.
+        </text>
     </no_recuerda_meme>
 
     <!-- Este mensaje aparece cuando el usuario busca un meme y ocurre un error buscandolo -->
     <problema_buscando_meme>
+        <text>
 Sorry , there is a problem getting your meme. Try again.
+        </text>
     </problema_buscando_meme>
 
     <!-- Este mensaje aparece cuando el usuario utiliza /stop -->
     <!-- Recordar que /stop detiene al bot de mandarle mensajes -->
     <stop>
+        <text>
 Now, you won't receive my updates and any other messages.
+        </text>
     </stop>
 
     <!-- Este mensaje aparece cuando el usuario utiliza /stop y ya estaba detenida su supscripcion -->
     <!-- Recordar que /stop detiene al bot de mandarle mensajes -->
     <stop_twice>
+        <text>
 You just dont like me right? You were already out of the queue.
+        </text>
     </stop_twice>
 
     <!-- Este mensaje aparece cuando el usuario utiliza /wannaknowupdates -->
     <!-- Recordar que /wannaknowupdates habilita al usuario de recibir mensajes del bot -->
     <!-- Establecido por default BTW -->
     <wannaknowupdates>
+        <text>
 Hello again ,now you will receive update notifications.
+        </text>
     </wannaknowupdates>
 
     <!-- Este mensaje aparece cuando el usuario utiliza /wannaknowupdates -->
     <!-- Recordar que /wannaknowupdates habilita al usuario de recibir mensajes del bot -->
     <wannaknowupdates_twice>
+        <text>
 You are already receiving my notifications.
+        </text>
     </wannaknowupdates_twice>
 
     <!-- Este mensaje aparece cuando el usuario utiliza /create sin comandos -->
     <!-- Recordar que /create utiliza la mas reciente imagen enviada al usuario para escribir el meme -->
     <create_sin_comandos>
+        <text>
 Please use this command to write over the current meme , use it this way , example:
 
 /create Texto to write- Texto optional , Color optional
 
 Send me /help create for more examples.
+        </text>
     </create_sin_comandos>
 
     <!-- Este mensaje aparece cuando el usuario utiliza /create sin imagen reciente -->
     <!-- Recordar que /create utiliza la mas reciente imagen enviada al usuario para escribir el meme -->
     <create_sin_imagen_reciente>
+        <text>
 First tell me which meme typing its name! or using /sendme name
+        </text>
     </create_sin_imagen_reciente>
 
     <!-- Este mensaje aparece cuando ocurre un error interno -->
     <error_1>
+        <text>
 Sorry , there was a problem , try again.
+        </text>
     </error_1>
 
 </data>

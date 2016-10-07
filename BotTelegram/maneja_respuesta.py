@@ -30,9 +30,7 @@ def atender_consulta_mensaje_tg(dict_update):
 
     update_tg = UpdateTG(dict_update)  # Convertimos el dict a una manejable Python Class
 
-
-    tree = ET.parse(join("BotTelegram", "languages", "en_US", 'strings.xml'))
-    root_xml_string = tree.getroot()
+    root_xml_string = ET.parse(join("BotTelegram", "languages", "en_US", 'strings.xml'))
 
     # Por ahora solo grupos "normales" y chats privados
     if update_tg.message and update_tg.message.chat.type not in ("group", "private"): return

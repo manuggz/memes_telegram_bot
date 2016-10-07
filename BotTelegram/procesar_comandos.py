@@ -5,7 +5,7 @@ import sys
 from django.core.exceptions import ObjectDoesNotExist
 
 from BotTelegram.enviar_mensajes_usuario import enviar_mensaje_usuario, enviar_imagen, enviar_mensaje_ayuda_comando, \
-    URL_TG_API, escribir_enviar_meme, guardar_imagen_enviada
+    URL_TG_API, escribir_enviar_meme, guardar_imagen_enviada, parsear_enviar_xml
 from BotTelegram.models import Imagen
 
 # Procesa el comando "/start" mandado por el usuario
@@ -86,9 +86,9 @@ def stop_tg(chat_id, usuario, is_debug, xml_string):
     if usuario.is_suscrito_actu:
         usuario.is_suscrito_actu = False
         usuario.save()  # Actualizamos el usuario en la BD
-        enviar_mensaje_usuario(chat_id, xml_string.find("stop").text)
+        parsear_enviar_xml(chat_id,xml_string.find("stop"))
     else:
-        enviar_mensaje_usuario(chat_id, xml_string.find("stop_twice").text)
+        parsear_enviar_xml(chat_id,xml_string.find("stop_twice"))
 
 
 # Procesa el comando /wannaknowupdates del usuario
@@ -100,9 +100,9 @@ def wannaknowupdates_tg(chat_id, usuario, is_debug, xml_string):
     if not usuario.is_suscrito_actu:
         usuario.is_suscrito_actu = True
         usuario.save()
-        enviar_mensaje_usuario(chat_id, xml_string.find("wannaknowupdates").text)
+        parsear_enviar_xml(chat_id,xml_string.find("wannaknowupdates"))
     else:
-        enviar_mensaje_usuario(chat_id, xml_string.find("wannaknowupdates_twice").text)
+        parsear_enviar_xml(chat_id, xml_string.find("wannaknowupdates_twice"))
 
 
 # Procesa el comando /create del usuario
@@ -113,11 +113,11 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
         enviar_mensaje_usuario(chat_id, "Respuesta /create")
 
     if not resto_mensaje:  # Si el usuario solo nos envio "/create"
-        enviar_mensaje_usuario(chat_id, xml_string.find("create_sin_comandos").text)
+        parsear_enviar_xml(chat_id, xml_string.find("create_sin_comandos"))
         return
 
     if not usuario.ultima_respuesta:  # Si no se ha enviado una imagen al usuario
-        enviar_mensaje_usuario(chat_id, xml_string.find("create_sin_imagen_reciente").text)
+        parsear_enviar_xml(chat_id, xml_string.find("create_sin_imagen_reciente"))
         return
 
     # Divide resto_mensaje en el TEXTO y el COLOR del mensaje
@@ -141,7 +141,7 @@ def sendme_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
         enviar_mensaje_usuario(chat_id, "Respuesta /sendme")
 
     if not resto_mensaje:  # si el usuario envia /sendme sin el resto del formato
-        enviar_mensaje_usuario(chat_id, xml_string.find("sendme_sin_comandos").text)
+        parsear_enviar_xml(chat_id, xml_string.find("sendme_sin_comandos"))
         return None
 
     # Divide resto_mensaje en el MEME NAME , TEXTO y COLOR del mensaje
@@ -172,7 +172,7 @@ def another_tg(chat_id, usuario, is_debug, xml_string):
         enviar_mensaje_usuario(chat_id, "Respuesta /another")
 
     if not usuario.ultima_respuesta:  # En caso de que no exista una imagen anterior
-        enviar_mensaje_usuario(chat_id, xml_string.find("another_sin_imagen").text)
+        parsear_enviar_xml(chat_id, xml_string.find("another_sin_imagen"))
         return None
 
     try:  # Intentamos obtener la siguiente
@@ -186,12 +186,12 @@ def another_tg(chat_id, usuario, is_debug, xml_string):
 
         # Enviamos la imagen
         if enviar_imagen(chat_id, imagen_siguiente) != 0:  # si no es exitoso
-            enviar_mensaje_usuario(chat_id, xml_string.find("error_1").text)
+            parsear_enviar_xml(chat_id, xml_string.find("error_1"))
             return None
 
         return imagen_siguiente
     except ObjectDoesNotExist:  # No existe una imagen siguiente
-        enviar_mensaje_usuario(chat_id, xml_string.find("sin_mas_imagenes_another").text)
+        parsear_enviar_xml(chat_id, xml_string.find("sin_mas_imagenes_another"))
 
     return None
 
@@ -300,9 +300,9 @@ def buscar_primera_imagen(chat_id, meme_name, xml_strings):
 
         imagenes = buscar_imagenes(meme_name)
         if imagenes == []:
-            enviar_mensaje_usuario(chat_id, xml_strings.find("no_recuerda_meme").text)
+            parsear_enviar_xml(chat_id, xml_string.find("no_recuerda_meme"))
         elif imagenes == None:
-            enviar_mensaje_usuario(chat_id, xml_strings.find("problema_buscando_meme").text)
+            parsear_enviar_xml(chat_id, xml_string.find("problema_buscando_meme"))
 
         else:
             primera_imagen = construir_imagenes(imagenes, meme_name)
