@@ -213,7 +213,7 @@ def buscar_meme_tg(chat_id, meme_name, tipo_chat, is_debug, xml_strings):
 
 
 ## Atiende el mensaje del usuario
-def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_strings, comando, resto_mensaje):
+def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_strings, message_id,comando, resto_mensaje):
     imagen_enviada = None
 
     if comando == "/start":
@@ -282,7 +282,7 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
 
     if imagen_enviada:
         guardar_imagen_enviada(
-            chat_id,
+            message_id,
             fecha_hora,
             usuario,
             imagen_enviada

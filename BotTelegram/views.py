@@ -50,7 +50,7 @@ def atender_mensaje_usuario_tg(request):
         atender_consulta_mensaje_tg(consulta)
     else:
 
-        mensaje = u"/start"
+        mensaje = u"/another"
         chid = 109518141
         upid = 25208203
         atender_consulta_mensaje_tg({u'message': {u'text': mensaje,
@@ -58,7 +58,7 @@ def atender_mensaje_usuario_tg(request):
                                                              u'username': u'Saditurboo'},
                                                    u'chat': {u'first_name': u'SaDeGh', u'id': chid,
                                                              u'username': u'Saditurboo', u'type': u'private'},
-                                                   u'message_id': 905524, u'date': 1475391962}, u'update_id': 25256647,"debug":True})
+                                                   u'message_id': 905527, u'date': 1475391962}, u'update_id': 25256647,"debug":True})
 
         # atender_consulta_mensaje_tg({u'update_id': 25257467, u'callback_query': {u'data': u'random', u'message': {u'photo': [
         # {u'file_id': u'AgADAQADnwEyG3unIQeHf8_1SA8rG42t5y8ABPFY1bJSpotw-akBAAEC', u'height': 90, u'file_size': 2033,

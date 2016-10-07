@@ -28,6 +28,7 @@ def procesar_callback_query(update_tg,xml_strings):
             update_tg.message.datetime if update_tg.message else None,
             usuario_m,
             xml_strings,
+            update_tg.callback_query.id,
             "/random",
             ""
         )
