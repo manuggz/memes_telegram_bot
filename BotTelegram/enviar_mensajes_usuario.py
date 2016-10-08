@@ -25,6 +25,12 @@ URL_TG_API = "https://api.telegram.org/bot" + CODE_BOT + "/"
 def responder_callback_query(query_id):
     requests.get(URL_TG_API + 'answerCallbackQuery', params={'callback_query_id': query_id})
 
+def obtener_info_webhook():
+    return requests.get(URL_TG_API + 'getWebhookInfo')
+
+def obtener_info_me():
+    return requests.get(URL_TG_API + 'getMe')
+
 def enviar_mensaje_usuario(chat_id, mensaje,reply_markup = None):
 
     params  = {'chat_id': chat_id, 'text': mensaje}

@@ -1,0 +1,25 @@
+{% extends "base.html"%}
+
+{% block contenido%}
+
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th> ID </th>
+				<th> Nombre </th>
+				<th> Apellido </th>
+				<th> Username</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{{bot.id}} </td>
+				<td>{{bot.first_name}} </td>
+				<td>{{bot.last_name}} </td>
+				<td>{{bot.username}} </td>
+			</tr>
+		</tbody>
+	</table>	
+
+{% endblock %}
+

@@ -12,5 +12,9 @@ urlpatterns = [
     url(r'^imagenes/$', views.mostrar_imagenes, name='imagenes_todas'), # Muestra todos los  usuarios registrados
     url(r'^imagenes/(?P<id_imagen>\d+)$', views.mostrar_imagen, name='imagen'), #Muestra los datos de una imagen
 
+    url(r'^webhook/$', views.webhook, name='webhook'),  # Establece/Muestra el WebHook
+
+    url(r'^me/$', views.mostrar_me, name='me'),  # Muestra informacion sobre el bot
+
     url(r'^119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/$', views.atender_mensaje_usuario_tg, name='responder_mensaje'),
 ]

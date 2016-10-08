@@ -3,6 +3,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
+from BotTelegram.user_tg import UserTG
+from BotTelegram.webhook_tg import WebhookTG
 from enviar_mensajes_usuario import *
 from maneja_respuesta import *
 from forms import FormEnviarMensaje
@@ -84,7 +86,6 @@ def atender_mensaje_usuario_tg(request):
 
 @login_required
 def mostrar_imagen(request,id_imagen):
-    id_usuario = int(id_imagen)
     imagen = get_object_or_404(Imagen, pk=id_imagen)
 
     return render(request, 'imagen.html', {'imagen': imagen})
@@ -94,6 +95,34 @@ def mostrar_imagen(request,id_imagen):
 def mostrar_imagenes(request):
     return render(request, 'imagenes.html', {'imagenes': Imagen.objects.all()})
 
+@login_required
+def webhook(request):
+
+    contexto = {}
+    webhook_info = obtener_info_webhook()
+
+    webhook_info = json.loads(webhook_info.text)
+
+    if webhook_info:
+        webhook_info = WebhookTG(webhook_info["result"])
+        contexto["webhook"] = webhook_info
+
+    return render(request,'webhook.html',contexto)
+
+@login_required
+def mostrar_me(request):
+    contexto = {}
+    me = obtener_info_me()
+
+    me = json.loads(me.text)
+
+    if me:
+        me = UserTG(me["result"])
+        contexto["bot"] = me
+
+    return render(request,'me.html',contexto)
 
 def home(request):
     return render(request,'home.html')
+
+
