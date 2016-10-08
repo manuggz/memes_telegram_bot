@@ -9,7 +9,4 @@ urlpatterns = [
         {'redirect_authenticated_user': 'BotTelegram:index'},
         name='login',
     ),
-    #url('^', include('django.contrib.auth.urls')),
-    #url('^', include('django.contrib.auth.urls')),
-    #url('^crear/$',views.crear_cuenta,name="crear_cuenta")
 ]
