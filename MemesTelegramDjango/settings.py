@@ -82,17 +82,8 @@ WSGI_APPLICATION = 'MemesTelegramDjango.wsgi.application'
 import dj_database_url
 
 DATABASES = {}
-#DATABASES['default'] =  dj_database_url.config()
-DATABASES['default'] = {
-    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'HOST': '',
-    'NAME': 'memestg',
-    'CONN_MAX_AGE': 0,
-    'PASSWORD': '',
-    'PORT': '',
-    'USER': ''
-}
-#print dj_database_url.config()
+DATABASES['default'] =  dj_database_url.config()
+
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
