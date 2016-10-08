@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'BotTelegram',
+    'accounts',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -69,6 +70,8 @@ TEMPLATES = [
     },
 ]
 
+LOGIN_REDIRECT_URL = "BotTelegram:index"
+
 WSGI_APPLICATION = 'MemesTelegramDjango.wsgi.application'
 
 
@@ -79,22 +82,39 @@ WSGI_APPLICATION = 'MemesTelegramDjango.wsgi.application'
 import dj_database_url
 
 DATABASES = {}
-DATABASES['default'] =  dj_database_url.config()
-# if not DATABASES['default']:
-#     DATABASES = {
-#         'default':{'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'memestg8',
-#         'HOST': 'localhost',
-#         'USER': 'postgres',
-#         'PASSWORD': 'linking750',
-#         'PORT': '5432'}
-#
-#     }
+#DATABASES['default'] =  dj_database_url.config()
+DATABASES['default'] = {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'HOST': '',
+    'NAME': 'memestg',
+    'CONN_MAX_AGE': 0,
+    'PASSWORD': '',
+    'PORT': '',
+    'USER': ''
+}
+#print dj_database_url.config()
+# Password validation
+# https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'America/Caracas'
 

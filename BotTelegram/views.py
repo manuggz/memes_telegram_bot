@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -8,16 +9,19 @@ from forms import FormEnviarMensaje
 
 
 # Vista principal Home.
+@login_required
 def index(request):
     return render(request, 'base.html')
 
 
 # Muestra una lista de los mensajes registrados enviados a la pagina
+@login_required
 def mostrar_mensajes(request):
     return render(request, 'mensajes.html', {'mensajes': RespuestaServidor.objects.all()})
 
 
 # Muestra todos los usuarios registrados
+@login_required
 def mostrar_usuarios(request):
     if request.method == "POST":  # Si se recive una peticion de enviar mensaje a todos
         form = FormEnviarMensaje(request.POST)
@@ -28,6 +32,7 @@ def mostrar_usuarios(request):
 
 
 # Muestra los datos de un usuario
+@login_required
 def mostrar_usuario(request, id_usuario):
     id_usuario = int(id_usuario)
     usuario_r = get_object_or_404(Usuario, pk=id_usuario)
@@ -77,6 +82,7 @@ def atender_mensaje_usuario_tg(request):
     return HttpResponse('OK')
 
 
+@login_required
 def mostrar_imagen(request,id_imagen):
     id_usuario = int(id_imagen)
     imagen = get_object_or_404(Imagen, pk=id_imagen)
@@ -84,5 +90,10 @@ def mostrar_imagen(request,id_imagen):
     return render(request, 'imagen.html', {'imagen': imagen})
 
 
+@login_required
 def mostrar_imagenes(request):
     return render(request, 'imagenes.html', {'imagenes': Imagen.objects.all()})
+
+
+def home(request):
+    return render(request,'home.html')
