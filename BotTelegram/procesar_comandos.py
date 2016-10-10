@@ -36,25 +36,30 @@ def help_tg(chat_id, tema_ayuda, is_debug, xml_string):
 
 # Construye los botones que se muestran debajo de una imagen aleatoria
 def construir_callback_buttons(imagen):
-    data_another = imagen.textobuscado + "," + str(imagen.id_lista)
+    link_image = imagen.textobuscado + "," + str(imagen.id_lista)
 
-    if sys.getsizeof(data_another) > 64:
-        data_another = imagen.textobuscado
-        if sys.getsizeof(data_another) > 64:
-            data_another = data_another[:63]
+    if sys.getsizeof(link_image) > 64:
+        link_image = imagen.textobuscado
+        if sys.getsizeof(link_image) > 64:
+            link_image = link_image[:63]
 
     mark_keyboard = {
         "inline_keyboard":
             [
                 [
                     {"text": "Random", "callback_data": "Random"}
-                ]#,
+                    ,
+                    #{
+                    #    "text": "Another",
+                    #    "callback_data": "Another,"  + link_image,
+                    #}
+                ],
                 #[
                 #    {
-                #        "text": "Another",
-                #        "callback_data": data_another
+                #        "text": "Create",
+                #        "callback_data": "Create," + link_image,
                 #    }
-                #]
+                #],
             ]
     }
 

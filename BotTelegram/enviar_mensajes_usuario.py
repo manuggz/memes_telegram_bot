@@ -94,7 +94,10 @@ def enviar_mensaje_imagen(chat_id, ruta_foto,caption="",reply_markup=None):
 # construyendo el mensaje en un formato entendible por la api de TG
 def enviar_mensaje_ayuda_comando(chat_id, comando, root_xml):
 
-    elemento_ayuda = root_xml.findall("help[@comando='{0}']".format(comando))[0]
+    elemento_ayuda = root_xml.findall("help[@comando='{0}']".format(comando))
+
+    if elemento_ayuda:
+        elemento_ayuda = elemento_ayuda[0]
 
     parsear_enviar_xml(chat_id,elemento_ayuda)
 

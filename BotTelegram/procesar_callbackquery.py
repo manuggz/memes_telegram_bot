@@ -20,10 +20,13 @@ def procesar_callback_query(update_tg,xml_strings):
             apellido=update_tg.callback_query.user_from.last_name[:200]
         )
 
-    if update_tg.callback_query.data == "Random":
+    responder_callback_query(update_tg.callback_query.id)
+
+    formato = update_tg.callback_query.data.split(",")
+
+    if  formato[0]== "Random":
         #Notar que no se esta usando chat_instance arreglar
 
-        responder_callback_query(update_tg.callback_query.id)
         procesar_comando(
             update_tg.callback_query.user_from.id,
             update_tg.is_message_debug,
@@ -35,4 +38,22 @@ def procesar_callback_query(update_tg,xml_strings):
             ""
         )
         return
+
+    elif formato[0] == "Another":
+        print formato
+        return
+    elif formato[0] == "Create":
+        procesar_comando(
+            update_tg.callback_query.user_from.id,
+            update_tg.is_message_debug,
+            "private",
+            update_tg.message.datetime if update_tg.message else None,
+            usuario_m,
+            xml_strings,
+            "/create",
+            ""
+        )
+        return
+
+
 

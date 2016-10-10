@@ -66,6 +66,15 @@ class TestBot(TestCase):
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
 
+    def test_help_potatoe(self):
+        """"No tema de ayuda"""
+        self.consulta[u'message'][u'text'] = u"/help potatoe"
+        response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
+                                    json.dumps(self.consulta), content_type="text/json", secure=True)
+
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
 
     def test_sendme_sin_comandos(self):
         self.consulta[u'message'][u'text'] = u"/sendme"
