@@ -6,7 +6,9 @@ from random import random
 
 import datetime
 
-from BotTelegram.models import Usuario, RespuestaServidor
+from django.core.exceptions import ObjectDoesNotExist
+
+from BotTelegram.models import Usuario, RespuestaServidor, Imagen
 import requests
 from time import sleep
 from django.utils import timezone
@@ -55,6 +57,10 @@ def enviar_mensaje_usuarios(mensaje):
 # envia una imagen a un chat
 # notar que primero se debe guardar la imagen localmente
 def enviar_imagen(chat_id, imagen, reply_markup=None):
+    # Colocamos el estado en el bot "subiendo foto"
+
+    requests.get(URL_TG_API + 'sendChatAction', params={'chat_id': chat_id, 'action': 'upload_photo'})
+
     guardar_imagen(imagen)
     return enviar_mensaje_imagen(chat_id, imagen.ruta_imagen, imagen.title,reply_markup)
 
@@ -99,24 +105,33 @@ def enviar_mensaje_ayuda_comando(chat_id, comando, root_xml):
     if elemento_ayuda:
         elemento_ayuda = elemento_ayuda[0]
 
-    parsear_enviar_xml(chat_id,elemento_ayuda)
+        parsear_enviar_xml(chat_id,elemento_ayuda)
 
-# Parsea un xml object y lo envia en formato de la API de Telegram
-def parsear_enviar_xml(chat_id,xml_object):
-    texto = ""
-    botones = []
-    mark_keyboard = {}
+def parsear_xml_object(xml_object):
+
+    if not xml_object: return
+
+    result ={"text":"","botones":[]}
 
     for sub_elemento in list(xml_object):
         if sub_elemento.tag == "text":
-            texto += sub_elemento.text
+            result["text"] += sub_elemento.text
         elif sub_elemento.tag == "button":
-            botones.append([sub_elemento.attrib]) # De esta forma quedan uno debajo del otro
+            result["botones"].append([sub_elemento.attrib]) # De esta forma quedan uno debajo del otro
 
-    if botones:
-        mark_keyboard = {"inline_keyboard":botones}
+    return result
 
-    enviar_mensaje_usuario(chat_id, texto,mark_keyboard)
+# Parsea un xml object y lo envia en formato de la API de Telegram
+def parsear_enviar_xml(chat_id,xml_object):
+
+    result = parsear_xml_object(xml_object)
+    mark_keyboard = {}
+
+
+    if result["botones"]:
+        mark_keyboard = {"inline_keyboard":result["botones"]}
+
+    enviar_mensaje_usuario(chat_id, result["text"],mark_keyboard)
 
 
 # Si no existe la imagen en el servidor
@@ -129,7 +144,7 @@ def guardar_imagen(imagen):
             shutil.copyfileobj(resp.raw, archivo_img)
 
 
-def escribir_enviar_meme(comandos, imagen, chat_id, usuario_m):
+def escribir_enviar_meme(comandos, imagen, chat_id, usuario_m,mark_keyboard=None):
     guardar_imagen(imagen)
 
     imagen_pil = Image.open(imagen.ruta_imagen)
@@ -156,7 +171,7 @@ def escribir_enviar_meme(comandos, imagen, chat_id, usuario_m):
                    ".PNG"
 
     imagen_pil.save(ruta_guardar, quality=95)
-    enviar_mensaje_imagen(chat_id, ruta_guardar)
+    enviar_mensaje_imagen(chat_id, ruta_guardar,reply_markup=mark_keyboard)
 
 
 def dibujar_texto_sobre_imagen(texto, draw, image, fposiciony, color):

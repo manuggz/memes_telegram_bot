@@ -2,21 +2,15 @@
 
 <data>
 
-    <!--Este mensaje aparece cuando el usuario envia /help sendme-->
-    <!-- Le dice al usuario lo que hace dicho comando /sendme -->
-    <!-- Recordar que /sendme obtiene una imagen de la BD o de la pagina web y escribe sobre ella -->
-    <help comando = "sendme">
+    <!--Este mensaje aparece cuando el usuario envia /help search-->
+    <!-- Le dice al usuario lo que hace dicho comando /search -->
+    <!-- Recordar que /search obtiene una imagen de la BD o de la pagina web-->
+    <help comando = "search">
         <text>
-To use this command you have to tell me three things, which meme you want me to fetch, a text to write over your meme and a color to use.
+This command will look a meme for you.
 
-The format is: /sendme MEME , TEXT 1 - TEXT 2 , COLOR
+The format is: /search MEME
 
-Text 1 : upper text
-Text 2 : optional lower text , if you dont tell me a Text 2 , then Text 1 will be written on the lower part.
-
-Color: it is a string , tell me a color name if I dont know it, i'll write using RED.
-
-Notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts and color are separated using a comma(,) that have to be respected.
         </text>
     </help>
 
@@ -33,7 +27,7 @@ The format is: /create TEXT 1 - TEXT 2 , COLOR
 Text 1 : upper text
 Text 2 : optional lower text , if you dont tell me a Text 2 , then Text 1 will be written on the lower part.
 
-This command use your current meme that you got using /sendme MEME or just typing its name.
+This command use your current meme that you got using /search MEME or just typing its name.
 
 Color: it is a string , tell me a color name if I dont know it, i'll write using RED.
 
@@ -45,7 +39,7 @@ Please, notice that Text 1 and Text 2 are separated using a hyphen(-) , and the 
     <!--Este mensaje aparece cuando el usuario envia /help random-->
     <!-- Le dice al usuario lo que hace dicho comando /random -->
     <!-- Recordar que /random escoge de las imagenes referenciadas en la BD una imagen aleatoria y se la da al usuario
-    guardando el mensaje para que el usuario pueda usar /another -->
+    guardando el mensaje para que el usuario pueda usar /next -->
     <help comando = "random">
         <text>
 Get a random meme fron Internet!
@@ -59,19 +53,19 @@ Get a random meme fron Internet!
         <text>
 Hi, I can send you memes and let you write over them.
 
-You can send me its name or use /sendme yaoming .
+You can send me its name or use /search yaoming .
 
-If you want to write over them just use /create HOLA! or /sendme yaoming, HOLA!
+If you want to write over them just use /create HOLA!
 
 Examples of this bot:
 forever alone
-/another
+/next
 /create Im alone
 /create Im alone - But with my dog
 /create Im alone - But with my dog , black
 
 For more information :
-Use /help sendme or /help create
+Use /help search or /help create
 
 If you have any suggestions for my creator let him now at @manuggz.
 
@@ -94,36 +88,36 @@ wanna know more? Send me /help
         <button text = "random" callback_data = "Random"/>
     </help>
 
-    <!--Este mensaje aparece cuando el usuario envia /sendme solamente lo cual no cumple con su formato -->
-    <sendme_sin_comandos>
+    <!--Este mensaje aparece cuando el usuario envia /search solamente lo cual no cumple con su formato -->
+    <search_sin_comandos>
         <text>
-Please use this command to write memes, use it this way , example:
+Please use this command to look for memes, use it this way , example:
 
-/sendme yao ming ,texto to write- Texto optional , red
+/search yao ming
 
 Send me /help for more examples.
         </text>
-    </sendme_sin_comandos>
+    </search_sin_comandos>
 
-    <!--Este mensaje aparece cuando el usuario alcanza el final de la lista de imagenes y envia /another de nuevo -->
-    <sin_mas_imagenes_another>
+    <!--Este mensaje aparece cuando el usuario alcanza el final de la lista de imagenes y envia /next de nuevo -->
+    <sin_mas_imagenes_next>
         <text>
 
 Sorry , there's no more images for your meme.
 
         </text>
         <button text = "random" callback_data = "Random"/>
-    </sin_mas_imagenes_another>
+    </sin_mas_imagenes_next>
 
-    <!--Este mensaje aparece cuando el usuario quiere usar /another pero no ha usado ningun comando que regrese una
-    lista de imagenes, recordar que /another se usa para ver la siguiente de una lista-->
-    <another_sin_imagen>
+    <!--Este mensaje aparece cuando el usuario quiere usar /next pero no ha usado ningun comando que regrese una
+    lista de imagenes, recordar que /next se usa para ver la siguiente de una lista-->
+    <next_sin_imagen>
         <text>
 
 First tell me which meme!
         </text>
         <button text = "random" callback_data = "Random"/>
-    </another_sin_imagen>
+    </next_sin_imagen>
 
     <!-- Este mensaje aparece cuando el usuario busca un meme el cual no se encuentra ni en BD ni en la pagina -->
     <no_recuerda_meme>
@@ -195,15 +189,102 @@ Send me /help create for more examples.
     <!-- Recordar que /create utiliza la mas reciente imagen enviada al usuario para escribir el meme -->
     <create_sin_imagen_reciente>
         <text>
-First tell me which meme typing its name! or using /sendme name
+First tell me which meme typing its name! or using /search name
         </text>
     </create_sin_imagen_reciente>
+
+    <change_upper_text>
+        <text>
+Change Upper Text
+        </text>
+    </change_upper_text>
+
+    <change_lower_text>
+        <text>
+Change Lower Text
+        </text>
+    </change_lower_text>
+
+    <change_color>
+        <text>
+Change Color
+        </text>
+    </change_color>
+
+    <dame_upper_text>
+        <text>
+Please, tell me your Upper Text! or use /none.
+        </text>
+    </dame_upper_text>
+
+    <dame_lower_text>
+        <text>
+Please, tell me your Lower Text! or use /none.
+        </text>
+    </dame_lower_text>
+    <sin_imagen_borrador>
+        <text>
+Please, use /create or tap/click a "Create" button first.
+        </text>
+    </sin_imagen_borrador>
+    <changed_upper_text>
+        <text>
+Your Upper Text has been changed.
+        </text>
+    </changed_upper_text>
+    <changed_upper_text_none>
+        <text>
+Your Upper Text has been removed.
+        </text>
+    </changed_upper_text_none>
+
+    <changed_lower_text>
+        <text>
+Your Lower Text has been changed.
+        </text>
+    </changed_lower_text>
+
+    <changed_lower_text_none>
+        <text>
+Your Lower Text has been removed.
+        </text>
+    </changed_lower_text_none>
+
+    <changed_color_text>
+        <text>
+Your Color has been changed.
+        </text>
+    </changed_color_text>
+    <changed_color_text_none>
+        <text>
+Your Color has been set to Red.
+        </text>
+    </changed_color_text_none>
+
+    <dame_lower_text>
+        <text>
+Please, tell me a Color!.
+
+Example:
+    Red
+    White
+    Black
+        </text>
+    </dame_lower_text>
+
 
     <!-- Este mensaje aparece cuando ocurre un error interno -->
     <error_1>
         <text>
-Sorry , there was a problem , try again.
+Sorry, there was a problem , try again.
         </text>
     </error_1>
 
+    <imagen_muy_vieja_borrada>
+        <text>
+Sorry, that image is too old and have been deleted from the data base.
+Try with another one.
+        </text>
+        <button text = "random" callback_data = "Random"/>
+    </imagen_muy_vieja_borrada>
 </data>

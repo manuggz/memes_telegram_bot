@@ -56,29 +56,16 @@ def atender_mensaje_usuario_tg(request):
         print consulta
         atender_consulta_mensaje_tg(consulta)
     else:
-        mensaje = u"/random"
+        mensaje = u"LOL"
         chid = 109518141
         upid = 25208203
         atender_consulta_mensaje_tg({u'update_id': 25257960, u'message': {u'message_id': 108263, u'date': 1475969549, u'entities': [{u'type': u'bot_command', u'offset': 0, u'length': 7}], u'chat': {u'username': u'manuggz', u'type': u'private', u'first_name': u'Manuel', u'last_name': u'Gonzalez', u'id': 109518141}, u'from': {u'username': u'manuggz', u'first_name': u'Manuel', u'last_name': u'Gonzalez', u'id': 109518141}, u'text': mensaje}})
 
-        # atender_consulta_mensaje_tg({u'update_id': 25257467, u'callback_query': {u'data': u'random', u'message': {u'photo': [
-        # {u'file_id': u'AgADAQADnwEyG3unIQeHf8_1SA8rG42t5y8ABPFY1bJSpotw-akBAAEC', u'height': 90, u'file_size': 2033,
-        #  u'width': 71},
-        # {u'file_id': u'AgADAQADnwEyG3unIQeHf8_1SA8rG42t5y8ABGL1XRgTI1nU-qkBAAEC', u'height': 320, u'file_size': 25701,
-        #  u'width': 254},
-        # {u'file_id': u'AgADAQADnwEyG3unIQeHf8_1SA8rG42t5y8ABPvOMuFw8amT-KkBAAEC', u'height': 425, u'file_size': 27222,
-        #  u'width': 337}], u'chat': {u'last_name': u'Gonzalez', u'type': u'private', u'first_name': u'Manuel',
-        #                             u'id': 109518141, u'username': u'manuggz'}, u'from': {u'first_name': u'Memes',
-        #                                                                                   u'id': 119646075,
-        #                                                                                   u'username': u'MemesBot'},
-        #                                                                           u'date': 1475790308,
-        #                                                                           u'caption': u'Chuck Norris',
-        #                                                                           u'message_id': 107203},
-        #                                          u'chat_instance': u'-3266157052870893227',
-        #                                          u'id': u'470376835400986871',
-        #                                          u'from': {u'last_name': u'Gonzalez', u'first_name': u'Manuel',
-        #                                                    u'id': 109518141, u'username': u'manuggz'}},"debug":True})
+        #random
+        #atender_consulta_mensaje_tg({u'callback_query': {u'message': {u'from': {u'id': 119646075, u'first_name': u'Memes', u'username': u'MemesBot'}, u'date': 1476129023, u'caption': u'boobs_quote', u'message_id': 109060, u'chat': {u'id': 109518141, u'type': u'private', u'last_name': u'Gonzalez', u'first_name': u'Manuel', u'username': u'manuggz'}, u'photo': [{u'height': 90, u'width': 63, u'file_size': 1661, u'file_id': u'AgADAQADxAQyG3unIQc4XhXB1owN7QaZ5y8ABORpkD9zj8V14rMBAAEC'}, {u'height': 320, u'width': 224, u'file_size': 21166, u'file_id': u'AgADAQADxAQyG3unIQc4XhXB1owN7QaZ5y8ABEFMdcOyWVIL47MBAAEC'}, {u'height': 800, u'width': 559, u'file_size': 85369, u'file_id': u'AgADAQADxAQyG3unIQc4XhXB1owN7QaZ5y8ABN-X0engzx9q5LMBAAEC'}, {u'height': 801, u'width': 560, u'file_size': 79950, u'file_id': u'AgADAQADxAQyG3unIQc4XhXB1owN7QaZ5y8ABEiNMZ4ZYAABuuGzAQABAg'}]}, u'id': u'470376835817714395', u'from': {u'id': 109518141, u'last_name': u'Gonzalez', u'first_name': u'Manuel', u'username': u'manuggz'}, u'chat_instance': u'-3266157052870893227', u'data': u'Random'}, u'update_id': 25258566})
 
+        #next
+        #atender_consulta_mensaje_tg({u'callback_query': {u'message': {u'from': {u'id': 119646075, u'first_name': u'Memes', u'username': u'MemesBot'}, u'date': 1476129193, u'caption': u'Yao Ming LOL', u'message_id': 109062, u'chat': {u'id': 109518141, u'type': u'private', u'last_name': u'Gonzalez', u'first_name': u'Manuel', u'username': u'manuggz'}, u'photo': [{u'height': 90, u'width': 77, u'file_size': 1857, u'file_id': u'AgADAQADxgQyG3unIQfYweWz-QkxjRCB5y8ABK5ohjQzZbA4lLEBAAEC'}, {u'height': 320, u'width': 273, u'file_size': 16348, u'file_id': u'AgADAQADxgQyG3unIQfYweWz-QkxjRCB5y8ABMIYd0jIX2KclbEBAAEC'}, {u'height': 586, u'width': 500, u'file_size': 27963, u'file_id': u'AgADAQADxgQyG3unIQfYweWz-QkxjRCB5y8ABC0XwiR4op2Qk7EBAAEC'}]}, u'id': u'470376835093914980', u'from': {u'id': 109518141, u'last_name': u'Gonzalez', u'first_name': u'Manuel', u'username': u'manuggz'}, u'chat_instance': u'-3266157052870893227', u'data': u'SetUpperText'}, u'update_id': 25258567})
 
     return HttpResponse('OK')
 

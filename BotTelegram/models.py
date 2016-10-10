@@ -8,6 +8,8 @@ class Usuario(models.Model):
     nombreusuario = models.CharField(max_length=200, null=True)
     is_suscrito_actu = models.BooleanField(default=True) # cambiar a "is_suscrito_actu"
     ultima_respuesta = models.ForeignKey("RespuestaServidor",null=True,on_delete=models.SET_NULL)
+    datos_imagen_borrador  = models.ForeignKey("DatosImagenBorrador", null=True, on_delete=models.SET_NULL)
+    comando_en_espera = models.CharField(max_length=200,default="None")
 
     def __str__(self):
         str_r = self.nombre
@@ -16,6 +18,16 @@ class Usuario(models.Model):
             str_r += "( " + self.nombreusuario + " )"
         return str_r
 
+
+class DatosImagenBorrador(models.Model):
+    #id_chat = models.IntegerField(primary_key=True)
+    upper_text = models.CharField(max_length=200, null=True,default="Upper TEXT")
+    lower_text = models.CharField(max_length=200, null=True,default="Lower TEXT")
+    color = models.CharField(max_length=200, null=True,default="Red")
+
+    def __str__(self):
+        str_r = self.upper_text
+        return str_r
 
 class GrupoChat(models.Model):
     id_chat = models.IntegerField(primary_key=True)
@@ -28,8 +40,8 @@ class GrupoChat(models.Model):
 
 #Ultima Respuesta mandada por el servidor al usuario / Notar que
 # respuestas de texto como a /start no cuentan porque hay restricciones a la capacidad de la BD
-# solo se guardan las respuestas a /random /sendme <meme> o <meme> ya que es necesario
-# para cuando el usuario utilize /another o /create , necesitamos guardar esas referencias
+# solo se guardan las respuestas a /random /search <meme> o <meme> ya que es necesario
+# para cuando el usuario utilize /next o /create , necesitamos guardar esas referencias
 # Por eso SIEMPRE un usuario apunta A UN SOLO OBJETO RespuestaServidor
 class RespuestaServidor(models.Model):
     usuario_t = models.ForeignKey(Usuario,primary_key=True)  # A Quien se envia el mensaje

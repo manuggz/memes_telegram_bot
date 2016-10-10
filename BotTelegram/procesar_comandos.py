@@ -4,9 +4,11 @@ import requests
 import sys
 from django.core.exceptions import ObjectDoesNotExist
 
+from BotTelegram.construir_callback_buttons import construir_callback_buttons, construir_callbackbuttons_create
 from BotTelegram.enviar_mensajes_usuario import enviar_mensaje_usuario, enviar_imagen, enviar_mensaje_ayuda_comando, \
     URL_TG_API, escribir_enviar_meme, guardar_imagen_enviada, parsear_enviar_xml
 from BotTelegram.models import Imagen
+from PIL import ImageColor
 
 # Procesa el comando "/start" mandado por el usuario
 # Recordar que /start envia un mensaje de inicio al usuario
@@ -23,7 +25,7 @@ def start_tg(chat_id, is_debug, xml_string):
 
 # Procesa el comando help del usuario
 # Recordar que /help envia un mensaje de ayuda al usuario
-# Ejemplos de uso: /help o /help sendme
+# Ejemplos de uso: /help o /help search
 def help_tg(chat_id, tema_ayuda, is_debug, xml_string):
     if not tema_ayuda:
         tema_ayuda = "help"
@@ -34,36 +36,30 @@ def help_tg(chat_id, tema_ayuda, is_debug, xml_string):
     enviar_mensaje_ayuda_comando(chat_id,tema_ayuda, xml_string)
 
 
-# Construye los botones que se muestran debajo de una imagen aleatoria
-def construir_callback_buttons(imagen):
-    link_image = imagen.textobuscado + "," + str(imagen.id_lista)
-
-    if sys.getsizeof(link_image) > 64:
-        link_image = imagen.textobuscado
-        if sys.getsizeof(link_image) > 64:
-            link_image = link_image[:63]
-
-    mark_keyboard = {
-        "inline_keyboard":
-            [
-                [
-                    {"text": "Random", "callback_data": "Random"}
-                    ,
-                    #{
-                    #    "text": "Another",
-                    #    "callback_data": "Another,"  + link_image,
-                    #}
-                ],
-                #[
-                #    {
-                #        "text": "Create",
-                #        "callback_data": "Create," + link_image,
-                #    }
-                #],
-            ]
-    }
-
-    return mark_keyboard
+# # Construye los botones que se muestran debajo de una imagen de /next
+# def construir_callback_buttons_another(imagen):
+#
+#     link_image = construir_link_image(imagen)
+#
+#     mark_keyboard = {
+#         "inline_keyboard":
+#             [
+#                 [
+#                     {
+#                         "text": "Another",
+#                         "callback_data": "Another,"  + link_image,
+#                     }
+#                 ],
+#                 [
+#                     {
+#                         "text": "Create",
+#                         "callback_data": "Create," + link_image,
+#                     }
+#                 ],
+#             ]
+#     }
+#
+#     return mark_keyboard
 
 
 # Procesa el comando /random del usuario
@@ -138,48 +134,38 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
         escribir_enviar_meme(mensajes, usuario.ultima_respuesta.imagen_enviada, chat_id, usuario)
 
 
-# Procesa el comando /sendme del usuario
-# Recordar que /sendme busca el meme MEME NAME y escribe sobre él
-# El formato es /sendme MEME NAME , UPPER TEXT - LOWER TEXT , Color
-def sendme_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
+# Procesa el comando /search del usuario
+# Recordar que /search busca el meme MEME NAME
+# El formato es /search MEME NAME
+def search_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
     if is_debug:  # Mensage de DEBUG
-        enviar_mensaje_usuario(chat_id, "Respuesta /sendme")
+        enviar_mensaje_usuario(chat_id, "Respuesta /search")
 
-    if not resto_mensaje:  # si el usuario envia /sendme sin el resto del formato
-        parsear_enviar_xml(chat_id, xml_string.find("sendme_sin_comandos"))
+    if not resto_mensaje:  # si el usuario envia /search sin el resto del formato
+        parsear_enviar_xml(chat_id, xml_string.find("search_sin_comandos"))
         return None
 
-    # Divide resto_mensaje en el MEME NAME , TEXTO y COLOR del mensaje
-    # Ejemplo : "MEME NAME , TEXTO 1- TEXTO 2, RED" ----------> ["MEME NAME","TEXTO 1- TEXTO 2","RED"]
-    # Ejemplo : "MEME NAME" ----------> ["MEME NAME"]
-    formato = [mensaje_dibujar.strip() for mensaje_dibujar in resto_mensaje.split(',')]
-
-    imagen = buscar_primera_imagen(formato[0].strip(), chat_id, xml_string)
+    imagen = buscar_primera_imagen(resto_mensaje.strip(), chat_id, xml_string)
 
     if not imagen: return None  # Si no se encontro una imagen con exito
 
-    if len(formato) == 1:  # si solo quiere la imagen "cruda" ejemplo: solo envia /sendme yao ming
-        enviar_imagen(chat_id, imagen)  # Le enviamos la imagen de yao ming
-        return imagen  # regresamos la imagen enviada para que el usuario la pueda usar despues con comandos tales
-        # como /create o /another
-
-    # si el usuario quiere un texto sobre la imagen
-    escribir_enviar_meme(formato, imagen, chat_id, usuario)
-    return None
+    enviar_imagen(chat_id, imagen,construir_callback_buttons(imagen))
+    return imagen  # regresamos la imagen enviada para que el usuario la pueda usar despues con comandos tales
+    # como /create o /next
 
 
-# Procesa el comando /another del usuario
-# recordar que /another envia la siguiente imagen de la anterior enviada
-# El usuario puede usar /another despues de los siguientes casos:
-# Despues de /random , /sendme meme name, meme name, anterior /another
-def another_tg(chat_id, usuario, is_debug, xml_string):
+# Procesa el comando /next del usuario
+# recordar que /next envia la siguiente imagen de la anterior enviada
+# El usuario puede usar /next despues de los siguientes casos:
+# Despues de /random , /search meme name, meme name, anterior /next
+def next_image_tg(chat_id, usuario, is_debug, xml_string):
 
     if is_debug:  # Mensage de DEBUG
-        enviar_mensaje_usuario(chat_id, "Respuesta /another")
+        enviar_mensaje_usuario(chat_id, "Respuesta /next")
 
 
     if not usuario.ultima_respuesta_id:  # En caso de que no exista una imagen anterior
-        parsear_enviar_xml(chat_id, xml_string.find("another_sin_imagen"))
+        parsear_enviar_xml(chat_id, xml_string.find("next_sin_imagen"))
         return None
 
     try:  # Intentamos obtener la siguiente
@@ -188,17 +174,14 @@ def another_tg(chat_id, usuario, is_debug, xml_string):
             textobuscado=usuario.ultima_respuesta.imagen_enviada.textobuscado
         )
 
-        # Colocamos el estado en el bot "subiendo foto"
-        requests.get(URL_TG_API + 'sendChatAction', params={'chat_id': chat_id, 'action': 'upload_photo'})
-
         # Enviamos la imagen
-        if enviar_imagen(chat_id, imagen_siguiente) != 0:  # si no es exitoso
+        if enviar_imagen(chat_id, imagen_siguiente,construir_callback_buttons(imagen_siguiente)) != 0:  # si no es exitoso
             parsear_enviar_xml(chat_id, xml_string.find("error_1"))
             return None
 
         return imagen_siguiente
     except ObjectDoesNotExist:  # No existe una imagen siguiente
-        parsear_enviar_xml(chat_id, xml_string.find("sin_mas_imagenes_another"))
+        parsear_enviar_xml(chat_id, xml_string.find("sin_mas_imagenes_next"))
 
     return None
 
@@ -214,7 +197,7 @@ def buscar_meme_tg(chat_id, meme_name, tipo_chat, is_debug, xml_strings):
     imagen = buscar_primera_imagen(chat_id, meme_name.strip(), xml_strings)
 
     if imagen:
-        enviar_imagen(chat_id, imagen)
+        enviar_imagen(chat_id, imagen,construir_callback_buttons(imagen))
 
     return imagen
 
@@ -237,6 +220,10 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
             xml_strings
         )
     elif comando == "/random":
+
+        if usuario.datos_imagen_borrador:
+            usuario.datos_imagen_borrador.delete()
+
         imagen_enviada = random_tg(
             chat_id,
             is_debug
@@ -263,29 +250,85 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
             is_debug,
             xml_strings
         )
-    elif comando == "/sendme":
-        imagen_enviada = sendme_tg(
+    elif comando == "/search":
+        imagen_enviada = search_tg(
             chat_id,
             usuario,
             resto_mensaje,
             is_debug,
             xml_strings
         )
-    elif comando == "/another":
-        imagen_enviada = another_tg(
+    elif comando == "/next":
+        imagen_enviada = next_image_tg(
             chat_id,
             usuario,
             is_debug,
             xml_strings
         )
     else:
-        imagen_enviada = buscar_meme_tg(
-            chat_id,
-            comando,
-            tipo_chat,
-            is_debug,
-            xml_strings
-        )
+        if usuario.comando_en_espera != "None":
+            if usuario.datos_imagen_borrador:
+
+                cambio_algo = False
+                if usuario.comando_en_espera == "SetUpperText":
+                    if comando == "/none":
+                        usuario.datos_imagen_borrador.upper_text = ""
+                        parsear_enviar_xml(chat_id, xml_strings.find("changed_upper_text_none"))
+                    else:
+                        usuario.datos_imagen_borrador.upper_text = comando[:200]
+                        parsear_enviar_xml(chat_id, xml_strings.find("changed_upper_text"))
+                    usuario.datos_imagen_borrador.save()
+                    cambio_algo = True
+
+                elif usuario.comando_en_espera == "SetLowerText":
+
+                    if comando == "/none":
+                        usuario.datos_imagen_borrador.lower_text = ""
+                        parsear_enviar_xml(chat_id, xml_strings.find("changed_lower_text_none"))
+                    else:
+                        usuario.datos_imagen_borrador.lower_text = comando[:200]
+                        parsear_enviar_xml(chat_id, xml_strings.find("changed_lower_text"))
+
+                    usuario.datos_imagen_borrador.save()
+                    cambio_algo = True
+
+                elif usuario.comando_en_espera == "SetColor":
+
+                    if comando == "/none":
+                        nuevo_color = "red"
+                        parsear_enviar_xml(chat_id, xml_strings.find("changed_color_text_none"))
+                    else:
+                        #usuario.datos_imagen_borrador.lower_text = comando[:200]
+                        nuevo_color = comando[:200]
+
+                    if ImageColor.getrgb(nuevo_color):
+                        usuario.datos_imagen_borrador.color = nuevo_color
+                        usuario.datos_imagen_borrador.save()
+                        parsear_enviar_xml(chat_id, xml_strings.find("changed_color_text"))
+                        cambio_algo = True
+                    else:
+                        parsear_enviar_xml(chat_id,xml_strings.find("error_mal_color"))
+
+                if cambio_algo:
+                    escribir_enviar_meme(
+                        ["", usuario.datos_imagen_borrador.upper_text + "-" + usuario.datos_imagen_borrador.lower_text,
+                         usuario.datos_imagen_borrador.color],
+                        usuario.ultima_respuesta.imagen_enviada,
+                        chat_id,
+                        usuario,
+                        mark_keyboard=construir_callbackbuttons_create(usuario.datos_imagen_borrador, xml_strings)
+                    )
+
+            else:
+                parsear_enviar_xml(chat_id,xml_strings.find("sin_imagen_borrador"))
+        else:
+            imagen_enviada = buscar_meme_tg(
+                chat_id,
+                comando,
+                tipo_chat,
+                is_debug,
+                xml_strings
+            )
 
     if imagen_enviada:
         guardar_imagen_enviada(
