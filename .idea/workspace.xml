@@ -7,9 +7,6 @@
     <list default="true" id="9a5328c0-0b85-4a51-b0cf-d04724dbb485" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" afterPath="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py" afterPath="$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/procesar_comandos.py" afterPath="$PROJECT_DIR$/BotTelegram/procesar_comandos.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/changelog" afterPath="$PROJECT_DIR$/changelog" />
     </list>
     <ignored path="memes_telegramd.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="enviar_mensajes_usuario.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="enviar_mensajes_usuario.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="98" column="4" selection-start-line="98" selection-start-column="4" selection-end-line="98" selection-end-column="4" />
+            <state relative-caret-position="288">
+              <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -83,18 +80,18 @@
       <file leaf-file-name="procesar_comandos.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_comandos.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="229" column="0" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
+            <state relative-caret-position="300">
+              <caret line="242" column="20" selection-start-line="242" selection-start-column="20" selection-end-line="242" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="procesar_callbackquery.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="procesar_callbackquery.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+            <state relative-caret-position="-116">
+              <caret line="96" column="22" selection-start-line="96" selection-start-column="22" selection-end-line="96" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -208,9 +205,9 @@
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/BotTelegram/construir_callback_buttons.py" />
         <option value="$PROJECT_DIR$/changelog" />
-        <option value="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" />
         <option value="$PROJECT_DIR$/BotTelegram/procesar_comandos.py" />
         <option value="$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py" />
+        <option value="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" />
       </list>
     </option>
   </component>
@@ -801,7 +798,14 @@
       <option name="project" value="LOCAL" />
       <updated>1476146132954</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="fix color str">
+      <created>1476148316420</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1476148316420</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1172,26 +1176,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-116">
+          <caret line="96" column="22" selection-start-line="96" selection-start-column="22" selection-end-line="96" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_comandos.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="229" column="0" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
+        <state relative-caret-position="300">
+          <caret line="242" column="20" selection-start-line="242" selection-start-column="20" selection-end-line="242" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="98" column="4" selection-start-line="98" selection-start-column="4" selection-end-line="98" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+        <state relative-caret-position="288">
+          <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
           <folding />
         </state>
       </provider>
