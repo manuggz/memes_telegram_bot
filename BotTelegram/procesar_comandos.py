@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from BotTelegram.construir_callback_buttons import construir_callback_buttons, construir_callbackbuttons_create
 from BotTelegram.enviar_mensajes_usuario import enviar_mensaje_usuario, enviar_imagen, enviar_mensaje_ayuda_comando, \
-    URL_TG_API, escribir_enviar_meme, guardar_imagen_enviada, parsear_enviar_xml
+    URL_TG_API, escribir_enviar_meme, guardar_imagen_enviada, parsear_enviar_xml, borrar_cache_espera
 from BotTelegram.models import Imagen, DatosImagenBorrador
 from PIL import ImageColor
 
@@ -226,9 +226,7 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
     imagen_enviada = None
 
     if comando == "/start":
-        if usuario.datos_imagen_borrador:
-            usuario.datos_imagen_borrador.delete()
-            usuario.save()
+        borrar_cache_espera(usuario)
         start_tg(
             chat_id,
             is_debug,
@@ -242,9 +240,7 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
             xml_strings
         )
     elif comando == "/random":
-        if usuario.datos_imagen_borrador:
-            usuario.datos_imagen_borrador.delete()
-            usuario.save()
+        borrar_cache_espera(usuario)
 
         imagen_enviada = random_tg(
             chat_id,
@@ -273,9 +269,8 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
             xml_strings
         )
     elif comando == "/search":
-        if usuario.datos_imagen_borrador:
-            usuario.datos_imagen_borrador.delete()
-            usuario.save()
+        borrar_cache_espera(usuario)
+
         imagen_enviada = search_tg(
             chat_id,
             usuario,
@@ -284,9 +279,7 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
             xml_strings
         )
     elif comando == "/next":
-        if usuario.datos_imagen_borrador:
-            usuario.datos_imagen_borrador.delete()
-            usuario.save()
+        borrar_cache_espera(usuario)
         imagen_enviada = next_image_tg(
             chat_id,
             usuario,

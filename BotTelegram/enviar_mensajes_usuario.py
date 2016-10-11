@@ -96,6 +96,15 @@ def enviar_mensaje_imagen(chat_id, ruta_foto,caption="",reply_markup=None):
 
     return 0
 
+def borrar_cache_espera(usuario):
+
+    if usuario.datos_imagen_borrador:
+        usuario.datos_imagen_borrador.delete()
+    usuario.comando_en_espera = ""
+
+    usuario.save()
+
+
 # Parsea el string guardado en el archivo xml strings.xml
 # construyendo el mensaje en un formato entendible por la api de TG
 def enviar_mensaje_ayuda_comando(chat_id, comando, root_xml):

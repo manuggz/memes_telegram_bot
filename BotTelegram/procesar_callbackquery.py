@@ -5,7 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from BotTelegram.construir_callback_buttons import construir_callbackbuttons_create
 from BotTelegram.enviar_mensajes_usuario import responder_callback_query, enviar_mensaje_usuario, guardar_imagen_enviada, parsear_enviar_xml, escribir_enviar_meme, parsear_xml_object, \
-    enviar_imagen
+    enviar_imagen, borrar_cache_espera
 from BotTelegram.models import Usuario, Imagen, DatosImagenBorrador
 from BotTelegram.procesar_comandos import procesar_comando, construir_callback_buttons
 
@@ -46,9 +46,7 @@ def procesar_callback_query(update_tg,xml_strings):
 
     elif formato[0] == "Next":
 
-        if usuario_m.datos_imagen_borrador:
-            usuario_m.datos_imagen_borrador.delete()
-            usuario_m.save()
+        borrar_cache_espera(usuario_m)
 
         imagen_enviada = next_image_tg_callback(
             update_tg.callback_query.user_from.id,
@@ -113,9 +111,7 @@ def create_tg_callback(chat_id, usuario_m,formato,is_debug, xml_string):
         parsear_enviar_xml(chat_id, xml_string.find("imagen_muy_vieja_borrada"))
         return None
 
-    if usuario_m.datos_imagen_borrador:
-        usuario_m.datos_imagen_borrador.delete()
-        usuario_m.save()
+    borrar_cache_espera(usuario_m)
 
     #guardar_imagen_enviada(None,usuario_m,imagen_seleccionada)
 
