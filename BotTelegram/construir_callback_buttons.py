@@ -49,7 +49,7 @@ def construir_callback_buttons(imagen):
 
     return mark_keyboard
 
-def construir_callbackbuttons_create(imagen_borrador,xml_string):
+def construir_callbackbuttons_create(datos_imagen_borrador, xml_string):
 
     #link_image = construir_link_imagen_borrador(datos_imagen_borrador)
 
@@ -69,7 +69,8 @@ def construir_callbackbuttons_create(imagen_borrador,xml_string):
                 ],
                 [
                     {
-                        "text": parsear_xml_object(xml_string.find("change_color"))["text"],
+                        "text": parsear_xml_object(xml_string.find("change_color"))["text"] +
+                                + (datos_imagen_borrador.color),
                         "callback_data": "SetColor,",
                     }
                 ],

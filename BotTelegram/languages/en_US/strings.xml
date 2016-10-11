@@ -222,6 +222,16 @@ Please, tell me your Upper Text! or use /none.
 Please, tell me your Lower Text! or use /none.
         </text>
     </dame_lower_text>
+    <dame_color_text>
+        <text>
+Please, tell me a new color or use /none to set color to default.
+
+I support:
+    1) Hexadecimal color specifiers, given as #rgb or #rrggbb. For example, #ff0000 specifies pure red.
+    2) Common color names.140 standard color names.
+        </text>
+    </dame_color_text>
+
     <sin_imagen_borrador>
         <text>
 Please, use /create or tap/click a "Create" button first.

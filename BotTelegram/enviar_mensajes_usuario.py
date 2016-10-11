@@ -125,6 +125,7 @@ def parsear_xml_object(xml_object):
 def parsear_enviar_xml(chat_id,xml_object):
 
     result = parsear_xml_object(xml_object)
+    if not result: return
     mark_keyboard = {}
 
 

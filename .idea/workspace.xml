@@ -5,19 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a5328c0-0b85-4a51-b0cf-d04724dbb485" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BotTelegram/construir_callback_buttons.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BotTelegram/migrations/0001_initial.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BotTelegram/migrations/__init__.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/construir_callback_buttons.py" afterPath="$PROJECT_DIR$/BotTelegram/construir_callback_buttons.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" afterPath="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/languages/en_US/strings.xml" afterPath="$PROJECT_DIR$/BotTelegram/languages/en_US/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/models.py" afterPath="$PROJECT_DIR$/BotTelegram/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py" afterPath="$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/procesar_comandos.py" afterPath="$PROJECT_DIR$/BotTelegram/procesar_comandos.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/tests.py" afterPath="$PROJECT_DIR$/BotTelegram/tests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/views.py" afterPath="$PROJECT_DIR$/BotTelegram/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/changelog" afterPath="$PROJECT_DIR$/changelog" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
     </list>
     <ignored path="memes_telegramd.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="enviar_mensajes_usuario.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="enviar_mensajes_usuario.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="115" column="41" selection-start-line="115" selection-start-column="41" selection-end-line="115" selection-end-column="41" />
+            <state relative-caret-position="270">
+              <caret line="116" column="38" selection-start-line="116" selection-start-column="38" selection-end-line="116" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -71,8 +64,8 @@
       <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BotTelegram/languages/en_US/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="251" column="0" selection-start-line="251" selection-start-column="0" selection-end-line="251" selection-end-column="0" />
+            <state relative-caret-position="357">
+              <caret line="230" column="7" selection-start-line="230" selection-start-column="7" selection-end-line="230" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -81,8 +74,8 @@
       <file leaf-file-name="procesar_comandos.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_comandos.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="469">
-              <caret line="306" column="88" selection-start-line="306" selection-start-column="70" selection-end-line="306" selection-end-column="88" />
+            <state relative-caret-position="354">
+              <caret line="322" column="27" selection-start-line="322" selection-start-column="27" selection-end-line="322" selection-end-column="27" />
               <folding>
                 <element signature="e#16#31#0" expanded="true" />
               </folding>
@@ -93,8 +86,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BotTelegram/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="70" selection-start-line="11" selection-start-column="70" selection-end-line="11" selection-end-column="70" />
+            <state relative-caret-position="375">
+              <caret line="25" column="9" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -103,8 +96,8 @@
       <file leaf-file-name="procesar_callbackquery.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+            <state relative-caret-position="360">
+              <caret line="88" column="43" selection-start-line="88" selection-start-column="43" selection-end-line="88" selection-end-column="43" />
               <folding>
                 <element signature="e#58#68#0" expanded="true" />
               </folding>
@@ -115,8 +108,8 @@
       <file leaf-file-name="construir_callback_buttons.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BotTelegram/construir_callback_buttons.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="61" column="54" selection-start-line="61" selection-start-column="42" selection-end-line="61" selection-end-column="54" />
+            <state relative-caret-position="462">
+              <caret line="72" column="35" selection-start-line="72" selection-start-column="35" selection-end-line="72" selection-end-column="35" />
               <folding>
                 <element signature="e#71#81#0" expanded="true" />
               </folding>
@@ -127,18 +120,18 @@
       <file leaf-file-name="tests.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BotTelegram/tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-861">
-              <caret line="190" column="0" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
+            <state relative-caret-position="440">
+              <caret line="316" column="0" selection-start-line="316" selection-start-column="0" selection-end-line="316" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_pillow.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test_pillow.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test_pillow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+            <state relative-caret-position="45">
+              <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -215,14 +208,14 @@
         <option value="$PROJECT_DIR$/BotTelegram/models.py" />
         <option value="$PROJECT_DIR$/BotTelegram/migrations/0001_initial.py" />
         <option value="$PROJECT_DIR$/BotTelegram/migrations/0002_auto_20161010_1545.py" />
-        <option value="$PROJECT_DIR$/BotTelegram/construir_callback_buttons.py" />
-        <option value="$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py" />
         <option value="$PROJECT_DIR$/BotTelegram/views.py" />
-        <option value="$PROJECT_DIR$/test_pillow.py" />
         <option value="$PROJECT_DIR$/BotTelegram/tests.py" />
+        <option value="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" />
+        <option value="$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py" />
+        <option value="$PROJECT_DIR$/BotTelegram/construir_callback_buttons.py" />
         <option value="$PROJECT_DIR$/BotTelegram/procesar_comandos.py" />
         <option value="$PROJECT_DIR$/BotTelegram/languages/en_US/strings.xml" />
-        <option value="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" />
+        <option value="$PROJECT_DIR$/test_pillow.py" />
       </list>
     </option>
   </component>
@@ -785,7 +778,14 @@
       <option name="project" value="LOCAL" />
       <updated>1475968457270</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Agregado soporte botones random y create">
+      <created>1476140300005</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1476140300005</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -795,9 +795,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30514988" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30514988" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32884902" sideWeight="0.50269026" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -844,7 +844,8 @@
     <MESSAGE value="cambiada info del changelog y cambiada configuracion de settings" />
     <MESSAGE value="ws" />
     <MESSAGE value="Agregada pagina para ver los datos del bot en forma de user y datos del webhook" />
-    <option name="LAST_COMMIT_MESSAGE" value="Agregada pagina para ver los datos del bot en forma de user y datos del webhook" />
+    <MESSAGE value="Agregado soporte botones random y create" />
+    <option name="LAST_COMMIT_MESSAGE" value="Agregado soporte botones random y create" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1098,38 +1099,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/construir_callback_buttons.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="61" column="54" selection-start-line="61" selection-start-column="42" selection-end-line="61" selection-end-column="54" />
-          <folding>
-            <element signature="e#71#81#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
-          <folding>
-            <element signature="e#58#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BotTelegram/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="58" column="23" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="70" selection-start-line="11" selection-start-column="70" selection-end-line="11" selection-end-column="70" />
           <folding />
         </state>
       </provider>
@@ -1144,26 +1117,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_pillow.py">
+    <entry file="file://$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+        <state relative-caret-position="270">
+          <caret line="116" column="38" selection-start-line="116" selection-start-column="38" selection-end-line="116" selection-end-column="38" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="9" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/construir_callback_buttons.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="72" column="35" selection-start-line="72" selection-start-column="35" selection-end-line="72" selection-end-column="35" />
+          <folding>
+            <element signature="e#71#81#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BotTelegram/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-861">
-          <caret line="190" column="0" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
+        <state relative-caret-position="440">
+          <caret line="316" column="0" selection-start-line="316" selection-start-column="0" selection-end-line="316" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="88" column="43" selection-start-line="88" selection-start-column="43" selection-end-line="88" selection-end-column="43" />
+          <folding>
+            <element signature="e#58#68#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_comandos.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="306" column="88" selection-start-line="306" selection-start-column="70" selection-end-line="306" selection-end-column="88" />
+        <state relative-caret-position="354">
+          <caret line="322" column="27" selection-start-line="322" selection-start-column="27" selection-end-line="322" selection-end-column="27" />
           <folding>
             <element signature="e#16#31#0" expanded="true" />
           </folding>
@@ -1172,16 +1173,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BotTelegram/languages/en_US/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="251" column="0" selection-start-line="251" selection-start-column="0" selection-end-line="251" selection-end-column="0" />
+        <state relative-caret-position="357">
+          <caret line="230" column="7" selection-start-line="230" selection-start-column="7" selection-end-line="230" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py">
+    <entry file="file://$PROJECT_DIR$/test_pillow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="115" column="41" selection-start-line="115" selection-start-column="41" selection-end-line="115" selection-end-column="41" />
+        <state relative-caret-position="45">
+          <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
           <folding />
         </state>
       </provider>

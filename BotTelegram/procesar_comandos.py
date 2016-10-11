@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from BotTelegram.construir_callback_buttons import construir_callback_buttons, construir_callbackbuttons_create
 from BotTelegram.enviar_mensajes_usuario import enviar_mensaje_usuario, enviar_imagen, enviar_mensaje_ayuda_comando, \
     URL_TG_API, escribir_enviar_meme, guardar_imagen_enviada, parsear_enviar_xml
-from BotTelegram.models import Imagen
+from BotTelegram.models import Imagen, DatosImagenBorrador
 from PIL import ImageColor
 
 # Procesa el comando "/start" mandado por el usuario
@@ -113,13 +113,32 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
     if is_debug:  # Mensage de DEBUG
         enviar_mensaje_usuario(chat_id, "Respuesta /create")
 
-    if not resto_mensaje:  # Si el usuario solo nos envio "/create"
-        parsear_enviar_xml(chat_id, xml_string.find("create_sin_comandos"))
-        return
-
     if not usuario.ultima_respuesta:  # Si no se ha enviado una imagen al usuario
         parsear_enviar_xml(chat_id, xml_string.find("create_sin_imagen_reciente"))
         return
+
+    if not resto_mensaje:  # Si el usuario solo nos envio "/create"
+
+        if usuario.datos_imagen_borrador:
+            usuario.datos_imagen_borrador.delete()
+            usuario.save()
+
+        datos_imagen_borrador_nuevo = DatosImagenBorrador()
+        datos_imagen_borrador_nuevo.save()
+
+        usuario.datos_imagen_borrador = datos_imagen_borrador_nuevo
+        usuario.save()
+
+        escribir_enviar_meme(
+            ["", datos_imagen_borrador_nuevo.upper_text + "-" + datos_imagen_borrador_nuevo.lower_text,
+             datos_imagen_borrador_nuevo.color],
+            usuario.ultima_respuesta.imagen_enviada,
+            chat_id,
+            usuario,
+            mark_keyboard=construir_callbackbuttons_create(datos_imagen_borrador_nuevo, xml_string)
+        )
+        return
+
 
     # Divide resto_mensaje en el TEXTO y el COLOR del mensaje
     # Ejemplo : "TEXTO 1- TEXTO 2, RED" ----------> ["TEXTO 1- TEXTO 2","RED"]
@@ -301,13 +320,18 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
                         #usuario.datos_imagen_borrador.lower_text = comando[:200]
                         nuevo_color = comando[:200]
 
-                    if ImageColor.getrgb(nuevo_color):
+                    color_rgb = None
+
+                    try:
+                        color_rgb = ImageColor.getrgb(nuevo_color)
+                    except ValueError:
+                        parsear_enviar_xml(chat_id,xml_strings.find("error_mal_color"))
+
+                    if color_rgb:
                         usuario.datos_imagen_borrador.color = nuevo_color
                         usuario.datos_imagen_borrador.save()
                         parsear_enviar_xml(chat_id, xml_strings.find("changed_color_text"))
                         cambio_algo = True
-                    else:
-                        parsear_enviar_xml(chat_id,xml_strings.find("error_mal_color"))
 
                 if cambio_algo:
                     escribir_enviar_meme(

@@ -60,14 +60,13 @@ def procesar_callback_query(update_tg,xml_strings):
         )
     elif formato[0] == "Create":
 
-        create_tg_callback(
+        imagen_enviada = create_tg_callback(
             update_tg.callback_query.user_from.id,
             usuario_m,
             formato,
             update_tg.is_message_debug,
             xml_strings
         )
-        return
 
     elif formato[0] == "SetUpperText":
 
@@ -88,7 +87,7 @@ def procesar_callback_query(update_tg,xml_strings):
         return
     elif formato[0] == "SetColor":
         if usuario_m.datos_imagen_borrador:
-            parsear_enviar_xml(update_tg.callback_query.user_from.id,xml_strings.find("dame_color"))
+            parsear_enviar_xml(update_tg.callback_query.user_from.id,xml_strings.find("dame_color_text"))
             usuario_m.comando_en_espera = formato[0]
             usuario_m.save()
         else:
@@ -120,7 +119,7 @@ def create_tg_callback(chat_id, usuario_m,formato,is_debug, xml_string):
         usuario_m.datos_imagen_borrador.delete()
         usuario_m.save()
 
-    guardar_imagen_enviada(None,usuario_m,imagen_seleccionada)
+    #guardar_imagen_enviada(None,usuario_m,imagen_seleccionada)
 
     datos_imagen_borrador_nuevo = DatosImagenBorrador()
     datos_imagen_borrador_nuevo.save()
@@ -137,7 +136,8 @@ def create_tg_callback(chat_id, usuario_m,formato,is_debug, xml_string):
         usuario_m,
         mark_keyboard=construir_callbackbuttons_create(datos_imagen_borrador_nuevo,xml_string)
     )
-    return None
+
+    return imagen_seleccionada
 
 
 
