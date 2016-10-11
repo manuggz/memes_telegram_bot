@@ -100,6 +100,7 @@ def borrar_cache_espera(usuario):
 
     if usuario.datos_imagen_borrador:
         usuario.datos_imagen_borrador.delete()
+        usuario.save()
 
     usuario.comando_en_espera = "None"
 

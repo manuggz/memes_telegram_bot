@@ -805,7 +805,14 @@
       <option name="project" value="LOCAL" />
       <updated>1476148316420</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="fix comando_en_espera">
+      <created>1476148565677</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1476148565677</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -866,7 +873,8 @@
     <MESSAGE value="Agregada pagina para ver los datos del bot en forma de user y datos del webhook" />
     <MESSAGE value="Agregado soporte botones random y create" />
     <MESSAGE value="fix color str" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix color str" />
+    <MESSAGE value="fix comando_en_espera" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix comando_en_espera" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
