@@ -348,6 +348,7 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
             else:
                 parsear_enviar_xml(chat_id,xml_strings.find("sin_imagen_borrador"))
         else:
+            borrar_cache_espera(usuario)
             imagen_enviada = buscar_meme_tg(
                 chat_id,
                 comando,
