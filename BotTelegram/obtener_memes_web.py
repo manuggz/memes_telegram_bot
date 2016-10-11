@@ -35,8 +35,7 @@ def construir_imagenes(imagenes, txt_bu):
 
     for i in range(len(imagenes) - 1, -1, -1):
         url_ima = "http:" + imagenes[i].url
-        path_archivo = join('staticfiles', basename(url_ima))  # Ruta en el servidor
-        #print imagenes[i]
+        path_archivo = join('staticfiles', basename(url_ima))  # Posible ruta en el servidor
         imagendb = Imagen(
             id_lista=i,
             url_imagen=url_ima,

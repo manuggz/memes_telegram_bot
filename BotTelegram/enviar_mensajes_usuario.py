@@ -27,15 +27,17 @@ URL_TG_API = "https://api.telegram.org/bot" + CODE_BOT + "/"
 def responder_callback_query(query_id):
     requests.get(URL_TG_API + 'answerCallbackQuery', params={'callback_query_id': query_id})
 
+
 def obtener_info_webhook():
     return requests.get(URL_TG_API + 'getWebhookInfo')
+
 
 def obtener_info_me():
     return requests.get(URL_TG_API + 'getMe')
 
-def enviar_mensaje_usuario(chat_id, mensaje,reply_markup = None):
 
-    params  = {'chat_id': chat_id, 'text': mensaje}
+def enviar_mensaje_usuario(chat_id, mensaje, reply_markup=None):
+    params = {'chat_id': chat_id, 'text': mensaje}
 
     if reply_markup:
         params["reply_markup"] = json.dumps(reply_markup)
@@ -62,10 +64,10 @@ def enviar_imagen(chat_id, imagen, reply_markup=None):
     requests.get(URL_TG_API + 'sendChatAction', params={'chat_id': chat_id, 'action': 'upload_photo'})
 
     guardar_imagen(imagen)
-    return enviar_mensaje_imagen(chat_id, imagen.ruta_imagen, imagen.title,reply_markup)
+    return enviar_mensaje_imagen(chat_id, imagen.ruta_imagen, imagen.title, reply_markup)
 
 
-def enviar_mensaje_imagen(chat_id, ruta_foto,caption="",reply_markup=None):
+def enviar_mensaje_imagen(chat_id, ruta_foto, caption="", reply_markup=None):
     files = {'photo': open(ruta_foto, 'rb')}
 
     data_message = {'chat_id': chat_id}
@@ -96,8 +98,8 @@ def enviar_mensaje_imagen(chat_id, ruta_foto,caption="",reply_markup=None):
 
     return 0
 
-def borrar_cache_espera(usuario):
 
+def borrar_cache_espera(usuario):
     if usuario.datos_imagen_borrador:
         usuario.datos_imagen_borrador.delete()
         usuario.save()
@@ -110,40 +112,38 @@ def borrar_cache_espera(usuario):
 # Parsea el string guardado en el archivo xml strings.xml
 # construyendo el mensaje en un formato entendible por la api de TG
 def enviar_mensaje_ayuda_comando(chat_id, comando, root_xml):
-
     elemento_ayuda = root_xml.findall("help[@comando='{0}']".format(comando))
 
     if elemento_ayuda:
         elemento_ayuda = elemento_ayuda[0]
 
-        parsear_enviar_xml(chat_id,elemento_ayuda)
+        parsear_enviar_xml(chat_id, elemento_ayuda)
+
 
 def parsear_xml_object(xml_object):
-
     if not xml_object: return
 
-    result ={"text":"","botones":[]}
+    result = {"text": "", "botones": []}
 
     for sub_elemento in list(xml_object):
         if sub_elemento.tag == "text":
             result["text"] += sub_elemento.text
         elif sub_elemento.tag == "button":
-            result["botones"].append([sub_elemento.attrib]) # De esta forma quedan uno debajo del otro
+            result["botones"].append([sub_elemento.attrib])  # De esta forma quedan uno debajo del otro
 
     return result
 
-# Parsea un xml object y lo envia en formato de la API de Telegram
-def parsear_enviar_xml(chat_id,xml_object):
 
+# Parsea un xml object y lo envia en formato de la API de Telegram
+def parsear_enviar_xml(chat_id, xml_object):
     result = parsear_xml_object(xml_object)
     if not result: return
     mark_keyboard = {}
 
-
     if result["botones"]:
-        mark_keyboard = {"inline_keyboard":result["botones"]}
+        mark_keyboard = {"inline_keyboard": result["botones"]}
 
-    enviar_mensaje_usuario(chat_id, result["text"],mark_keyboard)
+    enviar_mensaje_usuario(chat_id, result["text"], mark_keyboard)
 
 
 # Si no existe la imagen en el servidor
@@ -155,59 +155,68 @@ def guardar_imagen(imagen):
         with open(imagen.ruta_imagen, 'wb') as archivo_img:
             shutil.copyfileobj(resp.raw, archivo_img)
 
-
-def escribir_enviar_meme(comandos, imagen, chat_id, usuario_m,mark_keyboard=None):
-    guardar_imagen(imagen)
-
-    imagen_pil = Image.open(imagen.ruta_imagen)
+def escribir_enviar_meme(chat_id, texto, color, ruta_imagen, mark_keyboard= None):
+    imagen_pil = Image.open(ruta_imagen)
     draw_pil = ImageDraw.Draw(imagen_pil)
 
-    mensajes = comandos[1].split("-")
-    tup = ""
-    tdown = ""
+    mensajes = texto.split("-")
+
+    upper_text = ""
+    lower_text = ""
+
     if len(mensajes) == 1:
-        tdown = mensajes[0]
+        lower_text = mensajes[0]
     else:
-        tup = mensajes[0]
-        tdown = mensajes[1]
+        upper_text = mensajes[0]
+        lower_text = mensajes[1]
 
-    try:
-        color = comandos[2]
-    except IndexError:
-        color = "red"
+    dibujar_texto_sobre_imagen(upper_text, draw_pil, imagen_pil, (lambda td, sz: sz[0] // 12), color)
+    dibujar_texto_sobre_imagen(lower_text, draw_pil, imagen_pil, (lambda td, sz: sz[1] - td[1] - td[1] // 2), color)
 
-    dibujar_texto_sobre_imagen(tup, draw_pil, imagen_pil, (lambda td, sz: sz[0] // 12), color)
-    dibujar_texto_sobre_imagen(tdown, draw_pil, imagen_pil, (lambda td, sz: sz[1] - td[1] - td[1] // 2), color)
-    ruta_tu = splitext(imagen.ruta_imagen)
-    ruta_guardar = ruta_tu[0] + str(usuario_m.pk) + str(random()) + \
-                   ".PNG"
+    ruta_tu = splitext(ruta_imagen)
+    ruta_guardar = ruta_tu[0] + str(random())[2:] + ".PNG"
 
-    imagen_pil.save(ruta_guardar, quality=95)
-    enviar_mensaje_imagen(chat_id, ruta_guardar,reply_markup=mark_keyboard)
+    imagen_pil.save(ruta_guardar, quality=100)
+    enviar_mensaje_imagen(chat_id, ruta_guardar, reply_markup=mark_keyboard)
 
 
-def dibujar_texto_sobre_imagen(texto, draw, image, fposiciony, color):
+def dibujar_texto_sobre_imagen(texto, image_draw, image, fposiciony, color):
     if texto == "": return
 
-    tam = image.size[1] // 9
-    fuente = ImageFont.truetype(FUENTE, tam)
+    shadowcolor = "black"
+    ancho_imagen, alto_imagen = image.size
 
-    tam_d = draw.textsize(texto, font=fuente)
+    fuente = ImageFont.truetype(FUENTE, alto_imagen // 7)
 
-    while tam_d[0] + image.size[0] // 2 - tam_d[0] // 2 > image.size[0]:
+    # Calculamos el ancho de la fuente para que sea adecuada a la imagen
+    ancho_texto, alto_texto = image_draw.textsize(texto, font=fuente)
+    while ancho_texto + image.size[0] // 2 - ancho_texto // 2 > image.size[0]:
         del fuente
-        tam -= 2
-        fuente = ImageFont.truetype(FUENTE, tam)
-        tam_d = draw.textsize(texto, font=fuente)
+        alto_imagen -= 2
+        fuente = ImageFont.truetype(FUENTE, alto_imagen)
+        ancho_texto, alto_texto = image_draw.textsize(texto, font=fuente)
 
-    try:
-        draw.text((image.size[0] // 2 - tam_d[0] // 2, fposiciony(tam_d, image.size)), texto, font=fuente, fill=color)
-    except ValueError:
-        draw.text((image.size[0] // 2 - tam_d[0] // 2, fposiciony(tam_d, image.size)), texto, font=fuente, fill="red")
+    x = ancho_imagen // 2 - ancho_texto // 2
+    y = fposiciony((ancho_texto, alto_texto), image.size)
+    p = 2
+
+    # thin border
+    image_draw.text((x - p, y), texto, font=fuente, fill=shadowcolor)
+    image_draw.text((x + p, y), texto, font=fuente, fill=shadowcolor)
+    image_draw.text((x, y - p), texto, font=fuente, fill=shadowcolor)
+    image_draw.text((x, y + p), texto, font=fuente, fill=shadowcolor)
+
+    # thicker border
+    image_draw.text((x - p, y - p), texto, font=fuente, fill=shadowcolor)
+    image_draw.text((x + p, y - p), texto, font=fuente, fill=shadowcolor)
+    image_draw.text((x - p, y + p), texto, font=fuente, fill=shadowcolor)
+    image_draw.text((x + p, y + p), texto, font=fuente, fill=shadowcolor)
+
+    # now we image_draw the text over it
+    image_draw.text((x, y), texto, font=fuente, fill=color)
 
 
 def guardar_imagen_enviada(datetime_unix, usuario_m, image):
-
     if datetime_unix:
         datetime_d = datetime.datetime.utcfromtimestamp(int(datetime_unix))
     else:
@@ -216,9 +225,9 @@ def guardar_imagen_enviada(datetime_unix, usuario_m, image):
     # creamos la respuesta
     respuesta = RespuestaServidor(
         fecha=timezone.make_aware(
-                datetime_d,
-                timezone.get_default_timezone()
-            ),
+            datetime_d,
+            timezone.get_default_timezone()
+        ),
         usuario_t=usuario_m,
         imagen_enviada=image
     )

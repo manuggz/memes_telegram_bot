@@ -36,32 +36,6 @@ def help_tg(chat_id, tema_ayuda, is_debug, xml_string):
     enviar_mensaje_ayuda_comando(chat_id,tema_ayuda, xml_string)
 
 
-# # Construye los botones que se muestran debajo de una imagen de /next
-# def construir_callback_buttons_another(imagen):
-#
-#     link_image = construir_link_image(imagen)
-#
-#     mark_keyboard = {
-#         "inline_keyboard":
-#             [
-#                 [
-#                     {
-#                         "text": "Another",
-#                         "callback_data": "Another,"  + link_image,
-#                     }
-#                 ],
-#                 [
-#                     {
-#                         "text": "Create",
-#                         "callback_data": "Create," + link_image,
-#                     }
-#                 ],
-#             ]
-#     }
-#
-#     return mark_keyboard
-
-
 # Procesa el comando /random del usuario
 # Recordar que /random envia una imagen aleatoria al usuario
 def random_tg(chat_id, is_debug):
@@ -129,12 +103,12 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
         usuario.datos_imagen_borrador = datos_imagen_borrador_nuevo
         usuario.save()
 
+
         escribir_enviar_meme(
-            ["", datos_imagen_borrador_nuevo.upper_text + "-" + datos_imagen_borrador_nuevo.lower_text,
-             datos_imagen_borrador_nuevo.color],
-            usuario.ultima_respuesta.imagen_enviada,
             chat_id,
-            usuario,
+            datos_imagen_borrador_nuevo.upper_text + "-" + datos_imagen_borrador_nuevo.lower_text,
+            datos_imagen_borrador_nuevo.color,
+            usuario.ultima_respuesta.imagen_enviada.ruta_imagen,
             mark_keyboard=construir_callbackbuttons_create(datos_imagen_borrador_nuevo, xml_string)
         )
         return
@@ -147,10 +121,19 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
 
     if usuario.ultima_respuesta:
         try:
-            mensajes = ("", mensajes[0], mensajes[1])
+            texto,color = mensajes[0], mensajes[1]
         except IndexError:
-            mensajes = ("", mensajes[0])
-        escribir_enviar_meme(mensajes, usuario.ultima_respuesta.imagen_enviada, chat_id, usuario)
+            texto , color  = mensajes[0],"wihte"
+
+        color_rgb = None
+
+        try:
+            color_rgb = ImageColor.getrgb(color)
+        except ValueError:
+            parsear_enviar_xml(chat_id, xml_string.find("error_mal_color"))
+            color = "white"
+
+        escribir_enviar_meme(chat_id,texto,color, usuario.ultima_respuesta.imagen_enviada)
 
 
 # Procesa el comando /search del usuario
@@ -337,11 +320,10 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
 
                 if cambio_algo:
                     escribir_enviar_meme(
-                        ["", usuario.datos_imagen_borrador.upper_text + "-" + usuario.datos_imagen_borrador.lower_text,
-                         usuario.datos_imagen_borrador.color],
-                        usuario.ultima_respuesta.imagen_enviada,
                         chat_id,
-                        usuario,
+                        usuario.datos_imagen_borrador.upper_text + "-" + usuario.datos_imagen_borrador.lower_text,
+                        usuario.datos_imagen_borrador.color,
+                        usuario.ultima_respuesta.imagen_enviada.ruta_imagen,
                         mark_keyboard=construir_callbackbuttons_create(usuario.datos_imagen_borrador, xml_strings)
                     )
 

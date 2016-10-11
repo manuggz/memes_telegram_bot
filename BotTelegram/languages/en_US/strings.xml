@@ -29,7 +29,7 @@ Text 2 : optional lower text , if you dont tell me a Text 2 , then Text 1 will b
 
 This command use your current meme that you got using /search MEME or just typing its name.
 
-Color: it is a string , tell me a color name if I dont know it, i'll write using RED.
+Color: it is a string , tell me a color name if I dont know it, i'll write using White.
 
 Please, notice that Text 1 and Text 2 are separated using a hyphen(-) , and the texts and color are separated using a comma(,) that have to be respected.
 
@@ -267,10 +267,13 @@ Your Color has been changed.
     </changed_color_text>
     <changed_color_text_none>
         <text>
-Your Color has been set to Red.
+Your Color has been set to White.
         </text>
     </changed_color_text_none>
 
+    <error_mal_color>
+Wrong Color.
+    </error_mal_color>
     <dame_lower_text>
         <text>
 Please, tell me a Color!.

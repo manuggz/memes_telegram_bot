@@ -6,7 +6,7 @@ class Usuario(models.Model):
     nombre = models.CharField(max_length=200,default="NoName")
     apellido = models.CharField(max_length=200, null=True)
     nombreusuario = models.CharField(max_length=200, null=True)
-    is_suscrito_actu = models.BooleanField(default=True) # cambiar a "is_suscrito_actu"
+    is_suscrito_actu = models.BooleanField(default=True)
     ultima_respuesta = models.ForeignKey("RespuestaServidor",null=True,on_delete=models.SET_NULL)
     datos_imagen_borrador  = models.ForeignKey("DatosImagenBorrador", null=True, on_delete=models.SET_NULL)
     comando_en_espera = models.CharField(max_length=200,default="None")
@@ -20,10 +20,9 @@ class Usuario(models.Model):
 
 
 class DatosImagenBorrador(models.Model):
-    #id_chat = models.IntegerField(primary_key=True)
     upper_text = models.CharField(max_length=200, null=True,default="Upper TEXT")
     lower_text = models.CharField(max_length=200, null=True,default="Lower TEXT")
-    color = models.CharField(max_length=200, null=True,default="Red")
+    color = models.CharField(max_length=200, null=True,default="white")
 
     def __str__(self):
         str_r = self.upper_text
@@ -57,7 +56,8 @@ class Imagen(models.Model):
     title = models.CharField(max_length=200,default="")
     url_imagen = models.CharField(max_length=200)
     textobuscado = models.CharField(max_length=200)  # Texto buscado para acceder a la imagen
-    ruta_imagen = models.CharField(max_length=200)  # Ruta de la imagen en el servidor(in case)
+    # Ruta de la imagen en el servidor(in case) No es usada como debe ser al final
+    ruta_imagen = models.CharField(max_length=200)
     id_lista = models.IntegerField()  # ID en la lista de imagenes
 
 
