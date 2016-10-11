@@ -2,6 +2,8 @@
 import sys
 from BotTelegram.enviar_mensajes_usuario import parsear_xml_object
 
+
+
 def construir_link_imagen_borrador(imagen_borrador):
     link_image = str(imagen_borrador.pk)
 

@@ -1,13 +1,20 @@
+[0.5.3]
+
+I've been update to version 0.5.3
+
+---- Changed text draw style
+---- Default color set to white
+----- Changed /create to works with buttons
+
+
+------ last 3 updates -------
+
 [0.5.2]
 
-I've been update to version 0.5.2
 
 ---- Added Button Another , Create
 ---- Changed Another to Next
 ----- Changed sendme for search
-
------- last updates -------
-
 
 [0.5.1]
 

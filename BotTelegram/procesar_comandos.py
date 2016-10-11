@@ -6,7 +6,8 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from BotTelegram.construir_callback_buttons import construir_callback_buttons, construir_callbackbuttons_create
 from BotTelegram.enviar_mensajes_usuario import enviar_mensaje_usuario, enviar_imagen, enviar_mensaje_ayuda_comando, \
-    URL_TG_API, escribir_enviar_meme, guardar_imagen_enviada, parsear_enviar_xml, borrar_cache_espera
+    URL_TG_API, escribir_enviar_meme, guardar_imagen_enviada, parsear_enviar_xml, borrar_cache_espera, \
+    obtener_upper_lower_text
 from BotTelegram.models import Imagen, DatosImagenBorrador
 from PIL import ImageColor
 
@@ -91,18 +92,17 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
         parsear_enviar_xml(chat_id, xml_string.find("create_sin_imagen_reciente"))
         return
 
-    if not resto_mensaje:  # Si el usuario solo nos envio "/create"
-
-        if usuario.datos_imagen_borrador:
-            usuario.datos_imagen_borrador.delete()
-            usuario.save()
-
-        datos_imagen_borrador_nuevo = DatosImagenBorrador()
-        datos_imagen_borrador_nuevo.save()
-
-        usuario.datos_imagen_borrador = datos_imagen_borrador_nuevo
+    if usuario.datos_imagen_borrador:
+        usuario.datos_imagen_borrador.delete()
         usuario.save()
 
+    datos_imagen_borrador_nuevo = DatosImagenBorrador()
+    datos_imagen_borrador_nuevo.save()
+
+    usuario.datos_imagen_borrador = datos_imagen_borrador_nuevo
+    usuario.save()
+
+    if not resto_mensaje:  # Si el usuario solo nos envio "/create"
 
         escribir_enviar_meme(
             chat_id,
@@ -119,21 +119,26 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
     # Ejemplo : "TEXTO 1" ----------> ["TEXTO 1"]
     mensajes = [mensaje_dibujar.strip() for mensaje_dibujar in resto_mensaje.split(',')]
 
-    if usuario.ultima_respuesta:
-        try:
-            texto,color = mensajes[0], mensajes[1]
-        except IndexError:
-            texto , color  = mensajes[0],"wihte"
+    try:
+        texto,color = mensajes[0], mensajes[1]
+    except IndexError:
+        texto , color  = mensajes[0],"white"
 
-        color_rgb = None
+    try:
+        ImageColor.getrgb(color)
+    except ValueError:
+        parsear_enviar_xml(chat_id, xml_string.find("error_mal_color"))
+        color = "white"
 
-        try:
-            color_rgb = ImageColor.getrgb(color)
-        except ValueError:
-            parsear_enviar_xml(chat_id, xml_string.find("error_mal_color"))
-            color = "white"
+    upper_text , lower_text = obtener_upper_lower_text(texto)
 
-        escribir_enviar_meme(chat_id,texto,color, usuario.ultima_respuesta.imagen_enviada)
+    datos_imagen_borrador_nuevo.upper_text = upper_text
+    datos_imagen_borrador_nuevo.upper_text = lower_text
+    datos_imagen_borrador_nuevo.color = color
+    datos_imagen_borrador_nuevo.save()
+
+    escribir_enviar_meme(chat_id,texto,color, usuario.ultima_respuesta.imagen_enviada.ruta_imagen,
+            mark_keyboard=construir_callbackbuttons_create(datos_imagen_borrador_nuevo, xml_string))
 
 
 # Procesa el comando /search del usuario

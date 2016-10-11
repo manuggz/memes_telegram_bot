@@ -53,7 +53,7 @@ def enviar_mensaje_usuarios(mensaje):
     for usuario in usuarios:
         if usuario.is_suscrito_actu:
             enviar_mensaje_usuario(usuario.pk, mensaje)
-        sleep(2)
+            sleep(5)
 
 
 # envia una imagen a un chat
@@ -155,9 +155,7 @@ def guardar_imagen(imagen):
         with open(imagen.ruta_imagen, 'wb') as archivo_img:
             shutil.copyfileobj(resp.raw, archivo_img)
 
-def escribir_enviar_meme(chat_id, texto, color, ruta_imagen, mark_keyboard= None):
-    imagen_pil = Image.open(ruta_imagen)
-    draw_pil = ImageDraw.Draw(imagen_pil)
+def obtener_upper_lower_text(texto):
 
     mensajes = texto.split("-")
 
@@ -169,6 +167,12 @@ def escribir_enviar_meme(chat_id, texto, color, ruta_imagen, mark_keyboard= None
     else:
         upper_text = mensajes[0]
         lower_text = mensajes[1]
+
+    return upper_text, lower_text
+
+def escribir_enviar_meme(chat_id, upper_text , lower_text, color, ruta_imagen, mark_keyboard= None):
+    imagen_pil = Image.open(ruta_imagen)
+    draw_pil = ImageDraw.Draw(imagen_pil)
 
     dibujar_texto_sobre_imagen(upper_text, draw_pil, imagen_pil, (lambda td, sz: sz[0] // 12), color)
     dibujar_texto_sobre_imagen(lower_text, draw_pil, imagen_pil, (lambda td, sz: sz[1] - td[1] - td[1] // 2), color)
