@@ -245,6 +245,7 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
         if usuario.datos_imagen_borrador:
             usuario.datos_imagen_borrador.delete()
             usuario.save()
+
         imagen_enviada = random_tg(
             chat_id,
             is_debug

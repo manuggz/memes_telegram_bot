@@ -69,8 +69,7 @@ def construir_callbackbuttons_create(datos_imagen_borrador, xml_string):
                 ],
                 [
                     {
-                        "text": parsear_xml_object(xml_string.find("change_color"))["text"] +
-                                +str(datos_imagen_borrador.color),
+                        "text": parsear_xml_object(xml_string.find("change_color"))["text"],
                         "callback_data": "SetColor,",
                     }
                 ],
