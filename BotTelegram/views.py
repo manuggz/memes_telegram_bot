@@ -9,6 +9,11 @@ from enviar_mensajes_usuario import *
 from maneja_respuesta import *
 from forms import FormEnviarMensaje
 
+# import the logging library
+import logging
+
+# Get an instance of a logger
+#logger = logging.getLogger("django")
 
 # Vista principal Home.
 @login_required
@@ -59,7 +64,9 @@ def atender_mensaje_usuario_tg(request):
         mensaje = u"LOL"
         chid = 109518141
         upid = 25208203
-        atender_consulta_mensaje_tg({u'update_id': 25257960, u'message': {u'message_id': 108263, u'date': 1475969549, u'entities': [{u'type': u'bot_command', u'offset': 0, u'length': 7}], u'chat': {u'username': u'manuggz', u'type': u'private', u'first_name': u'Manuel', u'last_name': u'Gonzalez', u'id': 109518141}, u'from': {u'username': u'manuggz', u'first_name': u'Manuel', u'last_name': u'Gonzalez', u'id': 109518141}, u'text': mensaje}})
+        #2 + a
+        #logger.debug("LOL")
+        #atender_consulta_mensaje_tg({u'update_id': 25257960, u'message': {u'message_id': 108263, u'date': 1475969549, u'entities': [{u'type': u'bot_command', u'offset': 0, u'length': 7}], u'chat': {u'username': u'manuggz', u'type': u'private', u'first_name': u'Manuel', u'last_name': u'Gonzalez', u'id': 109518141}, u'from': {u'username': u'manuggz', u'first_name': u'Manuel', u'last_name': u'Gonzalez', u'id': 109518141}, u'text': mensaje}})
 
         #random
         #atender_consulta_mensaje_tg({u'callback_query': {u'message': {u'from': {u'id': 119646075, u'first_name': u'Memes', u'username': u'MemesBot'}, u'date': 1476129023, u'caption': u'boobs_quote', u'message_id': 109060, u'chat': {u'id': 109518141, u'type': u'private', u'last_name': u'Gonzalez', u'first_name': u'Manuel', u'username': u'manuggz'}, u'photo': [{u'height': 90, u'width': 63, u'file_size': 1661, u'file_id': u'AgADAQADxAQyG3unIQc4XhXB1owN7QaZ5y8ABORpkD9zj8V14rMBAAEC'}, {u'height': 320, u'width': 224, u'file_size': 21166, u'file_id': u'AgADAQADxAQyG3unIQc4XhXB1owN7QaZ5y8ABEFMdcOyWVIL47MBAAEC'}, {u'height': 800, u'width': 559, u'file_size': 85369, u'file_id': u'AgADAQADxAQyG3unIQc4XhXB1owN7QaZ5y8ABN-X0engzx9q5LMBAAEC'}, {u'height': 801, u'width': 560, u'file_size': 79950, u'file_id': u'AgADAQADxAQyG3unIQc4XhXB1owN7QaZ5y8ABEiNMZ4ZYAABuuGzAQABAg'}]}, u'id': u'470376835817714395', u'from': {u'id': 109518141, u'last_name': u'Gonzalez', u'first_name': u'Manuel', u'username': u'manuggz'}, u'chat_instance': u'-3266157052870893227', u'data': u'Random'}, u'update_id': 25258566})

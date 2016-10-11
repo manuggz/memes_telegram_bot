@@ -148,6 +148,60 @@ class TestBot(TestCase):
     #     # Check that the response is 200 OK.
     #     self.assertEqual(response.status_code, 200)
     #
+
+    # def test_simple_create_im_alone(self):
+    #
+    #     self.consulta[u'message'][u'text'] = u"forever alone"
+    #     response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
+    #                                 json.dumps(self.consulta), content_type="text/json", secure=True)
+    #
+    #     # Check that the response is 200 OK.
+    #     self.assertEqual(response.status_code, 200)
+    #
+    #     self.consulta[u'message'][u'text'] = u"/create Im alone"
+    #     response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
+    #                                 json.dumps(self.consulta), content_type="text/json", secure=True)
+    #
+    #     # Check that the response is 200 OK.
+    #     self.assertEqual(response.status_code, 200)
+    #
+    # def test_simple_create_im_alone_but_with_my_dog(self):
+    #     self.consulta[u'message'][u'text'] = u"forever alone"
+    #     response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
+    #                                 json.dumps(self.consulta), content_type="text/json", secure=True)
+    #
+    #     # Check that the response is 200 OK.
+    #     self.assertEqual(response.status_code, 200)
+    #
+    #     self.consulta[u'message'][u'text'] = u"/create Im alone - but with my dog"
+    #     response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
+    #                                 json.dumps(self.consulta), content_type="text/json", secure=True)
+    #
+    #     # Check that the response is 200 OK.
+    #     self.assertEqual(response.status_code, 200)
+
+    # def test_simple_create_im_alone_but_with_my_dog_separated(self):
+    #     self.consulta[u'message'][u'text'] = u"forever alone"
+    #     response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
+    #                                 json.dumps(self.consulta), content_type="text/json", secure=True)
+    #
+    #     # Check that the response is 200 OK.
+    #     self.assertEqual(response.status_code, 200)
+    #
+    #     self.consulta[u'message'][u'text'] = u"/create Im alone"
+    #     response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
+    #                                 json.dumps(self.consulta), content_type="text/json", secure=True)
+    #
+    #     # Check that the response is 200 OK.
+    #     self.assertEqual(response.status_code, 200)
+    #
+    #     self.consulta[u'message'][u'text'] = u"/create Im alone - but with my dog"
+    #     response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
+    #                                 json.dumps(self.consulta), content_type="text/json", secure=True)
+    #
+    #     # Check that the response is 200 OK.
+    #     self.assertEqual(response.status_code, 200)
+
     def test_search_forever_alone_example(self):
         self.consulta[u'message'][u'text'] = u"forever alone"
         response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',

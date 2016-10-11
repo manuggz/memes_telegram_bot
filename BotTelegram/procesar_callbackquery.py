@@ -5,7 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from BotTelegram.construir_callback_buttons import construir_callbackbuttons_create
 from BotTelegram.enviar_mensajes_usuario import responder_callback_query, enviar_mensaje_usuario, \
     guardar_imagen_enviada, parsear_enviar_xml, escribir_enviar_meme, parsear_xml_object, \
-    enviar_imagen, borrar_cache_espera
+    enviar_imagen, borrar_cache_espera, guardar_imagen
 from BotTelegram.models import Usuario, Imagen, DatosImagenBorrador
 from BotTelegram.procesar_comandos import procesar_comando, construir_callback_buttons
 
@@ -116,6 +116,8 @@ def create_tg_callback(chat_id, usuario_m, formato, is_debug, xml_string):
 
     usuario_m.datos_imagen_borrador = datos_imagen_borrador_nuevo
     usuario_m.save()
+
+    guardar_imagen(imagen_seleccionada)
 
     escribir_enviar_meme(
         chat_id,

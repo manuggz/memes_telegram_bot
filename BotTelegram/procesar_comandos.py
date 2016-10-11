@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from BotTelegram.construir_callback_buttons import construir_callback_buttons, construir_callbackbuttons_create
 from BotTelegram.enviar_mensajes_usuario import enviar_mensaje_usuario, enviar_imagen, enviar_mensaje_ayuda_comando, \
     URL_TG_API, escribir_enviar_meme, guardar_imagen_enviada, parsear_enviar_xml, borrar_cache_espera, \
-    obtener_upper_lower_text
+    obtener_upper_lower_text, guardar_imagen
 from BotTelegram.models import Imagen, DatosImagenBorrador
 from PIL import ImageColor
 
@@ -94,6 +94,7 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
 
     if usuario.datos_imagen_borrador:
         usuario.datos_imagen_borrador.delete()
+        usuario.datos_imagen_borrador.save()
         usuario.save()
 
     datos_imagen_borrador_nuevo = DatosImagenBorrador()
@@ -103,6 +104,8 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
     usuario.save()
 
     if not resto_mensaje:  # Si el usuario solo nos envio "/create"
+
+        guardar_imagen(usuario.ultima_respuesta.imagen_enviada)
 
         escribir_enviar_meme(
             chat_id,
@@ -137,6 +140,8 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
     datos_imagen_borrador_nuevo.upper_text = lower_text
     datos_imagen_borrador_nuevo.color = color
     datos_imagen_borrador_nuevo.save()
+
+    guardar_imagen(usuario.ultima_respuesta.imagen_enviada)
 
     escribir_enviar_meme(
         chat_id,
@@ -331,6 +336,9 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
                         cambio_algo = True
 
                 if cambio_algo:
+
+                    guardar_imagen(usuario.ultima_respuesta.imagen_enviada)
+
                     escribir_enviar_meme(
                         chat_id,
                         usuario.datos_imagen_borrador.upper_text,
