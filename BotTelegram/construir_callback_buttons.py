@@ -3,15 +3,7 @@ import sys
 from BotTelegram.enviar_mensajes_usuario import parsear_xml_object
 
 
-
-def construir_link_imagen_borrador(imagen_borrador):
-    link_image = str(imagen_borrador.pk)
-
-    if sys.getsizeof(link_image) > 64:
-        link_image = ""
-
-    return link_image
-
+## Construye un link hacia la imagen que referencia un boton tal como /create o /next
 def construir_link_image(imagen):
     link_image = str(imagen.pk)
 
@@ -51,9 +43,7 @@ def construir_callback_buttons(imagen):
 
     return mark_keyboard
 
-def construir_callbackbuttons_create(datos_imagen_borrador, xml_string):
-
-    #link_image = construir_link_imagen_borrador(datos_imagen_borrador)
+def construir_callbackbuttons_create(xml_string):
 
     mark_keyboard = {
         "inline_keyboard":

@@ -106,10 +106,11 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
 
         escribir_enviar_meme(
             chat_id,
-            datos_imagen_borrador_nuevo.upper_text + "-" + datos_imagen_borrador_nuevo.lower_text,
+            datos_imagen_borrador_nuevo.upper_text,
+            datos_imagen_borrador_nuevo.lower_text,
             datos_imagen_borrador_nuevo.color,
             usuario.ultima_respuesta.imagen_enviada.ruta_imagen,
-            mark_keyboard=construir_callbackbuttons_create(datos_imagen_borrador_nuevo, xml_string)
+            mark_keyboard=construir_callbackbuttons_create(xml_string)
         )
         return
 
@@ -137,8 +138,14 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
     datos_imagen_borrador_nuevo.color = color
     datos_imagen_borrador_nuevo.save()
 
-    escribir_enviar_meme(chat_id,texto,color, usuario.ultima_respuesta.imagen_enviada.ruta_imagen,
-            mark_keyboard=construir_callbackbuttons_create(datos_imagen_borrador_nuevo, xml_string))
+    escribir_enviar_meme(
+        chat_id,
+        upper_text,
+        lower_text,
+        color,
+        usuario.ultima_respuesta.imagen_enviada.ruta_imagen,
+        mark_keyboard=construir_callbackbuttons_create(xml_string)
+    )
 
 
 # Procesa el comando /search del usuario
@@ -326,10 +333,11 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
                 if cambio_algo:
                     escribir_enviar_meme(
                         chat_id,
-                        usuario.datos_imagen_borrador.upper_text + "-" + usuario.datos_imagen_borrador.lower_text,
+                        usuario.datos_imagen_borrador.upper_text,
+                        usuario.datos_imagen_borrador.lower_text,
                         usuario.datos_imagen_borrador.color,
                         usuario.ultima_respuesta.imagen_enviada.ruta_imagen,
-                        mark_keyboard=construir_callbackbuttons_create(usuario.datos_imagen_borrador, xml_strings)
+                        mark_keyboard=construir_callbackbuttons_create(xml_strings)
                     )
 
             else:

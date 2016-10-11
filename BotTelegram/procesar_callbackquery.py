@@ -119,10 +119,11 @@ def create_tg_callback(chat_id, usuario_m, formato, is_debug, xml_string):
 
     escribir_enviar_meme(
         chat_id,
-        datos_imagen_borrador_nuevo.upper_text + "-" + datos_imagen_borrador_nuevo.lower_text,
+        datos_imagen_borrador_nuevo.upper_text,
+        datos_imagen_borrador_nuevo.lower_text,
         datos_imagen_borrador_nuevo.color,
         imagen_seleccionada.ruta_imagen,
-        mark_keyboard=construir_callbackbuttons_create(datos_imagen_borrador_nuevo, xml_string)
+        mark_keyboard=construir_callbackbuttons_create(xml_string)
     )
 
     return imagen_seleccionada
