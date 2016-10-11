@@ -32,9 +32,6 @@ def procesar_callback_query(update_tg,xml_strings):
     if  formato[0]== "Random":
         #Notar que no se esta usando chat_instance arreglar
 
-        if usuario_m.datos_imagen_borrador:
-            usuario_m.datos_imagen_borrador.delete()
-
         procesar_comando(
             update_tg.callback_query.user_from.id,
             update_tg.is_message_debug,
@@ -51,6 +48,7 @@ def procesar_callback_query(update_tg,xml_strings):
 
         if usuario_m.datos_imagen_borrador:
             usuario_m.datos_imagen_borrador.delete()
+            usuario_m.save()
 
         imagen_enviada = next_image_tg_callback(
             update_tg.callback_query.user_from.id,

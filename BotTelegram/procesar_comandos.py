@@ -226,6 +226,9 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
     imagen_enviada = None
 
     if comando == "/start":
+        if usuario.datos_imagen_borrador:
+            usuario.datos_imagen_borrador.delete()
+            usuario.save()
         start_tg(
             chat_id,
             is_debug,
@@ -239,10 +242,9 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
             xml_strings
         )
     elif comando == "/random":
-
         if usuario.datos_imagen_borrador:
             usuario.datos_imagen_borrador.delete()
-
+            usuario.save()
         imagen_enviada = random_tg(
             chat_id,
             is_debug
@@ -270,6 +272,9 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
             xml_strings
         )
     elif comando == "/search":
+        if usuario.datos_imagen_borrador:
+            usuario.datos_imagen_borrador.delete()
+            usuario.save()
         imagen_enviada = search_tg(
             chat_id,
             usuario,
@@ -278,6 +283,9 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
             xml_strings
         )
     elif comando == "/next":
+        if usuario.datos_imagen_borrador:
+            usuario.datos_imagen_borrador.delete()
+            usuario.save()
         imagen_enviada = next_image_tg(
             chat_id,
             usuario,
