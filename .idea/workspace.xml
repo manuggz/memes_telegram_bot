@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9a5328c0-0b85-4a51-b0cf-d04724dbb485" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/procesar_comandos.py" afterPath="$PROJECT_DIR$/BotTelegram/procesar_comandos.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/maneja_respuesta.py" afterPath="$PROJECT_DIR$/BotTelegram/maneja_respuesta.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/update_tg.py" afterPath="$PROJECT_DIR$/BotTelegram/update_tg.py" />
     </list>
     <ignored path="memes_telegramd.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,51 +38,51 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BotTelegram/languages/en_US/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="511">
-              <caret line="299" column="7" selection-start-line="299" selection-start-column="7" selection-end-line="299" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="enviar_mensajes_usuario.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
+            <state relative-caret-position="1335">
               <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LICENSE" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LICENSE">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="changelog" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/changelog">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="procesar_comandos.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="procesar_comandos.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_comandos.py">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
+              <caret line="382" column="13" selection-start-line="382" selection-start-column="13" selection-end-line="382" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="message_tg.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BotTelegram/message_tg.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="14" column="22" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="maneja_respuesta.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/BotTelegram/maneja_respuesta.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="update_tg.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BotTelegram/update_tg.py">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
-              <caret line="350" column="40" selection-start-line="350" selection-start-column="40" selection-end-line="350" selection-end-column="40" />
+              <caret line="23" column="94" selection-start-line="23" selection-start-column="94" selection-end-line="23" selection-end-column="94" />
               <folding />
             </state>
           </provider>
@@ -90,7 +91,7 @@
       <file leaf-file-name="procesar_callbackquery.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-116">
+            <state relative-caret-position="1335">
               <caret line="96" column="22" selection-start-line="96" selection-start-column="22" selection-end-line="96" selection-end-column="22" />
               <folding />
             </state>
@@ -100,12 +101,10 @@
       <file leaf-file-name="tests.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BotTelegram/tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2400">
+            <state relative-caret-position="4860">
               <caret line="325" column="0" selection-start-line="325" selection-start-column="0" selection-end-line="325" selection-end-column="0" />
               <folding>
                 <marker date="1476144530783" expanded="true" signature="96:19889" ph="..." />
-                <marker date="1476144530783" expanded="true" signature="142:657" ph="..." />
-                <marker date="1476144530783" expanded="true" signature="646:657" ph="..." />
               </folding>
             </state>
           </provider>
@@ -172,13 +171,11 @@
         <option value="$PROJECT_DIR$/BotTelegram/chat_tg.py" />
         <option value="$PROJECT_DIR$/BotTelegram/message_tg.py" />
         <option value="$PROJECT_DIR$/BotTelegram/callback_tg.py" />
-        <option value="$PROJECT_DIR$/BotTelegram/update_tg.py" />
         <option value="$PROJECT_DIR$/BotTelegram/callbackquery_tg.py" />
         <option value="$PROJECT_DIR$/BotTelegram/obtener_memes_web.py" />
         <option value="$PROJECT_DIR$/BotTelegram/migrations/0005_auto_20161007_1519.py" />
         <option value="$PROJECT_DIR$/BotTelegram/templates/imagenes.html" />
         <option value="$PROJECT_DIR$/BotTelegram/templates/imagen.html" />
-        <option value="$PROJECT_DIR$/BotTelegram/maneja_respuesta.py" />
         <option value="$PROJECT_DIR$/test_respuesta_servidor.py" />
         <option value="$PROJECT_DIR$/BotTelegram/test_respuesta_servidor.py" />
         <option value="$PROJECT_DIR$/Procfile" />
@@ -208,6 +205,8 @@
         <option value="$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py" />
         <option value="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" />
         <option value="$PROJECT_DIR$/BotTelegram/procesar_comandos.py" />
+        <option value="$PROJECT_DIR$/BotTelegram/update_tg.py" />
+        <option value="$PROJECT_DIR$/BotTelegram/maneja_respuesta.py" />
       </list>
     </option>
   </component>
@@ -248,7 +247,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -338,6 +336,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -819,7 +818,14 @@
       <option name="project" value="LOCAL" />
       <updated>1476148995616</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="fix save error">
+      <created>1476149126267</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1476149126267</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1017,7 +1023,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1025,7 +1030,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="795">
           <caret line="53" column="20" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1040,7 +1044,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1048,15 +1051,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/maneja_respuesta.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="40" column="12" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1064,23 +1058,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
           <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/update_tg.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="27" column="64" selection-start-line="27" selection-start-column="64" selection-end-line="27" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/message_tg.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="14" column="22" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1088,7 +1065,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="366">
           <caret line="48" column="19" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1096,9 +1072,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="474">
           <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
-          <folding>
-            <element signature="e#71#110#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1108,9 +1081,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
           <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding>
-            <marker date="1476144530783" expanded="true" signature="1974:1995" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1118,9 +1088,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1132,37 +1099,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2400">
-          <caret line="325" column="0" selection-start-line="325" selection-start-column="0" selection-end-line="325" selection-end-column="0" />
-          <folding>
-            <marker date="1476144530783" expanded="true" signature="96:19889" ph="..." />
-            <marker date="1476144530783" expanded="true" signature="142:657" ph="..." />
-            <marker date="1476144530783" expanded="true" signature="646:657" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_pillow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BotTelegram/languages/en_US/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
+        <state relative-caret-position="4485">
           <caret line="299" column="7" selection-start-line="299" selection-start-column="7" selection-end-line="299" selection-end-column="7" />
           <folding />
         </state>
@@ -1184,6 +1123,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1335">
+          <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_comandos.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="382" column="13" selection-start-line="382" selection-start-column="13" selection-end-line="382" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1335">
+          <caret line="96" column="22" selection-start-line="96" selection-start-column="22" selection-end-line="96" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4860">
+          <caret line="325" column="0" selection-start-line="325" selection-start-column="0" selection-end-line="325" selection-end-column="0" />
+          <folding>
+            <marker date="1476144530783" expanded="true" signature="96:19889" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_pillow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BotTelegram/construir_callback_buttons.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -1192,26 +1181,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py">
+    <entry file="file://$PROJECT_DIR$/BotTelegram/message_tg.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+        <state relative-caret-position="195">
+          <caret line="14" column="22" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-116">
-          <caret line="96" column="22" selection-start-line="96" selection-start-column="22" selection-end-line="96" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_comandos.py">
+    <entry file="file://$PROJECT_DIR$/BotTelegram/update_tg.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
-          <caret line="350" column="40" selection-start-line="350" selection-start-column="40" selection-end-line="350" selection-end-column="40" />
+          <caret line="23" column="94" selection-start-line="23" selection-start-column="94" selection-end-line="23" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/maneja_respuesta.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
           <folding />
         </state>
       </provider>

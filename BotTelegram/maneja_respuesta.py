@@ -32,9 +32,9 @@ def atender_consulta_mensaje_tg(dict_update):
 
     root_xml_string = ET.parse(join("BotTelegram", "languages", "en_US", 'strings.xml'))
 
+    if update_tg.edited_message: return
     # Por ahora solo grupos "normales" y chats privados
     if update_tg.message and update_tg.message.chat.type not in ("group", "private"): return
-
 
 
     if update_tg.callback_query:

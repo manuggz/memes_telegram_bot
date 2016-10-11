@@ -20,6 +20,12 @@ class UpdateTG:
         if self.message:
             self.message = MessageTG(self.message)
 
+        # type: Messaje
+        # Optional. Optional. New version of a message that is known to the bot and was edited
+        self.edited_message = dict_update.get("edited_message","")
+        if self.edited_message:
+            self.edited_message = MessageTG(self.edited_message)
+
         # type: CallbackQuery
         # Optional. New incoming callback query
         # For example when a user press a bu
