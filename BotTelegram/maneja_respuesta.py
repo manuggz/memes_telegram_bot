@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import os
 from os.path import join
 
 from BotTelegram.procesar_callbackquery import procesar_callback_query
@@ -17,7 +18,7 @@ def atender_consulta_mensaje_tg(dict_update):
     update_tg = UpdateTG(dict_update)  # Convertimos el dict a una manejable Python Class
 
     # Cargamos los textos a usar
-    root_xml_string = ET.parse(join("BotTelegram", "languages", "en_US", 'strings.xml'))
+    root_xml_string = ET.parse(join(os.path.dirname(os.path.abspath(__file__)),"languages", "en_US", 'strings.xml'))
 
     if update_tg.edited_message: return # No manejamos ediciones a mensajes enviados
 

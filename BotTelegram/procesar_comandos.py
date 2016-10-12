@@ -425,7 +425,7 @@ def buscar_primera_imagen(chat_id, meme_name, xml_strings):
 # "yao ming"
 # regresa ("yao ming","",False)
 def extraer_comando(text):
-    if not text: return ""
+    if not text: return ("","")
 
     text = text.strip()
     comando = ""

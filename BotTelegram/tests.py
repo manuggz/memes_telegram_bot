@@ -131,6 +131,13 @@ class TestBot(TestCase):
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
 
+    def test_enviar_sticker(self):
+        consulta = {u'message': {u'from': self.user_from, u'sticker': {u'file_size': 34562, u'thumb': {u'width': 128, u'file_size': 5638, u'height': 128, u'file_id': u'AAQCABPhcnENAAQIgxvfjdw6WNFQAAIC'}, u'height': 512, u'width': 512, u'file_id': u'BQADAgADqwkAApI2owsNHHNJBqvhngI', u'emoji': u'\U0001f377'}, u'message_id': 110265, u'date': 1476292253, u'chat': {u'id': 236779973, u'last_name': u'Subbotin', u'first_name': u'Maxim', u'type': u'private'}}, u'update_id': 25259005}
+
+        response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
+                                    json.dumps(consulta), content_type="text/json", secure=True)
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
 
     def test_create_callback(self):
 
