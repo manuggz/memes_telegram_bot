@@ -2,6 +2,14 @@
 
 <data>
 
+<!--Este mensaje aparece cuando el usuario envia /help next-->
+    <!-- Le dice al usuario lo que hace dicho comando /next -->
+    <help comando = "next">
+        <text>
+This command get you the next meme result of your query.
+        </text>
+    </help>
+
     <!--Este mensaje aparece cuando el usuario envia /help search-->
     <!-- Le dice al usuario lo que hace dicho comando /search -->
     <!-- Recordar que /search obtiene una imagen de la BD o de la pagina web-->
@@ -300,4 +308,10 @@ Try with another one.
         </text>
         <button text = "random" callback_data = "Random"/>
     </imagen_muy_vieja_borrada>
+
+    <no_hay_ayuda_para_ese_tema>
+        <text>
+Sorry, I can't help you about that.
+        </text>
+    </no_hay_ayuda_para_ese_tema>
 </data>

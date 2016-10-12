@@ -13,7 +13,7 @@ import requests
 from time import sleep
 from django.utils import timezone
 from PIL import Image, ImageDraw, ImageFont
-
+from django.conf import settings
 # Fuente usada para escribir sobre los memes
 FUENTE = "staticfiles/ufonts.com_impact.ttf"
 
@@ -23,6 +23,9 @@ CODE_BOT = "119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg"
 # URL para acceder al API de Telegram
 URL_TG_API = "https://api.telegram.org/bot" + CODE_BOT + "/"
 
+import logging
+
+logger = logging.getLogger("BotTelegram.telegram.request_api_tg.error_request")
 
 def responder_callback_query(query_id):
     return requests.get(URL_TG_API + 'answerCallbackQuery', params={'callback_query_id': query_id})
@@ -35,8 +38,19 @@ def obtener_info_webhook():
 def obtener_info_me():
     return requests.get(URL_TG_API + 'getMe')
 
-def mostrar_accion(chat_id,accion):
-    return requests.get(URL_TG_API + 'sendChatAction', params={'chat_id': chat_id, 'action': accion})
+
+def request_get_api_telegram(url,params):
+
+    respuesta = requests.get(url, params=params)
+
+    if respuesta.status_code != 200:
+        logger.error("Request :" + url + "\n" +
+                      "con los parametros:" + str(params) + "\n" +
+                      "Respuesta:" + respuesta.text)
+
+        if settings.DEBUG:
+            ## Notar que es para forzar que falle un caso de prueba
+            raise Exception("Error en request a telegram")
 
 
 def enviar_mensaje_usuario(chat_id, mensaje, reply_markup=None):
@@ -46,8 +60,9 @@ def enviar_mensaje_usuario(chat_id, mensaje, reply_markup=None):
     if reply_markup:
         params["reply_markup"] = json.dumps(reply_markup)
 
-    mostrar_accion(chat_id,"typing")
-    requests.get(URL_TG_API + 'sendMessage', params=params)
+    request_get_api_telegram(URL_TG_API + 'sendChatAction', {'chat_id': chat_id, 'action': "typing"})
+    request_get_api_telegram(URL_TG_API + 'sendMessage',params)
+
 
 
 # Envia un mensaje a todos los usuarios del bot
@@ -115,17 +130,21 @@ def borrar_cache_espera(usuario):
 
 # Parsea el string guardado en el archivo xml strings.xml
 # construyendo el mensaje en un formato entendible por la api de TG
-def enviar_mensaje_ayuda_comando(chat_id, comando, root_xml):
-    elemento_ayuda = root_xml.findall("help[@comando='{0}']".format(comando))
+def enviar_mensaje_ayuda_comando(chat_id, comando, xml_string):
+
+    elemento_ayuda = xml_string.findall("help[@comando='{0}']".format(comando))
 
     if elemento_ayuda:
         elemento_ayuda = elemento_ayuda[0]
 
         parsear_enviar_xml(chat_id, elemento_ayuda)
 
+    else:
+        parsear_enviar_xml(chat_id, xml_string.find("no_hay_ayuda_para_ese_tema"))
+
 
 def parsear_xml_object(xml_object):
-    if not xml_object: return
+    if xml_object is None: return
 
     result = {"text": "", "botones": []}
 
@@ -140,8 +159,11 @@ def parsear_xml_object(xml_object):
 
 # Parsea un xml object y lo envia en formato de la API de Telegram
 def parsear_enviar_xml(chat_id, xml_object):
+
     result = parsear_xml_object(xml_object)
-    if not result: return
+
+    if result is None: return
+
     mark_keyboard = {}
 
     if result["botones"]:

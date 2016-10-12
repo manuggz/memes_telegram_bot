@@ -28,11 +28,9 @@ def start_tg(chat_id, is_debug, xml_string):
 # Recordar que /help envia un mensaje de ayuda al usuario
 # Ejemplos de uso: /help o /help search
 def help_tg(chat_id, tema_ayuda, is_debug, xml_string):
+
     if not tema_ayuda:
         tema_ayuda = "help"
-
-    if is_debug:  # Mensage de DEBUG
-        enviar_mensaje_usuario(chat_id, "Respuesta /help : " + tema_ayuda)
 
     enviar_mensaje_ayuda_comando(chat_id,tema_ayuda, xml_string)
 

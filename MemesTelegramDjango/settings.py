@@ -81,9 +81,9 @@ WSGI_APPLICATION = 'MemesTelegramDjango.wsgi.application'
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 
-DATABASES = {}
-DATABASES['default'] =  dj_database_url.config()
-
+#DATABASES = {}
+#DATABASES['default'] =  dj_database_url.config()
+DATABASES =  {'default': {'ENGINE': 'django.db.backends.postgresql_psycopg2', 'HOST': '', 'NAME': 'memestg', 'CONN_MAX_AGE': 0, 'PASSWORD': '', 'PORT': '', 'USER': ''}}
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
@@ -127,21 +127,47 @@ STATICFILES_DIRS = (
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'file': {
-#             'level': 'DEBUG',
-#             'class': 'logging.FileHandler',
-#             'filename': 'debug.log',
-#         },
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['file'],
-#             'level': 'ERROR',
-#             'propagate': True,
-#         },
-#     },
-# }
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'error_request_api_tg.log',
+            'formatter':'verbose'
+        },
+        'console': {
+            'level': 'DEBUG',
+            #'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+    },
+    'loggers': {
+        'BotTelegram':{
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+
+        },
+        'BotTelegram.request_api_tg': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'BotTelegram.request_api_tg.error_request': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}
