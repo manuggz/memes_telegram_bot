@@ -280,7 +280,9 @@ Your Color has been set to White.
     </changed_color_text_none>
 
     <error_mal_color>
+        <text>
 Wrong Color.
+        </text>
     </error_mal_color>
     <dame_lower_text>
         <text>

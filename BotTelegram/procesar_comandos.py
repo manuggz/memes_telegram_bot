@@ -93,11 +93,12 @@ def wannaknowupdates_tg(chat_id, usuario, is_debug, xml_string):
 # Recordar que /create escribe sobre la ultima imagen enviada por el usuario
 # resto_mensaje es el texto que le sigue al comando /create , tal como el mensaje y el color
 def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
+
     if is_debug:  # Mensage de DEBUG
-        enviar_mensaje_usuario(chat_id, "Respuesta /create")
+        enviar_mensaje_usuario(chat_id, "Respuesta /create comando " + resto_mensaje)
 
     if not usuario.ultima_respuesta:  # Si no se ha enviado una imagen al usuario
-        parsear_enviar_xml(chat_id, xml_string.find("create_sin_imagen_reciente"))
+        parsear_enviar_xml(chat_id, obtener_xml_objeto("create_sin_imagen_reciente",xml_string))
         return
 
     if usuario.datos_imagen_borrador:
@@ -112,7 +113,6 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
     usuario.save()
 
     if not resto_mensaje:  # Si el usuario solo nos envio "/create"
-
         guardar_imagen(usuario.ultima_respuesta.imagen_enviada)
 
         escribir_enviar_meme(
@@ -139,7 +139,7 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
     try:
         ImageColor.getrgb(color)
     except ValueError:
-        parsear_enviar_xml(chat_id, xml_string.find("error_mal_color"))
+        parsear_enviar_xml(chat_id, obtener_xml_objeto("error_mal_color",xml_string))
         color = "white"
 
     upper_text , lower_text = obtener_upper_lower_text(texto)
@@ -161,26 +161,29 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
     )
 
 
+def obtener_xml_objeto(tag,xml_string):
+    objeto_xml_texto = xml_string.find(tag)
+
+    if objeto_xml_texto is None:
+        logger_xml.error("No se encontró TEXTO para " + tag)
+
+        if settings.DEBUG:
+            # Forzamos el error
+            raise Exception("Error XML")
+
+    return objeto_xml_texto
+
+
 # Procesa el comando /search del usuario
 # Recordar que /search busca el meme MEME NAME
 # El formato es /search MEME NAME
 def search_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
 
     if is_debug:  # Mensage de DEBUG
-        enviar_mensaje_usuario(chat_id, "Respuesta /search")
+        enviar_mensaje_usuario(chat_id, "Respuesta /search " + resto_mensaje)
 
     if not resto_mensaje:  # si el usuario envia /search sin el resto del formato
-
-        objeto_xml_texto = xml_string.find("search_sin_comandos")
-
-        if objeto_xml_texto is None:
-            logger_xml.error("No se encontró TEXTO para " + "search_sin_comandos")
-
-            if settings.DEBUG:
-                # Forzamos el error
-                raise Exception("Error XML")
-        else:
-            parsear_enviar_xml(chat_id, objeto_xml_texto)
+        parsear_enviar_xml(chat_id, obtener_xml_objeto("search_sin_comandos",xml_string))
         return None
 
     imagen = buscar_primera_imagen(chat_id,resto_mensaje.strip(), xml_string)

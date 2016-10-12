@@ -12,8 +12,6 @@ import datetime
 import json
 import shutil
 
-
-
 # Fuente usada para escribir sobre los memes
 FUENTE = "staticfiles/ufonts.com_impact.ttf"
 
@@ -23,8 +21,9 @@ CODE_BOT = "119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg"
 # URL para acceder al API de Telegram
 URL_TG_API = "https://api.telegram.org/bot" + CODE_BOT + "/"
 
-
 logger = logging.getLogger("BotTelegram.request_api_tg.error_request")
+logger_xml = logging.getLogger("BotTelegram.error_xml")
+
 
 def responder_callback_query(query_id):
     return requests.get(URL_TG_API + 'answerCallbackQuery', params={'callback_query_id': query_id})
@@ -38,30 +37,21 @@ def obtener_info_me():
     return requests.get(URL_TG_API + 'getMe')
 
 
-def request_get_api_telegram(url,params):
-
+def request_get_api_telegram(url, params):
     respuesta = requests.get(url, params=params)
 
     if respuesta.status_code != 200:
-        logger.error("Request :" + url + "\n" +
-                      "con los parametros:" + str(params) + "\n" +
-                      "Respuesta:" + respuesta.text)
-
-        if settings.DEBUG:
-            ## Notar que es para forzar que falle un caso de prueba
-            raise Exception("Error en request a telegram")
+        logear_error(url,params,respuesta.text)
 
 
 def enviar_mensaje_usuario(chat_id, mensaje, reply_markup=None):
-
     params = {'chat_id': chat_id, 'text': mensaje}
 
     if reply_markup:
         params["reply_markup"] = json.dumps(reply_markup)
 
     request_get_api_telegram(URL_TG_API + 'sendChatAction', {'chat_id': chat_id, 'action': "typing"})
-    request_get_api_telegram(URL_TG_API + 'sendMessage',params)
-
+    request_get_api_telegram(URL_TG_API + 'sendMessage', params)
 
 
 # Envia un mensaje a todos los usuarios del bot
@@ -74,13 +64,24 @@ def enviar_mensaje_usuarios(mensaje):
             sleep(5)
 
 
+def logear_error(url, parametros, text):
+    datos_error = "Request :" + url + "\n" + \
+                  "con los parametros:" + str(parametros) + "\n" + \
+                  "Respuesta:" + text
+
+    logger.error(datos_error)
+
+    if settings.DEBUG:
+        ## Notar que es para forzar que falle un caso de prueba
+        raise Exception("Error en request a telegram: \n" + datos_error)
+
+
 # envia una imagen a un chat
 # notar que primero se debe guardar la imagen localmente
 def enviar_imagen(chat_id, imagen, reply_markup=None):
     # Colocamos el estado en el bot "subiendo foto"
 
-    requests.get(URL_TG_API + 'sendChatAction', params={'chat_id': chat_id, 'action': 'upload_photo'})
-
+    request_get_api_telegram(URL_TG_API + 'sendChatAction',{'chat_id': chat_id, 'action': 'upload_photo'})
     guardar_imagen(imagen)
     return enviar_mensaje_imagen(chat_id, imagen.ruta_imagen, imagen.title, reply_markup)
 
@@ -95,23 +96,24 @@ def enviar_mensaje_imagen(chat_id, ruta_foto, caption="", reply_markup=None):
 
     if caption:
         data_message["caption"] = caption
-    try:
-        requests.get(URL_TG_API + 'sendChatAction', params={'chat_id': chat_id, 'action': 'upload_photo'})
-        r = requests.post(
-            URL_TG_API + "sendPhoto",
-            data=data_message,
-            files=files
-        )
-    except:
-        return -1
+
+    request_get_api_telegram(URL_TG_API + 'sendChatAction',  {'chat_id': chat_id, 'action': 'upload_photo'})
+
+    url = URL_TG_API + 'sendPhoto'
+
+    r = requests.post(
+        URL_TG_API + "sendPhoto",
+        data=data_message,
+        files=files
+    )
 
     if r.status_code != 200:
-        print r.text
+        logear_error(url, "", r.text)
         return -1
 
     respuesta = json.loads(r.text)
     if not respuesta["ok"]:
-        print r.text
+        logear_error(url,"", r.text)
         return 1
 
     return 0
@@ -126,11 +128,22 @@ def borrar_cache_espera(usuario):
 
     usuario.save()
 
+# Parsea un xml object y lo envia en formato de la API de Telegram
+def parsear_enviar_xml(chat_id, xml_object):
+    result = parsear_xml_object(xml_object)
+
+    if result is None: return False
+
+    mark_keyboard = {}
+
+    if result["botones"]:
+        mark_keyboard = {"inline_keyboard": result["botones"]}
+
+    enviar_mensaje_usuario(chat_id, result["text"], mark_keyboard)
 
 # Parsea el string guardado en el archivo xml strings.xml
 # construyendo el mensaje en un formato entendible por la api de TG
 def enviar_mensaje_ayuda_comando(chat_id, comando, xml_string):
-
     elemento_ayuda = xml_string.findall("help[@comando='{0}']".format(comando))
 
     if elemento_ayuda:
@@ -153,22 +166,12 @@ def parsear_xml_object(xml_object):
         elif sub_elemento.tag == "button":
             result["botones"].append([sub_elemento.attrib])  # De esta forma quedan uno debajo del otro
 
+    if result["text"] == "":
+        logger_xml.warning("Objeto " + str(xml_object) + " no tiene texto")
+
     return result
 
 
-# Parsea un xml object y lo envia en formato de la API de Telegram
-def parsear_enviar_xml(chat_id, xml_object):
-
-    result = parsear_xml_object(xml_object)
-
-    if result is None: return False
-
-    mark_keyboard = {}
-
-    if result["botones"]:
-        mark_keyboard = {"inline_keyboard": result["botones"]}
-
-    enviar_mensaje_usuario(chat_id, result["text"], mark_keyboard)
 
 
 # Si no existe la imagen en el servidor
@@ -180,8 +183,8 @@ def guardar_imagen(imagen):
         with open(imagen.ruta_imagen, 'wb') as archivo_img:
             shutil.copyfileobj(resp.raw, archivo_img)
 
-def obtener_upper_lower_text(texto):
 
+def obtener_upper_lower_text(texto):
     mensajes = texto.split("-")
 
     upper_text = ""
@@ -195,7 +198,8 @@ def obtener_upper_lower_text(texto):
 
     return upper_text, lower_text
 
-def escribir_enviar_meme(chat_id, upper_text , lower_text, color, ruta_imagen, mark_keyboard= None):
+
+def escribir_enviar_meme(chat_id, upper_text, lower_text, color, ruta_imagen, mark_keyboard=None):
     imagen_pil = Image.open(ruta_imagen)
     draw_pil = ImageDraw.Draw(imagen_pil)
 

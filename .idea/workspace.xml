@@ -4,9 +4,13 @@
     <bookmark url="file://$PROJECT_DIR$/BotTelegram/languages/en_US/strings.xml" line="75" mnemonic="7" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a5328c0-0b85-4a51-b0cf-d04724dbb485" name="Default" comment="">
+    <list default="true" id="9a5328c0-0b85-4a51-b0cf-d04724dbb485" name="Default" comment="Added tests for create&#10;Faltan los de callback">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BotTelegram/test_comando_create_callback.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/tests.py" afterPath="$PROJECT_DIR$/BotTelegram/tests.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" afterPath="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/languages/en_US/strings.xml" afterPath="$PROJECT_DIR$/BotTelegram/languages/en_US/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/procesar_comandos.py" afterPath="$PROJECT_DIR$/BotTelegram/procesar_comandos.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/test_comando_create.py" afterPath="$PROJECT_DIR$/BotTelegram/test_comando_create.py" />
     </list>
     <ignored path="memes_telegramd.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,9 +27,13 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/memes_telegramd$Test__BotTelegram_test_comando_help.coverage" NAME="Test: BotTelegram.test_comando_help Coverage Results" MODIFIED="1476235366134" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/memes_telegramd$Test__BotTelegram_test_comando_create_TestSimpleCreate_test_simple_create__im_alone_but_buen_color.coverage" NAME="Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create__im_alone_but_buen_color Coverage Results" MODIFIED="1476242053563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/memes_telegramd$Test__BotTelegram_test_comando_create_TestSimpleCreate_test_simple_create_with_anterior.coverage" NAME="Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create_with_anterior Coverage Results" MODIFIED="1476242320724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/memes_telegramd$update_tg.coverage" NAME="update_tg Coverage Results" MODIFIED="1475621261975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BotTelegram" />
+    <SUITE FILE_PATH="coverage/memes_telegramd$Test__BotTelegram_test_comando_create.coverage" NAME="Test: BotTelegram.test_comando_create Coverage Results" MODIFIED="1476241946790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/memes_telegramd$Test__BotTelegram_test_comando_search.coverage" NAME="Test: BotTelegram.test_comando_search Coverage Results" MODIFIED="1476237923457" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/memes_telegramd$Test__BotTelegram_tests_TestBot_setUpTestData.coverage" NAME="Test: BotTelegram.tests.TestBot.setUpTestData Coverage Results" MODIFIED="1476220787797" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/memes_telegramd$Test__BotTelegram_test_comando_create_TestSimpleCreate_test_simple_create____mal_color.coverage" NAME="Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create____mal_color Coverage Results" MODIFIED="1476241460350" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -39,38 +47,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="test_comando_search.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BotTelegram/test_comando_search.py">
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BotTelegram/languages/en_US/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="114" column="45" selection-start-line="0" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_comando_help.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BotTelegram/test_comando_help.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="489">
-              <caret line="101" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="enviar_mensajes_usuario.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="39" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="181">
+              <caret line="285" column="0" selection-start-line="285" selection-start-column="0" selection-end-line="285" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -78,8 +60,8 @@
       <file leaf-file-name="procesar_comandos.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_comandos.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="298" column="0" selection-start-line="298" selection-start-column="0" selection-end-line="298" selection-end-column="0" />
+            <state relative-caret-position="150">
+              <caret line="115" column="0" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
               <folding>
                 <element signature="e#16#31#0" expanded="true" />
               </folding>
@@ -87,35 +69,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_comando_create.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test_comando_create.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BotTelegram/test_comando_create.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="571" column="45" selection-start-line="571" selection-start-column="45" selection-end-line="571" selection-end-column="45" />
+            <state relative-caret-position="284">
+              <caret line="149" column="31" selection-start-line="149" selection-start-column="31" selection-end-line="149" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="enviar_mensajes_usuario.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="251" column="60" selection-start-line="251" selection-start-column="60" selection-end-line="251" selection-end-column="60" />
               <folding>
-                <element signature="e#15#47#0" expanded="true" />
+                <element signature="e#0#26#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="obtener_memes_web.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BotTelegram/obtener_memes_web.py">
+      <file leaf-file-name="test_comando_create_callback.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BotTelegram/test_comando_create_callback.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tests.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/BotTelegram/tests.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+            <state relative-caret-position="180">
+              <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -124,9 +104,21 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MemesTelegramDjango/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="501">
-              <caret line="178" column="53" selection-start-line="178" selection-start-column="53" selection-end-line="178" selection-end-column="53" />
+            <state relative-caret-position="140">
+              <caret line="161" column="30" selection-start-line="161" selection-start-column="21" selection-end-line="161" selection-end-column="30" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="construir_callback_buttons.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BotTelegram/construir_callback_buttons.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="141">
+              <caret line="52" column="32" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
+              <folding>
+                <element signature="e#71#81#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -194,15 +186,17 @@
         <option value="$PROJECT_DIR$/BotTelegram/views.py" />
         <option value="$PROJECT_DIR$/BotTelegram/maneja_respuesta.py" />
         <option value="$PROJECT_DIR$/BotTelegram/test_comando_help.py" />
-        <option value="$PROJECT_DIR$/BotTelegram/languages/en_US/strings.xml" />
         <option value="$PROJECT_DIR$/test_search.py" />
-        <option value="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" />
         <option value="$PROJECT_DIR$/MemesTelegramDjango/settings.py" />
         <option value="$PROJECT_DIR$/BotTelegram/obtener_memes_web.py" />
         <option value="$PROJECT_DIR$/BotTelegram/test_comando_search.py" />
-        <option value="$PROJECT_DIR$/BotTelegram/procesar_comandos.py" />
-        <option value="$PROJECT_DIR$/BotTelegram/test_comando_create.py" />
         <option value="$PROJECT_DIR$/BotTelegram/tests.py" />
+        <option value="$PROJECT_DIR$/BotTelegram/languages/en_US/strings.xml" />
+        <option value="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" />
+        <option value="$PROJECT_DIR$/BotTelegram/test_create_callback.py" />
+        <option value="$PROJECT_DIR$/BotTelegram/test_comando_create_callback.py" />
+        <option value="$PROJECT_DIR$/BotTelegram/test_comando_create.py" />
+        <option value="$PROJECT_DIR$/BotTelegram/procesar_comandos.py" />
       </list>
     </option>
   </component>
@@ -290,6 +284,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="memes_telegramd" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="memes_telegramd" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BotTelegram" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="languages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="en_US" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -310,65 +326,7 @@
       <recent name="$PROJECT_DIR$/BotTelegram/templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Django tests.Test: BotTelegram.test_comando_search">
-    <configuration default="false" name="update_tg" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BotTelegram" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="memes_telegramd" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BotTelegram/update_tg.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Test: BotTelegram.tests.TestBot.setUpTestData" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="memes_telegramd" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="TARGET" value="BotTelegram.tests.TestBot.setUpTestData" />
-      <option name="SETTINGS_FILE" value="" />
-      <option name="CUSTOM_SETTINGS" value="false" />
-      <option name="USE_OPTIONS" value="false" />
-      <option name="OPTIONS" value="" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Test: BotTelegram.test_comando_help" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="memes_telegramd" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="TARGET" value="BotTelegram.test_comando_help" />
-      <option name="SETTINGS_FILE" value="" />
-      <option name="CUSTOM_SETTINGS" value="false" />
-      <option name="USE_OPTIONS" value="false" />
-      <option name="OPTIONS" value="" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Django tests.Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create_with_anterior">
     <configuration default="false" name="Test: BotTelegram.test_comando_search" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -383,6 +341,86 @@
       <module name="memes_telegramd" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="TARGET" value="BotTelegram.test_comando_search" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Test: BotTelegram.test_comando_create" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="memes_telegramd" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="TARGET" value="BotTelegram.test_comando_create" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create____mal_color" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="memes_telegramd" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="TARGET" value="BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create____mal_color" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create__im_alone_but_buen_color" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="memes_telegramd" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="TARGET" value="BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create__im_alone_but_buen_color" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create_with_anterior" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="memes_telegramd" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="TARGET" value="BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create_with_anterior" />
       <option name="SETTINGS_FILE" value="" />
       <option name="CUSTOM_SETTINGS" value="false" />
       <option name="USE_OPTIONS" value="false" />
@@ -644,19 +682,21 @@
       <option name="customRunCommand" value="" />
       <method />
     </configuration>
-    <list size="5">
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Django server.memes_telegramd" />
-      <item index="1" class="java.lang.String" itemvalue="Python.update_tg" />
-      <item index="2" class="java.lang.String" itemvalue="Django tests.Test: BotTelegram.tests.TestBot.setUpTestData" />
-      <item index="3" class="java.lang.String" itemvalue="Django tests.Test: BotTelegram.test_comando_help" />
-      <item index="4" class="java.lang.String" itemvalue="Django tests.Test: BotTelegram.test_comando_search" />
+      <item index="1" class="java.lang.String" itemvalue="Django tests.Test: BotTelegram.test_comando_search" />
+      <item index="2" class="java.lang.String" itemvalue="Django tests.Test: BotTelegram.test_comando_create" />
+      <item index="3" class="java.lang.String" itemvalue="Django tests.Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create____mal_color" />
+      <item index="4" class="java.lang.String" itemvalue="Django tests.Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create__im_alone_but_buen_color" />
+      <item index="5" class="java.lang.String" itemvalue="Django tests.Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create_with_anterior" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Django tests.Test: BotTelegram.test_comando_search" />
-        <item index="1" class="java.lang.String" itemvalue="Django tests.Test: BotTelegram.test_comando_help" />
-        <item index="2" class="java.lang.String" itemvalue="Django tests.Test: BotTelegram.tests.TestBot.setUpTestData" />
-        <item index="3" class="java.lang.String" itemvalue="Python.update_tg" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Django tests.Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create_with_anterior" />
+        <item index="1" class="java.lang.String" itemvalue="Django tests.Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create__im_alone_but_buen_color" />
+        <item index="2" class="java.lang.String" itemvalue="Django tests.Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create____mal_color" />
+        <item index="3" class="java.lang.String" itemvalue="Django tests.Test: BotTelegram.test_comando_create" />
+        <item index="4" class="java.lang.String" itemvalue="Django tests.Test: BotTelegram.test_comando_search" />
       </list>
     </recent_temporary>
   </component>
@@ -881,24 +921,46 @@
       <option name="project" value="LOCAL" />
       <updated>1476238216194</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Added tests for create&#10;Faltan los de callback">
+      <created>1476239174031</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1476239174031</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Test__BotTelegram_test_comando_help - 2016.10.11 at 21h 16m 48s.xml">
-      <configuration name="Test: BotTelegram.test_comando_help" configurationId="DjangoTestsConfigurationType" />
+    <history-entry file="Test__BotTelegram_test_comando_create - 2016.10.11 at 22h 53m 15s.xml">
+      <configuration name="Test: BotTelegram.test_comando_create" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__BotTelegram_test_comando_create - 2016.10.11 at 23h 13m 59s.xml">
+      <configuration name="Test: BotTelegram.test_comando_create" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__BotTelegram_test_comando_create_TestSimpleCreate_test_simple_create____mal_color - 2016.10.11 at 22h 54m 58s.xml">
+      <configuration name="Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create____mal_color" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__BotTelegram_test_comando_create_TestSimpleCreate_test_simple_create____mal_color - 2016.10.11 at 23h 02m 38s.xml">
+      <configuration name="Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create____mal_color" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__BotTelegram_test_comando_create_TestSimpleCreate_test_simple_create____mal_color - 2016.10.11 at 23h 05m 13s.xml">
+      <configuration name="Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create____mal_color" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__BotTelegram_test_comando_create_TestSimpleCreate_test_simple_create__im_alone_but_buen_color - 2016.10.11 at 23h 15m 10s.xml">
+      <configuration name="Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create__im_alone_but_buen_color" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__BotTelegram_test_comando_create_TestSimpleCreate_test_simple_create_with_anterior - 2016.10.11 at 23h 16m 47s.xml">
+      <configuration name="Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create_with_anterior" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__BotTelegram_test_comando_create_TestSimpleCreate_test_simple_create_with_anterior - 2016.10.11 at 23h 18m 30s.xml">
+      <configuration name="Test: BotTelegram.test_comando_create.TestSimpleCreate.test_simple_create_with_anterior" configurationId="DjangoTestsConfigurationType" />
     </history-entry>
     <history-entry file="Test__BotTelegram_test_comando_help - 2016.10.11 at 21h 27m 55s.xml">
       <configuration name="Test: BotTelegram.test_comando_help" configurationId="DjangoTestsConfigurationType" />
     </history-entry>
     <history-entry file="Test__BotTelegram_test_comando_search - 2016.10.11 at 22h 09m 27s.xml">
       <configuration name="Test: BotTelegram.test_comando_search" configurationId="DjangoTestsConfigurationType" />
-    </history-entry>
-    <history-entry file="Test__BotTelegram_tests_TestBot_setUpTestData - 2016.10.04 at 18h 48m 21s.xml">
-      <configuration name="Test: BotTelegram.tests.TestBot.setUpTestData" configurationId="DjangoTestsConfigurationType" />
-    </history-entry>
-    <history-entry file="Test__BotTelegram_tests_TestBot_setUpTestData - 2016.10.11 at 17h 19m 53s.xml">
-      <configuration name="Test: BotTelegram.tests.TestBot.setUpTestData" configurationId="DjangoTestsConfigurationType" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -964,7 +1026,8 @@
     <MESSAGE value="Agragados test para help&#10;agregado logging" />
     <MESSAGE value="Added test for search" />
     <MESSAGE value="olvide agregar un archivo" />
-    <option name="LAST_COMMIT_MESSAGE" value="olvide agregar un archivo" />
+    <MESSAGE value="Added tests for create&#10;Faltan los de callback" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added tests for create&#10;Faltan los de callback" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -979,8 +1042,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/accounts/models.py" />
-    <entry file="file://$PROJECT_DIR$/accounts/forms.py" />
     <entry file="file://$PROJECT_DIR$/accounts/apps.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1148,16 +1209,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/construir_callback_buttons.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="70" selection-start-line="15" selection-start-column="70" selection-end-line="15" selection-end-column="70" />
-          <folding>
-            <element signature="e#71#81#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BotTelegram/chat_tg.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1173,14 +1224,6 @@
           <folding>
             <element signature="e#433#477#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="21" column="25" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1260,38 +1303,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/languages/en_US/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="56" selection-start-line="8" selection-start-column="56" selection-end-line="8" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MemesTelegramDjango/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="178" column="53" selection-start-line="178" selection-start-column="53" selection-end-line="178" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BotTelegram/obtener_memes_web.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
           <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="39" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1306,32 +1323,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_comandos.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="298" column="0" selection-start-line="298" selection-start-column="0" selection-end-line="298" selection-end-column="0" />
-          <folding>
-            <element signature="e#16#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BotTelegram/test_comando_search.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="301">
           <caret line="114" column="45" selection-start-line="0" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/test_comando_create.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="571" column="45" selection-start-line="571" selection-start-column="45" selection-end-line="571" selection-end-column="45" />
-          <folding>
-            <element signature="e#15#47#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1340,6 +1337,84 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="21" column="25" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python2.7/site-packages/django/test/client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="408" column="0" selection-start-line="408" selection-start-column="0" selection-end-line="408" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/languages/en_US/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="285" column="0" selection-start-line="285" selection-start-column="0" selection-end-line="285" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/construir_callback_buttons.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="52" column="32" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
+          <folding>
+            <element signature="e#71#81#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MemesTelegramDjango/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="161" column="30" selection-start-line="161" selection-start-column="21" selection-end-line="161" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/test_comando_create_callback.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_comandos.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="115" column="0" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
+          <folding>
+            <element signature="e#16#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="251" column="60" selection-start-line="251" selection-start-column="60" selection-end-line="251" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/test_comando_create.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="149" column="31" selection-start-line="149" selection-start-column="31" selection-end-line="149" selection-end-column="31" />
           <folding />
         </state>
       </provider>
