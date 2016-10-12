@@ -159,6 +159,18 @@ LOGGING = {
             'propagate': True,
 
         },
+        'BotTelegram.error_xml': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+
+        },
+        'BotTelegram.error_meme_web': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+
+        },
         'BotTelegram.request_api_tg': {
             'handlers': ['console'],
             'level': 'DEBUG',

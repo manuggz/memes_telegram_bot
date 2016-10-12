@@ -34,22 +34,6 @@ class TestBot(TestCase):
     #
     #
     #
-    # def test_search_sin_comandos(self):
-    #     self.consulta[u'message'][u'text'] = u"/search"
-    #     response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
-    #                                 json.dumps(self.consulta), content_type="text/json", secure=True)
-    #
-    #     # Check that the response is 200 OK.
-    #     self.assertEqual(response.status_code, 200)
-    #
-    # def test_search_forever_alone(self):
-    #     self.consulta[u'message'][u'text'] = u"/search Forever Alone"
-    #     response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
-    #                                 json.dumps(self.consulta), content_type="text/json", secure=True)
-    #
-    #     # Check that the response is 200 OK.
-    #     self.assertEqual(response.status_code, 200)
-    #
     # def test_random(self):
     #
     #     self.consulta[u'message'][u'text'] = u"forever alone"

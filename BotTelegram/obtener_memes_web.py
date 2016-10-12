@@ -1,13 +1,11 @@
-# Crea el objeto que registra la respuesta del servidor
-# Solo se guardan las respuesta en imagen
+import logging,requests
 from HTMLParser import HTMLParser
-from os.path import basename
-from os.path import join
+from os.path import basename,join
 from random import choice
-
-import requests
-
 from BotTelegram.models import Imagen
+from django.conf import settings
+
+logger = logging.getLogger("BotTelegram.error_meme_web")
 
 # URL de la pagina usada para buscar los memes
 PAGINA_MEMES = 'http://imgflip.com/memesearch'
@@ -50,16 +48,21 @@ def construir_imagenes(imagenes, txt_bu):
 
 # Busca TODAS las imagenes en la pagina web PAGINA_MEMES
 # va guardando TODAS las rutas url en una lista y las regresa
-def buscar_imagenes(memeConsultado):
-    try:
-        peticion = requests.get(PAGINA_MEMES, params={'q': memeConsultado})
-    except:
+def buscar_imagenes_web(meme_consultado):
+
+    respuesta = requests.get(PAGINA_MEMES, params={'q': meme_consultado})
+
+    if respuesta.status_code != 200:
+        logger.error("Request :" + PAGINA_MEMES + "\n" +
+                      "con los parametros:" + str({'q': meme_consultado}) + "\n")
+
+        if settings.DEBUG:
+            ## Notar que es para forzar que falle un caso de prueba
+            raise Exception("Error en request a la meme web ")
         return None
 
-    if peticion.status_code != 200:
-        return None
     parser = parseadorHTML()
-    parser.feed(peticion.text)
+    parser.feed(respuesta.text)
     return parser.imagenes
 
 
@@ -72,19 +75,15 @@ class parseadorHTML(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         if tag == "h3":
-            #print tag ,attrs
             self.imagen_actual = ImagenWeb()
 
         if tag == "img":
-            #print tag,attrs
             self.imagen_actual.url = dict(attrs)['src']
             self.imagenes.append(self.imagen_actual)
-            #print self.imagen_actual
             self.imagen_actual = None
 
     def handle_data(self, data):
         if self.imagen_actual:
-            #print "ASDASDASD", data
             if data.strip():
                 self.imagen_actual.title = data
 

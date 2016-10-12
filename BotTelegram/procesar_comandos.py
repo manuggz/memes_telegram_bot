@@ -10,10 +10,17 @@ from BotTelegram.enviar_mensajes_usuario import enviar_mensaje_usuario, enviar_i
     obtener_upper_lower_text, guardar_imagen
 from BotTelegram.models import Imagen, DatosImagenBorrador
 from PIL import ImageColor
+from django.conf import settings
 
 # Procesa el comando "/start" mandado por el usuario
 # Recordar que /start envia un mensaje de inicio al usuario
-from BotTelegram.obtener_memes_web import obtener_imagen_random, buscar_imagenes, construir_imagenes
+
+
+import logging
+
+logger_xml = logging.getLogger("'BotTelegram.error_xml'")
+
+from BotTelegram.obtener_memes_web import obtener_imagen_random, buscar_imagenes_web, construir_imagenes
 
 
 def start_tg(chat_id, is_debug, xml_string):
@@ -31,6 +38,9 @@ def help_tg(chat_id, tema_ayuda, is_debug, xml_string):
 
     if not tema_ayuda:
         tema_ayuda = "help"
+
+    if is_debug:  # Mensage de DEBUG
+        enviar_mensaje_usuario(chat_id, "Respuesta /help : " + tema_ayuda)
 
     enviar_mensaje_ayuda_comando(chat_id,tema_ayuda, xml_string)
 
@@ -155,14 +165,25 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
 # Recordar que /search busca el meme MEME NAME
 # El formato es /search MEME NAME
 def search_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
+
     if is_debug:  # Mensage de DEBUG
         enviar_mensaje_usuario(chat_id, "Respuesta /search")
 
     if not resto_mensaje:  # si el usuario envia /search sin el resto del formato
-        parsear_enviar_xml(chat_id, xml_string.find("search_sin_comandos"))
+
+        objeto_xml_texto = xml_string.find("search_sin_comandos")
+
+        if objeto_xml_texto is None:
+            logger_xml.error("No se encontró TEXTO para " + "search_sin_comandos")
+
+            if settings.DEBUG:
+                # Forzamos el error
+                raise Exception("Error XML")
+        else:
+            parsear_enviar_xml(chat_id, objeto_xml_texto)
         return None
 
-    imagen = buscar_primera_imagen(resto_mensaje.strip(), chat_id, xml_string)
+    imagen = buscar_primera_imagen(chat_id,resto_mensaje.strip(), xml_string)
 
     if not imagen: return None  # Si no se encontro una imagen con exito
 
@@ -267,7 +288,6 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
             xml_strings
         )
     elif comando == "/search":
-        borrar_cache_espera(usuario)
 
         imagen_enviada = search_tg(
             chat_id,
@@ -276,6 +296,10 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
             is_debug,
             xml_strings
         )
+
+        if imagen_enviada is not None:
+            borrar_cache_espera(usuario)
+
     elif comando == "/next":
         borrar_cache_espera(usuario)
         imagen_enviada = next_image_tg(
@@ -375,12 +399,12 @@ def buscar_primera_imagen(chat_id, meme_name, xml_strings):
         primera_imagen = Imagen.objects.get(id_lista=0, textobuscado=meme_name)
     except ObjectDoesNotExist:
 
-        imagenes = buscar_imagenes(meme_name)
+        imagenes = buscar_imagenes_web(meme_name)
+
         if imagenes == []:
             parsear_enviar_xml(chat_id, xml_strings.find("no_recuerda_meme"))
         elif imagenes == None:
             parsear_enviar_xml(chat_id, xml_strings.find("problema_buscando_meme"))
-
         else:
             primera_imagen = construir_imagenes(imagenes, meme_name)
 
@@ -400,6 +424,7 @@ def buscar_primera_imagen(chat_id, meme_name, xml_strings):
 def extraer_comando(text):
     if not text: return ""
 
+    text = text.strip()
     comando = ""
 
     for i in range(0, len(text)):

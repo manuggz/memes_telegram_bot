@@ -1,19 +1,19 @@
-import json
-import shutil
 from os.path import exists
 from os.path import splitext
 from random import random
-
-import datetime
-
-from django.core.exceptions import ObjectDoesNotExist
-
 from BotTelegram.models import Usuario, RespuestaServidor, Imagen
-import requests
 from time import sleep
 from django.utils import timezone
 from PIL import Image, ImageDraw, ImageFont
 from django.conf import settings
+import requests
+import logging
+import datetime
+import json
+import shutil
+
+
+
 # Fuente usada para escribir sobre los memes
 FUENTE = "staticfiles/ufonts.com_impact.ttf"
 
@@ -23,9 +23,8 @@ CODE_BOT = "119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg"
 # URL para acceder al API de Telegram
 URL_TG_API = "https://api.telegram.org/bot" + CODE_BOT + "/"
 
-import logging
 
-logger = logging.getLogger("BotTelegram.telegram.request_api_tg.error_request")
+logger = logging.getLogger("BotTelegram.request_api_tg.error_request")
 
 def responder_callback_query(query_id):
     return requests.get(URL_TG_API + 'answerCallbackQuery', params={'callback_query_id': query_id})
@@ -162,7 +161,7 @@ def parsear_enviar_xml(chat_id, xml_object):
 
     result = parsear_xml_object(xml_object)
 
-    if result is None: return
+    if result is None: return False
 
     mark_keyboard = {}
 
