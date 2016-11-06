@@ -21,7 +21,7 @@ class ImagenWeb:
 
 # De las imagenes referenciadas en la BD obtiene una aleatoria
 def obtener_imagen_random():
-    todos = Imagen.objects.all()
+    todos = Imagen.objects.filter(id_lista__gte=1)
     if todos.exists():
         return choice(todos)
     return None
