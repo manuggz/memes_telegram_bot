@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
-from BotTelegram.ClasesTG.user_tg import UserTG
-from BotTelegram.ClasesTG.webhook_tg import WebhookTG
+from ClasesTG.user_tg import UserTG
+from ClasesTG.webhook_tg import WebhookTG
 from enviar_mensajes_usuario import *
 from forms import FormEnviarMensaje
 from maneja_respuesta import *
