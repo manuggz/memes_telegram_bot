@@ -96,42 +96,20 @@ def wannaknowupdates_tg(chat_id, usuario, is_debug, xml_string):
 # resto_mensaje es el texto que le sigue al comando /create , tal como el mensaje y el color
 def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
 
-    #print "c.1"
     if is_debug:  # Mensage de DEBUG
         enviar_mensaje_usuario(chat_id, "Respuesta /create comando " + resto_mensaje)
 
-    #print "c.2"
     if not usuario.imagen_actual:  # Si no se ha enviado una imagen al usuario
-        #print "c.3"
         parsear_enviar_xml(chat_id, obtener_xml_objeto("create_sin_imagen_reciente",xml_string))
         return
 
-    #print "c.4"
-    #if usuario.datos_imagen_borrador:
-        #print "c.5"
-        #usuario.datos_imagen_borrador.delete()
-        #usuario.datos_imagen_borrador.save()
-        #usuario.save()
-    #print "c.6"
-
-    #datos_imagen_borrador_nuevo = DatosImagenBorrador()
-    #print "c.7"
-    #datos_imagen_borrador_nuevo.save()
-
-    #print "c.8"
-    #usuario.datos_imagen_borrador = datos_imagen_borrador_nuevo
-    #print "c.9"
     usuario.esta_creando_meme = True
     usuario.upper_text = "Upper TEXT"
     usuario.lower_text = "Lower TEXT"
-    #usuario.save()
 
-    #print "c.10"
     if not resto_mensaje:  # Si el usuario solo nos envio "/create"
-        #print "c.11"
         guardar_imagen(usuario.imagen_actual)
 
-        #print "c.12"
         escribir_enviar_meme(
             chat_id,
             usuario.upper_text,
