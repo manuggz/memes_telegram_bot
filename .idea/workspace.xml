@@ -48,8 +48,8 @@
       <file leaf-file-name="procesar_comandos.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_comandos.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="400" column="0" selection-start-line="400" selection-start-column="0" selection-end-line="400" selection-end-column="0" />
+            <state relative-caret-position="384">
+              <caret line="392" column="54" selection-start-line="392" selection-start-column="54" selection-end-line="392" selection-end-column="54" />
               <folding>
                 <element signature="e#16#31#0" expanded="true" />
               </folding>
@@ -1100,7 +1100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1478432584629</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="cambiada la forma en que se borra la espera de comando">
+      <created>1478432951147</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1478432951147</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1176,7 +1183,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/madchat" />
     </ignored-roots>
-    <MESSAGE value="Fixed bugs" />
     <MESSAGE value="antes de agregarle manejo de cuentas" />
     <MESSAGE value="agregado manejo de log in y landing page plantilla" />
     <MESSAGE value="cambiada info del changelog y cambiada configuracion de settings" />
@@ -1201,7 +1207,8 @@
     <MESSAGE value="debug set to false" />
     <MESSAGE value="Refactorizaciones" />
     <MESSAGE value="falco el init" />
-    <option name="LAST_COMMIT_MESSAGE" value="falco el init" />
+    <MESSAGE value="cambiada la forma en que se borra la espera de comando" />
+    <option name="LAST_COMMIT_MESSAGE" value="cambiada la forma en que se borra la espera de comando" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1604,8 +1611,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_comandos.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="400" column="0" selection-start-line="400" selection-start-column="0" selection-end-line="400" selection-end-column="0" />
+        <state relative-caret-position="384">
+          <caret line="392" column="54" selection-start-line="392" selection-start-column="54" selection-end-line="392" selection-end-column="54" />
           <folding>
             <element signature="e#16#31#0" expanded="true" />
           </folding>
