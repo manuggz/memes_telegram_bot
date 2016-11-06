@@ -26,7 +26,7 @@ def procesar_callback_query(update_tg, xml_strings):
 
     #Avisa al chat de tg que se esta respondiendo la peticion
     # Visualmente, quita el simbolo de <cargando> en el boton que el usuario presionó
-    responder_callback_query(update_tg.callback_query.id)
+    responder_callback_query(update_tg.callback_query.id,text="HOla")
 
     formato = update_tg.callback_query.data.split(",")
 
