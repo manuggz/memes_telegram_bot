@@ -25,8 +25,14 @@ logger = logging.getLogger("BotTelegram.request_api_tg.error_request")
 logger_xml = logging.getLogger("BotTelegram.error_xml")
 
 
-def responder_callback_query(query_id):
-    return requests.get(URL_TG_API + 'answerCallbackQuery', params={'callback_query_id': query_id})
+def responder_callback_query(query_id,text = "",show_alert = False):
+
+    params = {'callback_query_id': query_id,"show_alert":show_alert}
+
+    if text:
+        params["text"] = text
+
+    return requests.get(URL_TG_API + 'answerCallbackQuery', params=params)
 
 
 def obtener_info_webhook():
