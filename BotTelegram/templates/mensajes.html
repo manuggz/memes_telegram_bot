@@ -16,14 +16,14 @@
     {% for mensaje in mensajes %}
     	<tbody>
     		<tr>
-    			<td>{{mensaje.id_mensaje}} </td>
+    			<td>{{mensaje.pk}} </td>
                 <td>{{mensaje.fecha}} </td>
     			<td>
-    				<a href ="{% url 'BotTelegram:usuarios' mensaje.usuario.pk %}">{{mensaje.usuario.pk}}({{mensaje.usuario.nombreusuario}}) </a>
+    				<a href ="{% url 'BotTelegram:usuarios' mensaje.usuario_t.pk %}" target="_blank">{{mensaje.usuario_t.pk}}({{mensaje.usuario_t.nombreusuario}}) </a>
     			</td>
-    			<td>
-    				<a href ="{{mensaje.imagen_enviada.url_imagen}}" target="_blank">Imagen </a>
-    			</td>
+                <td>
+                    <a href="{% url 'BotTelegram:imagen' mensaje.imagen_enviada_id %}" target="_blank">{{mensaje.imagen_enviada.textobuscado}} </a>
+                </td>
     			<!--<td>{{mensaje.update_id}} </td>
                 <td>{{mensaje.texto_enviado}} </td>-->
     		</tr>
