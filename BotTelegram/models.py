@@ -25,17 +25,9 @@ class DatosImagenBorrador(models.Model):
     color = models.CharField(max_length=200, null=True,default="white")
 
     def __str__(self):
-        str_r = self.upper_text
+        str_r = self.upper_text + " , " + self.lower_text + " , " + self.color
         return str_r
 
-class GrupoChat(models.Model):
-    id_chat = models.IntegerField(primary_key=True)
-    nombrechat = models.CharField(max_length=200, null=True)
-    is_suscrito_actu = models.BooleanField(default=True)
-
-    def __str__(self):
-        str_r = self.nombrechat
-        return str_r
 
 #Ultima Respuesta mandada por el servidor al usuario / Notar que
 # respuestas de texto como a /start no cuentan porque hay restricciones a la capacidad de la BD
@@ -45,7 +37,7 @@ class GrupoChat(models.Model):
 class RespuestaServidor(models.Model):
     usuario_t = models.ForeignKey(Usuario,primary_key=True)  # A Quien se envia el mensaje
     fecha = models.DateTimeField()  # Fecha de respuesta
-    imagen_enviada = models.ForeignKey("Imagen")  # Imagen enviada
+    imagen_enviada = models.ForeignKey("Imagen",on_delete=models.CASCADE)  # Imagen enviada
 
     def __str__(self):
         str_r = str(self.usuario_t)
@@ -65,3 +57,6 @@ class Imagen(models.Model):
         str_r = self.url_imagen + ":" + self.textobuscado +  "(" + str(self.id_lista) + ")"
         return str_r
 
+
+# Eliminar las imagenes que no estan referenciadas por los usuarios
+#DELETE FROM "BotTelegram_imagen" as ima_del   WHERE textobuscado not in ( select ima.textobuscado from "BotTelegram_imagen" as ima where ima.id in (select imagen_enviada_id from "BotTelegram_respuestaservidor"));

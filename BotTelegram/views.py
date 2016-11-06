@@ -1,17 +1,13 @@
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
-from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
-from BotTelegram.user_tg import UserTG
-from BotTelegram.webhook_tg import WebhookTG
+from BotTelegram.ClasesTG.user_tg import UserTG
+from BotTelegram.ClasesTG.webhook_tg import WebhookTG
 from enviar_mensajes_usuario import *
-from maneja_respuesta import *
 from forms import FormEnviarMensaje
-
-# import the logging library
-import logging
+from maneja_respuesta import *
 
 # Get an instance of a logger
 logger = logging.getLogger("BotTelegram")

@@ -1,3 +1,4 @@
+# coding=utf-8
 # Procesa el callback generado por los botones en el bot
 import sys
 from django.core.exceptions import ObjectDoesNotExist
@@ -7,10 +8,11 @@ from BotTelegram.enviar_mensajes_usuario import responder_callback_query, enviar
     guardar_imagen_enviada, parsear_enviar_xml, escribir_enviar_meme, parsear_xml_object, \
     enviar_imagen, borrar_cache_espera, guardar_imagen
 from BotTelegram.models import Usuario, Imagen, DatosImagenBorrador
-from BotTelegram.procesar_comandos import procesar_comando, construir_callback_buttons
+from BotTelegram.procesar_comandos import procesar_mensaje, construir_callback_buttons, random_tg
 
 
 def procesar_callback_query(update_tg, xml_strings):
+
     try:
         usuario_m = Usuario.objects.get(id_u=update_tg.callback_query.user_from.id)
     except ObjectDoesNotExist:
@@ -22,6 +24,8 @@ def procesar_callback_query(update_tg, xml_strings):
             apellido=update_tg.callback_query.user_from.last_name[:200]
         )
 
+    #Avisa al chat de tg que se esta respondiendo la peticion
+    # Visualmente, quita el simbolo de <cargando> en el boton que el usuario presionó
     responder_callback_query(update_tg.callback_query.id)
 
     formato = update_tg.callback_query.data.split(",")
@@ -31,17 +35,11 @@ def procesar_callback_query(update_tg, xml_strings):
     if formato[0] == "Random":
         # Notar que no se esta usando chat_instance arreglar
 
-        procesar_comando(
+        borrar_cache_espera(usuario_m)
+        imagen_enviada = random_tg(
             update_tg.callback_query.user_from.id,
-            update_tg.is_message_debug,
-            "private",
-            update_tg.message.datetime if update_tg.message else None,
-            usuario_m,
-            xml_strings,
-            "/random",
-            ""
+            update_tg.is_message_debug
         )
-        return
 
     elif formato[0] == "Next":
 
@@ -71,7 +69,7 @@ def procesar_callback_query(update_tg, xml_strings):
             usuario_m.save()
         else:
             parsear_enviar_xml(update_tg.callback_query.user_from.id, xml_strings.find("sin_imagen_borrador"))
-        return
+
     elif formato[0] == "SetLowerText":
         if usuario_m.datos_imagen_borrador:
             parsear_enviar_xml(update_tg.callback_query.user_from.id, xml_strings.find("dame_lower_text"))
@@ -79,7 +77,7 @@ def procesar_callback_query(update_tg, xml_strings):
             usuario_m.save()
         else:
             parsear_enviar_xml(update_tg.callback_query.user_from.id, xml_strings.find("sin_imagen_borrador"))
-        return
+
     elif formato[0] == "SetColor":
         if usuario_m.datos_imagen_borrador:
             parsear_enviar_xml(update_tg.callback_query.user_from.id, xml_strings.find("dame_color_text"))
@@ -87,7 +85,7 @@ def procesar_callback_query(update_tg, xml_strings):
             usuario_m.save()
         else:
             parsear_enviar_xml(update_tg.callback_query.user_from.id, xml_strings.find("sin_imagen_borrador"))
-        return
+
 
     if imagen_enviada:
         guardar_imagen_enviada(
@@ -101,7 +99,7 @@ def create_tg_callback(chat_id, usuario_m, formato, is_debug, xml_string):
     if is_debug:  # Mensage de DEBUG
         enviar_mensaje_usuario(chat_id, "Respuesta /create callback")
 
-    try:  # Intentamos obtener la siguiente
+    try:  # Intentamos obtener la imagen
         imagen_seleccionada = Imagen.objects.get(pk=formato[1])
     except ObjectDoesNotExist:  # No existe una imagen siguiente
         parsear_enviar_xml(chat_id, xml_string.find("imagen_muy_vieja_borrada"))

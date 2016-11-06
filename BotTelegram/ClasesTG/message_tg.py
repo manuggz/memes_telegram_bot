@@ -1,6 +1,7 @@
 # coding=utf-8
-from user_tg import UserTG
-from chat_tg import ChatTG
+from BotTelegram.ClasesTG.chat_tg import ChatTG
+from BotTelegram.ClasesTG.user_tg import UserTG
+
 
 class MessageTG:
 

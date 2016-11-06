@@ -9,7 +9,7 @@
 				<th> Nombre </th>
 				<th> Apellido </th>
 				<th> ID </th>
-				<th> Total mensajes enviados</th>
+				<th> Suscrito?</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -18,33 +18,34 @@
 				<td>{{usuario.nombre}} </td>
 				<td>{{usuario.apellido}} </td>
 				<td>{{usuario.pk}} </td>
-				<td><a href = '{% url 'BotTelegram:usuarios' usuario.pk %}'} >{{total_ms_en}} </a></td>
+				<td>
+                    {% if usuario.is_suscrito_actu %}
+				        Si
+                    {% else %}
+                        No
+				    {% endif %}
+                </td>
 			</tr>
 		</tbody>
 	</table>	
 
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th> ID Mensaje </th>
-				<!--<th> Update ID </th>-->
-				<th> Texto enviado </th>
-				<th> Imagen Respuesta</th>
-			</tr>
-		</thead>
-	{% for mensaje in mensajes %}
-		<tbody>
-			<tr>
-				<td>{{mensaje.id_mensaje}} </td>
-				<!--<td>{{mensaje.update_id}} </td>-->
-				<td>{{mensaje.texto_enviado}} </td>
-    			<td>
-    				<a href ="{{mensaje.imagen_enviada.url_imagen}}" target="_blank">Imagen </a>
-    			</td>
-			</tr>
-		</tbody>
-	{% endfor%}
-	</table>	
+    {% if usuario.ultima_respuesta %}
+        <span>Última respuesta enviada</span>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th> Fecha </th>
+                    <th> Imagen </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{usuario.ultima_respuesta.fecha}} </td>
+                    <td><a href="{% url 'BotTelegram:imagen' usuario.ultima_respuesta.imagen_enviada_id %}">{{usuario.ultima_respuesta.imagen_enviada.textobuscado}} </a> </td>
+                </tr>
+            </tbody>
+        </table>
+    {% endif %}
 
 	<hr>
 	<form class="form-inline" action ='{% url 'BotTelegram:usuarios' usuario.pk %}'} method = "POST">

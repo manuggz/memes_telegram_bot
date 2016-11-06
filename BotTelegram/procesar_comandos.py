@@ -8,7 +8,7 @@ from BotTelegram.construir_callback_buttons import construir_callback_buttons, c
 from BotTelegram.enviar_mensajes_usuario import enviar_mensaje_usuario, enviar_imagen, enviar_mensaje_ayuda_comando, \
     URL_TG_API, escribir_enviar_meme, guardar_imagen_enviada, parsear_enviar_xml, borrar_cache_espera, \
     obtener_upper_lower_text, guardar_imagen
-from BotTelegram.models import Imagen, DatosImagenBorrador
+from BotTelegram.models import Imagen, DatosImagenBorrador, Usuario
 from PIL import ImageColor
 from django.conf import settings
 
@@ -244,19 +244,37 @@ def buscar_meme_tg(chat_id, meme_name, tipo_chat, is_debug, xml_strings):
 
 
 ## Atiende el mensaje del usuario
-def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_strings,comando, resto_mensaje):
+def procesar_mensaje(mensaje, xml_strings,is_debug):
+
+    #Obtenemos la referencia al usuario o lo creamos
+    try:
+        usuario = Usuario.objects.get(id_u=mensaje.user_from.id)
+    except ObjectDoesNotExist:
+
+        usuario = Usuario(
+            id_u=mensaje.user_from.id,
+            nombreusuario=mensaje.user_from.username[:200],
+            nombre=mensaje.user_from.first_name[:200],
+            apellido=mensaje.user_from.last_name[:200]
+        )
+        usuario.save()
+
+    ## Dividimos el mensaje del usuario en: comando | Texto
+    comando , resto_mensaje = extraer_comando(mensaje.text)
+
+    # Posible imagen enviada como respuesta al mensaje del usuario
     imagen_enviada = None
 
     if comando == "/start":
         borrar_cache_espera(usuario)
         start_tg(
-            chat_id,
+            mensaje.user_from.id,
             is_debug,
             xml_strings
         )
     elif comando == "/help":
         help_tg(
-            chat_id,
+            mensaje.user_from.id,
             resto_mensaje,
             is_debug,
             xml_strings
@@ -265,26 +283,26 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
         borrar_cache_espera(usuario)
 
         imagen_enviada = random_tg(
-            chat_id,
+            mensaje.user_from.id,
             is_debug
         )
     elif comando == "/stop":
         stop_tg(
-            chat_id,
+            mensaje.user_from.id,
             usuario,
             is_debug,
             xml_strings
         )
     elif comando == "/wannaknowupdates":
         wannaknowupdates_tg(
-            chat_id,
+            mensaje.user_from.id,
             usuario,
             is_debug,
             xml_strings
         )
     elif comando == "/create":
         create_tg(
-            chat_id,
+            mensaje.user_from.id,
             usuario,
             resto_mensaje,
             is_debug,
@@ -293,7 +311,7 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
     elif comando == "/search":
 
         imagen_enviada = search_tg(
-            chat_id,
+            mensaje.user_from.id,
             usuario,
             resto_mensaje,
             is_debug,
@@ -306,7 +324,7 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
     elif comando == "/next":
         borrar_cache_espera(usuario)
         imagen_enviada = next_image_tg(
-            chat_id,
+            mensaje.user_from.id,
             usuario,
             is_debug,
             xml_strings
@@ -319,10 +337,10 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
                 if usuario.comando_en_espera == "SetUpperText":
                     if comando == "/none":
                         usuario.datos_imagen_borrador.upper_text = ""
-                        parsear_enviar_xml(chat_id, xml_strings.find("changed_upper_text_none"))
+                        parsear_enviar_xml(mensaje.user_from.id, xml_strings.find("changed_upper_text_none"))
                     else:
                         usuario.datos_imagen_borrador.upper_text = comando[:200]
-                        parsear_enviar_xml(chat_id, xml_strings.find("changed_upper_text"))
+                        parsear_enviar_xml(mensaje.user_from.id, xml_strings.find("changed_upper_text"))
                     usuario.datos_imagen_borrador.save()
                     cambio_algo = True
 
@@ -330,10 +348,10 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
 
                     if comando == "/none":
                         usuario.datos_imagen_borrador.lower_text = ""
-                        parsear_enviar_xml(chat_id, xml_strings.find("changed_lower_text_none"))
+                        parsear_enviar_xml(mensaje.user_from.id, xml_strings.find("changed_lower_text_none"))
                     else:
                         usuario.datos_imagen_borrador.lower_text = comando[:200]
-                        parsear_enviar_xml(chat_id, xml_strings.find("changed_lower_text"))
+                        parsear_enviar_xml(mensaje.user_from.id, xml_strings.find("changed_lower_text"))
 
                     usuario.datos_imagen_borrador.save()
                     cambio_algo = True
@@ -341,8 +359,8 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
                 elif usuario.comando_en_espera == "SetColor":
 
                     if comando == "/none":
-                        nuevo_color = "red"
-                        parsear_enviar_xml(chat_id, xml_strings.find("changed_color_text_none"))
+                        nuevo_color = "white"
+                        parsear_enviar_xml(mensaje.user_from.id, xml_strings.find("changed_color_text_none"))
                     else:
                         #usuario.datos_imagen_borrador.lower_text = comando[:200]
                         nuevo_color = comando[:200]
@@ -352,12 +370,12 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
                     try:
                         color_rgb = ImageColor.getrgb(nuevo_color)
                     except ValueError:
-                        parsear_enviar_xml(chat_id,xml_strings.find("error_mal_color"))
+                        parsear_enviar_xml(mensaje.user_from.id,xml_strings.find("error_mal_color"))
 
                     if color_rgb:
                         usuario.datos_imagen_borrador.color = nuevo_color
                         usuario.datos_imagen_borrador.save()
-                        parsear_enviar_xml(chat_id, xml_strings.find("changed_color_text"))
+                        parsear_enviar_xml(mensaje.user_from.id, xml_strings.find("changed_color_text"))
                         cambio_algo = True
 
                 if cambio_algo:
@@ -365,29 +383,30 @@ def procesar_comando(chat_id, is_debug, tipo_chat, fecha_hora, usuario, xml_stri
                     guardar_imagen(usuario.ultima_respuesta.imagen_enviada)
 
                     escribir_enviar_meme(
-                        chat_id,
+                        mensaje.user_from.id,
                         usuario.datos_imagen_borrador.upper_text,
                         usuario.datos_imagen_borrador.lower_text,
                         usuario.datos_imagen_borrador.color,
                         usuario.ultima_respuesta.imagen_enviada.ruta_imagen,
                         mark_keyboard=construir_callbackbuttons_create(xml_strings)
                     )
+                    borrar_cache_espera(usuario)
 
             else:
-                parsear_enviar_xml(chat_id,xml_strings.find("sin_imagen_borrador"))
+                parsear_enviar_xml(mensaje.user_from.id,xml_strings.find("sin_imagen_borrador"))
         else:
             borrar_cache_espera(usuario)
             imagen_enviada = buscar_meme_tg(
-                chat_id,
+                mensaje.user_from.id,
                 comando,
-                tipo_chat,
+                mensaje.chat.type,
                 is_debug,
                 xml_strings
             )
 
     if imagen_enviada:
         guardar_imagen_enviada(
-            fecha_hora,
+            mensaje.datetime,
             usuario,
             imagen_enviada
         )
@@ -414,16 +433,16 @@ def buscar_primera_imagen(chat_id, meme_name, xml_strings):
     return primera_imagen
 
 
-# Separa el texto del usuario en las partes importantes
+# Separa el texto enviado por el usuario en la forma "comando resto"
 # Ejemplo:
 # "/comando ASDASd"
-# regresa ("comando","ASDASd",False)
+# regresa ("comando","ASDASd")
 #
 # "/comando@MemesBot Test - Test , Red"
-# regresa ("comando","Test - Test , Red",True)
+# regresa ("comando","Test - Test , Red")
 #
 # "yao ming"
-# regresa ("yao ming","",False)
+# regresa ("yao ming","")
 def extraer_comando(text):
     if not text: return ("","")
 
