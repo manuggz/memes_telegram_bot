@@ -23,7 +23,15 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = '#m60qy*)s14)c$w#xs2t9e028^du7#jpq+pa*h&ls1ljc%r2%&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+ADMINS = [('Manuel', 'manuelggonzalezm@gmail.com')]
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'memesbottg@gmail.com'
+EMAIL_HOST_PASSWORD = 'Itadakimasu3093@!'
+EMAIL_PORT = 587
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
