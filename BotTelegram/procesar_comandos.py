@@ -1,14 +1,16 @@
 # coding=utf-8
+import json
 
 import requests
 import sys
 from django.core.exceptions import ObjectDoesNotExist
+from os.path import exists, basename, join
 
 from BotTelegram.construir_callback_buttons import construir_callback_buttons, construir_callbackbuttons_create
 from BotTelegram.enviar_mensajes_usuario import enviar_mensaje_usuario, enviar_imagen, enviar_mensaje_ayuda_comando, \
-    URL_TG_API, escribir_enviar_meme, guardar_imagen_enviada, parsear_enviar_xml, borrar_cache_espera, \
-    obtener_upper_lower_text, guardar_imagen
-from BotTelegram.models import Imagen, DatosImagenBorrador, Usuario
+    URL_TG_API, escribir_enviar_meme, guardar_imagen_respuesta_servidor, parsear_enviar_xml, borrar_cache_espera, \
+    obtener_upper_lower_text, guardar_imagen, CODE_BOT
+from BotTelegram.models import Imagen, Usuario
 from PIL import ImageColor
 from django.conf import settings
 
@@ -94,38 +96,54 @@ def wannaknowupdates_tg(chat_id, usuario, is_debug, xml_string):
 # resto_mensaje es el texto que le sigue al comando /create , tal como el mensaje y el color
 def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
 
+    #print "c.1"
     if is_debug:  # Mensage de DEBUG
         enviar_mensaje_usuario(chat_id, "Respuesta /create comando " + resto_mensaje)
 
-    if not usuario.ultima_respuesta:  # Si no se ha enviado una imagen al usuario
+    #print "c.2"
+    if not usuario.imagen_actual:  # Si no se ha enviado una imagen al usuario
+        #print "c.3"
         parsear_enviar_xml(chat_id, obtener_xml_objeto("create_sin_imagen_reciente",xml_string))
         return
 
-    if usuario.datos_imagen_borrador:
-        usuario.datos_imagen_borrador.delete()
-        usuario.datos_imagen_borrador.save()
-        usuario.save()
+    #print "c.4"
+    #if usuario.datos_imagen_borrador:
+        #print "c.5"
+        #usuario.datos_imagen_borrador.delete()
+        #usuario.datos_imagen_borrador.save()
+        #usuario.save()
+    #print "c.6"
 
-    datos_imagen_borrador_nuevo = DatosImagenBorrador()
-    datos_imagen_borrador_nuevo.save()
+    #datos_imagen_borrador_nuevo = DatosImagenBorrador()
+    #print "c.7"
+    #datos_imagen_borrador_nuevo.save()
 
-    usuario.datos_imagen_borrador = datos_imagen_borrador_nuevo
-    usuario.save()
+    #print "c.8"
+    #usuario.datos_imagen_borrador = datos_imagen_borrador_nuevo
+    #print "c.9"
+    usuario.esta_creando_meme = True
+    usuario.upper_text = "Upper TEXT"
+    usuario.lower_text = "Lower TEXT"
+    #usuario.save()
 
+    #print "c.10"
     if not resto_mensaje:  # Si el usuario solo nos envio "/create"
-        guardar_imagen(usuario.ultima_respuesta.imagen_enviada)
+        #print "c.11"
+        guardar_imagen(usuario.imagen_actual)
 
+        #print "c.12"
         escribir_enviar_meme(
             chat_id,
-            datos_imagen_borrador_nuevo.upper_text,
-            datos_imagen_borrador_nuevo.lower_text,
-            datos_imagen_borrador_nuevo.color,
-            usuario.ultima_respuesta.imagen_enviada.ruta_imagen,
+            usuario.upper_text,
+            usuario.lower_text,
+            usuario.color,
+            usuario.imagen_actual.ruta_imagen,
             mark_keyboard=construir_callbackbuttons_create(xml_string)
         )
         return
 
 
+    #print "c.13"
     # Divide resto_mensaje en el TEXTO y el COLOR del mensaje
     # Ejemplo : "TEXTO 1- TEXTO 2, RED" ----------> ["TEXTO 1- TEXTO 2","RED"]
     # Ejemplo : "TEXTO 1" ----------> ["TEXTO 1"]
@@ -144,19 +162,19 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
 
     upper_text , lower_text = obtener_upper_lower_text(texto)
 
-    datos_imagen_borrador_nuevo.upper_text = upper_text
-    datos_imagen_borrador_nuevo.upper_text = lower_text
-    datos_imagen_borrador_nuevo.color = color
-    datos_imagen_borrador_nuevo.save()
+    usuario.upper_text = upper_text
+    usuario.lower_text = lower_text
+    usuario.color = color
+    usuario.save()
 
-    guardar_imagen(usuario.ultima_respuesta.imagen_enviada)
+    guardar_imagen(usuario.imagen_actual)
 
     escribir_enviar_meme(
         chat_id,
         upper_text,
         lower_text,
         color,
-        usuario.ultima_respuesta.imagen_enviada.ruta_imagen,
+        usuario.imagen_actual.ruta_imagen,
         mark_keyboard=construir_callbackbuttons_create(xml_string)
     )
 
@@ -205,14 +223,14 @@ def next_image_tg(chat_id, usuario, is_debug, xml_string):
         enviar_mensaje_usuario(chat_id, "Respuesta /next")
 
 
-    if not usuario.ultima_respuesta_id:  # En caso de que no exista una imagen anterior
+    if not usuario.imagen_actual:  # En caso de que no exista una imagen anterior
         parsear_enviar_xml(chat_id, xml_string.find("next_sin_imagen"))
         return None
 
     try:  # Intentamos obtener la siguiente
         imagen_siguiente = Imagen.objects.get(
-            id_lista=usuario.ultima_respuesta.imagen_enviada.id_lista + 1,
-            textobuscado=usuario.ultima_respuesta.imagen_enviada.textobuscado
+            id_lista=usuario.imagen_actual.id_lista + 1,
+            textobuscado=usuario.imagen_actual.textobuscado
         )
 
         # Enviamos la imagen
@@ -244,7 +262,7 @@ def buscar_meme_tg(chat_id, meme_name, tipo_chat, is_debug, xml_strings):
 
 
 ## Atiende el mensaje del usuario
-def procesar_mensaje(mensaje, xml_strings,is_debug):
+def procesar_mensaje_texto(mensaje, xml_strings, is_debug):
 
     #Obtenemos la referencia al usuario o lo creamos
     try:
@@ -331,29 +349,28 @@ def procesar_mensaje(mensaje, xml_strings,is_debug):
         )
     else:
         if usuario.comando_en_espera != "None":
-            if usuario.datos_imagen_borrador:
+            if usuario.esta_creando_meme:
 
                 cambio_algo = False
                 if usuario.comando_en_espera == "SetUpperText":
                     if comando == "/none":
-                        usuario.datos_imagen_borrador.upper_text = ""
+                        usuario.upper_text = ""
                         parsear_enviar_xml(mensaje.user_from.id, xml_strings.find("changed_upper_text_none"))
                     else:
-                        usuario.datos_imagen_borrador.upper_text = comando[:200]
+                        usuario.upper_text = comando[:200]
                         parsear_enviar_xml(mensaje.user_from.id, xml_strings.find("changed_upper_text"))
-                    usuario.datos_imagen_borrador.save()
                     cambio_algo = True
 
                 elif usuario.comando_en_espera == "SetLowerText":
 
                     if comando == "/none":
-                        usuario.datos_imagen_borrador.lower_text = ""
+                        usuario.lower_text = ""
                         parsear_enviar_xml(mensaje.user_from.id, xml_strings.find("changed_lower_text_none"))
                     else:
-                        usuario.datos_imagen_borrador.lower_text = comando[:200]
+                        usuario.lower_text = comando[:200]
                         parsear_enviar_xml(mensaje.user_from.id, xml_strings.find("changed_lower_text"))
 
-                    usuario.datos_imagen_borrador.save()
+                    usuario.save()
                     cambio_algo = True
 
                 elif usuario.comando_en_espera == "SetColor":
@@ -373,21 +390,20 @@ def procesar_mensaje(mensaje, xml_strings,is_debug):
                         parsear_enviar_xml(mensaje.user_from.id,xml_strings.find("error_mal_color"))
 
                     if color_rgb:
-                        usuario.datos_imagen_borrador.color = nuevo_color
-                        usuario.datos_imagen_borrador.save()
+                        usuario.color = nuevo_color
                         parsear_enviar_xml(mensaje.user_from.id, xml_strings.find("changed_color_text"))
                         cambio_algo = True
 
                 if cambio_algo:
-
-                    guardar_imagen(usuario.ultima_respuesta.imagen_enviada)
+                    usuario.save()
+                    guardar_imagen(usuario.imagen_actual)
 
                     escribir_enviar_meme(
                         mensaje.user_from.id,
-                        usuario.datos_imagen_borrador.upper_text,
-                        usuario.datos_imagen_borrador.lower_text,
-                        usuario.datos_imagen_borrador.color,
-                        usuario.ultima_respuesta.imagen_enviada.ruta_imagen,
+                        usuario.upper_text,
+                        usuario.lower_text,
+                        usuario.color,
+                        usuario.imagen_actual.ruta_imagen,
                         mark_keyboard=construir_callbackbuttons_create(xml_strings)
                     )
                     usuario.comando_en_espera = "None"
@@ -405,7 +421,7 @@ def procesar_mensaje(mensaje, xml_strings,is_debug):
             )
 
     if imagen_enviada:
-        guardar_imagen_enviada(
+        guardar_imagen_respuesta_servidor(
             mensaje.datetime,
             usuario,
             imagen_enviada
@@ -432,6 +448,64 @@ def buscar_primera_imagen(chat_id, meme_name, xml_strings):
 
     return primera_imagen
 
+## Se encarga de manejar las fotos que el usuario envia
+def procesar_mensaje_foto(mensaje, xml_strings, is_debug):
+
+    try:
+        usuario = Usuario.objects.get(id_u=mensaje.user_from.id)
+    except ObjectDoesNotExist:
+
+        usuario = Usuario(
+            id_u=mensaje.user_from.id,
+            nombreusuario=mensaje.user_from.username[:200],
+            nombre=mensaje.user_from.first_name[:200],
+            apellido=mensaje.user_from.last_name[:200]
+        )
+        usuario.save()
+
+    photo_size = mensaje.photo.maximo_tam()
+
+    if photo_size:
+        r = requests.get(URL_TG_API + 'getFile',
+                         params={"file_id": photo_size.file_id})
+        respuesta = json.loads(r.text)
+
+        if respuesta["ok"]:
+
+            file_path_tg = respuesta["result"]["file_path"]
+            file_path_servidor = join('staticfiles', basename(file_path_tg))
+            photo_size.file_id = respuesta["result"]["file_id"]
+            photo_size.file_size = respuesta["result"]["file_size"]
+
+            try:  # si ya el usuario subio una imagen anterior la borramos
+                imagenes = Imagen.objects.filter(textobuscado=mensaje.user_from.id,
+                                            id_lista=-1)
+                imagenes.delete()
+            except ObjectDoesNotExist:
+                pass
+
+            ## Creamos una nueva imagen en la bd
+            imagen = Imagen(
+                id_lista=-1,  ## dice que es del usuario
+                url_imagen="https://api.telegram.org/file/bot" + CODE_BOT + "/" + file_path_tg,
+                ruta_imagen=file_path_servidor,
+                textobuscado=usuario.pk,
+                title=mensaje.caption
+            )
+            imagen.save()
+
+            guardar_imagen(imagen)
+
+            if exists(file_path_servidor):
+                usuario.comando_en_espera = "None"
+
+                print "guardar imagen"
+                guardar_imagen_respuesta_servidor(mensaje.datetime, usuario, imagen,guardar_usuario = False)
+
+                print "create"
+                create_tg(mensaje.user_from.id,usuario,"",is_debug,xml_strings)
+
+    usuario.save()
 
 # Separa el texto enviado por el usuario en la forma "comando resto"
 # Ejemplo:
