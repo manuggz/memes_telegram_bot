@@ -266,7 +266,6 @@ def procesar_mensaje(mensaje, xml_strings,is_debug):
     imagen_enviada = None
 
     if comando == "/start":
-        borrar_cache_espera(usuario)
         start_tg(
             mensaje.user_from.id,
             is_debug,
@@ -280,7 +279,6 @@ def procesar_mensaje(mensaje, xml_strings,is_debug):
             xml_strings
         )
     elif comando == "/random":
-        borrar_cache_espera(usuario)
 
         imagen_enviada = random_tg(
             mensaje.user_from.id,
@@ -318,11 +316,8 @@ def procesar_mensaje(mensaje, xml_strings,is_debug):
             xml_strings
         )
 
-        if imagen_enviada is not None:
-            borrar_cache_espera(usuario)
 
     elif comando == "/next":
-        borrar_cache_espera(usuario)
         imagen_enviada = next_image_tg(
             mensaje.user_from.id,
             usuario,
@@ -390,12 +385,11 @@ def procesar_mensaje(mensaje, xml_strings,is_debug):
                         usuario.ultima_respuesta.imagen_enviada.ruta_imagen,
                         mark_keyboard=construir_callbackbuttons_create(xml_strings)
                     )
-                    borrar_cache_espera(usuario)
+                    usuario.comando_en_espera = "None"
 
             else:
                 parsear_enviar_xml(mensaje.user_from.id,xml_strings.find("sin_imagen_borrador"))
         else:
-            borrar_cache_espera(usuario)
             imagen_enviada = buscar_meme_tg(
                 mensaje.user_from.id,
                 comando,
@@ -404,7 +398,9 @@ def procesar_mensaje(mensaje, xml_strings,is_debug):
                 xml_strings
             )
 
+
     if imagen_enviada:
+        borrar_cache_espera(usuario)
         guardar_imagen_enviada(
             mensaje.datetime,
             usuario,
