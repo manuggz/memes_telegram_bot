@@ -50,7 +50,7 @@
         <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
-              <caret line="28" column="68" selection-start-line="28" selection-start-column="68" selection-end-line="28" selection-end-column="68" />
+              <caret line="28" column="56" selection-start-line="28" selection-start-column="56" selection-end-line="28" selection-end-column="56" />
               <folding>
                 <element signature="e#72#82#0" expanded="true" />
               </folding>
@@ -1015,7 +1015,14 @@
       <option name="project" value="LOCAL" />
       <updated>1478444303853</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="no alert en test">
+      <created>1478444354933</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1478444354933</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1091,7 +1098,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/madchat" />
     </ignored-roots>
-    <MESSAGE value="Agregada pagina para ver los datos del bot en forma de user y datos del webhook" />
     <MESSAGE value="Agregado soporte botones random y create" />
     <MESSAGE value="fix color str" />
     <MESSAGE value="fix comando_en_espera" />
@@ -1116,7 +1122,8 @@
     <MESSAGE value="cambios al front" />
     <MESSAGE value="test answer" />
     <MESSAGE value="quitado test" />
-    <option name="LAST_COMMIT_MESSAGE" value="quitado test" />
+    <MESSAGE value="no alert en test" />
+    <option name="LAST_COMMIT_MESSAGE" value="no alert en test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1524,7 +1531,7 @@
     <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
-          <caret line="28" column="68" selection-start-line="28" selection-start-column="68" selection-end-line="28" selection-end-column="68" />
+          <caret line="28" column="56" selection-start-line="28" selection-start-column="56" selection-end-line="28" selection-end-column="56" />
           <folding>
             <element signature="e#72#82#0" expanded="true" />
           </folding>
