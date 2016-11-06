@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9a5328c0-0b85-4a51-b0cf-d04724dbb485" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" afterPath="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py" afterPath="$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py" />
     </list>
     <ignored path="memes_telegramd.iws" />
@@ -50,8 +49,8 @@
       <file leaf-file-name="procesar_callbackquery.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+            <state relative-caret-position="180">
+              <caret line="28" column="56" selection-start-line="28" selection-start-column="56" selection-end-line="28" selection-end-column="56" />
               <folding>
                 <element signature="e#72#82#0" expanded="true" />
               </folding>
@@ -1002,7 +1001,14 @@
       <option name="project" value="LOCAL" />
       <updated>1478441867257</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="test answer">
+      <created>1478443920458</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1478443920458</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1078,7 +1084,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/madchat" />
     </ignored-roots>
-    <MESSAGE value="cambiada info del changelog y cambiada configuracion de settings" />
     <MESSAGE value="ws" />
     <MESSAGE value="Agregada pagina para ver los datos del bot en forma de user y datos del webhook" />
     <MESSAGE value="Agregado soporte botones random y create" />
@@ -1103,7 +1108,8 @@
     <MESSAGE value="cambiada la forma en que se borra la espera de comando" />
     <MESSAGE value="refrwsado" />
     <MESSAGE value="cambios al front" />
-    <option name="LAST_COMMIT_MESSAGE" value="cambios al front" />
+    <MESSAGE value="test answer" />
+    <option name="LAST_COMMIT_MESSAGE" value="test answer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1510,8 +1516,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        <state relative-caret-position="180">
+          <caret line="28" column="56" selection-start-line="28" selection-start-column="56" selection-end-line="28" selection-end-column="56" />
           <folding>
             <element signature="e#72#82#0" expanded="true" />
           </folding>
