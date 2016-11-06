@@ -1,7 +1,7 @@
 from os.path import exists
 from os.path import splitext
 from random import random
-from BotTelegram.models import Usuario, RespuestaServidor, Imagen
+from BotTelegram.models import Usuario, Imagen
 from time import sleep
 from django.utils import timezone
 from PIL import Image, ImageDraw, ImageFont
@@ -93,8 +93,10 @@ def enviar_imagen(chat_id, imagen, reply_markup=None):
 
 
 def enviar_mensaje_imagen(chat_id, ruta_foto, caption="", reply_markup=None):
+    #print "e.1 ruta_foto: " + ruta_foto
     files = {'photo': open(ruta_foto, 'rb')}
 
+    #print "e.2"
     data_message = {'chat_id': chat_id}
 
     if reply_markup:
@@ -103,35 +105,36 @@ def enviar_mensaje_imagen(chat_id, ruta_foto, caption="", reply_markup=None):
     if caption:
         data_message["caption"] = caption
 
+    #print "e.3"
     request_get_api_telegram(URL_TG_API + 'sendChatAction',  {'chat_id': chat_id, 'action': 'upload_photo'})
 
+    #print "e.4"
     url = URL_TG_API + 'sendPhoto'
-
     r = requests.post(
         URL_TG_API + "sendPhoto",
         data=data_message,
         files=files
     )
+    #print "e.5"
 
     if r.status_code != 200:
         logear_error(url, "", r.text)
         return -1
+    #print "e.6"
 
     respuesta = json.loads(r.text)
     if not respuesta["ok"]:
         logear_error(url,"", r.text)
         return 1
+    #print "e.7"
 
     return 0
 
 
 def borrar_cache_espera(usuario):
-    if usuario.datos_imagen_borrador:
-        usuario.datos_imagen_borrador.delete()
-        usuario.save()
 
+    usuario.esta_creando_meme = False
     usuario.comando_en_espera = "None"
-
     usuario.save()
 
 # Parsea un xml object y lo envia en formato de la API de Telegram
@@ -180,14 +183,18 @@ def parsear_xml_object(xml_object):
 
 
 
+
+def guardar_url_archivo(url_archivo,ruta_guardar):
+    resp = requests.get(url_archivo, stream=True)
+
+    with open(ruta_guardar, 'wb') as archivo:
+        shutil.copyfileobj(resp.raw, archivo)
+
 # Si no existe la imagen en el servidor
 # la guarda en la ruta especificada
 def guardar_imagen(imagen):
     if not exists(imagen.ruta_imagen):
-        resp = requests.get(imagen.url_imagen, stream=True)
-
-        with open(imagen.ruta_imagen, 'wb') as archivo_img:
-            shutil.copyfileobj(resp.raw, archivo_img)
+        guardar_url_archivo(imagen.url_imagen,imagen.ruta_imagen)
 
 
 def obtener_upper_lower_text(texto):
@@ -206,16 +213,26 @@ def obtener_upper_lower_text(texto):
 
 
 def escribir_enviar_meme(chat_id, upper_text, lower_text, color, ruta_imagen, mark_keyboard=None):
+    #print "es.1"
     imagen_pil = Image.open(ruta_imagen)
+    #print "es.2"
     draw_pil = ImageDraw.Draw(imagen_pil)
+    #print "es.3"
 
     dibujar_texto_sobre_imagen(upper_text, draw_pil, imagen_pil, (lambda td, sz: sz[0] // 12), color)
+    #print "es.4"
     dibujar_texto_sobre_imagen(lower_text, draw_pil, imagen_pil, (lambda td, sz: sz[1] - td[1] - td[1] // 2), color)
+    #print "es.5"
 
+    #print "es.6"
     ruta_tu = splitext(ruta_imagen)
+    #print "es.7"
     ruta_guardar = ruta_tu[0] + str(random())[2:] + ".PNG"
+    #print "es.8"
 
+    #print "es.9"
     imagen_pil.save(ruta_guardar, quality=100)
+    #print "es.10"
     enviar_mensaje_imagen(chat_id, ruta_guardar, reply_markup=mark_keyboard)
 
 
@@ -255,27 +272,20 @@ def dibujar_texto_sobre_imagen(texto, image_draw, image, fposiciony, color):
     image_draw.text((x, y), texto, font=fuente, fill=color)
 
 
-def guardar_imagen_enviada(datetime_unix, usuario_m, image):
+def guardar_imagen_respuesta_servidor(datetime_unix, usuario_m, image,guardar_usuario = True):
     if datetime_unix:
         datetime_d = datetime.datetime.utcfromtimestamp(int(datetime_unix))
     else:
         datetime_d = datetime.datetime.now()
 
-    # creamos la respuesta
-    respuesta = RespuestaServidor(
-        fecha=timezone.make_aware(
+    #print "g.3"
+
+    usuario_m.imagen_actual = image
+    usuario_m.fecha_ultima_respuesta = timezone.make_aware(
             datetime_d,
             timezone.get_default_timezone()
-        ),
-        usuario_t=usuario_m,
-        imagen_enviada=image
-    )
+        )
+    #print "g.6"
 
-    # Actualizamos el usuario
-    if usuario_m.ultima_respuesta:
-        usuario_m.ultima_respuesta.delete()
-
-    respuesta.save()  # Guardamos en la BD
-
-    usuario_m.ultima_respuesta = respuesta
-    usuario_m.save()
+    if guardar_usuario:
+        usuario_m.save()

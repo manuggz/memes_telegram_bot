@@ -29,7 +29,7 @@
 		</tbody>
 	</table>	
 
-    {% if usuario.ultima_respuesta %}
+    {% if usuario.imagen_actual %}
         <span>Última respuesta enviada</span>
         <table class="table table-hover">
             <thead>
@@ -40,8 +40,8 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{usuario.ultima_respuesta.fecha}} </td>
-                    <td><a href="{% url 'BotTelegram:imagen' usuario.ultima_respuesta.imagen_enviada_id %}">{{usuario.ultima_respuesta.imagen_enviada.textobuscado}} </a> </td>
+                    <td>{{usuario.fecha_ultima_respuesta}} </td>
+                    <td><a href="{% url 'BotTelegram:imagen' usuario.imagen_actual %}">{{usuario.imagen_actual.textobuscado}} </a> </td>
                 </tr>
             </tbody>
         </table>

@@ -1,5 +1,6 @@
 # coding=utf-8
 from BotTelegram.ClasesTG.chat_tg import ChatTG
+from BotTelegram.ClasesTG.photo_size_array_tg import PhotoSizeArray
 from BotTelegram.ClasesTG.user_tg import UserTG
 
 
@@ -38,6 +39,8 @@ class MessageTG:
         # Type:Array of PhotoSize
         # Optional. Message is a photo, available sizes of the photo
         self.photo = dict_message.get("photo", None)
+        if self.photo:
+            self.photo = PhotoSizeArray(self.photo)
 
         # Type: String, Optional. Caption for the document, photo or video, 0-200 characters
         self.caption = dict_message.get("caption", None)

@@ -5,10 +5,10 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from BotTelegram.construir_callback_buttons import construir_callbackbuttons_create
 from BotTelegram.enviar_mensajes_usuario import responder_callback_query, enviar_mensaje_usuario, \
-    guardar_imagen_enviada, parsear_enviar_xml, escribir_enviar_meme, parsear_xml_object, \
+    guardar_imagen_respuesta_servidor, parsear_enviar_xml, escribir_enviar_meme, parsear_xml_object, \
     enviar_imagen, borrar_cache_espera, guardar_imagen
-from BotTelegram.models import Usuario, Imagen, DatosImagenBorrador
-from BotTelegram.procesar_comandos import procesar_mensaje, construir_callback_buttons, random_tg
+from BotTelegram.models import Usuario, Imagen
+from BotTelegram.procesar_comandos import procesar_mensaje_texto, construir_callback_buttons, random_tg
 
 
 def procesar_callback_query(update_tg, xml_strings):
@@ -63,7 +63,7 @@ def procesar_callback_query(update_tg, xml_strings):
 
     elif formato[0] == "SetUpperText":
 
-        if usuario_m.datos_imagen_borrador:
+        if usuario_m.esta_creando_meme:
             parsear_enviar_xml(update_tg.callback_query.user_from.id, xml_strings.find("dame_upper_text"))
             usuario_m.comando_en_espera = formato[0]
             usuario_m.save()
@@ -71,7 +71,7 @@ def procesar_callback_query(update_tg, xml_strings):
             parsear_enviar_xml(update_tg.callback_query.user_from.id, xml_strings.find("sin_imagen_borrador"))
 
     elif formato[0] == "SetLowerText":
-        if usuario_m.datos_imagen_borrador:
+        if usuario_m.esta_creando_meme:
             parsear_enviar_xml(update_tg.callback_query.user_from.id, xml_strings.find("dame_lower_text"))
             usuario_m.comando_en_espera = formato[0]
             usuario_m.save()
@@ -79,7 +79,7 @@ def procesar_callback_query(update_tg, xml_strings):
             parsear_enviar_xml(update_tg.callback_query.user_from.id, xml_strings.find("sin_imagen_borrador"))
 
     elif formato[0] == "SetColor":
-        if usuario_m.datos_imagen_borrador:
+        if usuario_m.esta_creando_meme:
             parsear_enviar_xml(update_tg.callback_query.user_from.id, xml_strings.find("dame_color_text"))
             usuario_m.comando_en_espera = formato[0]
             usuario_m.save()
@@ -88,7 +88,7 @@ def procesar_callback_query(update_tg, xml_strings):
 
 
     if imagen_enviada:
-        guardar_imagen_enviada(
+        guardar_imagen_respuesta_servidor(
             None,
             usuario_m,
             imagen_enviada
@@ -109,19 +109,18 @@ def create_tg_callback(chat_id, usuario_m, formato, is_debug, xml_string):
 
     # guardar_imagen_enviada(None,usuario_m,imagen_seleccionada)
 
-    datos_imagen_borrador_nuevo = DatosImagenBorrador()
-    datos_imagen_borrador_nuevo.save()
-
-    usuario_m.datos_imagen_borrador = datos_imagen_borrador_nuevo
+    usuario_m.esta_creando_meme = True
+    usuario_m.upper_text = "Upper TEXT"
+    usuario_m.lower_text = "Lower TEXT"
     usuario_m.save()
 
     guardar_imagen(imagen_seleccionada)
 
     escribir_enviar_meme(
         chat_id,
-        datos_imagen_borrador_nuevo.upper_text,
-        datos_imagen_borrador_nuevo.lower_text,
-        datos_imagen_borrador_nuevo.color,
+        usuario_m.upper_text,
+        usuario_m.lower_text,
+        usuario_m.color,
         imagen_seleccionada.ruta_imagen,
         mark_keyboard=construir_callbackbuttons_create(xml_string)
     )
