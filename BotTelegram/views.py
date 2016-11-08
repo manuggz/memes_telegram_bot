@@ -102,3 +102,5 @@ def home(request):
     return render(request,'home.html')
 
 
+def pokemon(request):
+    return render(request,'pokemon.html')

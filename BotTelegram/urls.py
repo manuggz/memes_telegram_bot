@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^imagenes/(?P<id_imagen>\d+)$', views.mostrar_imagen, name='imagen'), #Muestra los datos de una imagen
 
     url(r'^webhook/$', views.webhook, name='webhook'),  # Establece/Muestra el WebHook
+    url(r'^pokemon/$', views.pokemon, name='pokemon'),  # Establece/Muestra el WebHook
 
     url(r'^me/$', views.mostrar_me, name='me'),  # Muestra informacion sobre el bot
 
