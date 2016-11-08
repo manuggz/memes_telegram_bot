@@ -41,7 +41,7 @@
             <tbody>
                 <tr>
                     <td>{{usuario.fecha_ultima_respuesta}} </td>
-                    <td><a href="{% url 'BotTelegram:imagen' usuario.imagen_actual %}">{{usuario.imagen_actual.textobuscado}} </a> </td>
+                    <td><a href="{% url 'BotTelegram:imagen' usuario.imagen_actual.pk %}">{{usuario.imagen_actual.textobuscado}} </a> </td>
                 </tr>
             </tbody>
         </table>

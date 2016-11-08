@@ -4,12 +4,9 @@
     <bookmark url="file://$PROJECT_DIR$/BotTelegram/languages/en_US/strings.xml" line="75" mnemonic="7" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a5328c0-0b85-4a51-b0cf-d04724dbb485" name="Default" comment="arreglado random utilizando las fotos subidass">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BotTelegram/templates/pokemon.html" />
+    <list default="true" id="9a5328c0-0b85-4a51-b0cf-d04724dbb485" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/urls.py" afterPath="$PROJECT_DIR$/BotTelegram/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/views.py" afterPath="$PROJECT_DIR$/BotTelegram/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MemesTelegramDjango/settings.py" afterPath="$PROJECT_DIR$/MemesTelegramDjango/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotTelegram/templates/usuario.html" afterPath="$PROJECT_DIR$/BotTelegram/templates/usuario.html" />
     </list>
     <ignored path="memes_telegramd.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,23 +61,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="procesar_callbackquery.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MemesTelegramDjango/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
-              <folding>
-                <element signature="e#72#82#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="345">
+              <caret line="47" column="18" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MemesTelegramDjango/settings.py">
+      <file leaf-file-name="usuario.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/BotTelegram/templates/usuario.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="56" column="61" selection-start-line="56" selection-start-column="61" selection-end-line="56" selection-end-column="61" />
+            <state relative-caret-position="249">
+              <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -222,7 +217,6 @@
         <option value="$PROJECT_DIR$/BotTelegram/ClasesTG/photo_size_array_tg.py" />
         <option value="$PROJECT_DIR$/BotTelegram/maneja_respuesta.py" />
         <option value="$PROJECT_DIR$/BotTelegram/admin.py" />
-        <option value="$PROJECT_DIR$/BotTelegram/templates/usuario.html" />
         <option value="$PROJECT_DIR$/BotTelegram/models.py" />
         <option value="$PROJECT_DIR$/BotTelegram/procesar_callbackquery.py" />
         <option value="$PROJECT_DIR$/BotTelegram/enviar_mensajes_usuario.py" />
@@ -233,6 +227,7 @@
         <option value="$PROJECT_DIR$/BotTelegram/views.py" />
         <option value="$PROJECT_DIR$/BotTelegram/templates/pokemon.html" />
         <option value="$PROJECT_DIR$/MemesTelegramDjango/settings.py" />
+        <option value="$PROJECT_DIR$/BotTelegram/templates/usuario.html" />
       </list>
     </option>
   </component>
@@ -767,13 +762,6 @@
       <option name="presentableId" value="Default" />
       <updated>1475536552121</updated>
     </task>
-    <task id="LOCAL-00004" summary="Agregado imagen en front">
-      <created>1475870283139</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1475870283139</updated>
-    </task>
     <task id="LOCAL-00005" summary="Agregado imagen en front">
       <created>1475870290555</created>
       <option name="number" value="00005" />
@@ -1110,7 +1098,14 @@
       <option name="project" value="LOCAL" />
       <updated>1478474733860</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="debug true">
+      <created>1478638043204</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1478638043205</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1186,8 +1181,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/madchat" />
     </ignored-roots>
-    <MESSAGE value="Changed default color to white&#10;Updated text default draw mode" />
-    <MESSAGE value="changed create" />
     <MESSAGE value="fixed some bug with a parameter" />
     <MESSAGE value="fixed bugs" />
     <MESSAGE value="Agragados test para help&#10;agregado logging" />
@@ -1211,7 +1204,9 @@
     <MESSAGE value="cambiados textos" />
     <MESSAGE value="quitados algunas cosas de debug" />
     <MESSAGE value="arreglado random utilizando las fotos subidass" />
-    <option name="LAST_COMMIT_MESSAGE" value="arreglado random utilizando las fotos subidass" />
+    <MESSAGE value="debug true" />
+    <MESSAGE value="fixed error" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed error" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1356,6 +1351,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1363,6 +1361,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1379,6 +1378,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="18" column="78" selection-start-line="18" selection-start-column="78" selection-end-line="18" selection-end-column="78" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1386,6 +1386,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1457,13 +1458,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BotTelegram/templates/usuario.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="45" column="20" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -1567,8 +1561,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MemesTelegramDjango/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="56" column="61" selection-start-line="56" selection-start-column="61" selection-end-line="56" selection-end-column="61" />
+        <state relative-caret-position="345">
+          <caret line="47" column="18" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BotTelegram/templates/usuario.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
           <folding />
         </state>
       </provider>
