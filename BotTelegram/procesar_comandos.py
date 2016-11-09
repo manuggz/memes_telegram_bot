@@ -19,6 +19,7 @@ logger_xml = logging.getLogger("'BotTelegram.error_xml'")
 # Procesa el comando "/start" mandado por el usuario
 # Recordar que /start envia un mensaje de inicio al usuario
 def start_tg(chat_id, is_debug, xml_string):
+
     if is_debug:  # Mensage de DEBUG
         enviar_mensaje_usuario(chat_id, "Respuesta /start")
 
@@ -113,7 +114,6 @@ def create_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
         return
 
 
-    #print "c.13"
     # Divide resto_mensaje en el TEXTO y el COLOR del mensaje
     # Ejemplo : "TEXTO 1- TEXTO 2, RED" ----------> ["TEXTO 1- TEXTO 2","RED"]
     # Ejemplo : "TEXTO 1" ----------> ["TEXTO 1"]
@@ -160,6 +160,8 @@ def search_tg(chat_id, usuario, resto_mensaje, is_debug, xml_string):
 
     if not resto_mensaje:  # si el usuario envia /search sin el resto del formato
         parsear_enviar_xml(chat_id, obtener_xml_objeto("search_sin_comandos",xml_string))
+        usuario.comando_en_espera = "/search"
+        usuario.save()
         return None
 
     imagen = buscar_primera_imagen(chat_id,resto_mensaje.strip(), xml_string)
@@ -181,7 +183,7 @@ def next_image_tg(chat_id, usuario, is_debug, xml_string):
         enviar_mensaje_usuario(chat_id, "Respuesta /next")
 
 
-    if not usuario.imagen_actual:  # En caso de que no exista una imagen anterior
+    if not usuario.imagen_actual:  # En caso de que el usuario no tenga una imagen actual
         parsear_enviar_xml(chat_id, xml_string.find("next_sin_imagen"))
         return None
 
@@ -190,27 +192,24 @@ def next_image_tg(chat_id, usuario, is_debug, xml_string):
             id_lista=usuario.imagen_actual.id_lista + 1,
             textobuscado=usuario.imagen_actual.textobuscado
         )
-
-        # Enviamos la imagen
-        if enviar_imagen(chat_id, imagen_siguiente,construir_callback_buttons(imagen_siguiente)) != 0:  # si no es exitoso
-            parsear_enviar_xml(chat_id, xml_string.find("error_1"))
-            return None
-
-        return imagen_siguiente
     except ObjectDoesNotExist:  # No existe una imagen siguiente
         parsear_enviar_xml(chat_id, xml_string.find("sin_mas_imagenes_next"))
+        return None
 
-    return None
+    # Enviamos la imagen
+    if enviar_imagen(chat_id, imagen_siguiente,
+                     construir_callback_buttons(imagen_siguiente)) != 0:  # si no es exitoso
+        parsear_enviar_xml(chat_id, xml_string.find("error_1"))
+        return None
 
+    return imagen_siguiente
 
 
 # Procesa cuando el usuario solo envia el nombre del meme
 # Ejemplo : Solo envia "yao ming"
-def buscar_meme_tg(chat_id, meme_name, tipo_chat, is_debug, xml_strings):
+def buscar_meme_tg(chat_id, meme_name, is_debug, xml_strings):
     if is_debug:  # Mensage de DEBUG
         enviar_mensaje_usuario(chat_id, "Respuesta mensage sin comando: " + meme_name)
-
-    if tipo_chat != "private": return None  # Debido a la forma del comando solo funciona "bien" cuando es un chat privado
 
     imagen = buscar_primera_imagen(chat_id, meme_name.strip(), xml_strings)
 

@@ -143,7 +143,9 @@ def obtener_xml_objeto(tag,xml_string):
 
     return objeto_xml_texto
 
-
+## El bot puede quedarse esperando la respuesta de un usuario a un comando
+# o una iteraccion de el.
+# Esta funcion, debe resetear el estado del usuario al inicial cuando comenzo por primera vez el bot.
 def borrar_cache_espera(usuario):
 
     usuario.esta_creando_meme = False

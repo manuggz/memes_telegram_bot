@@ -100,11 +100,7 @@ wanna know more? Send me /help
     <!--Este mensaje aparece cuando el usuario envia /search solamente lo cual no cumple con su formato -->
     <search_sin_comandos>
         <text>
-Please use this command to look for memes, use it this way , example:
-
-/search yao ming
-
-Send me /help for more examples.
+Now send me a meme name!
         </text>
     </search_sin_comandos>
 
@@ -225,18 +221,18 @@ Change Color
         </text>
     </change_color>
 
-    <dame_upper_text>
+    <dame_SetUpperText>
         <text>
 Please, tell me your Upper Text! or use /none.
         </text>
-    </dame_upper_text>
+    </dame_SetUpperText>
 
-    <dame_lower_text>
+    <dame_SetLowerText>
         <text>
 Please, tell me your Lower Text! or use /none.
         </text>
-    </dame_lower_text>
-    <dame_color_text>
+    </dame_SetLowerText>
+    <dame_SetColorText>
         <text>
 Please, tell me a new color or use /none to set color to default.
 
@@ -244,7 +240,7 @@ I support:
     1) Hexadecimal color specifiers, given as #rgb or #rrggbb. For example, #ff0000 specifies pure red.
     2) Common color names.140 standard color names.
         </text>
-    </dame_color_text>
+    </dame_SetColorText>
 
     <sin_imagen_borrador>
         <text>
