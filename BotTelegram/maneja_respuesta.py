@@ -1,15 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import json
 import os
-import shutil
 import xml.etree.ElementTree as ET
-from os.path import join, exists, basename
-
-#from BotTelegram.ClasesTG import UpdateTG
 from BotTelegram.ClasesTG.update_tg import UpdateTG
-from BotTelegram.enviar_mensajes_usuario import CODE_BOT, guardar_url_archivo, enviar_mensaje_imagen
 from BotTelegram.procesar_callbackquery import procesar_callback_query
+from BotTelegram.procesar_mensaje_foto import procesar_mensaje_foto
+from BotTelegram.procesar_mensaje_texto import procesar_mensaje_texto
 from procesar_comandos import *
 
 

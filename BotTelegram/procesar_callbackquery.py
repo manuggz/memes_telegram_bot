@@ -8,7 +8,7 @@ from BotTelegram.enviar_mensajes_usuario import responder_callback_query, enviar
     guardar_imagen_respuesta_servidor, parsear_enviar_xml, escribir_enviar_meme, parsear_xml_object, \
     enviar_imagen, borrar_cache_espera, guardar_imagen
 from BotTelegram.models import Usuario, Imagen
-from BotTelegram.procesar_comandos import procesar_mensaje_texto, construir_callback_buttons, random_tg
+from BotTelegram.procesar_comandos import construir_callback_buttons, random_tg
 
 
 def procesar_callback_query(update_tg, xml_strings):

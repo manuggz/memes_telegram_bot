@@ -2,6 +2,8 @@ import logging,requests
 from HTMLParser import HTMLParser
 from os.path import basename,join
 from random import choice
+
+from BotTelegram.enviar_mensajes_usuario import parsear_enviar_xml
 from BotTelegram.models import Imagen
 from django.conf import settings
 
@@ -64,6 +66,28 @@ def buscar_imagenes_web(meme_consultado):
     parser = parseadorHTML()
     parser.feed(respuesta.text)
     return parser.imagenes
+
+
+# Obtiene la primera imagen asociada a un texto buscado por el usuario
+# si ya alguien lo ha buscado antes se regresa la referencia al primer objeto Imagen de la lista
+# sino, se buscan todas-> se construyen en la BD y se regresa el primer objeto Imagen
+def buscar_primera_imagen(chat_id, meme_name, xml_strings):
+    primera_imagen = None
+    try:
+        primera_imagen = Imagen.objects.get(id_lista=0, textobuscado=meme_name)
+    except Imagen.ObjectDoesNotExist:
+
+        imagenes = buscar_imagenes_web(meme_name)
+
+        if imagenes == []:
+            parsear_enviar_xml(chat_id, xml_strings.find("no_recuerda_meme"))
+        elif imagenes == None:
+            parsear_enviar_xml(chat_id, xml_strings.find("problema_buscando_meme"))
+        else:
+            primera_imagen = construir_imagenes(imagenes, meme_name)
+
+    return primera_imagen
+
 
 
 

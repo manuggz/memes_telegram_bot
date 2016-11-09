@@ -1,3 +1,4 @@
+# coding=utf-8
 from os.path import exists
 from os.path import splitext
 from random import random
@@ -130,6 +131,18 @@ def enviar_mensaje_imagen(chat_id, ruta_foto, caption="", reply_markup=None):
 
     return 0
 
+def obtener_xml_objeto(tag,xml_string):
+    objeto_xml_texto = xml_string.find(tag)
+
+    if objeto_xml_texto is None:
+        logger_xml.error("No se encontró TEXTO para " + tag)
+
+        if settings.DEBUG:
+            # Forzamos el error
+            raise Exception("Error XML")
+
+    return objeto_xml_texto
+
 
 def borrar_cache_espera(usuario):
 
@@ -214,6 +227,7 @@ def obtener_upper_lower_text(texto):
 
 def escribir_enviar_meme(chat_id, upper_text, lower_text, color, ruta_imagen, mark_keyboard=None):
     #print "es.1"
+
     imagen_pil = Image.open(ruta_imagen)
     #print "es.2"
     draw_pil = ImageDraw.Draw(imagen_pil)

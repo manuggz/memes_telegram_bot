@@ -151,6 +151,11 @@ Now, you won't receive my updates and any other messages.
 You can enable them again with /wannaknowupdates.
         </text>
     </stop>
+    <algo_me_salio_mal_intenta_de_nuevo>
+        <text>
+Something went wrong. Try Again!
+        </text>
+    </algo_me_salio_mal_intenta_de_nuevo>algo_me_salio_mal_intenta_de_nuevo
 
     <!-- Este mensaje aparece cuando el usuario utiliza /stop y ya estaba detenida su supscripcion -->
     <!-- Recordar que /stop detiene al bot de mandarle mensajes -->
