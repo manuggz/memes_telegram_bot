@@ -7,7 +7,7 @@ from BotTelegram.construir_callback_buttons import construir_callback_buttons, c
 from BotTelegram.enviar_mensajes_usuario import enviar_mensaje_usuario, enviar_imagen, enviar_mensaje_ayuda_comando, \
     escribir_enviar_meme, parsear_enviar_xml, \
     obtener_upper_lower_text, guardar_imagen, obtener_xml_objeto
-from BotTelegram.obtener_memes_web import obtener_imagen_random, buscar_imagenes_web, construir_imagenes, \
+from BotTelegram.obtener_memes import obtener_imagen_random, buscar_memes_web, construir_imagenes, \
     buscar_primera_imagen
 from BotTelegram.models import Imagen
 from PIL import ImageColor
