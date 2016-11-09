@@ -8,19 +8,15 @@ from BotTelegram.models import Usuario, Imagen
 from BotTelegram.procesar_comandos import create_tg
 
 
+## Procesa cuando el usuario envia una foto
 def procesar_mensaje_foto(mensaje, xml_strings, is_debug):
 
-    try:
-        usuario = Usuario.objects.get(id_u=mensaje.user_from.id)
-    except Usuario.ObjectDoesNotExist:
-
-        usuario = Usuario(
-            id_u=mensaje.user_from.id,
-            nombreusuario=mensaje.user_from.username[:200],
-            nombre=mensaje.user_from.first_name[:200],
-            apellido=mensaje.user_from.last_name[:200]
-        )
-        usuario.save()
+    usuario = Usuario.objects.create(
+        id_u=mensaje.user_from.id,
+        nombreusuario=mensaje.user_from.username[:200],
+        nombre=mensaje.user_from.first_name[:200],
+        apellido=mensaje.user_from.last_name[:200]
+    )
 
     photo_size = mensaje.photo.maximo_tam()
 
@@ -37,8 +33,7 @@ def procesar_mensaje_foto(mensaje, xml_strings, is_debug):
             photo_size.file_size = respuesta["result"]["file_size"]
 
             try:  # si ya el usuario subio una imagen anterior la borramos
-                imagenes = Imagen.objects.filter(textobuscado=mensaje.user_from.id,
-                                            id_lista=-1)
+                imagenes = Imagen.objects.filter(textobuscado=mensaje.user_from.id,id_lista=-1)
                 imagenes.delete()
             except Imagen.ObjectDoesNotExist:
                 pass
