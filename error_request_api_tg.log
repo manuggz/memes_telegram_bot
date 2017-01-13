@@ -1,0 +1,18 @@
+ERROR 2017-01-13 16:04:03,479 enviar_mensajes_usuario 10048 140100426520320 Request :https://api.telegram.org/bot119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/sendChatAction
+con los parametros:{'action': 'upload_photo', 'chat_id': 64542397}
+Respuesta:{"ok":false,"error_code":403,"description":"Forbidden: Bot was blocked by the user"}
+ERROR 2017-01-13 16:04:07,483 enviar_mensajes_usuario 10048 140100426520320 Request :https://api.telegram.org/bot119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/sendPhoto
+con los parametros:
+Respuesta:{"ok":false,"error_code":403,"description":"Forbidden: Bot was blocked by the user"}
+ERROR 2017-01-13 16:07:33,060 enviar_mensajes_usuario 10152 140139655649024 Request :https://api.telegram.org/bot119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/sendChatAction
+con los parametros:{'action': 'upload_photo', 'chat_id': 64542397}
+Respuesta:{"ok":false,"error_code":403,"description":"Forbidden: Bot was blocked by the user"}
+ERROR 2017-01-13 16:07:37,761 enviar_mensajes_usuario 10152 140139655649024 Request :https://api.telegram.org/bot119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/sendPhoto
+con los parametros:
+Respuesta:{"ok":false,"error_code":403,"description":"Forbidden: Bot was blocked by the user"}
+ERROR 2017-01-13 16:08:19,073 enviar_mensajes_usuario 10182 139829179053824 Request :https://api.telegram.org/bot119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/sendChatAction
+con los parametros:{'action': 'upload_photo', 'chat_id': 64542397}
+Respuesta:{"ok":false,"error_code":403,"description":"Forbidden: Bot was blocked by the user"}
+ERROR 2017-01-13 16:08:24,063 enviar_mensajes_usuario 10182 139829179053824 Request :https://api.telegram.org/bot119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/sendPhoto
+con los parametros:
+Respuesta:{"ok":false,"error_code":403,"description":"Forbidden: Bot was blocked by the user"}

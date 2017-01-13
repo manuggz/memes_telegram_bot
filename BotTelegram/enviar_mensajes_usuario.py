@@ -78,9 +78,9 @@ def logear_error(url, parametros, text):
 
     logger.error(datos_error)
 
-    if settings.DEBUG:
+    #if settings.DEBUG:
         ## Notar que es para forzar que falle un caso de prueba
-        raise Exception("Error en request a telegram: \n" + datos_error)
+    #    raise Exception("Error en request a telegram: \n" + datos_error)
 
 
 # envia una imagen a un chat

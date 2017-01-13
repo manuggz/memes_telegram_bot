@@ -233,7 +233,7 @@ class TestBot(TestCase):
                                                                               u'username': u'manuggz'},
                                                                     u'chat_instance': u'-3266157052870893227',
                                                                     u'data': u'SetColor', u'message': {
-                                            u'from': {u'id': 119646075, u'username': u'MemesBot',u'first_name': u'Memes'},
+                                            u'from': {u'id': 109518141, u'username': u'MemesBot',u'first_name': u'Memes'},
                                             u'entities': [{u'type': u'bot_command', u'offset': 213, u'length': 5}],
                                             u'date': 1475867414,
                                             u'text': u"asd",
@@ -248,6 +248,23 @@ class TestBot(TestCase):
         self.consulta[u'message'][u'text'] = u"Red"
         response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
                                     json.dumps(self.consulta), content_type="text/json", secure=True)
+
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
+    def test_photo(self):
+        response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
+                                    json.dumps({u'message': {u'message_id': 150630,
+              u'from': {u'id': 109518141, u'username': u'BREiViK', u'last_name': u'Koivula', u'first_name': u'Miika'},
+              u'photo': [
+                  {u'width': 90, u'height': 60, u'file_id': u'AgADBAADErwxG73W2AO1m_ZhTeVX7hvQnBkABCet0a09K0qs-6AAAgI',
+                   u'file_size': 1446},
+                  {u'width': 131, u'height': 87, u'file_id': u'AgADBAADErwxG73W2AO1m_ZhTeVX7hvQnBkABHsSTaJkXde8-qAAAgI',
+                   u'file_size': 3512}], u'date': 1484298215,
+              u'chat': {u'id': 109518141, u'type': u'private', u'username': u'BREiViK', u'last_name': u'Koivula',
+                        u'first_name': u'Miika'}}, u'update_id': 25289986}
+)
+                                    , content_type="text/json", secure=True)
 
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)

@@ -31,11 +31,12 @@ def construir_callback_buttons(imagen):
                         "text": "Random",
                         "callback_data": "Random"
                     }
-                    ,
+                ],[
                     {
                         "text": "Next",
                         "callback_data": "Next,"  + link_image,
                     },
+                ],[
                     {
                         "text": "Create",
                         "callback_data": "Create," + link_image,
@@ -57,12 +58,13 @@ def construir_callbackbuttons_create(xml_string):
                         "text": parsear_xml_object(xml_string.find("change_upper_text"))["text"],
                         "callback_data": SET_UPPER_TEXT + ","
                     }
-                    ,
-                    {
+                ], [
+                {
                         "text": parsear_xml_object(xml_string.find("change_lower_text"))["text"],
                         "callback_data": SET_LOWER_TEXT + ","
                     },
-                    {
+            ], [
+                {
                         "text": parsear_xml_object(xml_string.find("change_color"))["text"],
                         "callback_data": SET_COLOR_TEXT + ",",
                     }

@@ -21,7 +21,7 @@ def index(request):
 # Muestra una lista de los mensajes registrados enviados a la pagina
 @login_required
 def mostrar_mensajes(request):
-    return render(request, 'mensajes.html', {'mensajes': RespuestaServidor.objects.all()})
+    return render(request, 'mensajes.html', {'mensajes': []})
 
 
 # Muestra todos los usuarios registrados
