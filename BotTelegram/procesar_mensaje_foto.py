@@ -3,6 +3,9 @@ import json
 import requests
 from os.path import basename, exists
 from os.path import join
+
+from django.core.exceptions import ObjectDoesNotExist
+
 from BotTelegram.enviar_mensajes_usuario import URL_TG_API, CODE_BOT, guardar_imagen, guardar_imagen_respuesta_servidor
 from BotTelegram.models import Usuario, Imagen
 from BotTelegram.procesar_comandos import create_tg
@@ -35,7 +38,7 @@ def procesar_mensaje_foto(mensaje, xml_strings, is_debug):
             try:  # si ya el usuario subio una imagen anterior la borramos
                 imagenes = Imagen.objects.filter(textobuscado=mensaje.user_from.id,id_lista=-1)
                 imagenes.delete()
-            except Imagen.ObjectDoesNotExist:
+            except ObjectDoesNotExist:
                 pass
 
             ## Creamos una nueva imagen en la bd

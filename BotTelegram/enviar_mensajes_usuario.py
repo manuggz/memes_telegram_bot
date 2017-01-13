@@ -202,6 +202,8 @@ def parsear_xml_object(xml_object):
 def guardar_url_archivo(url_archivo,ruta_guardar):
     resp = requests.get(url_archivo, stream=True)
 
+    import os
+    print os.path.dirname(os.path.abspath(__file__))
     with open(ruta_guardar, 'wb') as archivo:
         shutil.copyfileobj(resp.raw, archivo)
 

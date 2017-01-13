@@ -4,6 +4,8 @@ from HTMLParser import HTMLParser
 from os.path import basename, join
 from random import choice
 
+from django.core.exceptions import ObjectDoesNotExist
+
 from BotTelegram.enviar_mensajes_usuario import parsear_enviar_xml
 from BotTelegram.models import Imagen
 from django.conf import settings
@@ -107,7 +109,7 @@ def buscar_primera_imagen(chat_id, meme_name, xml_strings):
 
     try:  # Intentamos buscarla en la BD
         return Imagen.objects.get(id_lista=0, textobuscado=meme_name.strip())
-    except Imagen.ObjectDoesNotExist:  # No se ha buscado antes, se busca en la WEB
+    except ObjectDoesNotExist:  # No se ha buscado antes, se busca en la WEB
         pass
 
     imagenes = buscar_memes_web(meme_name)  # Se buscan los memes en la pagina web

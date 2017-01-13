@@ -35,5 +35,5 @@ def atender_consulta_mensaje_tg(dict_update):
             procesar_mensaje_foto(update_tg.message, lenguaje_xml, update_tg.is_message_debug)
 
     elif update_tg.callback_query:
-        procesar_callback_query(update_tg,lenguaje_xml,update_tg.is_message_debug)
+        procesar_callback_query(update_tg.callback_query,lenguaje_xml,update_tg.is_message_debug)
 

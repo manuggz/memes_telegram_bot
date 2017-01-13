@@ -11,12 +11,17 @@ from BotTelegram.procesar_comandos import construir_callback_buttons, random_tg
 
 # Procesa el callback generado por los botones en el bot
 def procesar_callback_query(callback_query, lenguaje_xml, es_debug):
-    usuario = Usuario.objects.create(
-        id_u=callback_query.user_from.id,
-        nombreusuario=callback_query.user_from.username[:200],
-        nombre=callback_query.user_from.first_name[:200],
-        apellido=callback_query.user_from.last_name[:200]
-    )
+
+    try:
+        usuario = Usuario.objects.get(id_u=callback_query.user_from.id)
+    except ObjectDoesNotExist:
+
+        usuario = Usuario.objects.create(
+            id_u=callback_query.user_from.id,
+            nombreusuario=callback_query.user_from.username[:200],
+            nombre=callback_query.user_from.first_name[:200],
+            apellido=callback_query.user_from.last_name[:200]
+        )
 
     # Avisa al chat de tg que se esta respondiendo la peticion
     # Visualmente, quita el simbolo de <cargando> en el boton que el usuario presionó
