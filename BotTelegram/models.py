@@ -46,4 +46,5 @@ class Imagen(models.Model):
 
 
 # Eliminar las imagenes que no estan referenciadas por los usuarios
-#DELETE FROM "BotTelegram_imagen" as ima_del   WHERE textobuscado not in ( select ima.textobuscado from "BotTelegram_imagen" as ima where ima.id in (select imagen_enviada_id from "BotTelegram_respuestaservidor"));
+#DELETE FROM "BotTelegram_imagen" as ima_del   WHERE textobuscado not in ( select ima.textobuscado from "BotTelegram_imagen" as ima where ima.id in (select imagen_actual_id from "BotTelegram_usuario"));
+
