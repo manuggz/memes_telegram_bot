@@ -1,6 +1,7 @@
 # coding=utf-8
 ## Atiende el mensaje del usuario
 from PIL import ImageColor
+from django.core.exceptions import ObjectDoesNotExist
 
 from BotTelegram.construir_callback_buttons import construir_callbackbuttons_create, SET_UPPER_TEXT, SET_LOWER_TEXT, \
     SET_COLOR_TEXT
@@ -15,12 +16,18 @@ from BotTelegram.util import extraer_comando
 
 def procesar_mensaje_texto(mensaje, lenguaje_xml, is_debug):
     # Obtenemos la referencia al usuario o lo creamos
-    usuario = Usuario.objects.create(
-        id_u=mensaje.user_from.id,
-        nombreusuario=mensaje.user_from.username[:200],
-        nombre=mensaje.user_from.first_name[:200],
-        apellido=mensaje.user_from.last_name[:200]
-    )
+    #Obtenemos la referencia al usuario o lo creamos
+    try:
+        usuario = Usuario.objects.get(id_u=mensaje.user_from.id)
+    except ObjectDoesNotExist:
+
+        usuario = Usuario(
+            id_u=mensaje.user_from.id,
+            nombreusuario=mensaje.user_from.username[:200],
+            nombre=mensaje.user_from.first_name[:200],
+            apellido=mensaje.user_from.last_name[:200]
+        )
+        usuario.save()
 
     ## Dividimos el mensaje del usuario en: comando | Texto
     comando, resto_mensaje = extraer_comando(mensaje.text)
