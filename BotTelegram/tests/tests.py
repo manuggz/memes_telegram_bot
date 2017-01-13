@@ -197,14 +197,6 @@ class TestBot(TestCase):
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
 
-
-        self.consulta[u'message'][u'text'] = u"/none"
-        response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
-                                    json.dumps(self.consulta), content_type="text/json", secure=True)
-
-        # Check that the response is 200 OK.
-        self.assertEqual(response.status_code, 200)
-
         response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
                                     json.dumps({u'callback_query': {u'id': u'470376835803901570',
                                                                     u'from': {u'id': 109518141,
@@ -233,20 +225,6 @@ class TestBot(TestCase):
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
 
-        self.consulta[u'message'][u'text'] = u"/none"
-        response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
-                                    json.dumps(self.consulta), content_type="text/json", secure=True)
-
-        # Check that the response is 200 OK.
-        self.assertEqual(response.status_code, 200)
-
-        self.consulta[u'message'][u'text'] = u"YO LOWER 2!"
-        response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
-                                    json.dumps(self.consulta), content_type="text/json", secure=True)
-
-        # Check that the response is 200 OK.
-        self.assertEqual(response.status_code, 200)
-
         response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
                                     json.dumps({u'callback_query': {u'id': u'470376835803901570',
                                                                     u'from': {u'id': 109518141,
@@ -268,13 +246,6 @@ class TestBot(TestCase):
         self.assertEqual(response.status_code, 200)
 
         self.consulta[u'message'][u'text'] = u"Red"
-        response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
-                                    json.dumps(self.consulta), content_type="text/json", secure=True)
-
-        # Check that the response is 200 OK.
-        self.assertEqual(response.status_code, 200)
-
-        self.consulta[u'message'][u'text'] = u"Black2"
         response = self.client.post('/BotTelegram/119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/',
                                     json.dumps(self.consulta), content_type="text/json", secure=True)
 
