@@ -75,13 +75,22 @@ def mostrar_imagenes(request):
 def webhook(request):
 
     contexto = {}
-    webhook_info = obtener_info_webhook()
+    if request.method == 'POST':
+        form = FormEnviarMensaje(request.POST)
+        if form.is_valid():
+            print form.cleaned_data['mensaje']
+            consulta = json.loads(form.cleaned_data['mensaje'])
+            print type(consulta)
+            logger.debug(consulta)
+            atender_consulta_mensaje_tg(consulta)
+    else:
+        webhook_info = obtener_info_webhook()
 
-    webhook_info = json.loads(webhook_info.text)
+        webhook_info = json.loads(webhook_info.text)
 
-    if webhook_info:
-        webhook_info = WebhookTG(webhook_info["result"])
-        contexto["webhook"] = webhook_info
+        if webhook_info:
+            webhook_info = WebhookTG(webhook_info["result"])
+            contexto["webhook"] = webhook_info
 
     return render(request,'webhook.html',contexto)
 
@@ -104,3 +113,5 @@ def home(request):
 
 def pokemon(request):
     return render(request,'pokemon.html')
+
+#'{"message": {"message_id": 150630,"from": {"id": 109518141, "username": "BREiViK", "last_name": "Koivula", "first_name": "Miika"},"photo": [{"width": 90, "height": 60, "file_id": "AgADBAADErwxG73W2AO1m_ZhTeVX7hvQnBkABCet0a09K0qs-6AAAgI","file_size": 1446},{"width": 131, "height": 87, "file_id": "AgADBAADErwxG73W2AO1m_ZhTeVX7hvQnBkABHsSTaJkXde8-qAAAgI","file_size": 3512}], "date": 1484298215,"chat": {"id": 109518141, "type": "private", "username": "BREiViK", "last_name": "Koivula","first_name": "Miika"}}, "update_id": 25289986}'
