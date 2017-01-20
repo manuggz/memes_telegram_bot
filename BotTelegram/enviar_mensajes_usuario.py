@@ -229,6 +229,10 @@ def obtener_upper_lower_text(texto):
 
 def escribir_enviar_meme(chat_id, upper_text, lower_text, color, ruta_imagen, mark_keyboard=None):
     #print "es.1"
+    # TODO: Please arreglar esto mejor
+    # Sucede cuando el usuario envia una omagen para editar
+    # E intenta modificarla usando el bot despues de pasado un tiempo en el que el servidor
+    # borro la imagen de los archivos por lo que explota aqui
     try:
         imagen_pil = Image.open(ruta_imagen)
     except IOError:
