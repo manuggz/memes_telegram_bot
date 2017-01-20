@@ -229,8 +229,10 @@ def obtener_upper_lower_text(texto):
 
 def escribir_enviar_meme(chat_id, upper_text, lower_text, color, ruta_imagen, mark_keyboard=None):
     #print "es.1"
-
-    imagen_pil = Image.open(ruta_imagen)
+    try:
+        imagen_pil = Image.open(ruta_imagen)
+    except IOError:
+        return
     #print "es.2"
     draw_pil = ImageDraw.Draw(imagen_pil)
     #print "es.3"
