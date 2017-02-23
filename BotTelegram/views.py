@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
@@ -11,6 +12,7 @@ from maneja_respuesta import *
 
 # Get an instance of a logger
 logger = logging.getLogger("BotTelegram")
+
 
 # Vista principal Home.
 @login_required
@@ -52,16 +54,20 @@ def mostrar_usuario(request, id_usuario):
 # Recibe el mensaje(request de Telegram API) mandado por el usuario al bot y responde adecuadamente
 @csrf_exempt
 def atender_mensaje_usuario_tg(request):
-
     if request.method == 'POST':
+        ## Convertimos el cuerpo del mensaje a un Json/Dict
         consulta = json.loads(request.body)
+        ## Logeamos la consulta
         logger.debug(consulta)
+        ## Llamamos a la función que va a atender el mensaje
         atender_consulta_mensaje_tg(consulta)
+
+    # Telegram necesita una respuesta con http code 200
     return HttpResponse('<h1>El Psy Congro</h1>')
 
 
 @login_required
-def mostrar_imagen(request,id_imagen):
+def mostrar_imagen(request, id_imagen):
     imagen = get_object_or_404(Imagen, pk=id_imagen)
 
     return render(request, 'imagen.html', {'imagen': imagen})
@@ -71,9 +77,9 @@ def mostrar_imagen(request,id_imagen):
 def mostrar_imagenes(request):
     return render(request, 'imagenes.html', {'imagenes': Imagen.objects.all()})
 
+
 @login_required
 def webhook(request):
-
     contexto = {}
     webhook_info = obtener_info_webhook()
 
@@ -90,7 +96,8 @@ def webhook(request):
             atender_consulta_mensaje_tg(consulta)
             contexto["salida"] = "ok"
 
-    return render(request,'webhook.html',contexto)
+    return render(request, 'webhook.html', contexto)
+
 
 @login_required
 def mostrar_me(request):
@@ -103,11 +110,12 @@ def mostrar_me(request):
         me = UserTG(me["result"])
         contexto["bot"] = me
 
-    return render(request,'me.html',contexto)
+    return render(request, 'me.html', contexto)
+
 
 def home(request):
-    return render(request,'home.html')
+    return render(request, 'home.html')
 
 
 def pokemon(request):
-    return render(request,'pokemon.html')
+    return render(request, 'pokemon.html')

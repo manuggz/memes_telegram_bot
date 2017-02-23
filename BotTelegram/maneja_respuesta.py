@@ -24,6 +24,7 @@ def atender_consulta_mensaje_tg(dict_update):
         )
     )
 
+    # Por ahora solo atiende dos tipos de mensajes "mensaje" y "callback_query"
     if update_tg.message:
 
         # Por ahora solo chats privados

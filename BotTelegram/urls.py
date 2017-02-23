@@ -16,5 +16,6 @@ urlpatterns = [
 
     url(r'^me/$', views.mostrar_me, name='me'),  # Muestra informacion sobre el bot
 
+    # Url que atiende los mensajes enviados por el Api de Telegram
     url(r'^119646075:AAFsQGgw8IaLwvRZX-IBO9mgV3k048NpuMg/$', views.atender_mensaje_usuario_tg, name='responder_mensaje'),
 ]
